@@ -1,19 +1,19 @@
 ---
-title: Fun with Twisting Geometries
+title: Drawing contours
 kind: example
 category: graphics
 license: MIT
 tags:
   - jitter
   - geometry
-description: Examples of what you can do with a Jitter geometry when you twist it.
+description: Example of how to make a Jitter geometry look hand-drawn
 author:
   name: Cycling '74
 contributors:
-  - Sam Tarakajian
+  - Matteo Marson
 ---
 
-# Fun with Twisting Geometries
+# Drawing contours
 
 I had an idea that it might be kind of fun to explore what you could do with twisting around various Jitter geometries. The first example is a sort of straightforward answer to "how do you make a shape that twists and untwists itself?" I don't entirely know what the second example is.
 
