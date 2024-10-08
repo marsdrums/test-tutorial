@@ -15,11 +15,11 @@ contributors:
 
 # Drawing contours
 
-I had an idea that it might be kind of fun to explore what you could do with twisting around various Jitter geometries. The first example is a sort of straightforward answer to "how do you make a shape that twists and untwists itself?" I don't entirely know what the second example is.
+If you had a pencil and paper, and you had to draw a duck, what would your drawing look like? I had fun putting together a patch that takes a Jitter geomerty and draws some lines along the contours of the mesh.
 
 ## Twisty Life Saver
 
-Open the patch *twisty-life-saver.maxpat*.
+Open the patch *contours.maxpat*.
 
 ![](./images/geom-twisting_001.png)
 
