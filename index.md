@@ -24,11 +24,15 @@ Open the patch *contours.maxpat*.
 ![](./images/geom-contours_001.png)
 
 Looking at the render, you can see that the mesh outlines have been drawn. But, how can we identify which portions of the mesh should be considered part of the outlines? 
-Give a look at the geom operators:
+
+Give a look at the patch:
 
 ![](./images/geom-contours_002.png)
 
-The first step consists in grabbing a mesh, turning it into a Jitter geometry, and computing face normals using {jit.geom.normgen}. They will come in handy later on. Then, {jit.geom.todict} converts the Jitter geometry into a dictionary accesible by JavaScript.
+The first step consists in grabbing a mesh, turning it into a Jitter geometry, and computing face normals using {jit.geom.normgen}. They will come in handy later on. 
+
+Then, {jit.geom.todict} converts the Jitter geometry into a dictionary accesible by JavaScript.
+
 Now, double-click on {v8 geom.draw.contours.js} to give a look at the custom geometry script.
 
 ![](./images/geom-contours_003.png)
