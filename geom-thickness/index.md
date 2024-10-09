@@ -15,7 +15,7 @@ contributors:
 
 # Thickness
 
-A very common operation on a mesh is diplacing the triangles of which it is composed. Althoug not evident on a closed mesh, when displaced, the triangles look flat and volumeless. This custom geometry script takes a Jitter geometry and extrudes the triangles of which it is composed along the vertex normals. 
+A very common operation on a mesh is diplacing the triangles of which it is composed. Althoug not evident on a closed mesh, when displaced, the triangles look flat and volumeless. This patch uses a custom geometry script to account for that.
 
 
 ## Let's thicken them up
@@ -24,7 +24,7 @@ Open the patch *thickness.maxpat*
 
 ![](./images/geom-thickness_001.gif)
 
-Looking at the render, you can see that the mesh outlines have been drawn. But, how can we identify which portions of the mesh should be considered part of the outlines? 
+This patch takes a Jitter geometry and extrudes the triangles along their vertex normals, forming truncated pyramids. It then performs a random displacement of such extruded triangles to show them in all their glorious thickness.
 
 Give a look at the patch:
 
