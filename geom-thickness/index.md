@@ -45,8 +45,8 @@ The script iterates over the triangles reading the positions and the normal vect
 
 It then triangulates the old and the new positions forming a volume. 
 
+Now, open the [p animate] subpatch if you want to give a look at how is the mesh dancing.
+
 ![](./images/geom-thickness_006.png)
 
-Double-click on [p animate] subpatch.
-
-The animation is then achieved offsetting the volumes' positions using a procedural noise
+The animation is achieved offsetting the volumes' positions along their face normals using a procedural noise provided by {jit.bfg}
