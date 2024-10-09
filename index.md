@@ -23,15 +23,16 @@ Open the patch *contours.maxpat*.
 
 ![](./images/geom-contours_001.png)
 
-If you just watch the animation for a second, you'll see what I was going for here. First the torus twists on one side, then it untwists itself, then it does the same thing on the other side. The key to making this all work is very precise timing.
+Looking at the render, you can see that the mesh outlines have been drawn. But, how can we identify which portions of the mesh should be considered pare of the outlines? Give a look at the geom operators
 
-![](./images/geom-twisting_002.png)
+![](./images/geom-contours_002.png)
 
-If you pop open the subpatch *[p precise-timing]*, you'll see what's going on. Every four seconds is divided into four phases: twist right, untwist right, twist left, and untwist left. The left branch of the patch manages updating the twist angle, and the right branch flips the axes of the two {jit.geom.twist} objects, so that the first work on the right side of the shape, and then the left.
+The first step consists in grabbing a mesh, turn it into a Jitter geometry, and compute face normals using {jit.geom.normgen}. These will come in handy later on. Then, {jit.geom.todict} converts the Jitter geometry into a dictionary accesible by JavaScript.
+Now, double-click on {v8 geom.draw.contours.js} to give a look at the custom geometry script.
 
 ![](./images/geom-twisting_003.png)
 
-One kind of cute touch with this patch is the striped texture that we apply to the surface of the torus. You can see that the generated texture just makes a bunch of stripes, but if you look at the left and right edges, you can see that one color always matches with the other. That means that when the texture is applied to the torus, everything lines up seamlessly.
+The core algorithm is pretty simple: iterate over the edges of the mesh checking the orientation (face normals) of the two faces divided by the edge; if the angle formed by the adjacent faces is minor than a user defined threshold, then draw a line connecting the extremities of the edge
 
 ## Pattern Wheel
 
