@@ -57,7 +57,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 0.0, 1000.0, 780.0 ],
+						"rect" : [ 59.0, 119.0, 1000.0, 780.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -93,7 +93,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 50.0, 100.0, 139.0, 22.0 ],
+									"patching_rect" : [ 32.0, 37.0, 139.0, 22.0 ],
 									"text" : "loadmess move 0.05 0 0"
 								}
 
@@ -105,8 +105,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "jit_gl_texture", "", "" ],
-									"patching_rect" : [ 50.0, 327.0, 327.0, 22.0 ],
-									"text" : "jit.gl.node @name node @erase_color 0.489 0.536 0.588 1."
+									"patching_rect" : [ 32.0, 264.0, 375.0, 22.0 ],
+									"text" : "jit.gl.node @name node @erase_color 0.489 0.536 0.588 1. @fsaa 1"
 								}
 
 							}
@@ -118,8 +118,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "jit_gl_texture", "", "" ],
-									"patching_rect" : [ 50.0, 401.0, 223.0, 22.0 ],
-									"text" : "jit.gl.pass @fxname vignette @falloff 0.3",
+									"patching_rect" : [ 32.0, 338.0, 223.0, 22.0 ],
+									"text" : "jit.gl.pass @fxname vignette @falloff 0.2",
 									"textfile" : 									{
 										"filename" : "vignette.jxp",
 										"flags" : 0,
@@ -138,7 +138,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "jit_gl_texture", "", "" ],
-									"patching_rect" : [ 50.0, 363.0, 142.0, 22.0 ],
+									"patching_rect" : [ 32.0, 300.0, 142.0, 22.0 ],
 									"text" : "jit.gl.pass @fxname ssao",
 									"textfile" : 									{
 										"filename" : "ssao.jxp",
@@ -158,7 +158,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 50.0, 213.0, 165.0, 102.0 ],
+									"patching_rect" : [ 32.0, 150.0, 165.0, 102.0 ],
 									"text" : "jit.gl.light node @type directional @direction 1 -1 1 @diffuse 30 18 10 @shadows 1 @shadowrange 7. @shadowquality hi @shadowblur 0"
 								}
 
@@ -170,7 +170,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 50.0, 130.0, 145.0, 22.0 ],
+									"patching_rect" : [ 32.0, 67.0, 145.0, 22.0 ],
 									"text" : "jit.anim.drive @ui_listen 1"
 								}
 
@@ -182,7 +182,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "jit_gl_texture", "" ],
-									"patching_rect" : [ 50.0, 166.0, 285.0, 22.0 ],
+									"patching_rect" : [ 32.0, 103.0, 285.0, 22.0 ],
 									"text" : "jit.gl.camera @locklook 1 @tripod 1 @position 2 1 1"
 								}
 
@@ -195,7 +195,7 @@
 									"maxclass" : "outlet",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 50.0, 483.0, 30.0, 30.0 ]
+									"patching_rect" : [ 32.0, 420.0, 30.0, 30.0 ]
 								}
 
 							}
@@ -229,7 +229,7 @@
 
 							}
  ],
-						"originid" : "pat-90"
+						"originid" : "pat-50"
 					}
 ,
 					"patching_rect" : [ 40.0, 27.0, 95.0, 22.0 ],
@@ -591,10 +591,10 @@
 
 			}
  ],
-		"originid" : "pat-88",
+		"originid" : "pat-48",
 		"dependency_cache" : [ 			{
 				"name" : "geom.draw.contours.js",
-				"bootpath" : "~/Documents/Max patches/geom scripts examples/Contours",
+				"bootpath" : "~/Documents/GitHub/test-tutorial/geom-contours/assets",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
 				"implicit" : 1

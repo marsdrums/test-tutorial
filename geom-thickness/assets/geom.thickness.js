@@ -1,12 +1,7 @@
-var thickness = 0.1;
+var thickness = 0.03;
 declareattribute("thickness", null, "setthickness", 0);
 function setthickness(v){ 
 	thickness = v;	
-}
-
-function normalize(x){
-	let l = Math.sqrt(x[0]*x[0] + x[1]*x[1] + x[2]*x[2]);
-	return [x[0]/l, x[1]/l, x[2]/l];
 }
 
 function translate(pos, dir){
@@ -54,7 +49,8 @@ function dictionary(dictionaryName) {
 		let p1 = geom.vertices[v1].point;
 		let p2 = geom.vertices[v2].point;
 
-		// create 3 new positions based on p0, p1, and p2, shifted by "thickness" along thery normal vector
+		// create 3 new positions based on p0, p1, and p2, 
+		// shifted by "thickness" along their normal vector
 		let pt0 = translate(p0, n0);
 		let pt1 = translate(p1, n0);
 		let pt2 = translate(p2, n0);
