@@ -15,8 +15,7 @@ contributors:
 
 # Thickness
 
-A very common operation on a mesh is diplacing the triangles of which it is composed. Althoug not evident on a closed mesh, when displaced, the triangles look flat and volumeless. This patch uses a custom geometry script to account for that.
-
+A very desirable operation to perform on a mesh is diplacing the triangles of which it is composed. Althoug not evident on a closed mesh, when displaced, the triangles look flat and volumeless. This patch uses a custom geometry script to account for that.
 
 ## Let's thicken them up
 
@@ -24,17 +23,19 @@ Open the patch *thickness.maxpat*
 
 ![](./images/geom-thickness_001.gif)
 
-This patch takes a Jitter geometry and extrudes the triangles along their vertex normals, forming truncated pyramids. It then performs a random displacement of such extruded triangles to show them in all their glorious thickness.
+This patch takes a Jitter geometry and extrudes the triangles along their vertex normals, forming truncated pyramids of user-defined height. It then performs a random displacement of such extruded triangles to show them in all their glorious thickness.
 
-Give a look at the patch:
+Let's give a look at the patch:
 
-![](./images/geom-contours_002.png)
+![](./images/geom-thickness_002.png)
 
-The first step consists in grabbing a mesh, turning it into a Jitter geometry, and computing face normals using {jit.geom.normgen}. They will come in handy later on. 
+The first step consists in grabbing a mesh, turning it into a Jitter geometry, and computing vertex normals using {jit.geom.normgen}. Each vertex in the Jitter geometry structure now retains vertex normals.
+
+![](./images/geom-thickness_003.png)
 
 Then, {jit.geom.todict} converts the Jitter geometry into a dictionary accesible by JavaScript.
 
-Now, double-click on {v8 geom.draw.contours.js} to give a look at the custom geometry script.
+double-click on {v8 geom.draw.contours.js} to give a look at what the custom geometry script does.
 
 ![](./images/geom-contours_003.png)
 
