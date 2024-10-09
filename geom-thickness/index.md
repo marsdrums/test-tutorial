@@ -35,8 +35,16 @@ The first step consists in grabbing a mesh, turning it into a Jitter geometry, a
 
 Then, {jit.geom.todict} converts the Jitter geometry into a dictionary accesible by JavaScript.
 
-double-click on {v8 geom.draw.contours.js} to give a look at what the custom geometry script does.
+double-click on {v8 geom.thickness.js} to give a look at what the custom geometry script does.
 
-![](./images/geom-contours_003.png)
+![](./images/geom-thickness_004.png)
 
-The core algorithm is pretty simple: iterate over the edges of the mesh checking the orientation (face normals) of the two faces divided by the edge; if the cosine of the angle formed by the adjacent faces is minor than a user-defined threshold, then draw a line connecting the endpoints of the edge.
+The script iterates over the triangles reading the positions and the normal vectors of the 3 vertices. It then computes 3 new positions, shifting each vertex inwards along the direction of their vertex normals.
+
+![](./images/geom-thickness_005.png)
+
+It then triangulates the old and the new positions forming a volume. 
+
+![](./images/geom-thickness_006.png)
+
+The animation is then achieved offsetting the volumes' positions using a procedural noise
