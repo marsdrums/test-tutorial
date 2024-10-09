@@ -47,4 +47,6 @@ It then triangulates the old and the new positions forming a volume.
 
 ![](./images/geom-thickness_006.png)
 
+Double-click on [p animate] subpatch.
+
 The animation is then achieved offsetting the volumes' positions using a procedural noise
