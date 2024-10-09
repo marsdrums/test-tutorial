@@ -17,11 +17,11 @@ contributors:
 
 If you had a pencil and paper, and you had to draw a duck, what would your drawing look like? I had fun putting together a patch that takes a Jitter geomerty and draws some lines along the contours of the mesh.
 
-## Twisty Life Saver
+## Pencil and paper
 
 Open the patch *contours.maxpat*.
 
-![](./images/geom-twisting_001.png)
+![](./images/geom-contours_001.png)
 
 If you just watch the animation for a second, you'll see what I was going for here. First the torus twists on one side, then it untwists itself, then it does the same thing on the other side. The key to making this all work is very precise timing.
 
