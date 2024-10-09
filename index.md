@@ -23,7 +23,8 @@ Open the patch *contours.maxpat*.
 
 ![](./images/geom-contours_001.png)
 
-Looking at the render, you can see that the mesh outlines have been drawn. But, how can we identify which portions of the mesh should be considered pare of the outlines? Give a look at the geom operators
+Looking at the render, you can see that the mesh outlines have been drawn. But, how can we identify which portions of the mesh should be considered part of the outlines? 
+Give a look at the geom operators:
 
 ![](./images/geom-contours_002.png)
 
