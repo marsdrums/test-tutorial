@@ -15,7 +15,7 @@ contributors:
 
 # Thickness
 
-A very desirable operation to perform on a mesh is diplacing the triangles of which it is composed. Althoug not evident on a closed mesh, when displaced, the triangles look flat and volumeless. This patch uses a custom geometry script to account for that.
+A very desirable operation to perform on a mesh is diplacing the triangles of which it is composed. Althoug not evident on a closed meshes, when displaced, the triangles look flat and volumeless. This patch uses a custom geometry script to account for that.
 
 ## Let's thicken them up
 
