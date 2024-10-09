@@ -15,11 +15,12 @@ contributors:
 
 # Thickness
 
-If you had a pencil and paper, and you had to draw a duck, what would your drawing look like? I had fun putting together a patch that takes a Jitter geomerty and draws some lines along the contours of the mesh.
+A very common operation on a mesh is diplacing the triangles of which it is composed. Althoug not evident on a closed mesh, when displaced, the triangles look flat and volumeless. This custom geometry script takes a Jitter geometry and extrudes the triangles of which it is composed along the vertex normals. 
+
 
 ## Let's thicken them up
 
-Open the patch *contours.maxpat*.
+Open the patch *thickness.maxpat*
 
 ![](./images/geom-thickness_001.gif)
 
