@@ -99,7 +99,10 @@ Let's now talk about the difference that it makes. Let's see the last image with
 
 ![](./images/visual-quality_007.png)
 
-The difference is pretty dramatic; the gamma corrected image on the left seems more natural and "belivable" than the non-gamma corrected one on the right. Dark details are more distinguishable, and it doesn't look too dark and too oversaturated like the image on the right.
+The difference is pretty dramatic; the gamma corrected image on the left seems more natural and "belivable" than the non-gamma corrected one on the right. Dark details are more distinguishable, and it doesn't look too dark and oversaturated like the image on the right. It's not just a matter of brightness; even if increasing the color values of the image on the right to match the left image brightness, colors look still weird:
+
+![](./images/visual-quality_008.png)
+
 
 
 ## Tonemapping
