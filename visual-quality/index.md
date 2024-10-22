@@ -47,8 +47,8 @@ If you want to check out an implementation of such functions, see the shader 'hd
 
 Most of the times, for efficiency and simplicity, an apprixomate gamma correction function is preferred over the ones above:
 
-- $sRGB = linRGB^(1/2.2)$
-- $linRGB = sRGB^(2.2)$
+- $sRGB = linRGB^{1/2.2}$
+- $linRGB = sRGB^{2.2}$
 
 These gamma correction curves are very popular and widely used in many computer graphics applications, also because the difference in result with the complete original piece-wise function is quite negligable.
 
