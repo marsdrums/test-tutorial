@@ -77,7 +77,7 @@ Most of the times, for efficiency and simplicity, an apprixomate gamma correctio
 - $sRGB = linRGB^{1/2.2}$
 - $linRGB = sRGB^{2.2}$
 
-These gamma correction curves are very popular and widely used in many computer graphics applications, because they're simpler and the difference in result with the original piece-wise function is quite negligable.
+These gamma correction curves are very popular and widely used in many computer graphics applications, because they're simpler than the original piece-wise function and the difference is quite negligable.
 
 ### How and where should i apply gamma correction?
 
@@ -91,8 +91,15 @@ In Jitter, this can be done in a variety of ways:
 
 - computing gamma correction with jit.gl.pass
 
+![](./images/visual-quality_006.png)
 
+Gamma correction must always be the last effect before sending a matrix or a texture to the display ({jit.world}, {jit.pworld}, {jit.window}, {jit.pwindow}).
 
+Let's now talk about the difference that it makes. Let's see the last image with and without gamma correction:
+
+![](./images/visual-quality_007.png)
+
+The difference is pretty dramatic; the gamma corrected image on the left seems more natural and "belivable" than the non-gamma corrected one on the right. Dark details are more distinguishable, and it doesn't look too dark and too oversaturated like the image on the right.
 
 
 ## Tonemapping
