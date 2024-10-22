@@ -99,11 +99,17 @@ Let's now talk about the difference that it makes. Let's see the last image with
 
 ![](./images/visual-quality_007.png)
 
-The difference is pretty dramatic; the gamma corrected image on the left seems more natural and "belivable" than the non-gamma corrected one on the right. Dark details are more distinguishable, and it doesn't look too dark and oversaturated like the image on the right. It's not just a matter of brightness; even if increasing the color values of the image on the right to match the left image brightness, colors look still weird:
+The difference is pretty dramatic; the gamma corrected image on the left seems more natural and "belivable" than the non-gamma corrected one on the right. Dark details are more distinguishable, and it doesn't look too dark and oversaturated like the image on the right. It's not just a matter of brightness; even if increasing the color values of the image on the right to match the left image brightness, colors look still weird and unnatural:
 
 ![](./images/visual-quality_008.png)
 
+### Gamma corrections in a chain of effect?
 
+We said that gamma correction must be applied last, but we should also take care of converting any input image or video from sRGB to linear RGB before applying any processing to them. When images or videos are stored on your computer, their colors are in sRGB color space, therefore, to make a correct image processing chain we must follow this steps:
+
+- input image -> sRGB to linear RGB -> processing -> linear RGB to sRGB -> display
+
+![](./images/visual-quality_009.png)
 
 ## Tonemapping
 ## Lighting setup
