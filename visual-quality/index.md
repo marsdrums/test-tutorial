@@ -15,7 +15,34 @@ contributors:
 
 # How to improve the visual quality of your rendering in Jitter
 
+## Color bit depth
 
+In the digital domain, colors are represented using numerical values, typically in three or more dimensions. For each pixel of an image, your computer allocates a certain amount of memory to represent the color values.
+***Color bit depth*** refers to the number of bits of memory used to represent the color of a single pixel and it determines the number of distinct colors values or shades that a pixel can assume:
+
+- 1-bit: Can represent 2 values (black or white).
+- 8-bit: Can represent 256 values.
+- 16-bit: Can represent 65.536 values.
+- 24-bit: Can represent 16777216 values.
+- 32-bit: Can represent 4294967296 values.
+
+In Jitter we can decide the color bit depth for a generated image, or we can convert the bit depth of an existing image.
+
+For example, the object {jit.noise 3 char 100}, for each cell of the Jitter matrix, produces 3 color values using 8-bits of memory, hence producing a 24-bit color information. Each component of the RGB encoded color can assume 256 distinct values, for a total of 16777216 possible color combinations. This is often called ***True Color***, as it’s sufficient for most applications to represent realistic images with smooth color transitions.
+
+If 8-bits per channel (***char***) are sufficient for representing all visible colors, why do we even need higher bit depths? Let's try to apply some operations on a ***char*** Jitter matrix:
+
+![](./images/visual-quality_004.png)
+
+The image we get after this process should be mathematically identical to the input image ($0.2*0.2/0.04 = 1$), but you can tell they're totally different. This happens because although 16777216 possible color combinations are enough for representing all visible colors, at each step of the process, the color values are truncated. 
+
+To make an even more extreme example, let's assume a 1-bit color value. If such a value is $1$, and we multiply it by $0.5$ the result of this opertaion can't be $0.5$, but only $0$ or $1$ (depending on how the value gets rounded);
+
+For this reason, it makes sense to have bit depths higher than 8-bit, and you should always use ***float32***, or at least ***float16*** matrices/textures if you're planning to process an image.
+
+Once your process has finished, you can safetely reduce the bit depth of your image if you need, for example, to use smaller storage space, and the result won't change noticebly.
+
+![](./images/visual-quality_005.png)
 
 ## Color spaces and gamma correction
 
@@ -50,7 +77,7 @@ Most of the times, for efficiency and simplicity, an apprixomate gamma correctio
 - $sRGB = linRGB^{1/2.2}$
 - $linRGB = sRGB^{2.2}$
 
-These gamma correction curves are very popular and widely used in many computer graphics applications, also because the difference in result with the complete original piece-wise function is quite negligable.
+These gamma correction curves are very popular and widely used in many computer graphics applications, because they're simpler and the difference in result with the original piece-wise function is quite negligable.
 
 ### How and where should i apply gamma correction?
 
@@ -69,7 +96,6 @@ In Jitter, this can be done in a variety of ways:
 
 
 ## Tonemapping
-## Color data depth
 ## Lighting setup
 ## Antialiasing
 ## The sense of scale
