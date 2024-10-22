@@ -103,9 +103,9 @@ The difference is pretty dramatic; the gamma corrected image on the left seems m
 
 ![](./images/visual-quality_008.png)
 
-### Gamma corrections in a chain of effect?
+### Gamma corrections in a chain of effects
 
-We said that gamma correction must be applied last, but we should also take care of converting any input image or video from sRGB to linear RGB before applying any processing to them. When images or videos are stored on your computer, their colors are in sRGB color space, therefore, to make a correct image processing chain we must follow this steps:
+We said that gamma correction must be applied last, but we should also take care of converting any input image or video from sRGB to linear RGB before applying any processing to them. When images or videos are stored on your computer, their colors are in sRGB color space, therefore, to make a correct image processing chain we must follow these steps:
 
 - input image -> sRGB to linear RGB -> processing -> linear RGB to sRGB -> display
 
