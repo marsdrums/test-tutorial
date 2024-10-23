@@ -26,7 +26,7 @@ In the digital domain, colors are represented using numerical values, typically 
 - 24-bit: Can represent 16777216 values.
 - 32-bit: Can represent 4294967296 values.
 
-In Jitter we can decide the color bit depth for a generated image, or we can convert the bit depth of an existing image.
+In Jitter we can decide the color bit depth for a generated image, or we can convert the bit depth of an existing one.
 
 For example, the object {jit.noise 3 char 100}, for each cell of the Jitter matrix, produces 3 color values using 8-bits of memory, hence producing a 24-bit color information. Each component of the RGB encoded color can assume 256 distinct values, for a total of 16777216 possible color combinations. This is often called ***True Color***, as it’s sufficient for most applications to represent realistic images with smooth color transitions.
 
@@ -111,11 +111,13 @@ We said that gamma correction must be applied last, but we should also take care
 
 ![](./images/visual-quality_009.png)
 
+The same principle applies to the textures used with {jit.gl.pbr}: as long as there's a final gamma correction stage, every input source must be converted from sRGB to linear RGB.
+
 ## Tonemapping
 ## Lighting setup
 ## Antialiasing
 ## The sense of scale
-## Driving viewr's attention
+## Driving viewer's attention
 ## Global illumination
 ## Color harmony
 ## Image composition
