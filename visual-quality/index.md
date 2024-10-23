@@ -111,7 +111,16 @@ We said that gamma correction must be applied last, but we should also take care
 
 ![](./images/visual-quality_009.png)
 
-The same principle applies to the textures used with {jit.gl.pbr}: as long as there's a final gamma correction stage, every input source must be converted from sRGB to linear RGB.
+The same principle applies to the textures used with {jit.gl.pbr} and {jit.gl.material}: as long as there's a final gamma correction stage, every input source must be converted from sRGB to linear RGB.
+
+A quick note: both {jit.gl.pbr} and {jit.gl.environment} have a @gamma_correction attribute, which is enabled by default. This attribute applies gamma correction at the end of the shading process. This is a sort of shortcut that has been made to make things look better, but now that you're aware of how gamma correction works, my advise is to turn @gamma_correction off, and use proper color space conversions "manually". This way, any process that happens after the rendering (for example a pass FX made with {jit.gl.pass}) will operate in the correct linear color space.
+
+![](./images/visual-quality_010.png)
+
+In theory one should convert the brick texture from sRGB to linear RGB prior to senting it to {jit.gl.pbr}. I'm not doing it because {jit.gl.pbr} internally converts the textures to the correct color space automatically. If i would have used {jit.gl.material} instead, i should have teaken care of converting the texture to the correct color space.
+
+![](./images/visual-quality_011.png)
+
 
 ## Tonemapping
 ## Lighting setup
