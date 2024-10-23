@@ -117,7 +117,7 @@ A quick note: both {jit.gl.pbr} and {jit.gl.environment} have a @gamma_correctio
 
 ![](./images/visual-quality_010.png)
 
-In theory one should convert the brick texture from sRGB to linear RGB prior to senting it to {jit.gl.pbr}. I'm not doing it because {jit.gl.pbr} internally converts the textures to the correct color space automatically. If i would have used {jit.gl.material} instead, i should have teaken care of converting the texture to the correct color space.
+In theory one should convert the bricks texture from sRGB to linear RGB prior to senting it to {jit.gl.pbr}. I'm not doing it because {jit.gl.pbr} internally converts the textures to the correct color space automatically. If i would have used {jit.gl.material} instead, i should have teaken care of converting the texture to the correct color space myself.
 
 ![](./images/visual-quality_011.png)
 
