@@ -173,7 +173,9 @@ When a light illuminates a surface, a variety of physical interactions occur bet
 - ***Direct illumination*** refers to light that reaches a surface directly from a light source. It is the most straightforward form of illumination and typically produces strong, well-defined shadows and high contrast between light and dark areas.
 - ***Indirect illumination*** occurs when light bounces off one or more surfaces before reaching the object being illuminated. This bounced or scattered light leads to softer, more even lighting that illuminates objects from multiple angles.
 
-In real-world lighting, both direct and indirect illumination combine to produce the complex lighting effects we experience. For instance, when you sit in a room with a lamp, you see both the direct light from the bulb and the indirect light bouncing off the walls and furniture.
+In real-world lighting, both direct and indirect illumination combine to produce the complex lighting effects we experience. 
+
+![](./images/visual-quality_019.png)
 
 
 
