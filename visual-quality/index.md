@@ -152,17 +152,25 @@ The red line represents colors without tonemapping, and the green curve shows th
 
 ![](./images/visual-quality_016.png)
 
-With the tonemapping function in place, the color details on the cube are back, and we can percieve the intense brightness on the light source. Take a look at where i placed the tonemapping function. The order for these two "finisher" effects must be always the same: ***tonemapping first, and then gamma correction***.
+With the tonemapping function in place, the color details on the cube are back, and we can percieve the intense brightness of the light source. Take a look at where i placed the tonemapping function. The order for these two "finisher" effects matters and must be always the same: ***tonemapping first, then gamma correction***.
 
 What if we don't want to write the tonemapping and the gamma correction functions every time? There's a {jit.gl.pass} effect named ***gamma***. 
 
 ![](./images/visual-quality_017.png)
 
-It implements both color correction curves, and you can choose between two gamma correction functions (approximate, and accurate) and among four tonemapping curves (Reinhard, Renhard-Jodie, ACES, and Uncharted2). I invite you to experiment with these functions and find the one that looks better for your scenes.
-
-
+It implements both color correction curves, and you can choose between two gamma correction functions (approximate, and accurate) and among four tonemapping curves (Reinhard, Renhard-Jodie, ACES, and Uncharted2). I invite you to experiment with these functions and find the one that looks better for your scene.
 
 # Global illumination
+
+Let's keep working on our outdoor scene, and let's see what is still missing. Now we have a bright light illuminating the scene, but if you turn the camera around, this is what the back of the cube looks like:
+
+![](./images/visual-quality_018.png)
+
+The cube casts a long black shadow that, once again, looks too dark to be belivable. Let's try to understand why such a dark shadow doesn't look right.
+
+
+
+
 # Lighting setup
 # Shadows
 # Antialiasing
