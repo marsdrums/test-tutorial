@@ -177,8 +177,7 @@ In real-world lighting, both direct and indirect illumination combine to produce
 
 ![](./images/visual-quality_019.png)
 
-
-
+The difference is massive! Indirect illumination accounts for most of the light illuminating a scene.
 
 # Lighting setup
 # Shadows
