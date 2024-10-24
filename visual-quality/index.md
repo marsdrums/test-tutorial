@@ -147,7 +147,7 @@ Tonemapping involves using mathematical functions or algorithms that compress th
 
 ![](./images/visual-quality_015.png)
 
-The red line represents colors without tonemapping, and the green curve shows the Reinhard tonemapping function. As you can see, this function cannot grow past 1, as $\lim\limits_{x \to \infty} \Reinhard(x) = 1$
+The red line represents colors without tonemapping, and the green curve shows the Reinhard tonemapping function. As you can see, this function cannot grow past 1, as $\lim\limits_{x \to \infty} Reinhard(x) = 1$
 
 
 
