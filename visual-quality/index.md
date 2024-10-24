@@ -15,7 +15,7 @@ contributors:
 
 # How to improve the visual quality of your rendering in Jitter
 
-## Color bit depth
+# Color bit depth
 
 In the digital domain, colors are represented using numerical values, typically in three or more dimensions. For each pixel of an image, your computer allocates a certain amount of memory to represent the color values.
 ***Color bit depth*** refers to the number of bits of memory used to represent the color of a single pixel and it determines the number of distinct colors values or shades that a pixel can assume:
@@ -44,7 +44,7 @@ Once your process has finished, you can safetely reduce the bit depth of your im
 
 ![](./images/visual-quality_005.png)
 
-## Color spaces and gamma correction
+# Color spaces and gamma correction
 
 In the digital domain, colors are represented using numerical values, typically in three or more dimensions. These numerical values are then interpreted by devices like screens, printers, and cameras to produce visible colors. The most widespread color representation is RGB. As you probably already know, RGB is a color system that combines three color components (Red, Green, Blue) to represent all the colors of the visible spectrum. When all are combined at full intensity, they create white light.
 
@@ -54,7 +54,7 @@ Color spaces are systems used to represent and organize colors in a consistent a
 
 Nowdays, most devices (TV, phones, computer monitors, projectors) use the ***sRGB*** color space (Standard Red Green Blue). It is important to understand how sRGB works to assign colors to our pixels properly.
 
-### Why sRGB?
+## Why sRGB?
 
 Human vision is more sensitive to changes in darker tones than in brighter tones. In other words, we can detect more subtle differences in shadowed areas than in highlights. 
 
@@ -79,7 +79,7 @@ Most of the times, for efficiency and simplicity, an apprixomate gamma correctio
 
 These gamma correction curves are very popular and widely used in many computer graphics applications, because they're simpler than the original piece-wise function and the difference is quite negligable.
 
-### How and where should i apply gamma correction?
+## How and where should i apply gamma correction?
 
 Let's put it this way: computers need to operate on RGB colors. They don't care at all about our funky color perception, but they just need to process color values as they are. Screens, on the contrary, are expecting to receive color values encoded in sRGB color space. So, gamma correction must always be used as the last step of any graphic pipeline. Just before sending a Jitter matrix or a texture to the display, we should convert the linear RGB into sRGB.
 
@@ -103,51 +103,50 @@ The difference is pretty dramatic; the gamma corrected image on the left seems m
 
 ![](./images/visual-quality_008.png)
 
-### Gamma corrections in a chain of effects
+## Gamma corrections in a chain of effects
 
 We said that gamma correction must be applied last, but we should also take care of converting any input image or video from sRGB to linear RGB before applying any processing to them. When images or videos are stored on your computer, their colors are in sRGB color space, therefore, to make a correct image processing chain we must follow these steps:
 
-- input image -> sRGB to linear RGB -> processing -> linear RGB to sRGB -> display
+- input image -> sRGB to linear RGB -> image processing -> linear RGB to sRGB -> display
 
 ![](./images/visual-quality_009.png)
-
-The same principle applies to the textures used with {jit.gl.pbr} and {jit.gl.material}: as long as there's a final gamma correction stage, every input source must be converted from sRGB to linear RGB.
 
 A quick note: both {jit.gl.pbr} and {jit.gl.environment} have a @gamma_correction attribute, which is enabled by default. This attribute applies gamma correction at the end of the shading process. This is a sort of shortcut that has been made to make things look better by default, but now that you're aware of how gamma correction works, my advise is to turn @gamma_correction off, and use proper color space conversions "manually". This way, any process that happens after the rendering (for example a pass FX made with {jit.gl.pass}) will operate in the correct linear RGB color space.
 
 ![](./images/visual-quality_010.png)
 
-In theory one should convert the bricks texture from sRGB to linear RGB prior to senting it to {jit.gl.pbr}. I'm not doing it because {jit.gl.pbr} internally converts the textures to the correct color space automatically. If i would have used {jit.gl.material} instead, or any custom shader that applies a texture to a mesh, i should have teaken care of converting the texture to the correct color space myself.
+In theory one should convert the bricks texture from sRGB to linear RGB prior to using it for something. I'm not doing it because {jit.gl.pbr} internally converts the textures to the correct color space automatically. If i would have used {jit.gl.material} instead, or any custom shader that applies a texture to a mesh, i should have teaken care of converting textures to the correct color space myself.
 
 ![](./images/visual-quality_011.png)
 
+# Light intensity and tonemapping
 
-## Tonemapping
-## Lighting setup
-## Antialiasing
-## The sense of scale
-## Driving viewer's attention
-## Global illumination
-## Color harmony
-## Image composition
+Let's say we want to create an outdoor scene illuminated by a bright summer sun. Let's set it up:
+
+![](./images/visual-quality_012.png)
+
+It's a very simple patch, but there are a couple of things i want you to focus on. First of all, i disabled @gamma_correction on both {jit.gl.pbr} objects, and i'm computing the color space conversion manually using {jit.gl.pix.codebox}. Don't mind about the other settings of {jit.gl.pbr}, we'll talk about those in another chapter. 
+
+We said we wanted a bright sunny day, but honestly the result looks kind of dull and dark. I set the @diffuse attribute of {jit.gl.light} to a color that resembles the sun light color, but it doesn't seem enough to get the effect we were after. The main reason why it doesn't look like an outdoor scene is that the light isn't intense enought. This brings us to a key concept: ***light color is NOT light intesity***. When we set the @diffuse attribute of {jit.gl.light} what we are actually setting is the light's "tint"; if we want to have a light of arbitrary instesity, we should take those values and multiply them by an intensity value. Let's see how it looks like now:
+
+![](./images/visual-quality_013.png)
+
+I'm using the {swatch} object to decide the light tint and i multiply each component of the color value by an intenisty parameter. This way, the light we get resembles sun light much more. This brings us to yet another cardinal concept: ***you should think in terms of light energy, not in terms of light color***. When we set the @diffuse attribute of {jit.gl.light} we are actually expressing how much energy comes from the light source -> how much red, how much green, and how much blue. If you take a look at the values in the message box below the object {vexpr}, you can notice how values go way past 1. So, don't be afraid to crank up these numbers!
+
+Now the light looks correct, but we lost all the details of the shape: the image looks burnt! Let's take a look at the values that are being sent to {jit.pworld}:
+
+![](./images/visual-quality_014.png)
+
+I set up a little debugger utility to have a sense of what values {jit.pworld} is receiving. I'm taking the rendered image, and i'm converting the RGB values to luminance; i then compare the luminance against 1: if luminance is greater than 1, then show a white pixel, else show a black pixel. With this simple test, we can see that {jit.pworld} is receiving values greater than 1, and therefore all it can do is to display a white color. In other words, colors are clipped, as there's no color brighter than pure white. Once again we're in a spot where our rendering looks unnatural: The light intensity seems convincing, but we lost all the details of the shape because the color values are clipped. What can we do then?
+
+Here comes into play another very important color correction tool: ***tonemapping***.
 
 
-Open the patch *contours.maxpat*.
-
-![](./images/geom-contours_001.png)
-
-Looking at the render, you can see that the mesh outlines have been drawn. But, how can we identify which portions of the mesh should be considered part of the outlines? 
-
-Give a look at the patch:
-
-![](./images/geom-contours_002.png)
-
-The first step consists in grabbing a mesh, turning it into a Jitter geometry, and computing face normals using {jit.geom.normgen}. They will come in handy later on. 
-
-Then, {jit.geom.todict} converts the Jitter geometry into a dictionary accesible by JavaScript.
-
-Now, double-click on {v8 geom.draw.contours.js} to give a look at the custom geometry script.
-
-![](./images/geom-contours_003.png)
-
-The core algorithm is pretty simple: iterate over the edges of the mesh checking the orientation (face normals) of the two faces divided by the edge; if the cosine of the angle formed by the adjacent faces is minor than a user-defined threshold, then draw a line connecting the endpoints of the edge.
+# Lighting setup
+# Shadows
+# Antialiasing
+# Global illumination
+# Give a sense of scale
+# Driving viewer's attention
+# Color harmony
+# Image composition
