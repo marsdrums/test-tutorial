@@ -143,11 +143,11 @@ Here comes into play another very important color correction tool: ***tonemappin
 
 Tonemapping is a technique used to convert high dynamic range (HDR) images, which have a wide range of luminance values, into a format that can be displayed on low dynamic range (LDR) devices like standard monitors, televisions, or printed media. The goal of tonemapping is to compress the wide range of brightness levels in an HDR image into a range that can be properly displayed on these devices, while still conveying the perceived brightness and contrast of the original scene.
 
-Tonemapping involves using mathematical functions or algorithms that compress the HDR luminance (brightness) range into a more limited one. This process can be done in several ways, depending on the desired artistic or visual effect. A very common tonemapping curve is the ***Reinhard Tonemapping***. This curve threats R, G, and B channels equally, and works as a sort of "intensity limiter". The Reinhard tonemapping curve corresponds to the function $RGB_{out} = RGB_{in} / {RGB_{in}+1}$, and this is its plotted graph:
+Tonemapping involves using mathematical functions or algorithms that compress the HDR luminance (brightness) range into a more limited one. This process can be done in several ways, depending on the desired artistic or visual effect. A very common tonemapping curve is the ***Reinhard Tonemapping***. This curve threats R, G, and B channels equally, and works as a sort of "intensity limiter". The Reinhard tonemapping curve corresponds to the function $RGB_{out} = \frac{RGB_{in}}{RGB_{in}+1} /$, and this is its plotted graph:
 
 ![](./images/visual-quality_015.png)
 
-The red line represents colors without tonemapping, and the green curve shows the Reinhard tonemapping function. As you can see, this function cannot grow past 1, as $\lim\limits_{x \to \infty} Reinhard(x) = 1$
+The red line represents colors without tonemapping, and the green curve shows the Reinhard tonemapping function. As you can see, this function cannot grow past 1, as $\lim\limits_{x \to \infty} Reinhard(x) = 1$. The Reinhard tonemapping curve contains the color values avoiding clipping, while 
 
 
 
