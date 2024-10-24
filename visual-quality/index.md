@@ -181,6 +181,12 @@ The light bouncing off the floor illuminates the faces of the cube in shadow
 
 $L_o(\mathbf{x}, \omega_o) = L_e(\mathbf{x}, \omega_o) + \int_{\Omega} f_r(\mathbf{x}, \omega_i, \omega_o) L_i(\mathbf{x}, \omega_i) (\omega_i \cdot \mathbf{n}) d\omega_i$
 
+- $L_o(\mathbf{x}, \omega_o)$: Outgoing radiance at point $\mathbf{x}$ in direction $\omega_o$.
+- $L_e(\mathbf{x}, \omega_o)$: Emitted radiance from the surface at $\mathbf{x}$ in direction $\omega_o$.
+- $f_r(\mathbf{x}, \omega_i, \omega_o)$: Bidirectional Reflectance Distribution Function (BRDF).
+- $$: Incoming radiance at point $\mathbf{x}$ in direction $\omega_i$.
+
+
 
 # Lighting setup
 # Shadows
