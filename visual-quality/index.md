@@ -206,7 +206,7 @@ If we go beyond the initial adversion for greek letters, we can break this funct
 
 ![](./images/visual-quality_022.png)
 
-![](./images/visual-quality_023.png)
+![](./images/visual-quality_023.jpg)
 
 # Lighting setup
 # Shadows
