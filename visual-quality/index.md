@@ -133,11 +133,11 @@ We said we wanted a bright sunny day, but honestly the result looks kind of dull
 
 I'm using the {swatch} object to decide the light tint and i multiply each component of the color value by an intenisty parameter. This way, the light we get resembles sun light much more. This brings us to yet another cardinal concept: ***you should think in terms of light energy, not in terms of light color***. When we set the @diffuse attribute of {jit.gl.light} we are actually expressing how much energy comes from the light source -> how much red, how much green, and how much blue. If you take a look at the values in the message box below the object {vexpr}, you can notice how values go way past 1. So, don't be afraid to crank up these numbers!
 
-Now the light looks correct, but we lost all the details of the shape: the image looks burnt! Let's take a look at the values that are being sent to {jit.pworld}:
+Now the light intensity looks correct, but we lost all the details on the shape: the image looks burnt! Let's take a look at the values that are being sent to {jit.pworld}:
 
 ![](./images/visual-quality_014.png)
 
-I set up a little debugger utility to have a sense of what values {jit.pworld} is receiving. I'm taking the rendered image, and i'm converting the RGB values to luminance; i then compare the luminance against 1: if luminance is greater than 1, then show a white pixel, else show a black pixel. With this simple test, we can see that {jit.pworld} is receiving values greater than 1, and therefore all it can do is to display a white color. In other words, colors are clipped, as there's no color brighter than pure white. Once again we're in a spot where our rendering looks unnatural: The light intensity seems convincing, but we lost all the details of the shape because the color values are clipped. What can we do then?
+I set up a little debugger utility to have a sense of what values {jit.pworld} is receiving. I'm taking the rendered image, and i'm converting the RGB values to luminance; i then compare the luminance against 1: if luminance is greater than 1, then the utility shows a white pixel, else it shows a black pixel. With this simple test, we can see that {jit.pworld} is receiving values greater than 1, and therefore all it can do is to display a white color. In other words, colors are clipped, as there's no color brighter than pure white. Once again we're in a spot where our rendering looks unnatural: The light intensity seems convincing, but we lost all the details of the shape because the color values are clipped. What can we do then?
 
 Here comes into play another very important color correction tool: ***tonemapping***.
 
@@ -152,9 +152,9 @@ The red line represents colors without tonemapping, and the green curve shows th
 
 ![](./images/visual-quality_016.png)
 
-With the tonemapping function in place, the color details on the cube are back, and we can percieve the intense brightness of the light source. Take a look at where i placed the tonemapping function. The order for these two "finisher" effects matters and must be always the same: ***tonemapping first, then gamma correction***.
+With the tonemapping function in place, the color details on the cube are back, and we can still percieve the intense brightness of the light source. Take a look at where i placed the tonemapping function in regards to the gamma correction function. The order for these two "finisher" effects matters and must be always the same: ***tonemapping first, then gamma correction***.
 
-What if we don't want to write the tonemapping and the gamma correction functions every time? There's a {jit.gl.pass} effect named ***gamma***. 
+What if we don't want to write the tonemapping and the gamma correction functions every time? We can again use the {jit.gl.pass} effect named ***gamma***. 
 
 ![](./images/visual-quality_017.png)
 
@@ -181,7 +181,7 @@ These complex light-surface interactions give rise to two primary types of illum
 
 Image from: "Modern Game Engine - Theory and Practice"
 
-If you come from the audio realm, you can compare direct and indirect illumination to what happens when sound waves propagete in a room. The direct component is the sound coming directly from the sound source to the listener along the shortest possible path; the inderect components are the sound waves reaching the listener after a certain number of bounces off the walls, floor, and ceiling of the room.
+If you come from the audio realm, you can compare direct and indirect illumination to what happens when sound waves propagete in a room. The direct component is the sound coming directly from the sound source to the listener along the shortest possible path; the indirect components are the sound waves reaching the listener after a certain number of bounces off walls, floor, and ceiling of the room.
 
 In real-world lighting, both direct and indirect illumination combine to produce the complex lighting effects we experience. Before looking at how we can add indirect illumination in Max, i want to show you the difference that the addition of indirect lighting makes in our scene:
 
@@ -205,6 +205,8 @@ If we go beyond the initial adversion for greek letters, we can break this funct
 - $$: Incoming radiance at point $\mathbf{x}$ in direction $\omega_i$.
 
 ![](./images/visual-quality_022.png)
+
+![](./images/visual-quality_023.png)
 
 # Lighting setup
 # Shadows
