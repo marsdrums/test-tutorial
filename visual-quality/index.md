@@ -181,11 +181,13 @@ These complex light-surface interactions give rise to two primary types of illum
 
 Image from: "Modern Game Engine - Theory and Practice"
 
-In real-world lighting, both direct and indirect illumination combine to produce the complex lighting effects we experience. This is the difference that makes adding indirect lighting to our scene:
+If you come from the audio realm, you can compare direct and indirect illumination to sound waves propagating in a room. The direct component is the sound coming directly from the sound source to the listener along the shortest possible path; the inderect components are the sound waves reaching the listener after a certain number of bounces off the walls, floor, and ceiling of the room.
+
+In real-world lighting, both direct and indirect illumination combine to produce the complex lighting effects we experience. Looking at how we can add indirect illumination in Max, i want to show you the that makes adding indirect lighting to our scene:
 
 ![](./images/visual-quality_019.png)
 
-The light bouncing off the floor illuminates the faces of the cube in shadow
+The light bouncing off the floor illuminates the faces of the cube not reached by direct illumination. The effect looks overall more "plausible" because that's what we're used to see every day.
 
 $L_o(\mathbf{x}, \omega_o) = L_e(\mathbf{x}, \omega_o) + \int_{\Omega} f_r(\mathbf{x}, \omega_i, \omega_o) L_i(\mathbf{x}, \omega_i) (\omega_i \cdot \mathbf{n}) d\omega_i$
 
