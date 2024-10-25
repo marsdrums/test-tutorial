@@ -166,7 +166,7 @@ Let's keep working on our outdoor scene, and let's see what is still missing. No
 
 ![](./images/visual-quality_018.png)
 
-The cube casts a long black shadow that, once again, looks too dark to be belivable. Let's try to understand why such a dark shadow doesn't look right.
+The cube casts a long black shadow that, once again, looks somewhat "unnatural". Let's try to understand why such a dark shadow doesn't look quite right.
 
 When a light illuminates a surface, a variety of physical interactions occur between the light (electromagnetic radiation) and the material. These interactions determine how we perceive the surface's color, brightness, and overall appearance. The light striking the surface can be absorbed, reflected, refracted, or even transmitted, depending on the surface's properties. 
 
@@ -177,7 +177,11 @@ These complex light-surface interactions give rise to two primary types of illum
 - ***Direct illumination*** refers to light that reaches a surface directly from a light source. It is the most straightforward form of illumination and typically produces strong, well-defined shadows and high contrast between light and dark areas.
 - ***Indirect illumination*** (also called diffuse, or global illumination) occurs when light bounces off one or more surfaces before reaching the object being illuminated. This bounced or scattered light leads to softer, more even lighting that illuminates objects from multiple angles.
 
-In real-world lighting, both direct and indirect illumination combine to produce the complex lighting effects we experience. This is the difference that indirect illumination makes on our cube:
+![](./images/visual-quality_021.png)
+
+Image from: "Modern Game Engine - Theory and Practice"
+
+In real-world lighting, both direct and indirect illumination combine to produce the complex lighting effects we experience. This is the difference that makes adding indirect lighting to our scene:
 
 ![](./images/visual-quality_019.png)
 
