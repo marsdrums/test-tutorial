@@ -181,22 +181,30 @@ These complex light-surface interactions give rise to two primary types of illum
 
 Image from: "Modern Game Engine - Theory and Practice"
 
-If you come from the audio realm, you can compare direct and indirect illumination to sound waves propagating in a room. The direct component is the sound coming directly from the sound source to the listener along the shortest possible path; the inderect components are the sound waves reaching the listener after a certain number of bounces off the walls, floor, and ceiling of the room.
+If you come from the audio realm, you can compare direct and indirect illumination to what happens when sound waves propagete in a room. The direct component is the sound coming directly from the sound source to the listener along the shortest possible path; the inderect components are the sound waves reaching the listener after a certain number of bounces off the walls, floor, and ceiling of the room.
 
-In real-world lighting, both direct and indirect illumination combine to produce the complex lighting effects we experience. Looking at how we can add indirect illumination in Max, i want to show you the that makes adding indirect lighting to our scene:
+In real-world lighting, both direct and indirect illumination combine to produce the complex lighting effects we experience. Before looking at how we can add indirect illumination in Max, i want to show you the difference that the addition of indirect lighting makes in our scene:
 
 ![](./images/visual-quality_019.png)
 
-The light bouncing off the floor illuminates the faces of the cube not reached by direct illumination. The effect looks overall more "plausible" because that's what we're used to see every day.
+The light bouncing off the floor illuminates the faces of the cube not reached by direct illumination, and the light bouncing off the cube illuminates the shadowed floor. The effect looks overall more "plausible" because that's what we're used to see every day.
+
+To illustrate the tools we have available in Max for computing global illumination, we have to go a step deeper into the understanding which elements contribute to the shading of a point on a surface.
+
+## The rendering equation
+
+In 1986, James Kajiya introduced a mathematical formulation used in computer graphics to describe the way light interacts with surfaces to produce the color and brightness we perceive. This formulation foes under the name of the ***rendering equation***:
 
 $L_o(\mathbf{x}, \omega_o) = L_e(\mathbf{x}, \omega_o) + \int_{\Omega} f_r(\mathbf{x}, \omega_i, \omega_o) L_i(\mathbf{x}, \omega_i) (\omega_i \cdot \mathbf{n}) d\omega_i$
 
-- $L_o(\mathbf{x}, \omega_o)$: Outgoing radiance at point $\mathbf{x}$ in direction $\omega_o$.
+If we go beyond the initial adversion for greek letters, we can break this function into pieces and discover that it's actually pretty simple and elegant.
+
+- $L_o(\mathbf{x}, \omega_o)$: Outgoing radiance at point $\mathbf{x}$ in direction $\omega_o$. This is what the equation solves, that is the amount of light that 
 - $L_e(\mathbf{x}, \omega_o)$: Emitted radiance from the surface at $\mathbf{x}$ in direction $\omega_o$.
 - $f_r(\mathbf{x}, \omega_i, \omega_o)$: Bidirectional Reflectance Distribution Function (BRDF).
 - $$: Incoming radiance at point $\mathbf{x}$ in direction $\omega_i$.
 
-
+![](./images/visual-quality_022.png)
 
 # Lighting setup
 # Shadows
