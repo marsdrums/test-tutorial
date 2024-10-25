@@ -168,7 +168,11 @@ Let's keep working on our outdoor scene, and let's see what is still missing. No
 
 The cube casts a long black shadow that, once again, looks too dark to be belivable. Let's try to understand why such a dark shadow doesn't look right.
 
-When a light illuminates a surface, a variety of physical interactions occur between the light (electromagnetic radiation) and the material. These interactions determine how we perceive the surface's color, brightness, and overall appearance. The light striking the surface can be absorbed, reflected, refracted, or even transmitted, depending on the surface's properties. There are two primary types of illumination involved: ***direct illumination*** and ***indirect illumination***.
+When a light illuminates a surface, a variety of physical interactions occur between the light (electromagnetic radiation) and the material. These interactions determine how we perceive the surface's color, brightness, and overall appearance. The light striking the surface can be absorbed, reflected, refracted, or even transmitted, depending on the surface's properties. 
+
+![](./images/visual-quality_020.png)
+
+These complex light-surface interactions give rise to two primary types of illumination: ***direct illumination*** and ***indirect illumination***.
 
 - ***Direct illumination*** refers to light that reaches a surface directly from a light source. It is the most straightforward form of illumination and typically produces strong, well-defined shadows and high contrast between light and dark areas.
 - ***Indirect illumination*** (also called diffuse, or global illumination) occurs when light bounces off one or more surfaces before reaching the object being illuminated. This bounced or scattered light leads to softer, more even lighting that illuminates objects from multiple angles.
