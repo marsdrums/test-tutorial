@@ -218,7 +218,17 @@ The rendering equation, describes how much light is visible from a point on a su
 
 The first thing that contributes to the result of the rendering equation, is the amount of light that the object is emitting (emitted radiance). If you look right at a light bulb switched on, it emits some light; the emitted radiance corresponds to the term $L_e(\mathbf{x}, \omega_o)$ in the rendering equation, and refers to the amount of light that point $\mathbf{x}$ is producing in direction $\omega_o$. If point $\mathbf{x}$ sits on a non-emissive surface, $L_e(\mathbf{x}, \omega_o) = 0$. 
 
-The rest of the equation describes how much light comes from point $\mathbf{x}$ (outgoing radiance) as a function of the light that point $\mathbf{x}$ is reciving (incoming radiance). We said before that when a surface is illuminated by some light, a variety of phisycal interractions may occur. As direct result of such interractions, a certain amount of light that point $\mathbf{x}$ is receiveing can be scatterd in the $\omega_o$ direction and therefore reach the viewer or another surface, contributing to its illumination. This last bit of the function is an integral because in order to know how much light is scattered in the $\omega_o$ direction, we should consider all the possible directions from which the point $\mathbf{x}$ can be illuminated.
+The rest of the equation describes how much light comes from point $\mathbf{x}$ (outgoing radiance) as a function of the light that point $\mathbf{x}$ is reciving (incoming radiance). We said before that when a surface is illuminated by some light, a variety of phisycal interractions may occur. As direct result of such interractions, a certain amount of light that point $\mathbf{x}$ is receiveing can be reflected in the $\omega_o$ direction and therefore reach the viewer or another surface, contributing to its illumination. This last bit of the function is an integral because in order to know how much light is reflected in the $\omega_o$ direction, we should consider all the possible directions from which the point $\mathbf{x}$ can be illuminated. Such a set of directions is infinite, and it includes all the directions within a hemisphere oriented according to the surface's normal vector. 
+
+![](./images/visual-quality_025.png)
+
+The integral returns the sum of the infinite amount of light contributions coming from all directions within the normal-oriented hemisphere. Each light contribution depends on three things:
+
+- The BRDF of point $\mathbf{x}$: $f_r(\mathbf{x}, \omega_o, \omega_i)$
+- The amount of incoming radiance from direction $\omega_i$: $L_i(\mathbf{x}, \omega_i)$
+- The cosine of the angle $\theta$ formed by the incoming radiance direction $\omega_i$ and the normal vector of $\mathbf{x}$: $\cos(\theta)$
+
+
 
 ![](./images/visual-quality_023.jpg)
 
