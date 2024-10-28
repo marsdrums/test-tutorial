@@ -224,7 +224,7 @@ The rest of the equation describes how much light comes from point $\mathbf{x}$ 
 
 The integral returns the sum of infinite light contributions coming from all directions within the normal-oriented hemisphere. Each light contribution depends on three things:
 
-- The BRDF of point $\mathbf{x}$: $f_r(\mathbf{x}, \omega_o, \omega_i)$
+- The BRDF at point $\mathbf{x}$: $f_r(\mathbf{x}, \omega_o, \omega_i)$
 - The amount of incoming radiance from direction $\omega_i$: $L_i(\mathbf{x}, \omega_i)$
 - The cosine of the angle $\theta$ formed by the incoming radiance direction $\omega_i$ and the normal vector of $\mathbf{x}$: $\cos(\theta)$
 
