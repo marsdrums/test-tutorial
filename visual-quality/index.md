@@ -195,7 +195,9 @@ To illustrate the tools we have available in Max for computing global illuminati
 
 In 1986, James Kajiya introduced a mathematical formulation used in computer graphics to describe the way light interacts with surfaces to produce the color and brightness we perceive. This formulation goes under the name of the ***rendering equation***:
 
-$L_o(\mathbf{x}, \omega_o) = L_e(\mathbf{x}, \omega_o) + \int_{\Omega} f_r(\mathbf{x}, \omega_i, \omega_o) L_i(\mathbf{x}, \omega_i) (\omega_i \cdot \mathbf{n}) d\omega_i$
+$L_o(\mathbf{x}, \omega_o) = L_e(\mathbf{x}, \omega_o) + \int_{\Omega} f_r(\mathbf{x}, \omega_i, \omega_o) L_i(\mathbf{x}, \omega_i) cos(theta) d\omega_i$
+
+Note: there exist many possible formulations for the rendering equation, but for the sake of this article, i'll just focus on the version for non-translucent materials.
 
 If we go beyond the initial adversion for greek letters one may have, we can break this function into pieces and discover that it's actually pretty simple and elegant.
 
