@@ -182,7 +182,7 @@ These surface-light interractions may cohexist, and they depend on the propertie
 These complex light-surface interactions are described by the so called ***BRDF*** (Bidirectional Reflectance Distribution Function).
 A BRDF describes how light reflects off a surface, defining the relationship between incoming light (from a given direction) and outgoing reflected light (in another direction). 
 
-![](./images/visual-quality_020.png)
+![](./images/visual-quality_024.png)
 
 The object {jit.gl.pbr} (Physics-Based Render) uses BRDF functions to reproduce how different materials look under various lighting conditions. If {jit.gl.pbr} is already accounting for generating plausible surface-light interractions, why doesn't our 3D scene look correct? 
 
