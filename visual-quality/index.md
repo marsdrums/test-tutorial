@@ -166,16 +166,27 @@ Let's keep working on our outdoor scene, and let's see what is still missing. No
 
 ![](./images/visual-quality_018.png)
 
-The cube casts a long black shadow that, once again, looks somewhat "unnatural". Let's try to understand why such a dark shadow doesn't look quite right.
+The cube casts a long black shadow that, once again, looks somewhat "unnatural". If the image still doesn't "look quite right", it is because we're not considering all the lighting phenomena that may contribute to the illumination of our scene. Before getting to the details, take a look at this comparison:
 
-When a light illuminates a surface, a variety of physical interactions occur between the light (electromagnetic radiation) and the material. These interactions determine how we perceive the surface's color, brightness, and overall appearance. The light striking the surface can be absorbed, reflected, refracted, or even transmitted, depending on the surface's properties. 
+![](./images/visual-quality_019.png)
+
+On the left we have our scene as rendered right now; on the right there's the same scene rendered considering a wider range of lighting interractions. The image on the right looks undoubtedly more "plausible", but what are such missing lighting interractions? To give you a solid answer to this question, we have to go a step deeper into understanding how light interracts with physical objects and how to render such interractions on screen.
+
+# Surface-light interractions
+
+When a light illuminates a surface, a variety of physical interactions occur between the light (electromagnetic radiation) and the material. These interactions determine how we perceive the surface's color, brightness, and overall appearance. The light striking the surface can be absorbed, reflected, refracted, or transmitted, depending on the surface's properties. 
 
 ![](./images/visual-quality_020.png)
 
-These complex light-surface interactions give rise to two primary types of illumination: ***direct illumination*** and ***indirect illumination***.
+These surface-light interractions may cohexist, and they depend on the properties of the material of which the surface is composed. For example, a black wall tends to absorb most of the light it receives; a window lets you see through it because it can transmit light; a mirror reflects all the received light in the specular direction.
+These complex light-surface interactions are described by the so called ***BRDF*** (Bidirectional Reflectance Distribution Function).
+A BRDF describes how light reflects off a surface, defining the relationship between incoming light (from a given direction) and outgoing reflected light (in another direction). 
 
-- ***Direct illumination*** refers to light that reaches a surface directly from a light source. It is the most straightforward form of illumination and typically produces strong, well-defined shadows and high contrast between light and dark areas.
-- ***Indirect illumination*** (also called diffuse, or global illumination) occurs when light bounces off one or more surfaces before reaching the object being illuminated. This bounced or scattered light leads to softer, more even lighting that illuminates objects from multiple angles.
+![](./images/visual-quality_020.png)
+
+The object {jit.gl.pbr} (Physics-Based Render) uses BRDF functions to reproduce how different materials look under various lighting conditions. If {jit.gl.pbr} is already accounting for generating plausible surface-light interractions, why doesn't our 3D scene look correct? 
+
+When a suface is illuminated, part of the light is reflected back into the environment. How such reflections behave is described by the BRDF of the material, but the amount of light emitted back into the scene should contribute to the illumination of other surfaces. {jit.gl.pbr} applies the correct light-surface responce only for the light coming directly from the light source (***direct illumination***), but doesn't account for the amount of light coming from other obects' reflections (***indirect illumination***).
 
 ![](./images/visual-quality_021.png)
 
@@ -183,11 +194,11 @@ Image from: "Modern Game Engine - Theory and Practice"
 
 If you come from the audio realm, you can compare direct and indirect illumination to what happens when sound waves propagete in a room. The direct component is the sound coming directly from the sound source to the listener along the shortest possible path; the indirect components are the sound waves reaching the listener after a certain number of bounces off walls, floor, and ceiling of the room.
 
-In real-world lighting, both direct and indirect illumination combine to produce the complex lighting effects we experience. Before looking at how we can add indirect illumination in Max, i want to show you the difference that the addition of indirect lighting makes in our scene:
+In real-world lighting, both direct and indirect illumination combine to produce the complex lighting effects we experience. If we go back at the side-by-side comparison of the two cubes, we can see the effect of adding indirect illumination to the scene.
 
 ![](./images/visual-quality_019.png)
 
-The light bouncing off the floor illuminates the faces of the cube not reached by direct illumination, and the light bouncing off the cube illuminates the shadowed floor. The effect looks overall more "plausible" because that's what we're used to see every day.
+The light bouncing off the floor illuminates the faces of the cube not reached by direct illumination, and the light bouncing off the cube illuminates the shadowed floor. 
 
 To illustrate the tools we have available in Max for computing global illumination, we have to go a step deeper into the understanding which elements contribute to the shading of a point on a surface.
 
@@ -205,9 +216,9 @@ If we go beyond the initial adversion for greek letters one may have, we can bre
 
 The rendering equation, describes how much light is visible from a point on a surface $\mathbf{x}$ looking in a certain direction $\omega_o$. In other words, it can tell us the percieved color and brightess for every point on a surface. The amount of light depends on a few things, but let's focus on them one by one.
 
-The first thing that contributes to the result of the rendering equation, is the amount of light that the object is emitting (emitted radiance). If you look right at a light bulb switched on, it emits some light; the emitted radiance corresponds to the term $L_e(\mathbf{x}, \omega_o)$ in the rendering equation, and refers to the amount of light that the point $\mathbf{x}$ is producing. If point $\mathbf{x}$ sits on a non-emissive surface, $L_e(\mathbf{x}, \omega_o) = 0$. 
+The first thing that contributes to the result of the rendering equation, is the amount of light that the object is emitting (emitted radiance). If you look right at a light bulb switched on, it emits some light; the emitted radiance corresponds to the term $L_e(\mathbf{x}, \omega_o)$ in the rendering equation, and refers to the amount of light that point $\mathbf{x}$ is producing in direction $\omega_o$. If point $\mathbf{x}$ sits on a non-emissive surface, $L_e(\mathbf{x}, \omega_o) = 0$. 
 
-The rest of the equation describes how much light is visible from point $\mathbf{x}$ as a function of the light that the point is reciving. We said before that when a surface is illuminated by some light, a variety of phisycal interractions may occur.
+The rest of the equation describes how much light comes from point $\mathbf{x}$ (outgoing radiance) as a function of the light that point $\mathbf{x}$ is reciving (incoming radiance). We said before that when a surface is illuminated by some light, a variety of phisycal interractions may occur. As direct result of such interractions, a certain amount of light that point $\mathbf{x}$ is receiveing can be scatterd in the $\omega_o$ direction and therefore reach the viewer or another surface, contributing to its illumination. This last bit of the function is an integral because in order to know how much light is scattered in the $\omega_o$ direction, we should consider all the possible directions from which the point $\mathbf{x}$ can be illuminated.
 
 ![](./images/visual-quality_023.jpg)
 
