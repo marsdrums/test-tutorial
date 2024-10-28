@@ -193,18 +193,17 @@ To illustrate the tools we have available in Max for computing global illuminati
 
 ## The rendering equation
 
-In 1986, James Kajiya introduced a mathematical formulation used in computer graphics to describe the way light interacts with surfaces to produce the color and brightness we perceive. This formulation foes under the name of the ***rendering equation***:
+In 1986, James Kajiya introduced a mathematical formulation used in computer graphics to describe the way light interacts with surfaces to produce the color and brightness we perceive. This formulation goes under the name of the ***rendering equation***:
 
 $L_o(\mathbf{x}, \omega_o) = L_e(\mathbf{x}, \omega_o) + \int_{\Omega} f_r(\mathbf{x}, \omega_i, \omega_o) L_i(\mathbf{x}, \omega_i) (\omega_i \cdot \mathbf{n}) d\omega_i$
 
-If we go beyond the initial adversion for greek letters, we can break this function into pieces and discover that it's actually pretty simple and elegant.
-
-- $L_o(\mathbf{x}, \omega_o)$: Outgoing radiance at point $\mathbf{x}$ in direction $\omega_o$. This is what the equation solves, that is the amount of light that 
-- $L_e(\mathbf{x}, \omega_o)$: Emitted radiance from the surface at $\mathbf{x}$ in direction $\omega_o$.
-- $f_r(\mathbf{x}, \omega_i, \omega_o)$: Bidirectional Reflectance Distribution Function (BRDF).
-- $$: Incoming radiance at point $\mathbf{x}$ in direction $\omega_i$.
+If we go beyond the initial adversion for greek letters one may have, we can break this function into pieces and discover that it's actually pretty simple and elegant.
 
 ![](./images/visual-quality_022.png)
+
+The rendering equation, describes how much light is visible from a point on a surface $\mathbf{x}$ looking in a certain direction $\omega_o$. The amount of light depends on two things:
+- the amount of light that the object is emitting (emitted radiance). If you look right at a light bulb switched on, it emits some light; the emitted radiance corresponds to the term $L_e(\mathbf{x}, \omega_o)$ in the rendering equation, and refers to the amount of light that the point $\mathbf{x}$ is producing.
+- the amount of light that point $\mathbf{x}$ is receving and therefore scattering in the $\omega_o$ direction. It corresponds to the terms $\int_{\Omega} f_r(\mathbf{x}, \omega_i, \omega_o) L_i(\mathbf{x}, \omega_i) (\omega_i \cdot \mathbf{n}) d\omega_i$ in the rendering equation. As we said before, when a surface is illuminated by some light, a variety of phisical interracts may occur.
 
 ![](./images/visual-quality_023.jpg)
 
