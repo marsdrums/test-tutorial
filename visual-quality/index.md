@@ -200,7 +200,7 @@ In real-world lighting, both direct and indirect illumination combine to produce
 
 The light bouncing off the floor illuminates the faces of the cube not reached by direct illumination, and the light bouncing off the cube illuminates the shadowed floor. 
 
-To illustrate the tools we have available in Max for computing global illumination, we have to go a step deeper into the understanding which elements contribute to the shading of a point on a surface.
+How can we then compute direct and indirect illumination?
 
 ## The rendering equation
 
@@ -228,9 +228,17 @@ The integral returns the sum of the infinite amount of light contributions comin
 - The amount of incoming radiance from direction $\omega_i$: $L_i(\mathbf{x}, \omega_i)$
 - The cosine of the angle $\theta$ formed by the incoming radiance direction $\omega_i$ and the normal vector of $\mathbf{x}$: $\cos(\theta)$
 
+So, we have it! We have the "magic" formula to exactly compute how to color the pixels on our screens. There's just a little problem...computers don't like to perform an infinite number of operations! The rendering equation, although elegant and relatively simply, contains an integral, which is an infinite sum of "things". If we have to implement such an uncomputable task, we would need infinite time, or infinite memory available. But there is still something we can try to do. What if we don't look for the exact result of the rendering equation, but rather we approximate it? It turned out that instead of computing the light contributions coming from the infinite set of directions, you can perform a sum of the light contributions coming from a finite subset of directions. Accepting an aproximated result makes the rendering equation computable; if we take a large enough number of incoming light directions, we can get close the real answer. The more directions we evaluate, the closer we get to the true result.
 
+There's a rendering technique called ***Path Tracing*** which produces an approximate result of the rendering equation by making the number of incoming light directs finite. Such a technique is used to synthsize photo-realistic images:
 
 ![](./images/visual-quality_023.jpg)
+
+These are two images rendered using a path tracer implemented in Max. There isn't a ready-to-go implementation of such a rendering technique, but you can make your own path tracer by writing custom shaders. 
+
+There's still one major problem: finding a good aproximation of the rendering equation requires a lot of time. These images were rendered in about three minutes each. While it may not seem like a lot, it is if we want to render these complex lighting phenomena in real-time, where we have just a few milliseconds to render a video frame. Techniques like path tracing are (partially) out of the way if we want to program a real-time application, but there are different kinds of aproximations of the rendering equation that we can perform in the real-time domain.
+
+## Ambient occlusion
 
 # Lighting setup
 # Shadows
