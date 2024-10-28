@@ -236,7 +236,9 @@ There's a rendering technique called ***Path Tracing*** which produces an approx
 
 These are two images rendered using a path tracer implemented in Max. There isn't a ready-to-go implementation of such a rendering technique, but you can make your own path tracer by writing custom shaders. 
 
-There's still one major problem: finding a good aproximation of the rendering equation requires a lot of time. These images were rendered in about three minutes each. While it may not seem like a lot, it is if we want to render these complex lighting phenomena in real-time, where we have just a few milliseconds to render a video frame. Techniques like path tracing are (partially) out of the way if we want to program a real-time application, but there are different kinds of aproximations of the rendering equation that we can perform in the real-time domain.
+There's still one major problem: finding a good aproximation of the rendering equation requires a lot of time. These images were rendered in about five minutes each. While it may not seem like a lot, it is if we want to render these complex lighting phenomena in real-time, where we have just a few milliseconds of "time budget" to render a video frame. Techniques like path tracing are (partially) out of the way if we want to program a real-time application, but there are various kinds of aproximations of the rendering equation that we can perform in the real-time domain.
+
+The first thing we have to do is to think about what is really expensive about solving the rendering equation.
 
 ## Ambient occlusion
 
