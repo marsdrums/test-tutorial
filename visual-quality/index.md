@@ -202,7 +202,7 @@ If we go beyond the initial adversion for greek letters one may have, we can bre
 ![](./images/visual-quality_022.png)
 
 The rendering equation, describes how much light is visible from a point on a surface $\mathbf{x}$ looking in a certain direction $\omega_o$. The amount of light depends on two things:
-- the amount of light that the object is emitting (emitted radiance). If you look right at a light bulb switched on, it emits some light; the emitted radiance corresponds to the term $L_e(\mathbf{x}, \omega_o)$ in the rendering equation, and refers to the amount of light that the point $\mathbf{x}$ is producing.
+- the amount of light that the object is emitting (emitted radiance). If you look right at a light bulb switched on, it emits some light; the emitted radiance corresponds to the term $L_e(\mathbf{x}, \omega_o)$ in the rendering equation, and refers to the amount of light that the point $\mathbf{x}$ is producing. If point $\mathbf{x}$ sits on a non-emissive surface, $L_e(\mathbf{x}, \omega_o) = 0$.
 - the amount of light that point $\mathbf{x}$ is receving and therefore scattering in the $\omega_o$ direction. It corresponds to the terms $\int_{\Omega} f_r(\mathbf{x}, \omega_i, \omega_o) L_i(\mathbf{x}, \omega_i) (\omega_i \cdot \mathbf{n}) d\omega_i$ in the rendering equation. As we said before, when a surface is illuminated by some light, a variety of phisical interracts may occur.
 
 ![](./images/visual-quality_023.jpg)
