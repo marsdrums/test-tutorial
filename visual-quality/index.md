@@ -195,7 +195,7 @@ To illustrate the tools we have available in Max for computing global illuminati
 
 In 1986, James Kajiya introduced a mathematical formulation used in computer graphics to describe the way light interacts with surfaces to produce the color and brightness we perceive. This formulation goes under the name of the ***rendering equation***:
 
-$L_o(\mathbf{x}, \omega_o) = L_e(\mathbf{x}, \omega_o) + \int_{\H^{2}} f_r(\mathbf{x}, \omega_i, \omega_o) L_i(\mathbf{x}, \omega_i) cos(theta) d\omega_i$
+$L_o(\mathbf{x}, \omega_o) = L_e(\mathbf{x}, \omega_o) + \int_{H^{2}} f_r(\mathbf{x}, \omega_o, \omega_i) L_i(\mathbf{x}, \omega_i) \cos(\theta) d\omega_i$
 
 Note: there exist many possible formulations for the rendering equation, but for the sake of this article, i'll just focus on the version for non-translucent materials.
 
@@ -203,9 +203,11 @@ If we go beyond the initial adversion for greek letters one may have, we can bre
 
 ![](./images/visual-quality_022.png)
 
-The rendering equation, describes how much light is visible from a point on a surface $\mathbf{x}$ looking in a certain direction $\omega_o$. The amount of light depends on two things:
-- the amount of light that the object is emitting (emitted radiance). If you look right at a light bulb switched on, it emits some light; the emitted radiance corresponds to the term $L_e(\mathbf{x}, \omega_o)$ in the rendering equation, and refers to the amount of light that the point $\mathbf{x}$ is producing. If point $\mathbf{x}$ sits on a non-emissive surface, $L_e(\mathbf{x}, \omega_o) = 0$.
-- the amount of light that point $\mathbf{x}$ is receving and therefore scattering in the $\omega_o$ direction. It corresponds to the terms $\int_{\Omega} f_r(\mathbf{x}, \omega_i, \omega_o) L_i(\mathbf{x}, \omega_i) (\omega_i \cdot \mathbf{n}) d\omega_i$ in the rendering equation. As we said before, when a surface is illuminated by some light, a variety of phisical interracts may occur.
+The rendering equation, describes how much light is visible from a point on a surface $\mathbf{x}$ looking in a certain direction $\omega_o$. In other words, it can tell us the percieved color and brightess for every point on a surface. The amount of light depends on a few things, but let's focus on them one by one.
+
+The first thing that contributes to the result of the rendering equation, is the amount of light that the object is emitting (emitted radiance). If you look right at a light bulb switched on, it emits some light; the emitted radiance corresponds to the term $L_e(\mathbf{x}, \omega_o)$ in the rendering equation, and refers to the amount of light that the point $\mathbf{x}$ is producing. If point $\mathbf{x}$ sits on a non-emissive surface, $L_e(\mathbf{x}, \omega_o) = 0$. 
+
+The rest of the equation describes how much light is visible from point $\mathbf{x}$ as a function of the light that the point is reciving. We said before that when a surface is illuminated by some light, a variety of phisycal interractions may occur.
 
 ![](./images/visual-quality_023.jpg)
 
