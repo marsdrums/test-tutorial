@@ -308,6 +308,10 @@ These two pass FXs can get a little closer the to original rendering equation fo
 
 ## ReSTIR
 
+![](./images/visual-quality_035.png)
+
+Image rendered using {jit.gl.pass} @fxname gi. Left: direct light only; right: direct light + indirect light
+
 # Environment mapping
 # Lighting setup
 # Shadows
