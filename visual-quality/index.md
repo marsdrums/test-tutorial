@@ -6,7 +6,7 @@ license: MIT
 tags:
   - jitter
   - geometry
-description: Polish Your Pixels: A Guide to Superior Renders in Jitter
+description: "Polish Your Pixels: A Guide to Superior Renders in Jitter"
 author:
   name: Cycling '74
 contributors:
