@@ -111,7 +111,8 @@ We said that gamma correction must be applied last, but we should also convert a
 
 ![](./images/visual-quality_009.png)
 
-A quick note: both {jit.gl.pbr} and {jit.gl.environment} have a @gamma_correction attribute, which is enabled by default. This attribute applies gamma correction at the end of the shading process. This shortcut has been made to make things look better by default, but now that you know how gamma correction works, I advise you to turn @gamma_correction off and use proper color space conversions "manually." This way, any process that happens after the rendering (for example, a pass FX made with {jit.gl.pass}) will operate in the correct linear RGB color space.
+> [!NOTE]  
+>  Both {jit.gl.pbr} and {jit.gl.environment} have a @gamma_correction attribute, which is enabled by default. This attribute applies gamma correction at the end of the shading process. This shortcut has been made to make things look better by default, but now that you know how gamma correction works, I advise you to turn @gamma_correction off and use proper color space conversions "manually." This way, any process that happens after the rendering (for example, a pass FX made with {jit.gl.pass}) will operate in the correct linear RGB color space.
 
 ![](./images/visual-quality_010.png)
 
@@ -316,7 +317,7 @@ Before moving on, i'd like to spend a couple of words on how to set up the ambie
 
 Image rendered using {jit.gl.pass} @fxname gi. Left: direct illumination only ({jit.gl.pbr} + {jit.gl.light}); right: direct illumination + indirect illumination
 
-ReSTIR (short for Reservoir-based Spatio-Temporal Importance Resampling) is an advanced algorithm developed to improve real-time global illumination and rendering quality,. One of ReSTIR’s strengths is its capability to compute global illumination effects like shadows, reflections, and light bouncing in real-time. Traditional path tracing, which is used for high-quality rendering, typically requires a lot of samples to resolve these details and is computationally expensive. ReSTIR reduces the need for such high sample counts, making real-time ray tracing more feasible.
+ReSTIR (short for Reservoir-based Spatio-Temporal Importance Resampling) is an advanced algorithm developed to improve real-time global illumination and rendering quality. One of ReSTIR’s strengths is its capability to compute global illumination effects like shadows, reflections, and light bouncing in real-time. Traditional path tracing, which is used for high-quality rendering, typically requires a lot of samples to resolve these details and is computationally expensive. ReSTIR reduces the need for such high sample counts, making real-time ray tracing more feasible.
 
 # Environment mapping
 # Lighting setup
