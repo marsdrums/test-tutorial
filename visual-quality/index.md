@@ -287,11 +287,14 @@ Now that we have a good idea of what ambient occlusion is, let's see which Max o
 ### ssao
 ![](./images/visual-quality_029.png)
 
-{jit.gl.pass}' FX ***ssao*** is the simplest ambient occlusion implementation available in max. It is controlled by three parameters: amnt, intensity, and radius. I personally like to leave "intensity" at 1, and play around with the other two parameters, but i invite you to explore the settings further. "Amnt" controls the amount of obscurance, and radius sets the distance within which to search for occluders. Although simple, ssao is my first choice, because it's not demanding in terms of computing resources, and with a little bit of tweaking, it can make miracles. I give you a quick tip: try to cascade 3 ssao FX with increasing radius and decreasing amnt. I personally find this configuration to be the best, as it delivers near-surface details, but it reacts to distant occluders too.
+{jit.gl.pass}' FX ***ssao*** is the simplest ambient occlusion implementation available in max. It is controlled by three parameters: amnt, intensity, and radius. I personally like to leave "intensity" at 1, and play around with the other two parameters, but i invite you to explore the settings further. "Amnt" controls the amount of obscurance, and radius sets the distance within which to search for occluders. Although simple, ssao is my first choice, because it's not demanding in terms of computing resources, and with a little bit of tweaking, it can make miracles. I give you a quick tip: try to cascade three ssao FXs with decreasing radius. I personally find this configuration to be the best, as it delivers near-surface details, but it reacts to distant occluders too.
 
 ![](./images/visual-quality_030.png)
 
+The name of the effect is an acronym standing for Screen-Space Ambient Occlusion, which is the technique used to explore the vicinity of each pixel in search for potential occluders.
 
+### tssao-gi and tssao-gi-ssr
+![](./images/visual-quality_031.png)
 
 
 # Lighting setup
