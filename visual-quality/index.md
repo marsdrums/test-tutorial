@@ -295,6 +295,9 @@ The name of the effect is an acronym standing for Screen-Space Ambient Occlusion
 
 ### tssao-gi and tssao-gi-ssr
 ![](./images/visual-quality_031.png)
+![](./images/visual-quality_032.png)
+
+If computing power in not an issue, you can use the {jit.gl.pass} FX tssao-gi and tssao-gi-ssr
 
 
 # Lighting setup
