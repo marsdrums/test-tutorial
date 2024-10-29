@@ -221,6 +221,8 @@ The first thing that contributes to the result of the rendering equation is the 
 The rest of the equation describes how much light comes from point $\mathbf{x}$ (outgoing radiance) as a function of the light that points $\mathbf{x}$ is receiving (incoming radiance). We said before that when a surface is illuminated by some light, a variety of physical interactions may occur. As a direct result of such interactions, a certain amount of light that point $\mathbf{x}$ is receiving can be reflected in the $\omega_o$ direction and, therefore, reach the viewer or another surface, contributing to its illumination. This last bit of the function is an integral because to know how much light is reflected in the $\omega_o$ direction, we should consider all the possible directions from which the point $\mathbf{x}$ can be illuminated. Such a set of directions is infinite, and it includes all the directions within a hemisphere oriented according to the surface's normal vector. 
 
 ![](./images/visual-quality_025.png)
+Image from "Voxel Based Indirect Illumination using Spherical Harmonics" by Randall Rauwendaal
+
 
 The integral returns the sum of infinite light contributions coming from all directions within the normal-oriented hemisphere. Each light contribution depends on three things:
 
@@ -230,17 +232,31 @@ The integral returns the sum of infinite light contributions coming from all dir
 
 So, we have it! We have the "magic" formula to compute how to color our screens' pixels precisely. There's just a little problem...computers don't like to perform an infinite number of operations! Although elegant and relatively simple, the rendering equation contains an integral, which is an endless sum of "things." If we have to implement such an uncomputable task, we would need infinite time or infinite memory available. But there is still something we can try to do. What if we don't look for the exact result of the rendering equation but rather approximate it? It turned out that instead of computing the light contributions coming from the infinite set of directions, you can perform a sum of the light contributions coming from a finite subset of directions. Accepting an approximated result makes the rendering equation computable; we can get close to the real answer if we consider enough incoming light directions. The more directions we evaluate, the closer we get to the actual result.
 
-There's a rendering technique called ***Path Tracing*** which produces an approximate result of the rendering equation by making the number of incoming light directs finite. Such a technique is used to synthesize photo-realistic images:
+There's a rendering technique called ***Path Tracing*** which produces an approximate result of the rendering equation by making the number of incoming light directions finite. Such a technique is used to synthesize photo-realistic images:
 
 ![](./images/visual-quality_023.jpg)
 
-These are two images rendered using a path tracer implemented in Max. There isn't a ready-to-go implementation of such a rendering technique, but you can make your own path tracer by writing custom shaders. 
+These are couple of images rendered using a path tracer implemented in Max. There isn't a ready-to-go implementation of such a rendering technique, but you can make your own path tracer by writing custom shaders. Implementing a path tracer from scratch isn't a trivial task and it's outside the scope of this article, but it goes to show you that everything is possible in Max, even if there's no object supporting a desired functionality directly (Touring complete, baby!).
 
-There's still one major problem: finding a good approximation of the rendering equation requires a lot of time. These images were rendered in about five minutes each. While it may not seem like a lot, it is if we want to render these complex lighting phenomena in real-time, where we have just a few milliseconds of "time budget" to render a video frame. Techniques like path tracing are (partially) out of the way if we want to program a real-time application, but there are various kinds of approximations of the rendering equation that we can perform in the real-time domain.
+There's still one major problem: finding a good approximation of the solution to the rendering equation requires a lot of time. These images were rendered in about five minutes each. While it may not seem like a lot, it is if we want to render these complex lighting phenomena in real-time, where we just have a few milliseconds of "time budget" to spend on a video frame. Techniques like path tracing are (partially) out of the way if we want to program a real-time application, but there are many variations of the rendering equation that we can use to perform complex shading in the real-time domain.
 
-The first thing we have to do is to think about what is expensive about solving the rendering equation.
+Let's see some of these techniques, and let's explore which objects implement them.
 
 ## Ambient occlusion
+
+Ambient occlusion is method for rendering indirect illumination which is based on a series of simplifications of the rendering equation. Let's assume that every point in out scene is receiving the same amount of light everywhere and that there are no emissive objects; the rendering equation simplifies as:
+
+$L_o(\mathbf{x}, \omega_o) = \int_{H^{2}} L_ambient \cos(\theta) d\omega_i$
+
+$L_ambient$ is the so-called ***ambient light***, a constant and uniform light that can potentially reach and illuminate any point in the scene. While this may sound like a very crude approximation of the lighting phenomenon, it's actually not too far from the truth: after multiple bounces off surfaces, indirect light looks like a sort or "light reverb", which tends to assume a color and an intesity which stabilizes around an average value.
+
+The simplified rendering equation looks much simpler, but we can rework it even further:
+
+$L_o(\mathbf{x}, \omega_o) = L_ambient \sum_{i=1}^{n} \cos(\theta)/n$
+
+The integral has been substituted with a computable dicrete summation, and the ambient term $L_ambient$ has been moved outside the summation.
+
+
 
 # Lighting setup
 # Shadows
