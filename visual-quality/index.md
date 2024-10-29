@@ -246,15 +246,15 @@ Let's see some of these techniques, and let's explore which objects implement th
 
 Ambient occlusion is method for rendering indirect illumination which is based on a series of simplifications of the rendering equation. Let's assume that every point in out scene is receiving the same amount of light everywhere and that there are no emissive objects; the rendering equation simplifies as:
 
-$L_o(\mathbf{x}, \omega_o) = \int_{H^{2}} L_ambient \cos(\theta) d\omega_i$
+$L_o(\mathbf{x}, \omega_o) = \int_{H^{2}} L_{ambient} \cos(\theta) d\omega_i$
 
 $L_ambient$ is the so-called ***ambient light***, a constant and uniform light that can potentially reach and illuminate any point in the scene. While this may sound like a very crude approximation of the lighting phenomenon, it's actually not too far from the truth: after multiple bounces off surfaces, indirect light looks like a sort or "light reverb", which tends to assume a color and an intesity which stabilizes around an average value.
 
 The simplified rendering equation looks much simpler, but we can rework it even further:
 
-$L_o(\mathbf{x}, \omega_o) = L_ambient \sum_{i=1}^{n} \cos(\theta)/n$
+$L_o(\mathbf{x}, \omega_o) = L_{ambient} \sum_{i=1}^{n} \cos(\theta)/n$
 
-The integral has been substituted with a computable dicrete summation, and the ambient term $L_ambient$ has been moved outside the summation.
+The integral has been substituted with a computable dicrete summation, and the ambient term $L_{ambient}$ has been moved outside the summation.
 
 
 
