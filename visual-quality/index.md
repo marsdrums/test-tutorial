@@ -244,11 +244,11 @@ Let's see some of these techniques, and let's explore which objects implement th
 
 ## Ambient occlusion
 
-Ambient occlusion is a method for rendering indirect illumination based on a series of simplifications of the rendering equation. Let's assume that every point in our scene is receiving the same amount of light everywhere and that there are no emissive objects; the rendering equation simplifies as:
+Ambient occlusion is a method for rendering indirect illumination based on a series of simplifications of the rendering equation. Let's assume that every point in our scene is receiving the same amount of light everywhere and that there are no emissive objects; the rendering equation simplifies to:
 
 $L_o(\mathbf{x}) = \int_{H^{2}} L_{ambient} \cos(\theta) d\omega_i$
 
-$L_{ambient}$ is the so-called ***ambient light***, a constant and uniform light that can potentially reach and illuminate any point in the scene. While this may sound like a very crude approximation of the lighting phenomenon, it's actually not too far from the truth: after multiple bounces off surfaces, indirect light looks like a sort or "light reverb", which tends to stabilize around an average value.
+$L_{ambient}$ is the so-called ***ambient light***, a constant and uniform light that comes from every direction and which can potentially reach and illuminate any point in the scene. While this may sound like a very crude approximation of the lighting phenomenon, it's actually not too far from the truth: after multiple bounces off surfaces, indirect light looks like a sort or "light reverb", which tends to stabilize around an average value.
 
 The rendering equation looks much simpler now, but we can rework it even further:
 
@@ -272,10 +272,10 @@ This is what the occlusion term looks like:
 ![](./images/visual-quality_027.png)
 Occlusion term rendered using the pass FX "tssao-gi"
 
-And this is what a render with ambient occlusion looks like:
+And this ambient occlusion changes the look of a scene:
 ![](./images/visual-quality_028.png)
 
-Left: the scene rendered using direct light only ({jit.gl.pbr})
+Left: direct light only ({jit.gl.pbr} + {jit.gl.light}); middle: direct light + uniform ambient light; right: direct light + occluded ambient light
 
 
 
