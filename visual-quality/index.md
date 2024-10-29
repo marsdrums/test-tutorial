@@ -269,7 +269,7 @@ Since the occlusion term is divided by $n$, we are actually computing the averag
 
 This is what the occlusion term looks like:
 
-![](./images/visual-quality_026.png)
+![](./images/visual-quality_027.png)
 Amcient occlusion rendered using the pass FX "tssao-gi"
 
 
