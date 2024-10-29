@@ -270,7 +270,12 @@ Since the occlusion term is divided by $n$, we are actually computing the averag
 This is what the occlusion term looks like:
 
 ![](./images/visual-quality_027.png)
-Amcient occlusion rendered using the pass FX "tssao-gi"
+Occlusion term rendered using the pass FX "tssao-gi"
+
+And this is what a render with ambient occlusion looks like:
+![](./images/visual-quality_028.png)
+
+Left: the scene rendered using direct light only ({jit.gl.pbr})
 
 
 
