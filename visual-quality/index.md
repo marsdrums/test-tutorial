@@ -209,7 +209,8 @@ When a surface is illuminated, part of the light is reflected into the environme
 
 Image from: "Modern Game Engine - Theory and Practice"
 
-If you come from the audio realm, you can compare direct and indirect illumination to what happens when sound waves propagate in a room. The direct component is the sound coming directly from the sound source to the listener along the shortest possible path; the indirect components are the sound waves reaching the listener after a certain number of bounces off the room's walls, floor, and ceiling.
+> [!NOTE]
+> If you come from the audio realm, you can compare direct and indirect illumination to what happens when sound waves propagate in a room. The direct component is the sound coming directly from the sound source to the listener along the shortest possible path; the indirect components are the sound waves reaching the listener after a certain number of bounces off the room's walls, floor, and ceiling.
 
 In real-world lighting, direct and indirect illumination combine to produce the complex lighting effects we experience. If we compare again the two cubes side-by-side, we can see the impact of adding indirect illumination to the scene.
 
