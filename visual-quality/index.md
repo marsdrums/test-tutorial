@@ -272,7 +272,9 @@ This is what the occlusion term looks like:
 ![](./images/visual-quality_027.png)
 Occlusion term rendered using the pass FX "tssao-gi"
 
-And this ambient occlusion changes the look of a scene:
+It always impresses me how good the occlusion term looks on its own; it really gives the sense of how much indirect light contributes to the perceprion of objects' volume and distance between each other. 
+
+And this is how ambient occlusion changes the look of a scene:
 ![](./images/visual-quality_028.png)
 
 Left: direct light only ({jit.gl.pbr} + {jit.gl.light}); middle: direct light + uniform ambient light; right: direct light + occluded ambient light
