@@ -337,7 +337,7 @@ These two pass FXs can get a little closer the to original rendering equation fo
 Before moving on, i'd like to spend a couple of words on how to set up the ambient light values for {jit.gl.light}. At each bounce, light looses some energy because part of it gets absorbed (the amount of absorpion depends on the albedo values of the surface it bounced off). After a few reflections (like 7 or 8), radiance tipically becomes very weak, to the point of being negligiable in terms of lighting contribution. Since the ambient light should represent the average indirect light amount, its values are usually set quite low (in the examples above, R: 0.05, G: 0.05, B: 0.05). That is to say to not be afraid of using just a touch of ambient light. 
 
 > [!TIP]
-> My advise is to set the ambient light to 0 and slowly fade it in until it looks right.
+> My advise is to set ambient light at 0 and slowly fade it in until it looks right.
 
 ## ReSTIR
 
@@ -345,7 +345,17 @@ Before moving on, i'd like to spend a couple of words on how to set up the ambie
 
 Image rendered using {jit.gl.pass} @fxname gi. Left: direct illumination only ({jit.gl.pbr} + {jit.gl.light}); right: direct illumination + indirect illumination
 
-ReSTIR (short for Reservoir-based Spatio-Temporal Importance Resampling) is an advanced algorithm developed to improve real-time global illumination and rendering quality. One of ReSTIR’s strengths is its capability to compute global illumination effects like shadows, reflections, and light bouncing in real-time. Traditional path tracing, which is used for high-quality rendering, typically requires a lot of samples to resolve these details and is computationally expensive. ReSTIR reduces the need for such high sample counts, making real-time ray tracing more feasible.
+ReSTIR, or Reservoir-based Spatio-Temporal Importance Resampling, is a cutting-edge technique in real-time computer graphics, specifically aimed at improving lighting quality. It's particularly valuable for ray-traced graphics, where simulating light behavior accurately is traditionally very demanding on computational resources. 
+
+Traditional methods to calculate accurate lighting, such as path tracing, are slow and unsuitable for real-time use because they require too many samples. ReSTIR makes it possible to achieve a similar level of visual fidelity in real-time by prioritizing the best samples and reusing them efficiently, delivering high-quality reflections, shadows, and global illumination at interactive frame rates.
+
+Without getting too much into the details of this rendering technique, let's try to understand what makes it so special.
+Imagine ReSTIR as keeping a small "bucket" of the most valuable light samples at each pixel. Instead of storing every sample (which would slow things down), it saves only the ones that provide the best lighting information for that pixel. This makes it much more efficient, as ReSTIR can ignore less relevant data and reuse high-quality samples that help produce a clean and realistic image. ReSTIR further enhances performance by reusing lighting information not only from the current frame but also from previous frames. If a light sample was effective in a previous frame, ReSTIR can reapply it, creating smooth, stable lighting.
+
+ReSTIR has been implemented in Max 9 as {jit.gl.pass} FX named "gi". This pass FX can interact with {jit.gl.pbr} (to get the materials' BRDFs) and with {jit.gl.environment} (to gather light from an envirionment map). This means that whichever settings you use for jit.gl.pbr, the ReSTIR pass will resopond with the correct lighting behavior. For example, you can change the roughness and/or metalness of an object, and this will affect the way the ReSTIR pass
+
+
+
 
 # Environment mapping
 # Lighting setup
