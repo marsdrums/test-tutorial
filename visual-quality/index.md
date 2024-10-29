@@ -244,7 +244,7 @@ Let's see some of these techniques, and let's explore which objects implement th
 
 ## Ambient occlusion
 
-Ambient occlusion is a method for rendering indirect illumination based on a series of simplifications of the rendering equation. Let's assume that every point in our scene is receiving the same amount of light everywhere and that there are no emissive objects; the rendering equation simplifies to:
+Ambient occlusion is a method for rendering indirect illumination based on a series of simplifications of the rendering equation. Let's assume that every point in our scene is receiving the same amount of light everywhere, that there are no emissive objects, and that we ignore the materials' BRDFs; the rendering equation simplifies to:
 
 $L_o(\mathbf{x}) = \int_{H^{2}} L_{ambient} \cos(\theta) d\omega_i$
 
@@ -279,6 +279,17 @@ And this is how ambient occlusion changes the look of a scene:
 
 Left: direct light only ({jit.gl.pbr} + {jit.gl.light}); middle: direct light + uniform ambient light; right: direct light + occluded ambient light
 
+Now that we have a good idea of what ambient occlusion is, let's see which Max objects we can use to implement it. There are three ways for adding ambient acclusion to your rendering, and they take the form of three distinct {jit.gl.pass} FXs:
+- ***ssao***
+- ***tssao-gi***
+- ***tssao-gi-ssr***
+
+### ssao
+![](./images/visual-quality_029.png)
+
+{jit.gl.pass}' FX ***ssao*** is the simplest ambient occlusion implementation available in max. It is controlled by three parameters: amnt, intensity, and radius. I personally like to leave "intensity" at 1, and play around with the other two parameters, but i invite you to explore the settings further. "Amnt" controls the amount of obscurance, and radius sets the distance within which to search for occluders. Although simple, ssao is my first choice, because it's not demanding in terms of computing resources, and with a little bit of tweaking, it can make miracles. I give you a quick tip: try to cascade 3 ssao FX with increasing radius and decreasing amnt. I personally find this configuration to be the best, as it delivers near-surface details, but it reacts to distant occluders too.
+
+![](./images/visual-quality_030.png)
 
 
 
