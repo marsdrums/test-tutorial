@@ -254,7 +254,7 @@ The rendering equation looks much simpler now, but we can rework it even further
 
 $L_o(\mathbf{x}) = L_{ambient} \sum_{i=1}^{n} \cos(\theta)/n$
 
-The integral has been substituted with a computable dicrete summation, and the ambient term $L_{ambient}$ has been moved outside the summation since it's always the same for any incoming light direction. We assumed that the ambient light is uniform and coming from every direction within the normal-oriented hemisphere; we can, thereore, get rid of the geometric term $\cos(\theta)$ with a simpler ***occlusion term***: 
+The integral has been substituted with a computable dicrete summation, and the ambient term $L_{ambient}$ has been moved outside the summation since it's always the same for any incoming light direction. We assumed that the ambient light is uniform and coming from every direction within the normal-oriented hemisphere; we can, thereore, get rid of the geometric term $\cos(\theta)$ and substitute it with a simpler ***occlusion term***: 
 
 $L_o(\mathbf{x}) = L_{ambient} \sum_{i=1}^{n} O(\mathbf{x}, \omega_i)/n$
 
@@ -264,6 +264,14 @@ In practice, this means for every point $\mathbf{x}$ to explore $n$ directions w
 
 ![](./images/visual-quality_026.png)
 Image from "Scalable Ambient Occlusion for Molecular Visualisation", by Gary Mcgowan et al.
+
+Since the occlusion term is divided by $n$, we are actually computing the average occlusion for point $\mathbf{x}$, which is nothing more than a value in the range [0; 1] that represents how much "stuff" is blocking the light reaching point $\mathbf{x}$.
+
+This is what the occlusion term looks like:
+
+![](./images/visual-quality_026.png)
+Amcient occlusion rendered using the pass FX "tssao-gi"
+
 
 
 
