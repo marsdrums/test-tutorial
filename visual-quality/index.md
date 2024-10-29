@@ -310,7 +310,7 @@ These two pass FXs can get a little closer the to original rendering equation fo
 
 ![](./images/visual-quality_035.png)
 
-Image rendered using {jit.gl.pass} @fxname gi. Left: direct light only; right: direct light + indirect light
+Image rendered using {jit.gl.pass} @fxname gi. Left: direct illumination only; right: direct illumination + indirect illumination
 
 ReSTIR (short for Reservoir-based Spatio-Temporal Importance Resampling) is an advanced algorithm developed to improve real-time global illumination and rendering quality,. One of ReSTIR’s strengths is its capability to compute global illumination effects like shadows, reflections, and light bouncing in real-time. Traditional path tracing, which is used for high-quality rendering, typically requires a lot of samples to resolve these details and is computationally expensive. ReSTIR reduces the need for such high sample counts, making real-time ray tracing more feasible.
 
