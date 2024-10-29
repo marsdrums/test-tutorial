@@ -172,7 +172,7 @@ The cube casts a long black shadow that, once again, looks somewhat "unnatural".
 
 On the left, we have our scene as rendered right now; on the right, there's the same scene rendered considering a wider range of lighting interactions. The image on the right looks undoubtedly more "plausible," but what are such missing lighting interactions? To give you a solid answer to this question, we have to go a step deeper into understanding how light interacts with physical objects and how to render such interactions on screen.
 
-# Surface-light interactions
+## Surface-light interactions
 
 When light illuminates a surface, a variety of physical interactions occur between the light (electromagnetic radiation) and the material. These interactions determine how we perceive the surface's color, brightness, and overall appearance. Depending on the surface's properties, the light striking the surface can be absorbed, reflected, refracted, or transmitted. 
 
@@ -295,11 +295,20 @@ The name of the effect is an acronym standing for Screen-Space Ambient Occlusion
 
 ### tssao-gi and tssao-gi-ssr
 ![](./images/visual-quality_031.png)
-![](./images/visual-quality_032.png)
 
-If computing power in not an issue, you can use the {jit.gl.pass} FX tssao-gi and tssao-gi-ssr
+If computing power isn't an issue, you can use the {jit.gl.pass} FXs tssao-gi and its "expanded" version tssao-gi-ssr. Although different at implementation level from ssao, these two FXs compute ambient occlusion following the same criterion. The main difference is that tssao-gi and tssao-gi-ssr gather the color of the occluding objects, better approximating the indirect light components.
 
+![](./images/visual-quality_033.png)
 
+You can notice how the red sphere reflects some light onto the white shpere, and that the floor illuminates both spheres from below. The tssao-gi-ssr variation adds reflections to the result; in a separate step, the FX assumes a specular BRDF for the objects in the scene and computes the amount of reflected color. 
+
+![](./images/visual-quality_034.png)
+
+These two pass FXs can get a little closer the to original rendering equation formulation, but there're still many aspects of it left off (e.g. albedo modulation, and different BRDFs).
+
+## ReSTIR
+
+# Environment mapping
 # Lighting setup
 # Shadows
 # Antialiasing
