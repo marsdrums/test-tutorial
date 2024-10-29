@@ -111,7 +111,7 @@ We said that gamma correction must be applied last, but we should also convert a
 
 ![](./images/visual-quality_009.png)
 
-> [!NOTE]  
+> [!IMPORTANT]  
 >  Both {jit.gl.pbr} and {jit.gl.environment} have a @gamma_correction attribute, which is enabled by default. This attribute applies gamma correction at the end of the shading process. This shortcut has been made to make things look better by default, but now that you know how gamma correction works, I advise you to turn @gamma_correction off and use proper color space conversions "manually." This way, any process that happens after the rendering (for example, a pass FX made with {jit.gl.pass}) will operate in the correct linear RGB color space.
 
 ![](./images/visual-quality_010.png)
@@ -209,7 +209,8 @@ In 1986, James Kajiya introduced a mathematical formulation used in computer gra
 
 $L_o(\mathbf{x}, \omega_o) = L_e(\mathbf{x}, \omega_o) + \int_{H^{2}} f_r(\mathbf{x}, \omega_o, \omega_i) L_i(\mathbf{x}, \omega_i) \cos(\theta) d\omega_i$
 
-Note: Many possible formulations exist for the rendering equation, but for the sake of this article, I'll just focus on the version for non-translucent materials.
+> [!NOTE]  
+> Many possible formulations exist for the rendering equation, but for the sake of this article, I'll just focus on the version for non-translucent materials.
 
 If we go beyond the initial aversion to Greek letters one may have, we can break this function into pieces and discover that it's actually pretty simple and elegant.
 
@@ -289,8 +290,10 @@ Now that we have a good idea of what ambient occlusion is, let's see which Max o
 
 ![](./images/visual-quality_029.png)
 
-{jit.gl.pass}' FX ***ssao*** is the simplest ambient occlusion implementation available in max. It is controlled by three parameters: amnt, intensity, and radius. I personally like to leave "intensity" at 1, and play around with the other two parameters, but i invite you to explore the settings further. "Amnt" controls the amount of obscurance, and radius sets the distance within which to search for occluders. Although simple, ssao is my first choice, because it's not demanding in terms of computing resources, and with a little bit of tweaking, it can make miracles. I give you a quick tip: try to cascade three ssao FXs with decreasing radius. I personally find this configuration to be the best, as it delivers near-surface details, but it reacts to distant occluders too.
+{jit.gl.pass}' FX ***ssao*** is the simplest ambient occlusion implementation available in max. It is controlled by three parameters: amnt, intensity, and radius. I personally like to leave "intensity" at 1, and play around with the other two parameters, but i invite you to explore the settings further. "Amnt" controls the amount of obscurance, and radius sets the distance within which to search for occluders. Although simple, ssao is my first choice, because it's not demanding in terms of computing resources, and with a little bit of tweaking, it can make miracles. 
 
+> [!TIP]  
+> Try to cascade three ssao FXs with decreasing radius. I personally find this configuration to be the best, as it delivers near-surface details, but it reacts to distant occluders too.
 ![](./images/visual-quality_030.png)
 
 The name of the effect is an acronym standing for Screen-Space Ambient Occlusion, which is the technique used to explore the vicinity of each pixel in search for potential occluders.
