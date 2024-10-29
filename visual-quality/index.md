@@ -166,10 +166,10 @@ The red line represents colors without tonemapping, and the green curve shows th
 
 ![](./images/visual-quality_016.png)
 
-With the tonemapping function in place, the color details on the cube are back, and we can still perceive the intense brightness of the light source. Take a look at where I placed the tonemapping function in relation to the gamma correction function. 
+With the tonemapping function in place, the color details on the cube are back, and we can still perceive the intense brightness of the light source. Take a look at where I placed the tonemapping function in relation to the gamma correction function. The order for these two "finisher" effects matters and must always be the same:
 
 > [!IMPORTANT]  
-> The order for these two "finisher" effects matters and must always be the same: tonemapping first, then gamma correction.
+> Tonemapping first, then gamma correction.
 
 What if we don't want to write the tonemapping and the gamma correction functions every time? We can again use the {jit.gl.pass} effect named ***gamma***. 
 
