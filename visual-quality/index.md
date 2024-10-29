@@ -6,14 +6,14 @@ license: MIT
 tags:
   - jitter
   - geometry
-description: How to improve the visual quality of your rendering in Jitter
+description: Polish Your Pixels: A Guide to Superior Renders in Jitter
 author:
   name: Cycling '74
 contributors:
   - Matteo Marson
 ---
 
-# How to improve the visual quality of your rendering in Jitter
+# Polish Your Pixels: A Guide to Superior Renders in Jitter
 
 # Color bit depth
 
@@ -28,7 +28,7 @@ In the digital domain, colors are represented using numerical values, typically 
 
 In Jitter we can decide the color bit depth for a generated image, or we can convert the bit depth of an existing one.
 
-For example, the object {jit.noise 3 char 100}, for each cell of the Jitter matrix, produces 3 color values using 8 bits of memory, producing a 24-bit color information. Each component of the RGB encoded color can assume 256 distinct values for 16777216 possible color combinations. This is often called ***True Color***, as it’s sufficient for most applications to represent realistic images with smooth color transitions.
+For example, the object {jit.noise 3 char 100}, for each cell of the Jitter matrix, produces 3 color values using 8 bits of memory, making a 24-bit color information. Each component of the RGB encoded color can assume 256 distinct values for 16777216 possible color combinations. This is often called ***True Color***, as it’s sufficient for most applications to represent realistic images with smooth color transitions.
 
 If 8 bits per channel (***char***) is sufficient for representing all visible colors, why do we even need higher bit depths? Let's try to apply some operations on a ***char*** Jitter matrix:
 
