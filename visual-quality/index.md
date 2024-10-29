@@ -38,7 +38,10 @@ The image we get after this process should be mathematically identical to the in
 
 To make an even more extreme example, let's assume a 1-bit color value. If such a value is $1$, and we multiply it by $0.5$ the result of this operation can't be $0.5$, but only $0$ or $1$ (depending on how the value gets rounded);
 
-For this reason, it makes sense to have bit depths higher than 8-bit, and you should always use ***float32***, or at least ***float16*** matrices/textures if you're planning to process an image.
+For this reason, it makes sense to have bit depths higher than 8-bit.
+
+> [!IMPORTANT]  
+> You should always use ***float32***, or at least ***float16*** matrices/textures if you're planning to process an image.
 
 Once your process has finished, you can safely reduce the bit depth of your image if you need, for example, to use smaller storage space, and the result won't change noticeably.
 
@@ -128,11 +131,21 @@ Let's say we want to create an outdoor scene illuminated by a bright summer sun.
 
 It's a very simple patch, but there are a couple of things i want you to focus on. First of all, I disabled @gamma_correction on both {jit.gl.pbr} objects, and I'm computing the color space conversion manually using {jit.gl.pix.codebox}. Don't mind about the other settings of {jit.gl.pbr}, we'll talk about those in another chapter. 
 
-We said we wanted a bright, sunny day, but honestly, the result looks kind of dull and dark. I set the @diffuse attribute of {jit.gl.light} to a color that resembles the sunlight color, but it doesn't seem enough to get the effect we were after. It doesn't look like an outdoor scene because the light isn't intense enough. This brings us to a key concept: ***light color is NOT light intensity***. When we set the @diffuse attribute of {jit.gl.light} what we are actually setting is the light's "tint"; if we want to have a light of arbitrary instesity, we should take those values and multiply them by an intensity value. Let's see what it looks like now:
+We said we wanted a bright, sunny day, but honestly, the result looks kind of dull and dark. I set the @diffuse attribute of {jit.gl.light} to a color that resembles the sunlight color, but it doesn't seem enough to get the effect we were after. It doesn't look like an outdoor scene because the light isn't intense enough. This brings us to a key concept: 
+
+> [!IMPORTANT]  
+> light color is NOT light intensity. 
+
+When we set the @diffuse attribute of {jit.gl.light} what we are actually setting is the light's "tint"; if we want to have a light of arbitrary instesity, we should take those values and multiply them by an intensity value. Let's see what it looks like now:
 
 ![](./images/visual-quality_013.png)
 
-I'm using the {swatch} object to decide the light tint, and I multiply each component of the color value by an intensity parameter. This way, the light we get resembles sunlight much more. This brings us to yet another cardinal concept: ***you should think in terms of light energy, not in terms of light color***. When we set the @diffuse attribute of {jit.gl.light} we are expressing how much energy comes from the light source -> how much red, how much green, and how much blue. If you look at the values in the message box below the object {vexpr}, you can notice how values go way past 1. So, don't be afraid to crank up these numbers!
+I'm using the {swatch} object to decide the light tint, and I multiply each component of the color value by an intensity parameter. This way, the light we get resembles sunlight much more. This brings us to yet another cardinal concept: 
+
+> [!IMPORTANT]  
+> You should think in terms of light energy, not in terms of light color. 
+
+When we set the @diffuse attribute of {jit.gl.light} we are expressing how much energy comes from the light source -> how much red, how much green, and how much blue. If you look at the values in the message box below the object {vexpr}, you can notice how values go way past 1. So, don't be afraid to crank up these numbers!
 
 The light intensity looks correct, but we lost all the details on the shape: the image looks burnt! Let's take a look at the values that are being sent to {jit.pworld}:
 
@@ -153,7 +166,10 @@ The red line represents colors without tonemapping, and the green curve shows th
 
 ![](./images/visual-quality_016.png)
 
-With the tonemapping function in place, the color details on the cube are back, and we can still perceive the intense brightness of the light source. Take a look at where I placed the tonemapping function in relation to the gamma correction function. The order for these two "finisher" effects matters and must always be the same: ***tonemapping first, then gamma correction***.
+With the tonemapping function in place, the color details on the cube are back, and we can still perceive the intense brightness of the light source. Take a look at where I placed the tonemapping function in relation to the gamma correction function. 
+
+> [!IMPORTANT]  
+> The order for these two "finisher" effects matters and must always be the same: tonemapping first, then gamma correction.
 
 What if we don't want to write the tonemapping and the gamma correction functions every time? We can again use the {jit.gl.pass} effect named ***gamma***. 
 
