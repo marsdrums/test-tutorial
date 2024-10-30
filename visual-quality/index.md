@@ -371,7 +371,7 @@ ReSTIR has been implemented in Max 9 as {jit.gl.pass} FX named "gi" (global illu
 
 ![](./images/visual-quality_036.png)
 
-This pass FX is really simple to use: as long as you take care of setting gamma correction and tonemapping correctly, you just need to instanciate it, and it does its job.
+The inner mechanics of the ReSTIR algorithm are complex, but the "gi" pass FX is rather straightforward to use: as long as you take care of setting gamma correction and tonemapping correctly, you just need to instanciate it, and it does its job.
 
 
 
