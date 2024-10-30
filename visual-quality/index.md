@@ -355,7 +355,7 @@ These two pass FXs can get closer to the original rendering equation formulation
 Before moving on, i'd like to spend a couple of words on how to set up the ambient light values for {jit.gl.light}. Light loses some energy at each bounce because part of it gets absorbed (the amount of absorption depends on the albedo values of the surface it bounced off). After a few reflections (like 7 or 8), radiance typically becomes very weak, negligible in terms of lighting contribution. Since the ambient light should represent the average indirect light amount, its values are usually relatively low (in the above examples, R: 0.05, G: 0.05, B: 0.05). That is to say, not to be afraid of using just a touch of ambient light. 
 
 > [!TIP]
-> My advice is to set ambient light at 0 and slowly fade it until it looks right. If you have in your scene a colored background (e.g., @erase_color 0.1 0.1 0.4 1.0), try to match its tint when setting the ambient light. This way you can create the perceprion of the environment illuminating the scene. You can also try to get a step further, and use {jit.fx.an.mean} to compute the mean color of the rendered image to use it as ambient light.
+> My advice is to set ambient light at 0 and slowly fade it until it looks right. If you have in your scene a colored background (e.g., @erase_color 0.1 0.1 0.4 1.0), try to match its tint when setting the ambient light. This way you can create the impression of the environment illuminating the scene. You can also try to get a step further, and use {jit.fx.an.mean} to compute the mean color of the rendered image to use it as ambient light.
 
 
 ## ReSTIR
