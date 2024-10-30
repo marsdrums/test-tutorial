@@ -376,7 +376,7 @@ The inner mechanics of the ReSTIR algorithm are complex, but the "gi" pass FX is
 > [!NOTE]
 > Numerous variations of the ReSTIR algorithm have been developed to adapt to different rendering methods. In Jitter, ReSTIR computes global illumination by tracing rays in screen-space.
 
-These are the built-in solutions for computing indirect lighting and global illumination in Max 9. There exist other worth mentioning algorithms and strategies for computing global illumination: voxel cone tracing (VCT), surfels, virtual point lights (VPL), and instant radiosity among others. Each method offers its own advantages and disadvantages. So, which one is the best? Horses for courses! Go with what works. Remember that if Max 9 built-in solutions for global illumination don't fulfill your needs, i engourage you to implement your own using custom shaders (all the FXs we discussed about in this article where initially prototyped using Max objects).
+These are the built-in solutions for computing indirect lighting and global illumination in Max 9. There exist other worth mentioning algorithms and strategies for computing global illumination: voxel cone tracing (VCT), surfels, virtual point lights (VPL), and instant radiosity among others. Each method offers its own advantages and disadvantages. So, which one is the best? Horses for courses! Go with what works. If Max 9 built-in solutions for global illumination don't fulfill your needs, i engourage you to implement your own using custom shaders (all the FXs we discussed about in this article where initially prototyped using Max objects).
 
 # Environment mapping
 
