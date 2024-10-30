@@ -227,7 +227,7 @@ How can we then compute direct and indirect illumination?
 In 1986, James Kajiya introduced a mathematical formulation used in computer graphics to describe how light interacts with surfaces to produce the color and brightness we perceive. This formulation goes under the name of the ***rendering equation***:
 
 $$
-L_o(\mathbf{x}, \omega_o) = L_e(\mathbf{x}, \omega_o) + \int_{H^{2}} f_r(\mathbf{x}, \omega_o, \omega_i) L_i(\mathbf{x}, \omega_i) \cos(\theta) d\omega_i
+L_o(\mathbf{x}, \omega_o) = L_e(\mathbf{x}, \omega_o) + \int_{H^{2}} f_r(\mathbf{x}, \omega_o, \omega_i) L_i(\mathbf{x}, \omega_i) \cos(\theta_i) d\omega_i
 $$
 
 > [!NOTE]  
@@ -251,12 +251,12 @@ The integral returns the sum of infinite light contributions coming from all dir
 
 - The BRDF at point $\mathbf{x}$: $f_r(\mathbf{x}, \omega_o, \omega_i)$
 - The amount of incoming radiance from direction $\omega_i$: $L_i(\mathbf{x}, \omega_i)$
-- The cosine of the angle $\theta$ formed by the incoming radiance direction $\omega_i$ and the normal vector of $\mathbf{x}$: $\cos(\theta)$
+- The cosine of the angle $\theta_i$ formed by the incoming radiance direction $\omega_i$ and the normal vector of $\mathbf{x}$: $\cos(\theta_i)$
 
 So, we have it! We have the "magic" formula to compute how to color our screens' pixels precisely. There's just a little problem...computers don't like to perform an infinite number of operations! Although elegant and relatively simple, the rendering equation contains an integral, which is an endless sum of "things." If we have to implement such an uncomputable task, we would need infinite time or infinite memory available. But there is still something we can try to do. What if we don't look for the exact result of the rendering equation but rather approximate it? It turned out that instead of computing the light contributions coming from the infinite set of directions, you can perform a sum of the light contributions coming from a finite subset of directions. 
 
 $$
-L_o(\mathbf{x}, \omega_o) \approx L_e(\mathbf{x}, \omega_o) + \frac{1}{N} \sum_{i=1}^N f_s(\mathbf{x}, \omega_i, \omega_o) \cdot L_i(\mathbf{x}, \omega_i) \cdot \cos(\theta)
+L_o(\mathbf{x}, \omega_o) \approx L_e(\mathbf{x}, \omega_o) + \frac{1}{N} \sum_{i=1}^N f_s(\mathbf{x}, \omega_i, \omega_o) \cdot L_i(\mathbf{x}, \omega_i) \cdot \cos(\theta_i)
 $$
 
 Accepting an approximated result makes the rendering equation computable; we can get close to the real answer if we consider enough incoming light directions. The more directions we evaluate, the closer we get to the actual result.
@@ -278,17 +278,17 @@ Let's see some of these techniques, and let's explore which objects implement th
 
 Ambient occlusion is a method for rendering indirect illumination based on a series of simplifications of the rendering equation. Let's assume that every point in our scene is receiving the same amount of light everywhere, that there are no emissive objects, and that we ignore the materials' BRDFs; the rendering equation simplifies to:
 $$
-$L_o(\mathbf{x}) = \int_{H^{2}} L_{ambient} \cos(\theta) d\omega_i
+$L_o(\mathbf{x}) = \int_{H^{2}} L_{ambient} \cos(\theta_i) d\omega_i
 $$
 
 $L_{ambient}$ is the so-called ***ambient light***, a constant and uniform light that comes from every direction and which can potentially reach and illuminate any point in the scene. While this may sound like a very crude approximation of the lighting phenomenon, it's actually not too far from the truth: after multiple bounces off surfaces, indirect light looks like a sort or "light reverb", which tends to stabilize around an average value.
 
 The rendering equation looks much simpler now, but we can rework it even further:
 $$
-$L_o(\mathbf{x}) = L_{ambient} \sum_{i=1}^{n} \cos(\theta)/n
+$L_o(\mathbf{x}) = L_{ambient} \sum_{i=1}^{n} \cos(\theta_i)/n
 $$
 
-The integral has been substituted with a computable dicrete summation, and the ambient term $L_{ambient}$ has been moved outside the summation since it's always the same for any incoming light direction. We assumed that the ambient light is uniform and coming from every direction within the normal-oriented hemisphere; we can, thereore, get rid of the geometric term $\cos(\theta)$ and substitute it with a simpler ***occlusion term***: 
+The integral has been substituted with a computable dicrete summation, and the ambient term $L_{ambient}$ has been moved outside the summation since it's always the same for any incoming light direction. We assumed that the ambient light is uniform and coming from every direction within the normal-oriented hemisphere; we can, thereore, get rid of the geometric term $\cos(\theta_i)$ and substitute it with a simpler ***occlusion term***: 
 $$
 $L_o(\mathbf{x}) = L_{ambient} \frac{1}{N} \sum_{i=1}^{n} O(\mathbf{x}, \omega_i)
 $$
