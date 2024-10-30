@@ -227,7 +227,7 @@ How can we then compute direct and indirect illumination?
 In 1986, James Kajiya introduced a mathematical formulation used in computer graphics to describe how light interacts with surfaces to produce the color and brightness we perceive. This formulation goes under the name of the ***rendering equation***:
 
 $$
-L_o(\mathbf{x}, \omega_o) = L_e(\mathbf{x}, \omega_o) + \int_{H^{2}} f_r(\mathbf{x}, \omega_o, \omega_i) L_i(\mathbf{x}, \omega_i) \cos(\theta_i) d\omega_i
+L_o(\mathbf{x}, \omega_o) = L_e(\mathbf{x}, \omega_o) + \int_{H^{2}} f_r(\mathbf{x}, \omega_o, \omega_i) \cdot L_i(\mathbf{x}, \omega_i) \cdot \cos(\theta_i) \cdot d\omega_i
 $$
 
 > [!NOTE]  
@@ -279,7 +279,7 @@ Let's see some of these techniques and explore which objects implement them.
 Ambient occlusion is a method for rendering indirect illumination based on a series of simplifications of the rendering equation. Let's assume that every point in our scene is receiving the same amount of light everywhere, that there are no emissive objects, and that we ignore the materials' BRDFs; the rendering equation simplifies to:
 
 $$
-L_o(\mathbf{x}) = \int_{H^{2}} L_{ambient} \cos(\theta_i) d\omega_i
+L_o(\mathbf{x}) = \int_{H^{2}} L_{ambient} \cos(\theta_i) \cdot d\omega_i
 $$
 
 $L_{ambient}$ is the so-called ***ambient light***, a constant and uniform light that comes from every direction and which can potentially reach and illuminate any point in the scene. While this may sound like a crude approximation of the lighting phenomenon, it's not too far from the truth: after multiple bounces off surfaces, indirect light looks like a sort of "light reverb," which tends to stabilize around an average value.
@@ -287,13 +287,13 @@ $L_{ambient}$ is the so-called ***ambient light***, a constant and uniform light
 The rendering equation looks much simpler now, but we can rework it even further:
 
 $$
-L_o(\mathbf{x}) = L_{ambient}  \frac{1}{n} \sum_{i=1}^{n} \cos(\theta_i)
+L_o(\mathbf{x}) = L_{ambient} \cdot \frac{1}{n} \cdot \sum_{i=1}^{n} \cos(\theta_i)
 $$
 
 The integral has been substituted with a computable discrete summation, and the ambient term $L_{ambient}$ has been moved outside it since it's always the same for any incoming light direction. We assumed that the ambient light is uniform and coming from everywhere within the normal-oriented hemisphere; we can, therefore, get rid of the geometric term $\cos(\theta_i)$ and substitute it with a simpler ***occlusion term***: 
 
 $$
-L_o(\mathbf{x}) = L_{ambient} \frac{1}{n} \sum_{i=1}^{n} O(\mathbf{x}, \omega_i)
+L_o(\mathbf{x}) = L_{ambient} \cdot \frac{1}{n} \cdot \sum_{i=1}^{n} O(\mathbf{x}, \omega_i)
 $$
 
 The occlusion term is the result of the function $O(\mathbf{x}, \omega_i)$, which returns the value 1 if there's no occluding object looking from position $\mathbf{x}$ in direction $\omega_i$, and 0 if something is blocking the ambient light in the $\omega_i$ direction.
