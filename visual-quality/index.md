@@ -279,7 +279,7 @@ Let's see some of these techniques, and let's explore which objects implement th
 Ambient occlusion is a method for rendering indirect illumination based on a series of simplifications of the rendering equation. Let's assume that every point in our scene is receiving the same amount of light everywhere, that there are no emissive objects, and that we ignore the materials' BRDFs; the rendering equation simplifies to:
 
 $$
-$L_o(\mathbf{x}) = \int_{H^{2}} L_{ambient} \cos(\theta_i) d\omega_i
+L_o(\mathbf{x}) = \int_{H^{2}} L_{ambient} \cos(\theta_i) d\omega_i
 $$
 
 $L_{ambient}$ is the so-called ***ambient light***, a constant and uniform light that comes from every direction and which can potentially reach and illuminate any point in the scene. While this may sound like a very crude approximation of the lighting phenomenon, it's actually not too far from the truth: after multiple bounces off surfaces, indirect light looks like a sort or "light reverb", which tends to stabilize around an average value.
@@ -287,13 +287,13 @@ $L_{ambient}$ is the so-called ***ambient light***, a constant and uniform light
 The rendering equation looks much simpler now, but we can rework it even further:
 
 $$
-$L_o(\mathbf{x}) = L_{ambient}  \frac{1}{N} \sum_{i=1}^{n} \cos(\theta_i)
+L_o(\mathbf{x}) = L_{ambient}  \frac{1}{N} \sum_{i=1}^{n} \cos(\theta_i)
 $$
 
-The integral has been substituted with a computable dicrete summation, and the ambient term $L_{ambient}$ has been moved outside the summation since it's always the same for any incoming light direction. We assumed that the ambient light is uniform and coming from every direction within the normal-oriented hemisphere; we can, thereore, get rid of the geometric term $\cos(\theta_i)$ and substitute it with a simpler ***occlusion term***: 
+The integral has been substituted with a computable dicrete summation, and the ambient term $L_{ambient}$ has been moved outside it since it's always the same for any incoming light direction. We assumed that the ambient light is uniform and coming from eeverywhere within the normal-oriented hemisphere; we can, thereore, get rid of the geometric term $\cos(\theta_i)$ and substitute it with a simpler ***occlusion term***: 
 
 $$
-$L_o(\mathbf{x}) = L_{ambient} \frac{1}{N} \sum_{i=1}^{n} O(\mathbf{x}, \omega_i)
+L_o(\mathbf{x}) = L_{ambient} \frac{1}{N} \sum_{i=1}^{n} O(\mathbf{x}, \omega_i)
 $$
 
 The occlusion term is the result of the function $O(\mathbf{x}, \omega_i)$ which returns the value 1 if there's no occluding object looking from position $\mathbf{x}$ in direction $\omega_i$, and 0 if there's something blocking the ambient light in the $\omega_i$ direction.
@@ -376,7 +376,7 @@ The inner mechanics of the ReSTIR algorithm are complex, but the "gi" pass FX is
 > [!NOTE]
 > Numerous variations of the ReSTIR algorithm have been developed to adapt to different rendering methods. In Jitter, ReSTIR computes global illumination by tracing rays in screen-space.
 
-These are the built-in solutions for computing indirect lighting and global illumination in Max 9. Which one is the best? Horses for courses! Go with what works.
+These are the built-in solutions for computing indirect lighting and global illumination in Max 9. There exist other succesfull algorithms and strategies for computing global illumination; to name a few: voxel cone tracing (VCT), surfels, virtual point lights (VPL), and instant radiosity. Each method offers its own advantages and disadvantages. So, which one is the best? Horses for courses! Go with what works. Remember that if Max 9 built-in solutions for computing global illumination don't fulfill your needs, you can always implement your own using custom shaders (all the FXs we discussed about in this article where initially prototyped using Max objects).
 
 # Environment mapping
 
