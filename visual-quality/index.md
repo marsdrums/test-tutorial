@@ -287,7 +287,7 @@ $L_{ambient}$ is the so-called ***ambient light***, a constant and uniform light
 The rendering equation looks much simpler now, but we can rework it even further:
 
 $$
-$L_o(\mathbf{x}) = L_{ambient} \sum_{i=1}^{n} \cos(\theta_i)/n
+$L_o(\mathbf{x}) = L_{ambient}  \frac{1}{N} \sum_{i=1}^{n} \cos(\theta_i)
 $$
 
 The integral has been substituted with a computable dicrete summation, and the ambient term $L_{ambient}$ has been moved outside the summation since it's always the same for any incoming light direction. We assumed that the ambient light is uniform and coming from every direction within the normal-oriented hemisphere; we can, thereore, get rid of the geometric term $\cos(\theta_i)$ and substitute it with a simpler ***occlusion term***: 
@@ -297,6 +297,9 @@ $L_o(\mathbf{x}) = L_{ambient} \frac{1}{N} \sum_{i=1}^{n} O(\mathbf{x}, \omega_i
 $$
 
 The occlusion term is the result of the function $O(\mathbf{x}, \omega_i)$ which returns the value 1 if there's no occluding object looking from position $\mathbf{x}$ in direction $\omega_i$, and 0 if there's something blocking the ambient light in the $\omega_i$ direction.
+
+> [!NOTE]  
+> In some ambient occlusion implementations, the occlusion function $O(\mathbf{x}, \omega_i)$ doesn't report a boolean value 0 - 1, but it also takes into account the distance of the occluding object from the occluded surface.
 
 In practice, this means for every point $\mathbf{x}$ to explore $n$ directions within the hemisphere and count how many of them are occluded
 
