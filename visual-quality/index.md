@@ -304,6 +304,7 @@ The occlusion term is the result of the function $O(\mathbf{x}, \omega_i)$ which
 In practice, this means for every point $\mathbf{x}$ to explore $n$ directions within the hemisphere and count how many of them are occluded
 
 ![](./images/visual-quality_026.png)
+
 Image from "Scalable Ambient Occlusion for Molecular Visualisation", by Gary Mcgowan et al.
 
 Since the occlusion term is divided by $n$, we are actually computing the average occlusion for point $\mathbf{x}$, which is nothing more than a value in the range [0; 1] that represents how much "stuff" is blocking the light reaching point $\mathbf{x}$.
