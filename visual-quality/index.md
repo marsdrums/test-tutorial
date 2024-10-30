@@ -346,11 +346,11 @@ If computing power isn't an issue, you can use the {jit.gl.pass} FXs tssao-gi an
 
 ![](./images/visual-quality_033.png)
 
-You can notice how the red sphere reflects some light onto the white shpere, and that the floor illuminates both spheres from below. The tssao-gi-ssr variation adds reflections to the result; in a separate step, the FX assumes a specular BRDF for the objects in the scene and computes the amount of reflected color. 
+You can notice how the red sphere reflects some light onto the white shpere, and that the floor illuminates both spheres from below. The tssao-gi-ssr variation adds reflections to the result; in a separate step, the FX assumes all surfaces have the same specular BRDF and computes the amount of reflected color. 
 
 ![](./images/visual-quality_034.png)
 
-These two pass FXs can get a little closer the to original rendering equation formulation, but there're still many aspects of it left off (e.g. albedo modulation, and different BRDFs).
+These two pass FXs can get a little closer the to original rendering equation formulation, but there're still many aspects of it left off (e.g. albedo modulation, and per-surface BRDFs).
 
 Before moving on, i'd like to spend a couple of words on how to set up the ambient light values for {jit.gl.light}. At each bounce, light looses some energy because part of it gets absorbed (the amount of absorpion depends on the albedo values of the surface it bounced off). After a few reflections (like 7 or 8), radiance tipically becomes very weak, to the point of being negligiable in terms of lighting contribution. Since the ambient light should represent the average indirect light amount, its values are usually set quite low (in the examples above, R: 0.05, G: 0.05, B: 0.05). That is to say to not be afraid of using just a touch of ambient light. 
 
