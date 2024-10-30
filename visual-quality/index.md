@@ -185,15 +185,15 @@ Let's keep working on our outdoor scene, and let's see what is still missing. No
 
 ![](./images/visual-quality_018.png)
 
-The cube casts a long black shadow that, once again, looks somewhat "unnatural". If the image still doesn't "look quite right", it is because we're not considering all the entirety of lighting phenomena that contribute to the illumination of the scene. Before getting to the details, take a look at this comparison:
+The cube casts a long black shadow that, once again, looks somewhat "unnatural." If the image still doesn't "look quite right", it is because we're not considering all the entirety of lighting phenomena that contribute to the illumination of the scene. Before getting to the details, take a look at this comparison:
 
 ![](./images/visual-quality_019.png)
 
-On the left, we have our scene as rendered right now; on the right, there's the same scene rendered considering a wider range of lighting interactions. The image on the right looks undoubtedly more "plausible," but what are such missing lighting interactions? To give you a solid answer to this question, we have to go a step deeper into understanding how light interacts with physical objects and how to render such interactions on screen.
+On the left, we have our scene as rendered right now; on the right, there's the same scene rendered, considering a more comprehensive range of lighting interactions. The image on the right looks undoubtedly more "plausible," but what are such missing lighting interactions? To give you a solid answer to this question, we have to go a step deeper into understanding how light interacts with physical objects and how to render such interactions on screen.
 
 ## Surface-light interactions
 
-When light illuminates a surface, a variety of physical interactions occur between the light (electromagnetic radiation) and the material. These interactions determine how we perceive the surface's color, brightness, and overall appearance. Depending on the surface's properties, the light striking the surface can be absorbed, reflected, refracted, or transmitted. 
+When light illuminates a surface, various physical interactions occur between the light (electromagnetic radiation) and the material. These interactions determine how we perceive the surface's color, brightness, and overall appearance. Depending on the surface's properties, the light striking the surface can be absorbed, reflected, refracted, or transmitted. 
 
 ![](./images/visual-quality_020.png)
 
@@ -205,7 +205,7 @@ A BRDF describes how light reflects off a surface, defining the relationship bet
 
 The object {jit.gl.pbr} (Physics-Based Render) uses BRDF functions to reproduce different materials' appearance under various lighting conditions. If {jit.gl.pbr} is already accounting for generating plausible surface-light interactions, why doesn't our 3D scene look correct? 
 
-When a surface is illuminated, part of the light is reflected into the environment. The BRDF of the material describes how such reflections behave, but the amount of light emitted back into the scene should contribute to the illumination of other surfaces. {jit.gl.pbr} applies the correct light-surface response only for the light coming directly from the light source (***direct illumination***) but doesn't account for the amount of light coming from other obects' reflections (***indirect illumination***).
+When a surface is illuminated, part of the light is reflected into the environment. The BRDF of the material describes how such reflections behave, but the amount of light emitted back into the scene should contribute to the illumination of other surfaces. {jit.gl.pbr} applies the correct light-surface response only for the light coming directly from the light source (***direct illumination***) but doesn't account for the amount of light coming from other objects' reflections (***indirect illumination***).
 
 ![](./images/visual-quality_021.png)
 
@@ -239,15 +239,15 @@ If we go beyond the initial aversion to Greek letters one may have, we can break
 
 The rendering equation describes how much light is visible from a point on a surface $\mathbf{x}$ looking in a specific direction $\omega_o$. In other words, it can tell us the perceived color and brightness for every point on a surface. The amount of light depends on a few things, but let's focus on them individually.
 
-The first thing that contributes to the result of the rendering equation is the amount of light the object emits (emitted radiance). If you look right at a light bulb switched on, it emits some light; the emitted radiance corresponds to the term $L_e(\mathbf{x}, \omega_o)$ in the rendering equation and refers to the amount of light that point $\mathbf{x}$ is producing in direction $\omega_o$. If point $\mathbf{x}$ sits on a non-emissive surface, $L_e(\mathbf{x}, \omega_o) = 0$. 
+The first thing contributing to the result of the rendering equation is the amount of light the object emits (emitted radiance). If you look right at a light bulb switched on, it emits some light; the emitted radiance corresponds to the term $L_e(\mathbf{x}, \omega_o)$ in the rendering equation and refers to the amount of light that point $\mathbf{x}$ is producing in direction $\omega_o$. If point $\mathbf{x}$ sits on a non-emissive surface, $L_e(\mathbf{x}, \omega_o) = 0$. 
 
-The rest of the equation describes how much light comes from point $\mathbf{x}$ (outgoing radiance) as a function of the light that points $\mathbf{x}$ is receiving (incoming radiance). We said before that when a surface is illuminated by some light, a variety of physical interactions may occur. As a direct result of such interactions, a certain amount of light that point $\mathbf{x}$ is receiving can be reflected in the $\omega_o$ direction and, therefore, reach the viewer or another surface, contributing to its illumination. This last bit of the function is an integral because to know how much light is reflected in the $\omega_o$ direction, we should consider all the possible directions from which the point $\mathbf{x}$ can be illuminated. Such a set of directions is infinite, and it includes all the directions within a hemisphere oriented according to the surface's normal vector. 
+The rest of the equation describes how much light comes from point $\mathbf{x}$ (outgoing radiance) as a function of the light that points $\mathbf{x}$ is receiving (incoming radiance). We said before that when some light illuminates a surface, various physical interactions may occur. As a direct result of such interactions, a certain amount of light that point $\mathbf{x}$ is receiving can be reflected in the $\omega_o$ direction and, therefore, reach the viewer or another surface, contributing to its illumination. This last bit of the function is an integral because to know how much light is reflected in the $\omega_o$ direction, we should consider all the possible directions from which the point $\mathbf{x}$ can be illuminated. Such a set of directions is infinite, and it includes all the directions within a hemisphere oriented according to the surface's normal vector. 
 
 ![](./images/visual-quality_025.png)
 Image from "Voxel Based Indirect Illumination using Spherical Harmonics" by Randall Rauwendaal
 
 
-The integral returns the sum of infinite light contributions coming from all directions within the normal-oriented hemisphere. Each light contribution depends on three things:
+The integral returns the sum of the infinite light contributions from all directions within the normal-oriented hemisphere. Each light contribution depends on three things:
 
 - The BRDF at point $\mathbf{x}$: $f_r(\mathbf{x}, \omega_o, \omega_i)$
 - The amount of incoming radiance from direction $\omega_i$: $L_i(\mathbf{x}, \omega_i)$
@@ -259,7 +259,7 @@ $$
 L_o(\mathbf{x}, \omega_o) \approx L_e(\mathbf{x}, \omega_o) + \frac{1}{N} \sum_{i=1}^N f_s(\mathbf{x}, \omega_i, \omega_o) \cdot L_i(\mathbf{x}, \omega_i) \cdot \cos(\theta_i)
 $$
 
-Accepting an approximated result makes the rendering equation computable; we can get close to the real answer if we consider enough incoming light directions. The more directions we evaluate, the closer we get to the actual result.
+Accepting an approximated result makes the rendering equation computable; if we consider enough incoming light directions, we can get close to the real answer. The more directions we evaluate, the closer we get to the result.
 
 There's a rendering technique called ***Path Tracing*** which produces an approximate result of the rendering equation by making the number of incoming light directions finite. Such a technique is used to synthesize photo-realistic images:
 
@@ -268,11 +268,11 @@ There's a rendering technique called ***Path Tracing*** which produces an approx
 These are couple of images rendered using a path tracer implemented in Max. 
 
 > [!NOTE]  
-> There isn't a ready-to-go implementation of such a rendering technique in Max, but you can make your own path tracer by writing custom shaders. Implementing a path tracer from scratch isn't a trivial task and it's outside the scope of this article, but it goes to show you that everything is possible in Max, even if there's no object supporting a desired functionality directly (Turing completeness, baby!).
+> There isn't a ready-to-go implementation of such a rendering technique in Max, but you can make your own path tracer by writing custom shaders. Implementing a path tracer from scratch isn't a trivial task, and it's outside the scope of this article. Still, it shows you that everything is possible in Max, even if no object directly supports a desired functionality (Turing completeness, baby!).
 
-There's still one major problem: finding a good approximation of the solution to the rendering equation requires a lot of time. These images were rendered in about five minutes each. While it may not seem like a lot, it is if we want to render these complex lighting phenomena in real-time, where we just have a few milliseconds of "time budget" to spend on a video frame. Techniques like path tracing are (partially) out of the way if we want to program a real-time application, but there are many variations of the rendering equation that we can use to perform complex shading in the real-time domain.
+There's still one major problem: finding a good approximation of the solution to the rendering equation requires a lot of time. These images were rendered in about five minutes each. While it may not seem like a lot, it is if we want to render these complex lighting phenomena in real-time, where we just have a few milliseconds of "time budget" to spend on a video frame. Techniques like path tracing are (partially) out of the way if we want to program a real-time application, but we can use many variations of the rendering equation to perform complex shading in the real-time domain.
 
-Let's see some of these techniques, and let's explore which objects implement them.
+Let's see some of these techniques and explore which objects implement them.
 
 ## Ambient occlusion
 
@@ -282,7 +282,7 @@ $$
 L_o(\mathbf{x}) = \int_{H^{2}} L_{ambient} \cos(\theta_i) d\omega_i
 $$
 
-$L_{ambient}$ is the so-called ***ambient light***, a constant and uniform light that comes from every direction and which can potentially reach and illuminate any point in the scene. While this may sound like a very crude approximation of the lighting phenomenon, it's actually not too far from the truth: after multiple bounces off surfaces, indirect light looks like a sort or "light reverb", which tends to stabilize around an average value.
+$L_{ambient}$ is the so-called ***ambient light***, a constant and uniform light that comes from every direction and which can potentially reach and illuminate any point in the scene. While this may sound like a crude approximation of the lighting phenomenon, it's not too far from the truth: after multiple bounces off surfaces, indirect light looks like a sort of "light reverb," which tends to stabilize around an average value.
 
 The rendering equation looks much simpler now, but we can rework it even further:
 
@@ -290,38 +290,38 @@ $$
 L_o(\mathbf{x}) = L_{ambient}  \frac{1}{N} \sum_{i=1}^{n} \cos(\theta_i)
 $$
 
-The integral has been substituted with a computable dicrete summation, and the ambient term $L_{ambient}$ has been moved outside it since it's always the same for any incoming light direction. We assumed that the ambient light is uniform and coming from eeverywhere within the normal-oriented hemisphere; we can, thereore, get rid of the geometric term $\cos(\theta_i)$ and substitute it with a simpler ***occlusion term***: 
+The integral has been substituted with a computable discrete summation, and the ambient term $L_{ambient}$ has been moved outside it since it's always the same for any incoming light direction. We assumed that the ambient light is uniform and coming from everywhere within the normal-oriented hemisphere; we can, therefore, get rid of the geometric term $\cos(\theta_i)$ and substitute it with a simpler ***occlusion term***: 
 
 $$
 L_o(\mathbf{x}) = L_{ambient} \frac{1}{N} \sum_{i=1}^{n} O(\mathbf{x}, \omega_i)
 $$
 
-The occlusion term is the result of the function $O(\mathbf{x}, \omega_i)$ which returns the value 1 if there's no occluding object looking from position $\mathbf{x}$ in direction $\omega_i$, and 0 if there's something blocking the ambient light in the $\omega_i$ direction.
+The occlusion term is the result of the function $O(\mathbf{x}, \omega_i)$, which returns the value 1 if there's no occluding object looking from position $\mathbf{x}$ in direction $\omega_i$, and 0 if something is blocking the ambient light in the $\omega_i$ direction.
 
 > [!NOTE]  
 > In some ambient occlusion implementations, the occlusion function $O(\mathbf{x}, \omega_i)$ doesn't report a boolean value 0 - 1, but it also takes into account the distance of the occluding object from the occluded surface.
 
-In practice, this means for every point $\mathbf{x}$ to explore $n$ directions within the hemisphere and count how many of them are occluded
+In practice, this means for every point $\mathbf{x}$ to explore $n$ directions within the hemisphere and count how many of them are occluded.
 
 ![](./images/visual-quality_026.png)
 
-Image from "Scalable Ambient Occlusion for Molecular Visualisation", by Gary Mcgowan et al.
+Image from "Scalable Ambient Occlusion for Molecular Visualisation" by Gary Mcgowan et al.
 
-Since the occlusion term is divided by $n$, we are actually computing the average occlusion for point $\mathbf{x}$, which is nothing more than a value in the range [0; 1] that represents how much "stuff" is blocking the light reaching point $\mathbf{x}$.
+Since the occlusion term is divided by $n$, we compute the average occlusion for point $\mathbf{x}$, which is nothing more than a value in the range [0; 1] that represents how much "stuff" is blocking the light reaching point $\mathbf{x}$.
 
 This is what the occlusion term looks like:
 
 ![](./images/visual-quality_027.png)
-Occlusion term rendered using the pass FX "tssao-gi"
+Occlusion term rendered using the pass FX "tssao-gi."
 
-It always impresses me how good the occlusion term looks on its own; it really gives the sense of how much indirect light contributes to the perceprion of objects' volume and distance between each other. 
+It always impresses me how good the occlusion term looks on its own; it gives the sense of how much indirect light contributes to the perception of objects' volume and distance between each other. 
 
 And this is how ambient occlusion changes the look of a scene:
 ![](./images/visual-quality_028.png)
 
 Left: direct light only ({jit.gl.pbr} + {jit.gl.light}); middle: direct light + uniform ambient light; right: direct light + occluded ambient light
 
-Now that we have a good idea of what ambient occlusion is, let's see which Max objects we can use to implement it. There are three ways for adding ambient acclusion to your rendering, and they take the form of three distinct {jit.gl.pass} FXs:
+Now that we have a good idea of what ambient occlusion is, let's see which Max objects we can use to implement it. There are three ways for adding ambient occlusion to your rendering, and they take the form of three distinct {jit.gl.pass} FXs:
 - ***ssao***
 - ***tssao-gi***
 - ***tssao-gi-ssr***
@@ -330,32 +330,32 @@ Now that we have a good idea of what ambient occlusion is, let's see which Max o
 
 ![](./images/visual-quality_029.png)
 
-{jit.gl.pass}' FX ***ssao*** is the simplest ambient occlusion implementation available in max. It is controlled by three parameters: amnt, intensity, and radius. I personally like to leave "intensity" at 1, and play around with the other two parameters, but i invite you to explore the settings further. "Amnt" controls the amount of obscurance, and radius sets the distance within which to search for occluders. Although simple, ssao is my first choice, because it's not demanding in terms of computing resources, and with a little bit of tweaking, it can make miracles. 
+{jit.gl.pass}' FX ***ssao*** is the simplest ambient occlusion implementation available in max. It is controlled by three parameters: amnt, intensity, and radius. I like to leave "intensity" at 1, and play around with the other two parameters, but i invite you to explore the settings further. "Amnt" controls the amount of obscurance, and radius sets the distance to search for occluders. Although simple, ssao is my first choice because it's not demanding in terms of computing resources, and with a bit of tweaking, it can make miracles. 
 
 > [!TIP]  
-> Try to cascade three ssao FXs with decreasing radius. I personally find this configuration to be the best, as it delivers near-surface details, but it reacts to distant occluders too.
+> Try to cascade three ssao FXs with decreasing radius. I find this configuration to be the best, as it delivers near-surface details but also reacts to distant occluders.
 ![](./images/visual-quality_030.png)
 
-The name of the effect is an acronym standing for Screen-Space Ambient Occlusion, which is the technique used to explore the vicinity of each pixel in search for potential occluders.
+The effect's name is an acronym for Screen-Space Ambient Occlusion, a technique for exploring the vicinity of each pixel in search of potential occluders.
 
 ### tssao-gi and tssao-gi-ssr
 
 ![](./images/visual-quality_031.png)
 
-If computing power isn't an issue, you can use the {jit.gl.pass} FXs tssao-gi and its "expanded" version tssao-gi-ssr. Although different at implementation level from ssao, these two FXs compute ambient occlusion following the same criterion. The main difference is that tssao-gi and tssao-gi-ssr gather the color of the occluding objects, better approximating the indirect light components.
+If computing power isn't an issue, you can use the {jit.gl.pass} FXs tssao-gi and its "expanded" version tssao-gi-ssr. Although different at the implementation level from ssao, these two FXs compute ambient occlusion following the same criterion. The main difference is that tssao-gi and tssao-gi-ssr gather the color of the occluding objects, better approximating the indirect light components.
 
 ![](./images/visual-quality_033.png)
 
-You can notice how the red sphere reflects some light onto the white shpere, and that the floor illuminates both spheres from below. The tssao-gi-ssr variation adds reflections to the result; in a separate step, the FX assumes all surfaces have the same specular BRDF and computes the amount of reflected color. 
+You can notice how the red sphere reflects some light onto the white sphere and that the floor illuminates both spheres from below. The tssao-gi-ssr variation adds reflections to the result; in a separate step, the FX assumes all surfaces have the same specular BRDF and computes the amount of reflected color. 
 
 ![](./images/visual-quality_034.png)
 
-These two pass FXs can get a little closer the to original rendering equation formulation, but there're still many aspects of it left off (e.g. albedo modulation, and per-surface BRDFs).
+These two pass FXs can get closer to the original rendering equation formulation, but many aspects remain unconsidered (e.g., albedo modulation and per-surface BRDFs).
 
-Before moving on, i'd like to spend a couple of words on how to set up the ambient light values for {jit.gl.light}. At each bounce, light looses some energy because part of it gets absorbed (the amount of absorpion depends on the albedo values of the surface it bounced off). After a few reflections (like 7 or 8), radiance tipically becomes very weak, to the point of being negligiable in terms of lighting contribution. Since the ambient light should represent the average indirect light amount, its values are usually set quite low (in the examples above, R: 0.05, G: 0.05, B: 0.05). That is to say to not be afraid of using just a touch of ambient light. 
+Before moving on, i'd like to spend a couple of words on how to set up the ambient light values for {jit.gl.light}. Light loses some energy at each bounce because part of it gets absorbed (the amount of absorption depends on the albedo values of the surface it bounced off). After a few reflections (like 7 or 8), radiance typically becomes very weak, negligible in terms of lighting contribution. Since the ambient light should represent the average indirect light amount, its values are usually relatively low (in the above examples, R: 0.05, G: 0.05, B: 0.05). That is to say, not to be afraid of using just a touch of ambient light. 
 
 > [!TIP]
-> My advise is to set ambient light at 0 and slowly fade it in until it looks right.
+> My advice is to set ambient light at 0 and slowly fade it until it looks right.
 
 ## ReSTIR
 
@@ -363,20 +363,20 @@ Before moving on, i'd like to spend a couple of words on how to set up the ambie
 
 Image rendered using {jit.gl.pass} @fxname gi. Left: direct illumination only ({jit.gl.pbr} + {jit.gl.light}); right: direct illumination + indirect illumination
 
-ReSTIR (Reservoir-based Spatio-Temporal Importance Resampling) is a cutting-edge technique in real-time computer graphics, specifically aimed at improving lighting quality. It's particularly valuable for ray-traced graphics, where simulating light behavior accurately is traditionally very demanding on computational resources. 
+ReSTIR (Reservoir-based Spatiotemporal Importance Resampling) is a cutting-edge technique in real-time computer graphics for improving lighting quality. It's especially valuable for ray-traced graphics, where simulating light behavior accurately is traditionally very demanding on computational resources. 
 
-Without getting too much into the details of this rendering technique, let's try to understand what makes it so special. When we talked about path tracing, we said that such a rendering technique is slow, because in order to find a good approximation to the rendering equation's solution, it has to evaluate a large set of incoming light directions, making it incompatible with the real-time domain. If we just have to pick and choose one direction among the ~10000 directions that a path tracer usually explores, which one would we choose? The best candidate would be the direction along which the most significant amount of energy (light) comes; in other words, the direction that contributes the most to shading our pixel. But, how do we know which is this "golden" light direction? Here comes into play ReSTIR. You can think about it as a sort of "giant directions sorter" that is capable of finding very quickly the most significant light direction (the one delivering more energy).
+Let's try to understand what makes it so unique without getting too much into the details of this rendering technique. When we talked about path tracing, we said that such a rendering technique is slow because to find a good approximation to the rendering equation's solution, it has to evaluate a large set of incoming light directions, making it incompatible with the real-time domain. If we just have to pick and choose one direction among the ~10000 directions that a path tracer usually explores, which one would we choose? The best candidate would be the direction along which the most significant amount of energy (light) comes; in other words, the direction that contributes the most to shading our pixel. But how do we know this "golden" light direction? Here ReSTIR comes into play. You can think about it as a sort of "giant directions sorter" that is capable of finding very quickly the most significant light direction (the one delivering more energy).
 
-ReSTIR has been implemented in Max 9 as {jit.gl.pass} FX named "gi" (global illumination). This pass FX can interact with {jit.gl.pbr} (to get the materials' BRDFs) and with {jit.gl.environment} (to gather light from an envirionment map). This means that whichever settings you use for jit.gl.pbr, the ReSTIR pass will resopond with the correct lighting behavior. For example, you can change the roughness and/or metalness of an object, and this will affect the way the ReSTIR pass computes global illumination.
+ReSTIR has been implemented in Max 9 as {jit.gl.pass} FX named "gi" (global illumination). This pass FX can interact with {jit.gl.pbr} (to get the materials' BRDFs) and with {jit.gl.environment} (to gather light from an environment map). This means that whichever settings you use for jit.gl.pbr, the ReSTIR pass will respond with the correct lighting behavior. For example, you can change an object's roughness and/or metalness, which will affect how the ReSTIR pass computes global illumination.
 
 ![](./images/visual-quality_036.png)
 
-The inner mechanics of the ReSTIR algorithm are complex, but the "gi" pass FX is rather straightforward to use: as long as you take care of setting gamma correction and tonemapping correctly, you just need to instanciate it, and it does its job.
+The inner mechanics of the ReSTIR algorithm are complex, but the "gi" pass FX is relatively straightforward to use. As long as you correctly set gamma correction and tonemapping, you just need to instantiate it, and it does its job.
 
 > [!NOTE]
 > Numerous variations of the ReSTIR algorithm have been developed to adapt to different rendering methods. In Jitter, ReSTIR computes global illumination by tracing rays in screen-space.
 
-These are the built-in solutions for computing indirect lighting and global illumination in Max 9. There exist other worth mentioning algorithms and strategies for computing global illumination: voxel cone tracing (VCT), surfels, virtual point lights (VPL), and instant radiosity among others. Each method offers its own advantages and disadvantages. So, which one is the best? Horses for courses! Go with what works. If Max 9 built-in solutions for global illumination don't fulfill your needs, i engourage you to implement your own using custom shaders (all the FXs we discussed about in this article where initially prototyped using Max objects).
+These are the built-in solutions for computing indirect lighting and global illumination in Max 9. Other algorithms and strategies for computing global illumination exist that are worth mentioning: voxel cone tracing (VCT), surfels, virtual point lights (VPL), and instant radiosity, among others. Each method offers its advantages and disadvantages. So, which one is the best? Horses for courses! Go with what works. Suppose Max 9 built-in solutions for global illumination don't fulfill your needs. In that case, I encourage you to implement your own using custom shaders (all the FXs we discussed in this article were initially prototyped using Max objects).
 
 # Environment mapping
 
