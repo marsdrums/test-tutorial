@@ -279,7 +279,7 @@ Let's see some of these techniques and explore which objects implement them.
 Ambient occlusion is a method for rendering indirect illumination based on a series of simplifications of the rendering equation. Let's assume that every point in our scene is receiving the same amount of light everywhere, that there are no emissive objects, and that we ignore the materials' BRDFs; the rendering equation simplifies to:
 
 $$
-L_o(\mathbf{x}) = \int_{H^{2}} L_{ambient} \cos(\theta_i) \cdot d\omega_i
+L_o(\mathbf{x}) = \int_{H^{2}} L_{ambient} \cdot \cos(\theta_i) \cdot d\omega_i
 $$
 
 $L_{ambient}$ is the so-called ***ambient light***, a constant and uniform light that comes from every direction and which can potentially reach and illuminate any point in the scene. While this may sound like a crude approximation of the lighting phenomenon, it's not too far from the truth: after multiple bounces off surfaces, indirect light looks like a sort of "light reverb," which tends to stabilize around an average value.
