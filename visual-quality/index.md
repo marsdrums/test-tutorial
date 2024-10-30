@@ -185,7 +185,7 @@ Let's keep working on our outdoor scene, and let's see what is still missing. No
 
 ![](./images/visual-quality_018.png)
 
-The cube casts a long black shadow that, once again, looks somewhat "unnatural". If the image still doesn't "look quite right", it is because we're not considering all the lighting phenomena that may contribute to the illumination of our scene. Before getting to the details, take a look at this comparison:
+The cube casts a long black shadow that, once again, looks somewhat "unnatural". If the image still doesn't "look quite right", it is because we're not considering all the entirety of lighting phenomena that contribute to the illumination of the scene. Before getting to the details, take a look at this comparison:
 
 ![](./images/visual-quality_019.png)
 
