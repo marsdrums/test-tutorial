@@ -376,9 +376,11 @@ The inner mechanics of the ReSTIR algorithm are complex, but the "gi" pass FX is
 > [!NOTE]
 > Numerous variations of the ReSTIR algorithm have been developed to adapt to different rendering methods. In Jitter, ReSTIR computes global illumination by tracing rays in screen-space.
 
-
+These are the built-in solutions for computing indirect lighting and global illumination in Max 9. Which one is the best? Horses for courses! Go with what works.
 
 # Environment mapping
+
+
 # Lighting setup
 # Shadows
 # Antialiasing
