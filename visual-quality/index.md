@@ -373,6 +373,9 @@ ReSTIR has been implemented in Max 9 as {jit.gl.pass} FX named "gi" (global illu
 
 The inner mechanics of the ReSTIR algorithm are complex, but the "gi" pass FX is rather straightforward to use: as long as you take care of setting gamma correction and tonemapping correctly, you just need to instanciate it, and it does its job.
 
+> [!NOTE]
+> Numerous variations of the ReSTIR algorithm have been developed to adapt to different rendering methods. In Jitter, ReSTIR computes global illumination by tracing rays in screen-space.
+
 
 
 # Environment mapping
