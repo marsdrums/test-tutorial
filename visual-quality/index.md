@@ -287,13 +287,13 @@ $L_{ambient}$ is the so-called ***ambient light***, a constant and uniform light
 The rendering equation looks much simpler now, but we can rework it even further:
 
 $$
-L_o(\mathbf{x}) = L_{ambient}  \frac{1}{N} \sum_{i=1}^{n} \cos(\theta_i)
+L_o(\mathbf{x}) = L_{ambient}  \frac{1}{n} \sum_{i=1}^{n} \cos(\theta_i)
 $$
 
 The integral has been substituted with a computable discrete summation, and the ambient term $L_{ambient}$ has been moved outside it since it's always the same for any incoming light direction. We assumed that the ambient light is uniform and coming from everywhere within the normal-oriented hemisphere; we can, therefore, get rid of the geometric term $\cos(\theta_i)$ and substitute it with a simpler ***occlusion term***: 
 
 $$
-L_o(\mathbf{x}) = L_{ambient} \frac{1}{N} \sum_{i=1}^{n} O(\mathbf{x}, \omega_i)
+L_o(\mathbf{x}) = L_{ambient} \frac{1}{n} \sum_{i=1}^{n} O(\mathbf{x}, \omega_i)
 $$
 
 The occlusion term is the result of the function $O(\mathbf{x}, \omega_i)$, which returns the value 1 if there's no occluding object looking from position $\mathbf{x}$ in direction $\omega_i$, and 0 if something is blocking the ambient light in the $\omega_i$ direction.
