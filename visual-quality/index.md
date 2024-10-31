@@ -227,7 +227,7 @@ How can we then compute direct and indirect illumination?
 In 1986, James Kajiya introduced a mathematical formulation used in computer graphics to describe how light interacts with surfaces to produce the color and brightness we perceive. This formulation goes under the name of the ***rendering equation***:
 
 $$
-L_o(\mathbf{x}, \omega_o) = L_e(\mathbf{x}, \omega_o) + \int_{H^{2}}f_r(\mathbf{x}, \omega_o, \omega_i) \cdot L_i(\mathbf{x}, \omega_i) \cdot \cos(\theta_i) \cdot d\omega_i
+L_o(\mathbf{x}, \omega_o) = L_e(\mathbf{x}, \omega_o) + \int_{H^{2}} f_r(\mathbf{x}, \omega_o, \omega_i) \cdot L_i(\mathbf{x}, \omega_i) \cdot \cos(\theta_i) \cdot d\omega_i
 $$
 
 > [!NOTE]  
@@ -366,16 +366,19 @@ Image rendered using {jit.gl.pass} @fxname gi. Left: direct illumination only ({
 
 ReSTIR (Reservoir-based Spatiotemporal Importance Resampling) is a cutting-edge technique in real-time computer graphics for improving lighting quality. It's especially valuable for ray-traced graphics, where simulating light behavior accurately is traditionally very demanding on computational resources. 
 
-Let's try to understand what makes it so unique without getting too much into the details. When we talked about path tracing, we said that such a rendering technique is slow because to find a good approximation to the rendering equation's solution, it has to evaluate a large set of incoming light directions, making it incompatible with the real-time domain. If we just have to pick and choose one direction among the ~10000 directions that a path tracer usually explores, which one would we choose? The best candidate would be the direction along which the most significant amount of energy (light) comes; in other words, the direction that contributes the most to shading our pixel. But how do we know this "golden" light direction? Here ReSTIR comes into play. You can think about it as a sort of "giant directions sorter" that is capable of finding very quickly the most significant light direction (the one delivering more energy).
+Let's try to understand what makes it so unique without getting too much into the details. When we talked about path tracing, we said that such a rendering technique is slow because to find a good approximation to the rendering equation's solution, it has to evaluate a large set of incoming light directions, making it incompatible with the real-time domain. But how many directions can we afford to explore in the time span of one frame on a modern computer? The answer is humbling: just one or two...If we just have to pick and choose one direction among the ~10000 directions that a path tracer usually explores, which one would we choose? The best candidate would be the direction along which the most significant amount of energy (light) comes; in other words, the direction that contributes the most to shading our pixel. But how do we know this "golden" light direction? Here ReSTIR comes into play. You can think about it as a sort of "directions sorter" that is capable of finding very quickly the most significant light direction (the one delivering more energy).
 
-ReSTIR has been implemented in Max 9 as {jit.gl.pass} FX named "gi" (global illumination). This pass FX can interact with {jit.gl.pbr} (to get the materials' BRDFs) and with {jit.gl.environment} (to gather light from an environment map). This means that whichever settings you use for jit.gl.pbr, the ReSTIR pass will respond with the correct lighting behavior. For example, any change of a mesh' roughness and/or metalness, will affect how the ReSTIR pass computes global illumination.
+> [!NOTE]
+> Numerous variations of the ReSTIR algorithm have been developed to adapt to different rendering methods. In Jitter, the ReSTIR algorithms is used to compute global illumination by tracing rays in screen-space.
+
+ReSTIR has been implemented in Max 9 as {jit.gl.pass} FX named "gi" (global illumination). This pass FX can interact with {jit.gl.pbr} (to get the materials' BRDFs) and with {jit.gl.environment} (to gather light from an environment map). This means that whichever settings you use for jit.gl.pbr, the ReSTIR pass will respond with the correct lighting behavior. For example, any change of a mesh' roughness and/or metalness, will affect how the "gi" pass computes global illumination.
 
 ![](./images/visual-quality_036.png)
 
 The inner mechanics of the ReSTIR algorithm are complex, but the "gi" pass FX is relatively straightforward to use. As long as you correctly set gamma correction and tonemapping, you just need to instantiate it, and it does its job.
 
-> [!NOTE]
-> Numerous variations of the ReSTIR algorithm have been developed to adapt to different rendering methods. In Jitter, ReSTIR computes global illumination by tracing rays in screen-space.
+> [!IMPORTANT]
+> The "gi" pass FX requires rendering multiple render targets (direct illumination, albedo, normals, roughness, metalness, four layers of depth). To make the effect work correctly, {jit.gl.pass}' @quality attribute must be set to "hi".
 
 These are the built-in solutions for computing indirect lighting and global illumination in Max 9. Other algorithms and strategies for computing global illumination exist that are worth mentioning: voxel cone tracing (VCT), surfels, virtual point lights (VPL), and instant radiosity, among others. Each method offers its advantages and disadvantages. So, which one is the best? Horses for courses! Go with what works. Suppose Max 9 built-in solutions for global illumination don't fulfill your needs. In that case, I encourage you to implement your own using custom shaders (all the FXs we discussed in this article were initially prototyped using Max objects).
 
