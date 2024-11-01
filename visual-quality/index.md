@@ -43,7 +43,7 @@ To make an even more extreme example, let's assume a 1-bit color value. If such 
 For this reason, it makes sense to have bit depths higher than 8-bit.
 
 > [!IMPORTANT]  
-> You should always use ***float32***, or at least ***float16*** matrices/textures if you're planning to process an image.
+> You should always use ***float32***, or at least ***float16*** matrices/textures for image processing.
 
 Once your process has finished, you can safely reduce the bit depth of your image if you need, for example, to use smaller storage space, and the result won't change noticeably.
 
@@ -51,7 +51,7 @@ Once your process has finished, you can safely reduce the bit depth of your imag
 
 # Color spaces and gamma correction
 
-In the digital domain, colors are represented using numerical values, typically in three or more dimensions. These numerical values are then interpreted by devices like screens, printers, and cameras to produce visible colors. The most widespread color representation is RGB. As you probably already know, RGB is a color system that combines three color components (Red, Green, and Blue) to represent all the visible spectrum colors. When all are combined at full intensity, they create white light.
+In the digital world, colors are expressed through numerical values, often spanning three or more dimensions. Devices such as screens, printers, and cameras interpret these values to display visible colors. The RGB color model is the most commonly used representation. As you likely know, RGB stands for Red, Green, and Blue, the three primary color components combined to reproduce a wide range of colors from the visible spectrum. When all three components are combined at full intensity, they produce white light.
 
 The problem is that the RGB color encoding is somehow abstract. Each device may have a different way of interpreting the numerical values, resulting in unconsistent results across different devices. For this reason, when we talk about colors, we usually refer to a so-called ***color space***. 
 
@@ -79,10 +79,15 @@ If you want to check out an implementation of such functions, see the shader 'hd
 
 Most of the time, for efficiency and simplicity, an approiomate gamma correction function is preferred over the ones above:
 
-- $sRGB = linRGB^{1/2.2}$
-- $linRGB = sRGB^{2.2}$
+$$
+sRGB = linRGB^{1/2.2}
+$$
 
-These gamma correction curves are very popular and widely used in computer graphics applications because they're simpler than the original piece-wise function, and the difference is negligible.
+$$
+$linRGB = sRGB^{2.2}
+$$
+
+These gamma correction curves are very popular and widely used in computer graphics applications because they're simpler than the original piece-wise function, and the difference is visually negligible.
 
 ## How and where should i apply gamma correction?
 
@@ -155,7 +160,7 @@ The light intensity looks correct, but we lost all the details on the shape: the
 
 ![](./images/visual-quality_014.png)
 
-I set up a little debugger utility to have a sense of what values {jit.pworld} is receiving. I'm taking the rendered image, and i'm converting the RGB values to luminance; i then compare the luminance against 1: if luminance is greater than 1, then the utility shows a white pixel, else it shows a black pixel. With this simple test, we can see that {jit.pworld} is receiving values greater than 1, and therefore all it can do is to display a white color. In other words, colors are clipped, as there's no color brighter than pure white. Once again, we're in a spot where our rendering looks unnatural: The light intensity seems convincing, but we lost all the shape details because the color values are clipped. What can we do then?
+I put togheter a simple utility to better understand the values that {jit.pworld} receives. This {jit.gl.pix.codebox} converts the rendered image's RGB values to luminance and then compares that luminance to 1: if it exceeds 1, the utility displays a white pixel; if not, it shows a black pixel. With this straightforward test, we can observe that {jit.pworld} is indeed receiving values greater than 1, which results in displaying only white. Essentially, this means colors are clipped, as no color can appear brighter than pure white. Once again, we're in a spot where our rendering looks unnatural: The light intensity seems convincing, but we lost all the shape details because of color clipping. What can we do then?
 
 Here comes into play another essential color correction tool: ***tonemapping***.
 
