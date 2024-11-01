@@ -306,7 +306,7 @@ $$
 The occlusion term is the result of the function $O(\mathbf{x}, \omega_i)$, which returns the value 1 if there's no occluding object looking from position $\mathbf{x}$ in direction $\omega_i$, and 0 if something is blocking the ambient light in the $\omega_i$ direction.
 
 > [!NOTE]  
-> In some ambient occlusion implementations, the occlusion function $O(\mathbf{x}, \omega_i)$ doesn't report a boolean value 0 - 1, but it also takes into account the distance of the occluding object from the occluded surface.
+> In some ambient occlusion implementations, the occlusion function $O(\mathbf{x}, \omega_i)$ doesn't only return a boolean value 0 - 1, but it also reports the distance of the occluding objects.
 
 In practice, this means for every point $\mathbf{x}$ to explore $n$ directions within the hemisphere and count how many of them are occluded.
 
@@ -362,7 +362,7 @@ These two pass FXs can get closer to the original rendering equation formulation
 Before moving on, i'd like to spend a couple of words on how to set up the ambient light values for {jit.gl.light}. Light loses some energy at each bounce because part of it gets absorbed (the amount of absorption depends on the albedo values of the surface it bounced off). After a few reflections (like 7 or 8), radiance typically becomes very weak, negligible in terms of lighting contribution. Since the ambient light should represent the average indirect light amount, its values are usually relatively low (in the above examples, R: 0.05, G: 0.05, B: 0.05). That is to say, not to be afraid of using just a touch of ambient light. 
 
 > [!TIP]
-> My advice is to set ambient light at 0 and slowly fade it until it looks right. If you have in your scene a colored background (e.g., @erase_color 0.1 0.1 0.4 1.0), try to match its tint when setting the ambient light. This way you can create the impression of the environment illuminating the scene. You can also try to get a step further, and use {jit.fx.an.mean} to compute the mean color of the rendered image to use it as ambient light.
+> I recommend starting with the ambient light set to 0 and gradually increasing it until you achieve the desired effect. If your scene includes a colored background (e.g., @erase_color 0.1 0.1 0.4 1.0), try matching the ambient light's tint to the background color. This approach helps create the impression that the environment is contributing to the scene's illumination. For an even spicier technique, consider using {jit.fx.an.mean} to calculate the average color of the rendered image and apply it as the ambient light.
 
 
 ## ReSTIR
