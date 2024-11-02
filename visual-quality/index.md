@@ -53,12 +53,12 @@ The same principles apply when capturing a render to texture: The attribute @typ
 
 ![](./images/visual-quality_037.png)
 
-Things different when we use {jit.gl.pass}; this object is used to apply post-processing effects on a 3D scene rendered to texture, and to control the bit depth of the internal processing there's a @quality attribute: @quality "lo" = char, @quality "med" = float16" (the default), @quality = "hi" = float32.
+Things are different when we use {jit.gl.pass}; this object is used to apply post-processing effects on a 3D scene rendered to texture, and to control the bit depth of the internal processing there's a @quality attribute: @quality "lo" = char, @quality "med" = float16" (the default), @quality = "hi" = float32.
 
 ![](./images/visual-quality_038.png)
 
 > [!IMPORTANT]  
-> If multiple {jit.gl.pass} are concatenated and they use different @quality settings, the lowest @quality is applied to ALL the chained {jit.gl.pass} FXs. My reccomendations is to set the quality to "hi" whenever possible, and make sure all the {jit.gl.pass} objects share the same quality settings.
+> If multiple {jit.gl.pass} are chained and they use different @quality settings, the lowest @quality is applied to ALL the chained {jit.gl.pass} FXs. My reccomendation is to set the quality to "hi" whenever possible, and make sure all the {jit.gl.pass} objects in the same FX chain share the same quality settings.
 
 # Color spaces and gamma correction
 
