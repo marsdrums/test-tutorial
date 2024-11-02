@@ -49,7 +49,7 @@ Once your process has finished, you can safely reduce the bit depth of your imag
 
 ![](./images/visual-quality_005.png)
 
-The same principles apply when capturing a render to texture: The attribute @type of {jit.gl.node} must be set to "float16" of "float32".
+The same principles apply when capturing a render to texture: The attribute @type of {jit.gl.node} must be set to "float16" of "float32" if we want to further process the images.
 
 ![](./images/visual-quality_037.png)
 
