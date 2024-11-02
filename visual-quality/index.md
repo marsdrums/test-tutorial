@@ -402,6 +402,14 @@ These are the built-in solutions for computing indirect lighting and global illu
 
 # Image-based lighting
 
+Imagine you're creating a 3D scene and you want it to look as realistic as possible. One of the secrets to achieving that realism is Image-Based Lighting, or IBL for short. Think of IBL as a way to light up your 3D world using real photos of an environment. Instead of manually placing lights around your scene, you can use an image, often a special panoramic photo called environment map (an High Dynamic Range image), that captures the light and colors of a real place. This image wraps around your 3D scene like a giant, invisible sphere, casting light and reflections as if your virtual object were truly sitting in that environment.
+
+With traditional lighting, you’d need to carefully place and adjust lights to mimic how the sun, sky, or indoor lamps might illuminate your object. But with IBL, the photo does all the heavy lifting. It not only adds natural light but also brings in subtle details, like the warm glow of a sunset or the sharp highlights of a clear sky. 
+
+In Max you can upload an environment map into {jit.gl.material} or {jit.gl.pbr} directly, or use {jit.gl.environment}. {jit.gl.environment} is designed to communicate with all {jit.gl.pbr} and {jit.gl.material} objects in the patch
+
+> [!TIP]
+> Usually, all objects in a 3D scene live in the same environment. For this reason, i suggest using {jit.gl.environment} for uploading an environment map, 
 
 # Lighting setup
 # Shadows
