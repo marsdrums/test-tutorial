@@ -62,7 +62,7 @@ Things are different when we use {jit.gl.pass}; this object is used to apply pos
 
 # Color spaces and gamma correction
 
-In the digital world, colors are expressed through numerical values, often spanning three or more dimensions. Devices such as screens, printers, and cameras interpret these values to display visible colors. The RGB color model is the most commonly used representation. As you likely know, RGB stands for Red, Green, and Blue, the three primary color components combined to reproduce a wide range of colors from the visible spectrum. When all three components are combined at full intensity, they produce white light.
+As we sain in the previous paragraph, in the digital world, colors are expressed through numerical values, often spanning three or more dimensions. Devices such as screens, printers, and cameras interpret these values to display visible colors. The RGB color model is the most commonly used representation. As you likely know, RGB stands for Red, Green, and Blue, the three primary color components combined to reproduce a wide range of colors from the visible spectrum. When all three components are combined at full intensity, they produce white light.
 
 The problem is that the RGB color encoding is somehow abstract. Each device may have a different way of interpreting the numerical values, resulting in unconsistent results across different devices. For this reason, when we talk about colors, we usually refer to a so-called ***color space***. 
 
