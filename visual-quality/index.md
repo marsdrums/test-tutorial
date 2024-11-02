@@ -402,6 +402,8 @@ These are the built-in solutions for computing indirect lighting and global illu
 
 # Image-based lighting
 
+![](./images/visual-quality_039.png)
+
 Imagine you're creating a 3D scene and you want it to look as realistic as possible. One of the secrets to achieving that realism is Image-Based Lighting, or IBL for short. Think of IBL as a way to light up your 3D world using real photos of an environment. Instead of manually placing lights around your scene, you can use an image, often a special panoramic photo called environment map (an High Dynamic Range image), that captures the light and colors of a real place. This image wraps around your 3D scene like a giant, invisible sphere, casting light and reflections as if your virtual object were truly sitting in that environment.
 
 With traditional lighting, you’d need to carefully place and adjust lights to mimic how the sun, sky, or indoor lamps might illuminate your object. But with IBL, the photo does all the heavy lifting. It not only adds natural light but also brings in subtle details, like the warm glow of a sunset or the sharp highlights of a clear sky. 
