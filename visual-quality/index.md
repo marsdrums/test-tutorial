@@ -49,6 +49,17 @@ Once your process has finished, you can safely reduce the bit depth of your imag
 
 ![](./images/visual-quality_005.png)
 
+The same principles apply when capturing a render to texture: The attribute @type of {jit.gl.node} must be set to "float16" of "float32".
+
+![](./images/visual-quality_037.png)
+
+Things different when we use {jit.gl.pass}; this object is used to apply post-processing effects on a 3D scene rendered to texture, and to control the bit depth of the internal processing there's a @quality attribute: @quality "lo" = char, @quality "med" = float16" (the default), @quality = "hi" = float32.
+
+![](./images/visual-quality_038.png)
+
+> [!IMPORTANT]  
+> If multiple {jit.gl.pass} are concatenated and they use different @quality settings, the lowest @quality is applied to ALL the chained {jit.gl.pass} FXs. My reccomendations is to set the quality to "hi" whenever possible, and make sure all the {jit.gl.pass} objects share the same quality settings.
+
 # Color spaces and gamma correction
 
 In the digital world, colors are expressed through numerical values, often spanning three or more dimensions. Devices such as screens, printers, and cameras interpret these values to display visible colors. The RGB color model is the most commonly used representation. As you likely know, RGB stands for Red, Green, and Blue, the three primary color components combined to reproduce a wide range of colors from the visible spectrum. When all three components are combined at full intensity, they produce white light.
@@ -373,7 +384,7 @@ Image rendered using {jit.gl.pass} @fxname gi. Left: direct illumination only ({
 
 ReSTIR (Reservoir-based Spatiotemporal Importance Resampling) is a cutting-edge technique in real-time computer graphics for improving lighting quality. It's especially valuable for ray-traced graphics, where simulating light behavior accurately is traditionally very demanding on computational resources. 
 
-Let’s explore what makes it unique without delving too deeply into technical details. When we discussed path tracing, we noted that this rendering method is slow because it requires evaluating a large number of incoming light directions to approximate the solution to the rendering equation, which makes it unsuitable for real-time applications. So, how many directions can we feasibly evaluate within the time span of a single frame on modern hardware? The answer is surprisingly limited: just one or two. Given that a typical path tracer samples around 10,000 directions, which single direction should we prioritize? Ideally, it would be the direction that carries the most energy (light), contributing the most to the pixel’s shading. But how can we identify this optimal direction? This is where ReSTIR comes into play. Think of it as a sophisticated 'direction sorter' that can quickly identify the most significant light direction—the one that maximizes energy contribution.
+Let’s explore what makes ReSTIR unique without delving too deeply into technical details. When we discussed path tracing, we noted that this rendering method is slow because it requires evaluating a large number of incoming light directions to approximate the solution to the rendering equation, which makes it unsuitable for real-time applications. So, how many directions can we feasibly evaluate within the time span of a single frame on modern hardware? The answer is surprisingly limited: just one or two. Given that a typical path tracer samples around 10,000 directions, which single direction should we prioritize? Ideally, it would be the direction that carries the most energy (light), contributing the most to the pixel’s shading. But how can we identify this optimal direction? This is where ReSTIR comes into play. Think of it as a sophisticated 'direction sorter' that can quickly identify the most significant light direction—the one that maximizes energy contribution.
 
 > [!NOTE]
 > Numerous variations of the ReSTIR algorithm have been developed to adapt to different rendering methods. In Jitter, the ReSTIR algorithms is used to compute global illumination by tracing rays in screen-space.
@@ -389,7 +400,7 @@ The inner mechanics of the ReSTIR algorithm are complex, but the "gi" pass FX is
 
 These are the built-in solutions for computing indirect lighting and global illumination in Max 9. However, there are other noteworthy algorithms and strategies for global illumination, such as voxel cone tracing (VCT), surfels, virtual point lights (VPL), and instant radiosity, each with its own set of pros and cons. So, which method is the best? It depends on the situation—use what works best for your needs; and if the built-in global illumination options in Max 9 don’t meet your requirements, I encourage you to implement your own using custom shaders (All the effects discussed in this article were originally prototyped with Max objects).
 
-# Environment mapping
+# Image-based lighting
 
 
 # Lighting setup
