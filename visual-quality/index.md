@@ -423,10 +423,10 @@ By loading different environment maps, you can quickly change the illumination o
 > [!NOTE]
 > EXR images, or OpenEXR files, are a type of image format designed specifically for high-quality, high-dynamic-range (HDR) imaging. These images are commonly used in computer graphics and visual effects, including environment mapping, due to their ability to store a vast range of luminance and color data that traditional image formats like JPEG or PNG cannot capture.
 
-The object {jit.gl.environment} has a @gamma_correction attribute; like with {jit.gl.pbr}, if you want to manage gamma correction manually, you should disable this attribute. {jit.gl.environment} has an attribute called @reflect_edge that controls the definition of the environment map for reflections. This value must be a power of 2.
+The object {jit.gl.environment} has a @gamma_correction attribute; like with {jit.gl.pbr}, if you want to manage gamma correction manually, you should disable this attribute. The {jit.gl.environment} object includes an attribute called @reflect_edge, which determines the resolution of the environment map used for reflections. This value should be set as a power of 2.
 
 > [!TIP]
-> If your scene contains very smooth materials (@roughness close to 0), a low @reflect_edge may result in blurry reflections. If that's the case, increase the @reflect_edge to a larger power of two.
+> If your scene contains very smooth materials (with @roughness close to 0), a low @reflect_edge value may result in blurry reflections. If that's the case, increase @reflect_edge to a larger power of two.
 
 ![](./images/visual-quality_041.png)
 
