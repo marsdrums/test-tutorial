@@ -407,16 +407,29 @@ These are the built-in solutions for computing indirect lighting and global illu
 
 ![](./images/visual-quality_039.png)
 
+Images rendered with various environment maps and "gi" pass FX.
+
 One of the secrets to achieving realism is Image-Based Lighting, or IBL for short. Think of IBL as a way to light up your 3D world using real photos of an environment. Instead of manually placing lights around your scene, you can use an image, often a special panoramic photo called environment map (an High Dynamic Range image), that captures the light and colors of a real place. This image wraps around your 3D scene like an invisible sphere, casting light and reflections as if your virtual object were truly sitting in that environment.
 
-In Max you can upload an environment map into {jit.gl.material} or {jit.gl.pbr} directly, or use {jit.gl.environment}. The latter is designed to communicate with all {jit.gl.pbr}, {jit.gl.material}, and {jit.gl.skybox} objects in the patch.
+In Max you can upload an environment map into {jit.gl.material} or {jit.gl.pbr} directly, or use {jit.gl.environment}. The latter is designed to communicate with all {jit.gl.pbr}, {jit.gl.material}, and {jit.gl.skybox} objects in the patch. {jit.gl.environment} also interacts with the "gi" pass FX. By loading an environment map, the "gi" pass can ray trace this environment, casting light from it.
 
 > [!TIP]
 > Usually, all objects in a 3D scene are supposed to live in the same environment. For this reason, i suggest using {jit.gl.environment} for uploading an environment map, because it simplifies a lot the IBL settings control.
 
 ![](./images/visual-quality_040.png)
 
-The object {jit.gl.environment} has a @gamma_correction attribute; like with {jit.gl.pbr}, if you want to manage gamma correction manually, you should disable this attribute.
+By loading different environment maps, you can quickly change the illumination of your entire scene. You can download plenty of them from the internet, or create your own with 360° cameras. Environment maps usually come in the .EXR format.
+
+> [!NOTE]
+> EXR images, or OpenEXR files, are a type of image format designed specifically for high-quality, high-dynamic-range (HDR) imaging. These images are commonly used in computer graphics and visual effects, including environment mapping, due to their ability to store a vast range of luminance and color data that traditional image formats like JPEG or PNG cannot capture.
+
+The object {jit.gl.environment} has a @gamma_correction attribute; like with {jit.gl.pbr}, if you want to manage gamma correction manually, you should disable this attribute. {jit.gl.environment} has an attribute called @reflect_edge that controls the definition of the environment map for reflections. This value must be a power of 2.
+
+> [!TIP]
+> If your scene contains very smooth materials (@roughness close to 0), a low @reflect_edge may result in blurry reflections. If that's the case, increase the @reflect_edge to a larger power of two.
+
+![](./images/visual-quality_041.png)
+
 
 
 # Lighting setup
