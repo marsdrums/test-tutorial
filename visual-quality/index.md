@@ -439,10 +439,9 @@ Max is designed to have a "default" lighting setup. If you start from an empty p
 
 This image should be illuminated only by the dark environment, but it doesn't work without putting in the patch a "dummy" black light to override the default hemisphere light.
 
-
-# Lighting setup
 # Shadows
 # Antialiasing
+# Lighting setup
 # Give a sense of scale
 # Driving viewer's attention
 # Color harmony
