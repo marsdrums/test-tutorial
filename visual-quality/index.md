@@ -430,6 +430,14 @@ The object {jit.gl.environment} has a @gamma_correction attribute; like with {ji
 
 ![](./images/visual-quality_041.png)
 
+Max is designed to have a "default" lighting setup. If you start from an empty patch and create a 3D object, it looks illuminated, even if there's no {jit.gl.light} in the patch. Behind the scenes, Max applies a white hemispere light comping from above. This is a convinient way to quickly sketch your scene, before worring about lighting setup. Once you instanciate a {jit.gl.light} object, this default light disappears, and gets overwritten by the light(s) you decided to put in the scene. While the removal of the default light is automatic when instanciating a {jit.gl.light} objects, that's not the case when using a {jit.gl.environment}.
+
+> [!WARNING]
+> If you want to use image-based lighting ONLY (without any {jit.gl.light}), you must intanciate a "dummy" light with @diffuse = 0. 0. 0. 1. to override the default hemisphere light.
+
+![](./images/visual-quality_042.png)
+
+This image should be illuminated only by the dark environment, but it doesn't work without putting in the patch a "dummy" black light to override the default hemisphere light.
 
 
 # Lighting setup
