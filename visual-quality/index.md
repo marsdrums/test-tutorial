@@ -131,7 +131,7 @@ We said that gamma correction must be applied last, but we should also convert a
 
 > [!IMPORTANT]
 > When images or videos are stored on your computer, their colors are in sRGB color space, therefore, to make a correct image processing chain, we must follow these steps:
-- input image -> sRGB to linear RGB -> image processing -> linear RGB to sRGB -> display
+input image -> sRGB to linear RGB -> image processing -> linear RGB to sRGB -> display
 
 ![](./images/visual-quality_009.png)
 
