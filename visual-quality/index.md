@@ -407,13 +407,16 @@ These are the built-in solutions for computing indirect lighting and global illu
 
 ![](./images/visual-quality_039.png)
 
-One of the secrets to achieving realism is Image-Based Lighting, or IBL for short. Think of IBL as a way to light up your 3D world using real photos of an environment. Instead of manually placing lights around your scene, you can use an image, often a special panoramic photo called environment map (an High Dynamic Range image), that captures the light and colors of a real place. This image wraps around your 3D scene like a giant, invisible sphere, casting light and reflections as if your virtual object were truly sitting in that environment.
+One of the secrets to achieving realism is Image-Based Lighting, or IBL for short. Think of IBL as a way to light up your 3D world using real photos of an environment. Instead of manually placing lights around your scene, you can use an image, often a special panoramic photo called environment map (an High Dynamic Range image), that captures the light and colors of a real place. This image wraps around your 3D scene like an invisible sphere, casting light and reflections as if your virtual object were truly sitting in that environment.
 
 In Max you can upload an environment map into {jit.gl.material} or {jit.gl.pbr} directly, or use {jit.gl.environment}. The latter is designed to communicate with all {jit.gl.pbr}, {jit.gl.material}, and {jit.gl.skybox} objects in the patch.
 
 > [!TIP]
-> Usually, all objects in a 3D scene are supposed to live in the same environment. For this reason, i suggest using {jit.gl.environment} for uploading an environment map, because it simplifies the control of IBL settings.
+> Usually, all objects in a 3D scene are supposed to live in the same environment. For this reason, i suggest using {jit.gl.environment} for uploading an environment map, because it simplifies a lot the IBL settings control.
 
+![](./images/visual-quality_040.png)
+
+The object {jit.gl.environment} has a @gamma_correction attribute; like with {jit.gl.pbr}, if you want to manage gamma correction manually, you should disable this attribute.
 
 
 # Lighting setup
