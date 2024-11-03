@@ -88,7 +88,7 @@ The function above transforms the linear RGB colors into sRGB colors. It's also 
 
 If you want to check out an implementation of such functions, see the shader 'hdr.gamma.jxs'.
 
-Most of the time, for efficiency and simplicity, an approiomate gamma correction function is preferred over the ones above:
+Most of the time, for efficiency and simplicity, an approximte gamma correction function is preferred over the ones above:
 
 $$
 sRGB = linRGB^{1/2.2}
@@ -114,7 +114,8 @@ In Jitter, this can be done in a variety of ways:
 
 ![](./images/visual-quality_006.png)
 
-Gamma correction must always be the last effect before sending a matrix or a texture to the display ({jit.world}, {jit.pworld}, {jit.window}, {jit.pwindow}).
+> [!IMPORTANT]
+> Gamma correction must always be the last effect before sending a matrix or a texture to the display ({jit.world}, {jit.pworld}, {jit.window}, {jit.pwindow}).
 
 Let's now talk about the difference that it makes. Let's see the last image with and without gamma correction:
 
