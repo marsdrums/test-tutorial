@@ -466,6 +466,22 @@ Shadow maps are created by rendering the scene from the light's point of view an
 
 ![](./images/visual-quality_046.png)
 
+Let's now see hot to activate shadows in Jitter.
+
+![](./images/visual-quality_047.png)
+
+Shadows are activated from the {jit.gl.light} object by enabling the @shadows attribute. All 3D objects connected to a {jit.gl.pbr} or {jit.gl.material} will cast and receive shadows.
+
+> [!NOTE]
+> Only directional lights and spot lights can cast shadows
+
+Shadows are there, but they don't look very good on this scene, and would probably need some tweaking. {jit.gl.light} has some attributes we can modify related to shadows: @shadowblur, @shadowquality, @shadowrange. Let's see what are these attributes referring to:
+
+- @shadowblur controls the amount of blurring applied on the rendered shadows. When the light source is very small of very far from the illuminated object, shadows appear sharp, with well-defined edges where the transition between light and shadow is abrupt. This kind of shadows are usually called ***hard shadows***. On the contrary, if the light has a big emitting surface, shadows have blurred, gradual edges, creating a transition zone between light and dark. This transition is called the penumbra, where light is partially blocked but not completely absent. The center of the shadow, where light is fully blocked, is called the umbra. Such blurry shadows are called ***soft shadows***. The @shadowblur attributes controls the transitions from hard to soft shadows, and it helps giving the impression of a large emitting light. It also helps with masking aliasing problems (more on that later).
+
+- @shadowquality is a param that controls the resolution of the shadow map. As said before, with shadow mapping, the scene is rendered from the camera point of view into a texture. @shadowquality sets the overall quality of the shadow map by changing its dimension.
+
+- @shadowrange controls how much of the scene is visible from the light point of view. To render the scene from a light, it gets substituted by a virtual camera. Such a camera has the same controls of any virual camera created using {jit.gl.camera}. As such, it also has a far clip parameter to decide the maximum extent of the view frustum. @shadowrange controls the length of the light-camera frustum.
 
 # Antialiasing
 # Lighting setup
