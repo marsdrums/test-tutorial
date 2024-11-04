@@ -483,13 +483,22 @@ Shadows are there, but they don't look very good on this scene, and would probab
 
 The @shadowblur attributes controls the transitions from hard to soft shadows, and it helps giving the impression of a large emitting light. It also helps with masking aliasing problems (more on that later).
 
-***@shadowquality*** is a param that controls the resolution of the shadow map. As said before, with shadow mapping, the scene is rendered from the camera point of view into a texture. @shadowquality sets the overall quality of the shadow map by changing its dimension.
+***@shadowquality*** is a param that controls the resolution of the shadow map. As said before, with shadow mapping, the scene is captured from the camera point of view into a texture. @shadowquality sets the overall quality of the shadow map by changing its resolution.
 
-***@shadowrange*** controls how much of the scene is visible from the light point of view. To render the scene from a light, it gets substituted by a virtual camera. Such a camera has the same controls of any virual camera created using {jit.gl.camera}. As such, it also has a far clip parameter to decide the maximum extent of the view frustum. @shadowrange controls the length of the light-camera frustum. Setting this attribute correctly is crucial to ensure all objects in the scene are casting shadows
+![](./images/visual-quality_048.png)
+
+> [!TIP]
+> When setting @shadowquality, start from "hi", and progressively reduce the quality until you start seeing jagged shadow margins. Than, increase the quality by one step. If perfomance isn't an issue, go with "hi" directly.
+
+The ***@shadowrange*** attribute determines how much of the scene is visible from the light's perspective. When rendering the scene from a light source, the light is represented by a virtual camera, which has the same controls as any camera created with {jit.gl.camera}. This includes a far clip parameter to set the extent of the view frustum. The @shadowrange attribute specifies the length of the light-camera frustum. Adjusting this attribute properly is essential to ensure that all objects in the scene are capable of casting shadows.
 
 ![](./images/visual-quality_049.png)
 
 From left to right: @shadowrange too short, correct @shadowrange, @shadowrange too long.
+When @shadowrange is too small, only objects close to the light can cast shadows. When @shadowrange is too high, all objects in the scene can cast shadows, but the produces shadows lack definition.
+
+> [!TIP]
+> When setting @shadowrange, start at 0 and increase it slowly. When you see that all objects in the scene are casting shadows, stop. 
 
 # Antialiasing
 # Lighting setup
