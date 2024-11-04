@@ -443,9 +443,9 @@ The object {jit.gl.environment} has a @gamma_correction attribute; like with {ji
 
 ![](./images/visual-quality_041.png)
 
-Max is designed to have a "default" lighting setup. If you start from an empty patch and create a 3D object, it looks illuminated, even if there's no {jit.gl.light} in the patch. Behind the scenes, Max applies a white hemispere light comping from above. This is a convinient way to quickly sketch your scene, before worring about lighting setup. Once you instanciate a {jit.gl.light} object, this default light disappears, and gets overwritten by the light(s) you decided to put in the scene. While the removal of the default light is automatic when instanciating a {jit.gl.light} objects, that's not the case when using a {jit.gl.environment}.
+Max comes with a built-in "default" lighting setup. When you create a 3D object in an empty patch, it appears illuminated even if no {jit.gl.light} object is present. This is because Max automatically applies a white hemisphere light from above, providing a convenient way to sketch out a scene without worrying about lighting configuration. However, as soon as a {jit.gl.light} object is added, this default light is automatically turned off and replaced by the custom lighting you set up. Unlike with {jit.gl.light} objects, the default light isn’t automatically disabled when using a {jit.gl.environment}.
 
-> [!WARNING]
+> [!IMPORTANT]
 > If you want to use image-based lighting ONLY (without any {jit.gl.light}), you must intanciate a "dummy" light with @diffuse 0 0 0 to override the default hemisphere light.
 
 ![](./images/visual-quality_042.png)
@@ -453,6 +453,13 @@ Max is designed to have a "default" lighting setup. If you start from an empty p
 This image should be illuminated only by the dark environment, but it doesn't work without the "dummy" black light overriding the default hemisphere light.
 
 # Shadows
+
+![](./images/visual-quality_044.png)
+
+In computer graphics, shadows are visual indicators that mimic the effect of objects blocking light. They are crucial for creating realistic 3D environments as they convey the spatial relationships between objects, their positions, and their interactions with light sources. Shadows result from light being obstructed and unable to reach certain surfaces due to intervening objects. In essence, shadows are defined negatively: they represent the absence of light. The rendering equation inherently accounts for shadowing, but, as mentioned, solving it directly is impractical in real-time rendering. Therefore, specific techniques have been developed to identify which surfaces should not be illuminated. Jitter employs a technique known as ***shadow mapping*** for rendering shadows.
+
+Shadow mapping works by identifying which parts of the scene are occluded from the light source's viewpoint, thus indicating where shadows should fall. This method is highly effective and widely used in real-time rendering for applications like video games and simulations due to its versatility. Picture positioning a light source (e.g., {jit.gl.light}) and observing the scene from its vantage point. Surfaces visible from the light’s position receive illumination, while those not directly seen remain in shadow. Shadow maps are produced by rendering the scene from light view position, and reporting the distance of the visible surfaces. 
+
 
 
 
