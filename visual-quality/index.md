@@ -504,7 +504,32 @@ These are the settings i ended up with:
 
 I usually like to have shadows with no or little blur when using directional lights, because they simulate light coming from a very distant emitter, which doesn't create regions of penumbra. @shadowrange has been set to tighly comprise all the objects in the shadowmap, and @shadowquality has been set to "hi" because performance wasn't problematic with such a simple scene.
 
-These were the shadow settings of {jit.gl.light}, but there are other shadow-related attributes we can modify: {jit.gl.pbr} and {jit.gl.material} can in fact be used to further tweak the shadow apparence.
+These were the shadow settings of {jit.gl.light}, but there are other shadow-related attributes we can modify: {jit.gl.pbr} and {jit.gl.material} can in fact be used to tweak the shadow apparence further. Let's take a closer look at our scene:
+
+![](./images/visual-quality_053.png)
+
+You can notice that where the cube contacts the floor, the shadow isn't precise. {jit.gl.pbr}'s shadow attributes control the behaviour of the shadow-receiving objects, and we can try to tweak them to improbe the shadows look. @shadow_hard, @shadow_soft, and @shadow_radius are parameters used to trim the shadow's apparence when {jit.gl.light}'s @shadowblur is greater than 0, defining the transition between umbra and penumbra. Since our light is directional, i'll set these parameters to their "neutral" values:
+
+![](./images/visual-quality_054.png)
+
+You can notice that the contact shadow looks sharper now. About the last attribute, @shadow_eps, this is used to compensate for two kinds of visual artifacts that shadowmapping may produce: shadow acne, and shadow leaking.
+
+Shadow acne refers to the presence in the scene of uncorrect small shadowed areas.
+
+![](./images/visual-quality_055.png)
+
+Shadow acne is a common artifact that occurs in shadow mapping, creating an unwanted pattern of dark spots or lines on the surfaces of 3D objects. This issue happens when the shadow map incorrectly calculates whether a point is in shadow, leading to a speckled or "striped" appearance. Shadow acne arises due to precision errors and self-shadowing issues. When rendering from the light's point of view, each surface's distance from the light is stored in the shadow map. During the scene's final rendering, the distance from the camera's perspective is compared to the shadow map's stored values. If the depth values are too close or nearly identical, slight precision errors can cause the surface to be falsely considered in shadow, even when it shouldn't be. This leads to shadow acne. To solve this issue, a small offset is added to the distance comparison, removing self-shading issues. @shadow_eps controls this arbitrary offset (the small offset is usually referred to as "epsilon").
+
+Shadow leakage is another common artifact in shadow mapping, where light or shadow unintentionally "leaks" through objects, causing parts of the scene to appear illuminated when they should be in shadow, or vice versa. 
+
+![](./images/visual-quality_056.png)
+
+shadow leaking below the cube.
+
+Shadow leakage typically happens due to improper depth comparisons or insufficient precision in the shadow map, leading to errors in identifying whether a surface should be in shadow. This issue is especially common when large or complex scenes are rendered, where distant objects or parts of the scene may not be accurately represented in the shadow map. Once again, a small @shadow_eps can solve or alleviate the issue.
+
+> [!TIP]
+> When setting @shadow_eps, start at 0 and increase it slowly. Stop right when the artifacts disappear.
 
 
 # Antialiasing
