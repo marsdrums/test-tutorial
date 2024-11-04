@@ -473,7 +473,7 @@ Let's now see hot to activate shadows in Jitter.
 Shadows are activated from the {jit.gl.light} object by enabling the @shadows attribute. All 3D objects connected to a {jit.gl.pbr} or {jit.gl.material} will cast and receive shadows.
 
 > [!NOTE]
-> Only directional lights and spot lights can cast shadows
+> Only directional lights and spot lights can cast shadows.
 
 Shadows are there, but they don't look very good on this scene, and would probably need some tweaking. {jit.gl.light} has some attributes we can modify related to shadows: @shadowblur, @shadowquality, @shadowrange. Let's see what are these attributes referring to:
 
