@@ -512,7 +512,7 @@ You can notice that where the cube contacts the floor, the shadow isn't precise.
 
 ![](./images/visual-quality_054.png)
 
-You can notice that the contact shadow looks sharper now. About the last attribute, @shadow_eps, this is used to compensate for two kinds of visual artifacts that shadowmapping may produce: shadow acne, and shadow leaking.
+You can notice that the contact shadow looks sharper now. About the last attribute, @shadow_eps, this is used to compensate for two kinds of visual artifacts that shadow mapping may produce: shadow acne, and shadow leakage.
 
 Shadow acne refers to the presence in the scene of uncorrect small shadowed areas.
 
@@ -530,7 +530,6 @@ Shadow leakage typically happens due to improper depth comparisons or insufficie
 
 > [!TIP]
 > When setting @shadow_eps, start at 0 and increase it slowly. Stop right when the artifacts disappear.
-
 
 # Antialiasing
 # Lighting setup
