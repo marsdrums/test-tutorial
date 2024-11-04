@@ -534,13 +534,17 @@ Shadow leakage typically happens due to improper depth comparisons or insufficie
 > [!TIP]
 > When setting @shadow_eps, start at 0 and increase it slowly. Stop right when the artifacts disappear.
 
-At the end of the day, shadow maping always requires some tweaking. It's impossible to find setting that always work, because shadow mapping is very sensible to the scale of the scenes. The only way is to empirically tweak the parameters until they look good. Still, it's important to be aware of the parameters' role to change them with conciousness.
+At the end of the day, shadow maping always requires some tweaking. It's impossible to find settings that always work, because shadow mapping is very sensible to the scale of the scenes. The only way is to empirically tweak the parameters until they look good. Still, it's important to be aware of the parameters' role to change them with conciousness.
 
-Shadow mapping is a very succesful shadow-rendering technique. As everything in computer graphics, many variations of the original algorithm have been created. To name a few: percentage-close filtering (PCF), variance shadow maps (VSM), cascaded shadow maps (CSM). For those of you who are into shader programming, i invite you to experiment with different shadow mapping techniques. If you need to access the shadow map captured by {jit.gl.light} for custom shadow mapping implementations, check out the patch 'lights.shadow.map.texture.maxpat'.
-
-
+As everything in computer graphics, many variations of the original algorithm have been created. To name a few: percentage-close filtering (PCF), variance shadow maps (VSM), cascaded shadow maps (CSM). For those of you who are into shader programming, i invite you to experiment with different shadow mapping techniques. If you need to access the shadow map captured by {jit.gl.light} for custom shadow mapping implementations, check out the patch 'lights.shadow.map.texture.maxpat'.
 
 # Antialiasing
+
+Imagine looking at a digital image or playing a video game where the edges of objects aren’t smooth but appear jagged, like tiny staircases. This is a common problem called aliasing in computer graphics, where visuals don’t look as smooth or realistic as we’d like because the computer struggles to represent fine details at a limited resolution. Let's break down what aliasing means, why it happens, and how we fix it.
+
+Aliasing happens when complex images or detailed patterns are represented at a lower resolution than needed. Picture trying to draw a smooth curve using only square blocks—no matter how carefully you place them, you’ll end up with a blocky, stepped edge instead of a perfect curve. This is essentially what happens when a computer tries to display high-resolution graphics with too few pixels.
+
+
 # Lighting setup
 # Give a sense of scale
 # Driving viewer's attention
