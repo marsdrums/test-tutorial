@@ -517,11 +517,11 @@ You can notice that where the cube contacts the floor, the shadow isn't precise.
 
 You can notice that the contact shadow looks sharper now. About the last attribute, @shadow_eps, this is used to compensate for two kinds of visual artifacts that shadow mapping may produce: shadow acne, and shadow leakage.
 
-Shadow acne refers to the presence in the scene of uncorrect small shadowed areas.
+Shadow acne is a common artifact that occurs in shadow mapping, creating an unwanted pattern of dark spots or lines on the surfaces of 3D objects. 
 
 ![](./images/visual-quality_055.png)
 
-Shadow acne is a common artifact that occurs in shadow mapping, creating an unwanted pattern of dark spots or lines on the surfaces of 3D objects. This issue happens when the shadow map incorrectly calculates whether a point is in shadow, leading to a speckled or "striped" appearance. Shadow acne arises due to precision errors and self-shadowing issues. When rendering from the light's point of view, each surface's distance from the light is stored in the shadow map. During the scene's final rendering, the distance from the camera's perspective is compared to the shadow map's stored values. If the depth values are too close or nearly identical, slight precision errors can cause the surface to be falsely considered in shadow, even when it shouldn't be. This leads to shadow acne. To solve this issue, a small offset is added to the distance comparison, removing self-shading issues. @shadow_eps controls this arbitrary offset (the small offset is usually referred to as "epsilon").
+This issue happens when the shadow map incorrectly calculates whether a point is in shadow, leading to a speckled or "striped" appearance. Shadow acne arises due to precision errors and self-shadowing issues. When rendering from the light's point of view, each surface's distance from the light is stored in the shadow map. During the scene's final rendering, the distance from the camera's perspective is compared to the shadow map's stored values. If the depth values are too close or nearly identical, slight precision errors can cause the surface to be falsely considered in shadow, even when it shouldn't be. This leads to shadow acne. To solve this issue, a small offset is added to the distance comparison, removing self-shading issues. @shadow_eps controls this arbitrary offset (the small offset is usually referred to as "epsilon").
 
 Shadow leakage is another common artifact in shadow mapping, where light or shadow unintentionally "leaks" through objects, causing parts of the scene to appear illuminated when they should be in shadow, or vice versa. 
 
@@ -534,7 +534,7 @@ Shadow leakage typically happens due to improper depth comparisons or insufficie
 > [!TIP]
 > When setting @shadow_eps, start at 0 and increase it slowly. Stop right when the artifacts disappear.
 
-At the end of the day, shadow maping always requires some tweaking. It's impossible to find settings that always work, because shadow mapping is very sensible to the scale of the scenes. The only way is to empirically tweak the parameters until they look good. Still, it's important to be aware of the parameters' role to change them with conciousness.
+At the end of the day, shadow maping always requires some tweaking. It's impossible to find settings that always work, because shadow mapping is very sensible to the scene's scale. The only way is to get the desired effect is to empirically tweak the parameters until shadows look good. Still, it's important to be aware of the parameters' role to modify them with conciousness.
 
 As everything in computer graphics, many variations of the original algorithm have been created. To name a few: percentage-close filtering (PCF), variance shadow maps (VSM), cascaded shadow maps (CSM). For those of you who are into shader programming, i invite you to experiment with different shadow mapping techniques. If you need to access the shadow map captured by {jit.gl.light} for custom shadow mapping implementations, check out the patch 'lights.shadow.map.texture.maxpat'.
 
@@ -545,13 +545,18 @@ Imagine looking at a digital image where the edges of objects aren’t smooth bu
 Aliasing happens when complex images or detailed patterns are represented at a lower resolution than needed. Picture trying to draw a smooth curve using only square blocks—no matter how carefully you place them, you’ll end up with a blocky, stepped edge instead of a perfect curve. Aliasing arises when a continuous signal (e.g., an image or sound wave) is sampled at an insufficient rate, violating the Nyquist-Shannon sampling theorem. In computer graphics, this means that when an image or 3D model is rendered at a resolution that cannot fully capture its detail, the representation suffers from noticeable artifacts.
 
 To minimize aliasing, a variety of different techniques have been developed. Such techniques go under the umbrella term of ***anti-aliasing***.
-In Jitter there are 3 methods we can use to reduce aliasing issues.
+
+![](./images/visual-quality_057.png)
+
+In Jitter there are 4 methods we can use to reduce aliasing issues.
 
 ## Full Scene Anti-Aliasing (FSAA)
 
 ## MXAA (MXAA)
 
 ## Temporal Anti-Aliasing (TAA)
+
+## Mipmapping
 
 
 
