@@ -538,11 +538,21 @@ At the end of the day, shadow maping always requires some tweaking. It's impossi
 
 As everything in computer graphics, many variations of the original algorithm have been created. To name a few: percentage-close filtering (PCF), variance shadow maps (VSM), cascaded shadow maps (CSM). For those of you who are into shader programming, i invite you to experiment with different shadow mapping techniques. If you need to access the shadow map captured by {jit.gl.light} for custom shadow mapping implementations, check out the patch 'lights.shadow.map.texture.maxpat'.
 
-# Antialiasing
+# Anti-aliasing
 
-Imagine looking at a digital image or playing a video game where the edges of objects aren’t smooth but appear jagged, like tiny staircases. This is a common problem called aliasing in computer graphics, where visuals don’t look as smooth or realistic as we’d like because the computer struggles to represent fine details at a limited resolution. Let's break down what aliasing means, why it happens, and how we fix it.
+Imagine looking at a digital image where the edges of objects aren’t smooth but appear jagged, like tiny staircases. This is a common problem called aliasing, where visuals don’t look as smooth or realistic as we’d like because the computer struggles to represent fine details at a limited resolution. Let's break down what aliasing means, why it happens, and how to fix it in Jitter.
 
-Aliasing happens when complex images or detailed patterns are represented at a lower resolution than needed. Picture trying to draw a smooth curve using only square blocks—no matter how carefully you place them, you’ll end up with a blocky, stepped edge instead of a perfect curve. This is essentially what happens when a computer tries to display high-resolution graphics with too few pixels.
+Aliasing happens when complex images or detailed patterns are represented at a lower resolution than needed. Picture trying to draw a smooth curve using only square blocks—no matter how carefully you place them, you’ll end up with a blocky, stepped edge instead of a perfect curve. Aliasing arises when a continuous signal (e.g., an image or sound wave) is sampled at an insufficient rate, violating the Nyquist-Shannon sampling theorem. In computer graphics, this means that when an image or 3D model is rendered at a resolution that cannot fully capture its detail, the representation suffers from noticeable artifacts.
+
+To minimize aliasing, a variety of different techniques have been developed. Such techniques go under the umbrella term of ***anti-aliasing***.
+In Jitter there are 3 methods we can use to reduce aliasing issues.
+
+## Full Scene Anti-Aliasing (FSAA)
+
+## MXAA (MXAA)
+
+## Temporal Anti-Aliasing (TAA)
+
 
 
 # Lighting setup
