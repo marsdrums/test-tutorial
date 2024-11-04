@@ -488,6 +488,9 @@ Shadows are there, but they don't look very good on this scene, and would probab
 > [!TIP]
 > When setting @shadowquality, start from "hi", and progressively reduce the quality until you start seeing jagged shadow margins. Then, increase the quality by one step. If perfomance isn't an issue, go with "hi" directly.
 
+> [!NOTE]
+> instead of using the @shadowquality attribute, you can send the message "sendoutput dim" followed by the desired shadow map size to {jit.gl.light}. Take a look at the patch 'lights.shadow.map.texture.maxpat' for an example.
+
 The ***@shadowrange*** attribute determines how much of the scene is visible from the light's perspective. When rendering the scene from a light source, the light is represented by a virtual camera, which has the same controls as any camera created with {jit.gl.camera}. This includes a far clip parameter to set the extent of the view frustum. The @shadowrange attribute specifies the length of the light-camera frustum. Adjusting this attribute properly is essential to ensure that all objects in the scene are capable of casting shadows.
 
 ![](./images/visual-quality_049.png)
@@ -530,6 +533,12 @@ Shadow leakage typically happens due to improper depth comparisons or insufficie
 
 > [!TIP]
 > When setting @shadow_eps, start at 0 and increase it slowly. Stop right when the artifacts disappear.
+
+At the end of the day, shadow maps and surface occlusion always require some tweaking. It's impossible to find setting that always work, because shadow mapping is very sensible to the scale of the scenes. The only way is to empirically tweak the parameters until they look good. Still, it's important to be aware of the parameters' role to change them with conciousness.
+
+Shadow mapping is a very succesful shadow-rendering technique. As everything in computer graphics, many variations of the original algorithm have been created. To name a few: percentage-close filtering (PCF), variance shadow maps (VSM), multi-resolution shadow maps. For those of you who are into shader programming, i invite you to experiment with different shadow mapping techniques. If you need to access the shadow map captured by {jit.gl.light} for custom shadow mapping implementations, check out the patch 'lights.shadow.map.texture.maxpat'.
+
+
 
 # Antialiasing
 # Lighting setup
