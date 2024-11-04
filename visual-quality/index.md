@@ -495,10 +495,10 @@ The ***@shadowrange*** attribute determines how much of the scene is visible fro
 ![](./images/visual-quality_049.png)
 
 From left to right: @shadowrange too short, correct @shadowrange, @shadowrange too long.
-When @shadowrange is too small, only objects close to the light can cast shadows. When @shadowrange is too high, all objects in the scene can cast shadows, but the produces shadows lack definition.
+When @shadowrange is too small, only objects close to the light can cast shadows. When @shadowrange is too high, all objects in the scene can cast shadows, but the produced shadows lack definition.
 
 > [!TIP]
-> When setting @shadowrange, start at 0 and increase it slowly. When you see that all objects in the scene are casting shadows, stop. 
+> When setting @shadowrange, start at 0 and increase it slowly. Stop right when all objects in the scene are casting shadows.
 
 # Antialiasing
 # Lighting setup
