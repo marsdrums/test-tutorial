@@ -485,7 +485,7 @@ The @shadowblur attributes controls the transitions from hard to soft shadows, a
 
 ***@shadowquality*** is a param that controls the resolution of the shadow map. As said before, with shadow mapping, the scene is captured from the camera point of view into a texture. @shadowquality sets the overall quality of the shadow map by changing its resolution.
 
-![](./images/visual-quality_048.png)
+![](./images/visual-quality_050.png)
 
 > [!TIP]
 > When setting @shadowquality, start from "hi", and progressively reduce the quality until you start seeing jagged shadow margins. Than, increase the quality by one step. If perfomance isn't an issue, go with "hi" directly.
