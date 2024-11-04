@@ -423,6 +423,19 @@ By loading different environment maps, you can quickly change the illumination o
 > [!NOTE]
 > EXR images, or OpenEXR files, are a type of image format designed specifically for high-quality, high-dynamic-range (HDR) imaging. These images are commonly used in computer graphics and visual effects, including environment mapping, due to their ability to store a vast range of luminance and color data that traditional image formats like JPEG or PNG cannot capture.
 
+Environment maps usually come in two formats: equirectangular and cube maps.
+- An equirectangular environment map is a type of panoramic image that represents a full 360-degree view of an environment, mapped onto a 2D rectangular image. The format resembles a world map where the top and bottom portions correspond to the poles, and the center represents the equator.
+- A cube map is a set of six square images that represent the environment around a point in space, with each image covering one side of a cube (front, back, left, right, top, and bottom). When mapped together, these six images form a seamless 3D environment around a viewer or object.
+
+![](./images/visual-quality_043.png)
+
+Image from "Extending 2D Saliency Models for Head Movement Prediction in 360-degree Images using CNN-based Fusion" by Ibrahim Djemai et al.
+
+The object {jit.gl.environment} can load equirectangular environment maps, but if you have a cube map, you can transform it into an equirectangualar map using the object {jit.gl.cubemap}.
+
+> [!NOTE]
+> Take a look the the {jit.gl.environment} help file to see how to import cube maps into it. If you need to transform an quirectangular environment map into a cube map, check out the "ibl.rect2cube.mrt.jxs" shader.
+
 The object {jit.gl.environment} has a @gamma_correction attribute; like with {jit.gl.pbr}, if you want to manage gamma correction manually, you should disable this attribute. The {jit.gl.environment} object includes an attribute called @reflect_edge, which determines the resolution of the environment map used for reflections. This value should be set as a power of 2.
 
 > [!TIP]
@@ -433,13 +446,16 @@ The object {jit.gl.environment} has a @gamma_correction attribute; like with {ji
 Max is designed to have a "default" lighting setup. If you start from an empty patch and create a 3D object, it looks illuminated, even if there's no {jit.gl.light} in the patch. Behind the scenes, Max applies a white hemispere light comping from above. This is a convinient way to quickly sketch your scene, before worring about lighting setup. Once you instanciate a {jit.gl.light} object, this default light disappears, and gets overwritten by the light(s) you decided to put in the scene. While the removal of the default light is automatic when instanciating a {jit.gl.light} objects, that's not the case when using a {jit.gl.environment}.
 
 > [!WARNING]
-> If you want to use image-based lighting ONLY (without any {jit.gl.light}), you must intanciate a "dummy" light with @diffuse = 0. 0. 0. 1. to override the default hemisphere light.
+> If you want to use image-based lighting ONLY (without any {jit.gl.light}), you must intanciate a "dummy" light with @diffuse 0 0 0 to override the default hemisphere light.
 
 ![](./images/visual-quality_042.png)
 
-This image should be illuminated only by the dark environment, but it doesn't work without putting in the patch a "dummy" black light to override the default hemisphere light.
+This image should be illuminated only by the dark environment, but it doesn't work without the "dummy" black light overriding the default hemisphere light.
 
 # Shadows
+
+
+
 # Antialiasing
 # Lighting setup
 # Give a sense of scale
