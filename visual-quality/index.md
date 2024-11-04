@@ -477,18 +477,16 @@ Shadows are activated from the {jit.gl.light} object by enabling the @shadows at
 
 Shadows are there, but they don't look very good on this scene, and would probably need some tweaking. {jit.gl.light} has some attributes we can modify related to shadows: @shadowblur, @shadowquality, @shadowrange. Let's see what are these attributes referring to:
 
-***@shadowblur*** controls the amount of blurring applied on the rendered shadows. When the light source is very small of very far from the illuminated object, shadows appear sharp, with well-defined edges where the transition between light and shadow is abrupt. This kind of shadows are usually called ***hard shadows***. On the contrary, if the light has a big emitting surface, shadows have blurred, gradual edges, creating a transition zone between light and dark. This transition is called the penumbra, where light is partially blocked but not completely absent. The center of the shadow, where light is fully blocked, is called the umbra. Such blurry shadows are called ***soft shadows***. 
+***@shadowblur*** controls the amount of blurring applied on the rendered shadows. When the light source is very small of very far from the illuminated object, shadows appear sharp, with well-defined edges where the transition between light and shadow is abrupt. This kind of shadows are usually called ***hard shadows***. On the contrary, if the light has a big emitting surface, shadows have blurred, gradual edges, creating a transition zone between light and dark. This transition is called the penumbra, where light is partially blocked but not completely absent. The center of the shadow, where light is fully blocked, is called the umbra. Such blurry shadows are called ***soft shadows***. The @shadowblur attributes controls the transitions from hard to soft shadows, and it helps giving the impression of a large emitting light. It also helps with masking aliasing problems (more on that later).
 
-![](./images/visual-quality_048.png)
-
-The @shadowblur attributes controls the transitions from hard to soft shadows, and it helps giving the impression of a large emitting light. It also helps with masking aliasing problems (more on that later).
+![](./images/visual-quality_051.png)
 
 ***@shadowquality*** is a param that controls the resolution of the shadow map. As said before, with shadow mapping, the scene is captured from the camera point of view into a texture. @shadowquality sets the overall quality of the shadow map by changing its resolution.
 
 ![](./images/visual-quality_050.png)
 
 > [!TIP]
-> When setting @shadowquality, start from "hi", and progressively reduce the quality until you start seeing jagged shadow margins. Than, increase the quality by one step. If perfomance isn't an issue, go with "hi" directly.
+> When setting @shadowquality, start from "hi", and progressively reduce the quality until you start seeing jagged shadow margins. Then, increase the quality by one step. If perfomance isn't an issue, go with "hi" directly.
 
 The ***@shadowrange*** attribute determines how much of the scene is visible from the light's perspective. When rendering the scene from a light source, the light is represented by a virtual camera, which has the same controls as any camera created with {jit.gl.camera}. This includes a far clip parameter to set the extent of the view frustum. The @shadowrange attribute specifies the length of the light-camera frustum. Adjusting this attribute properly is essential to ensure that all objects in the scene are capable of casting shadows.
 
