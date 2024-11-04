@@ -498,6 +498,15 @@ When @shadowrange is too small, only objects close to the light can cast shadows
 > [!TIP]
 > When setting @shadowrange, start at 0 and increase it slowly. Stop right when all objects in the scene are casting shadows.
 
+These are the settings i ended up with:
+
+![](./images/visual-quality_052.png)
+
+I usually like to have shadows with no or little blur when using directional lights, because they simulate light coming from a very distant emitter, which doesn't create regions of penumbra. @shadowrange has been set to tighly comprise all the objects in the shadowmap, and @shadowquality has been set to "hi" because performance wasn't problematic with such a simple scene.
+
+These were the shadow settings of {jit.gl.light}, but there are other shadow-related attributes we can modify: {jit.gl.pbr} and {jit.gl.material} can in fact be used to further tweak the shadow apparence.
+
+
 # Antialiasing
 # Lighting setup
 # Give a sense of scale
