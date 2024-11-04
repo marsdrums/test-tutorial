@@ -536,7 +536,7 @@ Shadow leakage typically happens due to improper depth comparisons or insufficie
 
 At the end of the day, shadow maping always requires some tweaking. It's impossible to find setting that always work, because shadow mapping is very sensible to the scale of the scenes. The only way is to empirically tweak the parameters until they look good. Still, it's important to be aware of the parameters' role to change them with conciousness.
 
-Shadow mapping is a very succesful shadow-rendering technique. As everything in computer graphics, many variations of the original algorithm have been created. To name a few: percentage-close filtering (PCF), variance shadow maps (VSM), multi-resolution shadow maps. For those of you who are into shader programming, i invite you to experiment with different shadow mapping techniques. If you need to access the shadow map captured by {jit.gl.light} for custom shadow mapping implementations, check out the patch 'lights.shadow.map.texture.maxpat'.
+Shadow mapping is a very succesful shadow-rendering technique. As everything in computer graphics, many variations of the original algorithm have been created. To name a few: percentage-close filtering (PCF), variance shadow maps (VSM), cascaded shadow maps (CSM). For those of you who are into shader programming, i invite you to experiment with different shadow mapping techniques. If you need to access the shadow map captured by {jit.gl.light} for custom shadow mapping implementations, check out the patch 'lights.shadow.map.texture.maxpat'.
 
 
 
