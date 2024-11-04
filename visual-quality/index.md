@@ -458,9 +458,13 @@ This image should be illuminated only by the dark environment, but it doesn't wo
 
 In computer graphics, shadows are visual indicators that mimic the effect of objects blocking light. They are crucial for creating realistic 3D environments as they convey the spatial relationships between objects, their positions, and their interactions with light sources. Shadows result from light being obstructed and unable to reach certain surfaces due to intervening objects. In essence, shadows are defined negatively: they represent the absence of light. The rendering equation inherently accounts for shadowing, but, as mentioned, solving it directly is impractical in real-time rendering. Therefore, specific techniques have been developed to identify which surfaces should not be illuminated. Jitter employs a technique known as ***shadow mapping*** for rendering shadows.
 
-Shadow mapping works by identifying which parts of the scene are occluded from the light source's viewpoint, thus indicating where shadows should fall. This method is highly effective and widely used in real-time rendering for applications like video games and simulations due to its versatility. Picture positioning a light source (e.g., {jit.gl.light}) and observing the scene from its vantage point. Surfaces visible from the light’s position receive illumination, while those not directly seen remain in shadow. Shadow maps are produced by rendering the scene from light view position, and reporting the distance of the visible surfaces. 
+Shadow mapping works by identifying which parts of the scene are occluded from the light source's viewpoint, thus indicating where shadows should fall. This method is highly effective and widely used in real-time rendering for applications like video games and simulations due to its versatility. Picture positioning a light source (e.g., {jit.gl.light}) and observing the scene from its vantage point. Surfaces visible from the light’s position receive illumination, while those not directly seen remain in shadow. 
 
+![](./images/visual-quality_045.png)
 
+Shadow maps are created by rendering the scene from the light's point of view and recording the distance to the visible surfaces. To determine if a point visible from the camera should be in shadow, the distance from that point to the light source is calculated. If this distance is greater than the value stored in the shadow map, the point is considered to be in shadow.
+
+![](./images/visual-quality_046.png)
 
 
 # Antialiasing
