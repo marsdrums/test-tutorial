@@ -575,7 +575,7 @@ Left: TAA on; right: TAA off.
 
 ## Mipmapping
 
-Imagine you’re playing a video game, and you’re looking at a wall in the distance. The wall is covered with a brick texture, and when you get closer, you can see the texture in full detail. But when you’re far away, you don’t really need that high level of detail—you just need enough texture to recognize it as a wall. This is where mipmapping comes in. Mipmapping is a clever trick used to make textures look nice from all distances. 
+Imagine you’re playing a video game, and you’re looking at a wall in the distance. The wall is covered with a brick texture, and when you get closer, you can see the texture in full detail. But when you’re far away, you don’t really need that high level of detail—you just need enough texture to recognize it as a wall. This is where mipmapping comes in. Mipmapping is a clever trick used to make textures look nice (alias-free) from all distances. 
 
 When a texture (like a brick wall) is loaded, the computer automatically makes smaller versions of it, called mipmaps. Each mipmap is a scaled-down version of the original texture.
 So, if the original texture is 1024x1024 pixels, mipmaps would be created at 512x512, 256x256, 128x128, and so on, all the way down to a tiny 1x1 pixel version. When you’re far from the wall, the graphics engine will use one of the smaller mipmaps instead of the original high-resolution texture. As you get closer, it switches to larger mipmaps, and when you’re really close, it uses the full-resolution texture. This set of pre-filtered textures can reduce aliasing artifacts appearing on textured surfaces.
