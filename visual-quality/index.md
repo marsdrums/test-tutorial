@@ -573,7 +573,7 @@ In Max, TAA can be applied using the object {jit.gl.pass} @fxname TAA.
 ![](./images/visual-quality_059.png)
 ![](./images/visual-quality_058.png)
 
-Left: TAA off; right: TAA on.
+Left: TAA on; right: TAA off.
 
 ## Mipmapping
 
