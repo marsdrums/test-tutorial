@@ -580,7 +580,7 @@ Imagine you’re playing a video game, and you’re looking at a wall in the dis
 When a texture (like a brick wall) is loaded, the computer automatically makes smaller versions of it, called mipmaps. Each mipmap is a scaled-down version of the original texture.
 So, if the original texture is 1024x1024 pixels, mipmaps would be created at 512x512, 256x256, 128x128, and so on, all the way down to a tiny 1x1 pixel version. When you’re far from the wall, the graphics engine will use one of the smaller mipmaps instead of the original high-resolution texture. As you get closer, it switches to larger mipmaps, and when you’re really close, it uses the full-resolution texture. This set of pre-filtered textures can reduce aliasing artifacts appearing on textured surfaces.
 
-Mipmapping in Max is enabled at texture level: set {jit.gl.texture}'s @mipmap to "bilinear" and disable @rectangle.
+Mipmapping in Max is enabled at texture level: set {jit.gl.texture}'s @mipmap to "bilinear" or "trilinear" and disable @rectangle.
 
 > [!IMPORTANT]
 > {jit.gl.texture}'s @rectangle must be disabled (0) to enable mipmappnig as non-rectangular textures are required for creating the mip levels.
@@ -597,7 +597,7 @@ These are the Anti-Aliasing methods currently available in Max.
 
 ![](./images/visual-quality_062.png)
 
-Left: no Anti-Aliasing and no mipmapping. Center: mipmapping only. Right: mipmapping + Anti-Aliasing (TAA).
+Left: no Anti-Aliasing and no mipmapping. Center: mipmapping only (trilinear). Right: mipmapping + Anti-Aliasing (TAA).
 
 
 # Lighting setup
