@@ -565,6 +565,15 @@ In Max, FSAA can be enabled by the attribute @fsaa of {jit.world}, {jit.pworld},
 Temporal Anti-Aliasing (TAA) is an advanced anti-aliasing technique that reduces aliasing artifacts by using information from previous frames in addition to the current frame to produce aliasing-free images. TAA takes samples from multiple frames over time (hence "temporal") and combines them. Unlike techniques that only use information from a single frame, TAA leverages data from past and current frames to determine the color of each pixel in the current frame.
 TAA applies a sub-pixel jitter or shift to the camera's position between frames. This shift allows the rendering engine to gather more unique sub-pixel data over time. The sub-pixel offsets are small and imperceptible individually, but when combined over several frames, they result in higher-quality sampling and reduce aliasing. The samples from the current frame and previous frames are blended together. The algorithm accumulates and averages these samples to compute the final color of each pixel. A history buffer is maintained to store information from past frames, allowing the TAA algorithm to look back over time and use this data in the blending process. TAA incorporates motion vectors to account for object and camera movement. These vectors help track how each pixel has moved from frame to frame, ensuring that the accumulation of data aligns correctly and doesn't cause ghosting or blurring of moving objects.
 
+In Max, TAA can be applied using the object {jit.gl.pass} @fxname TAA.
+
+> [!IMPORTANT]
+> TAA must placed after tonemapping and before gamma correction.
+
+![](./images/visual-quality_059.png)
+![](./images/visual-quality_058.png)
+
+Left: TAA off; right: TAA on.
 
 ## Mipmapping
 
