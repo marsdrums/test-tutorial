@@ -595,6 +595,10 @@ These are the Anti-Aliasing methods currently available in Max.
 > [!TIP]
 > Anti-Aliasing and mipmapping can cohexist. I in fact suggest using always both a Anti-Aliasing method and mipmapping.
 
+![](./images/visual-quality_062.png)
+
+Left: no Anti-Aliasing and no mipmapping. Center: mipmapping only. Right: mipmapping + Anti-Aliasing (TAA).
+
 
 # Lighting setup
 # Give a sense of scale
