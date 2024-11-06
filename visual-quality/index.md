@@ -95,7 +95,7 @@ sRGB = linRGB^{1/2.2}
 $$
 
 $$
-$linRGB = sRGB^{2.2}
+linRGB = sRGB^{2.2}
 $$
 
 These gamma correction curves are very popular and widely used in computer graphics applications because they're simpler than the original piece-wise function, and the difference is visually negligible.
@@ -274,17 +274,17 @@ The integral returns the sum of the infinite light contributions from all direct
 - The amount of incoming radiance from direction $\omega_i$: $L_i(\mathbf{x}, \omega_i)$
 - The cosine of the angle $\theta_i$ formed by the incoming radiance direction $\omega_i$ and the normal vector of $\mathbf{x}$: $\cos(\theta_i)$
 
-So, we have it! We have the "magic" formula to compute how to color our screens' pixels precisely. There's just a little problem...computers don't like to perform an infinite number of operations! Although elegant and relatively simple, the rendering equation contains an integral, which is an endless sum of "things." If we have to implement such an uncomputable task, we would need infinite time or infinite memory available. But there is still something we can try to do. What if we don't look for the exact result of the rendering equation but rather approximate it? Welcome the ***Monte Carlo*** method! The Monte Carlo method refers to a set of algorithms used to solve problems through statistical sampling, often in scenarios where deterministic algorithms would be too complex or inefficient. Think of trying to estimate how crowded a park is. Instead of counting every person, you take random snapshots of different spots and times. By averaging the number of people in these snapshots, you can guess how busy the park is overall. The Monte Carlo method works the same way, just with light rays instead of people. 
+So, we have it! We have the "magic" formula to compute how to color our screens' pixels precisely. There's just a little problem...computers don't like to perform an infinite number of operations! Although elegant and relatively simple, the rendering equation contains an integral, which is an endless sum of "things." If we have to implement such an uncomputable task, we would need infinite time or infinite memory available. But there is still something we can try to do. What if we don't look for the exact result of the rendering equation but rather approximate it? Welcome the ***Monte Carlo*** method! The Monte Carlo method refers to a set of algorithms used to solve problems through statistical sampling, often in scenarios where deterministic algorithms would be too complex or inefficient. Think of trying to estimate how crowded a park is. Instead of counting every person, you take random snapshots of different spots and times. By averaging the number of people in these snapshots, you can guess how busy the park is overall. The Monte Carlo method works the same way for solving the rendering equation, just with light rays instead of people. 
 
-We can then reformulate the rendering equation so that instead of computing the light contributions coming from the infinite set of possible light directions, it computes a sum of the light contributions coming from a finite subset of (random) directions. 
+We can then reformulate the rendering equation so that instead of computing the light contributions coming from the infinite set of possible light directions, it computes a sum of the light contributions coming from a finite subset of (random) directions and averages it. 
 
 $$
 L_o(\mathbf{x}, \omega_o) \approx L_e(\mathbf{x}, \omega_o) + \frac{1}{N} \sum_{i=1}^N f_s(\mathbf{x}, \omega_i, \omega_o) \cdot L_i(\mathbf{x}, \omega_i) \cdot \cos(\theta_i)
 $$
 
-Accepting an approximated result makes the rendering equation computable; if we consider enough incoming light directions, we can get close to the real answer. The more directions we evaluate, the closer we get to the result.
+Accepting an approximated result makes the rendering equation computable; if we consider enough incoming light directions, we can get close to the real answer. The more directions we evaluate, the closer we get to the result. For $N = \infty$, the solution to the discrete formulation of the rendering equation converges with the true solution.
 
-There's a rendering technique called ***Path Tracing*** which approximates the result of the rendering equation using the Monte Carlo approach. Such a technique is used to synthesize photo-realistic images:
+***Path tracing*** is a rendering technique that uses the Monte Carlo method to approximate the solution of the rendering equation. This technique is commonly employed in movies and architectural visualization to create highly realistic images.
 
 ![](./images/visual-quality_023.jpg)
 
