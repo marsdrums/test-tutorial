@@ -550,15 +550,13 @@ To minimize aliasing, a variety of different techniques have been developed. Suc
 
 ![](./images/visual-quality_057.png)
 
-In Jitter there are 4 methods we can use to reduce aliasing issues.
+In Jitter there are 3 methods we can use to reduce aliasing issues.
 
 ## Full Scene Anti-Aliasing (FSAA)
 
 Full Scene Anti-Aliasing is the simplest, but the most effective form of Anti-Aliasing. FSAA solves aliasing issues by rendering the entire scene at a higher resolution than the display resolution. For example, if the target display resolution is 1080p (1920x1080 pixels), FSAA might render the scene at 2x, 4x, or even higher multiples of that resolution (e.g., 3840x2160 or 7680x4320). Once the high-resolution scene is rendered, FSAA averages the colors of the sub-pixels to compute the final color of each displayed pixel. This averaging process smooths out color transitions between adjacent pixels, reducing the stair-step effect seen along diagonal and curved edges. The rendered high-resolution image is then downsampled (reduced) to the original display resolution. The result is a smoother final image that preserves the details while minimizing aliasing effects.
 
 In Max, FSAA can be enabled by the attribute @fsaa of {jit.world}, {jit.pworld}, and {jit.gl.node}. @fsaa enables a 2x supersampling.
-
-## Fast Approximate Anti-Aliasing (FXAA)
 
 ## Temporal Anti-Aliasing (TAA)
 
@@ -591,6 +589,11 @@ Mipmapping in Max is enabled at texture level: set {jit.gl.texture}'s @mipmap to
 ![](./images/visual-quality_060.png)
 
 Left: Mipmapping enabled; right: Mipmapping disabled.
+
+These are the Anti-Aliasing methods currently available in Max. 
+
+> [!TIP]
+> Anti-Aliasing and mipmapping can cohexist. I in fact suggest using always both a Anti-Aliasing method and mipmapping.
 
 
 # Lighting setup
