@@ -595,11 +595,17 @@ These are the Anti-Aliasing methods currently available in Max.
 > [!TIP]
 > Anti-Aliasing and mipmapping can cohexist. I suggest always using both an Anti-Aliasing method and mipmapping.
 ![](./images/visual-quality_062.png)
-Left: no Anti-Aliasing and no mipmapping. Center: mipmapping only (trilinear). Right: mipmapping + Anti-Aliasing (TAA).
+Left: no Anti-Aliasing and no mipmapping. Center: mipmapping only (trilinear). Right: mipmapping (trilinear) + Anti-Aliasing (TAA).
 
+# Give a sense of scale
+
+Which of the two ducks looks bigger?
+
+![](./images/visual-quality_063.png)
+
+They are the same size.
 
 # Lighting setup
-# Give a sense of scale
 # Driving viewer's attention
 # Color harmony
 # Image composition
