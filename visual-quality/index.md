@@ -1,12 +1,12 @@
 ---
-title: Drawing contours
+title: Polish your pixels
 kind: Tutorial
 category: graphics
 license: MIT
 tags:
   - jitter
   - geometry
-description: "Polish your pixels: a guide to superior renders in Jitter"
+description: "A guide to superior renders in Jitter"
 author:
   name: Cycling '74
 contributors:
@@ -597,7 +597,7 @@ These are the Anti-Aliasing methods currently available in Max.
 ![](./images/visual-quality_062.png)
 Left: no Anti-Aliasing and no mipmapping. Center: mipmapping only (trilinear). Right: mipmapping (trilinear) + Anti-Aliasing (TAA).
 
-# Give a sense of scale
+# How to give a sense of scale
 
 Which of the two ducks is bigger?
 
