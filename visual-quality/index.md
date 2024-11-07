@@ -599,11 +599,15 @@ Left: no Anti-Aliasing and no mipmapping. Center: mipmapping only (trilinear). R
 
 # Give a sense of scale
 
-Which of the two ducks looks bigger?
+Which of the two ducks is bigger?
 
 ![](./images/visual-quality_063.png)
 
-They are the same size.
+They are the same size, but some visual clues makes us percieve the duck on the right to be way bigger than the duck on the left. We, as humans, are used to estimate the size of objects and the distance between them. We do it unconsciously using a series of visual clues. I'd like to list some of them and explore what can we do in Jitter to give a better sense of object's scale.
+
+## Relative size
+
+That's an easy one: we estimate the size and the distance of objects by comparing them with other objects. In the image above 
 
 # Lighting setup
 # Driving viewer's attention
