@@ -603,11 +603,14 @@ Which of the two ducks is bigger?
 
 ![](./images/visual-quality_063.png)
 
-They are the same size, but some visual clues makes us percieve the duck on the right to be way bigger than the duck on the left. We, as humans, are used to estimate the size of objects and the distance between them. We do it unconsciously using a series of visual clues. I'd like to list some of them and explore what can we do in Jitter to give a better sense of object's scale.
+They are the same size, but some visual clues makes us percieve the duck on the right to be way bigger than the duck on the left. We, as humans, are used to estimate the size of objects and the distance between them. Humans estimate the size of objects through a combination of visual cues, learned experience, and context. Our brains use information from our eyes, as well as from our knowledge of the world, to interpret and understand the relative size and distance of objects. I'd like to list some of visual clues that contribute to the size perception and explore what can we recreate them in Jitter to give a better sense of object's scale.
 
-## Relative size
+## Familiarity and Context
 
-That's an easy one: we estimate the size and the distance of objects by comparing them with other objects. In the image above 
+Previous Knowledge: When we already know the typical size of an object, like a car or a person, we can estimate its size based on that knowledge. If we see something that looks like a car but appears unusually small, we might assume it’s further away.
+Relative Size in a Scene: The objects around something also give clues. For instance, if we see a person standing next to a building, we understand the scale of each object based on the scene as a whole.
+
+We can use this to our advantage, for example inserting in the scene some familiar objects of well known size.
 
 # Lighting setup
 # Driving viewer's attention
