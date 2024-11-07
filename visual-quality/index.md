@@ -5,7 +5,6 @@ category: graphics
 license: MIT
 tags:
   - jitter
-  - geometry
 description: "A guide to superior renders in Jitter"
 author:
   name: Cycling '74
