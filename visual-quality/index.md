@@ -536,7 +536,7 @@ Shadow leakage typically happens due to improper depth comparisons or insufficie
 > [!TIP]
 > When setting @shadow_eps, start at 0 and increase it slowly. Stop right when the artifacts disappear.
 ![](./images/visual-quality_064.png)
-Left: @shadow_eps = 0, leads to shadow acne; Center: @shadow_eps 0.004, correct settings; Right: @shadow_eps = 0.2 (the default), leads to light leaking through the wall on the left, and the shadows below the poles on th balcony look detached from the poles.
+Left: @shadow_eps = 0, leads to shadow acne; Center: @shadow_eps 0.004, correct settings for this scene; Right: @shadow_eps = 0.2 (the default), leads to light leaking through the wall on the left, and the shadows below the poles on the balcony look detached from the poles.
 
 At the end of the day, shadow maping always requires some tweaking. It's impossible to find settings that always work, because shadow mapping is very sensible to the scene's scale. The only way is to get the desired effect is to empirically tweak the parameters until shadows look good. Still, it's important to be aware of the parameters' role to modify them with conciousness.
 
