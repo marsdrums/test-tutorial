@@ -12,24 +12,11 @@ contributors:
   - Matteo Marson
 ---
 
-
----
-title: test tabella
-kind: Tutorial
-category: graphics
-license: MIT
-tags:
-  - jitter
-description: "A guide to superior renders in Jitter"
-author:
-  name: Cycling '74
-contributors:
-  - Matteo Marson
----
-
 # Polish your pixels: a guide to superior renders in Jitter
 
 Creating visually stunning renders is both an art and a science, and in Jitter, achieving top-tier results requires a blend of technical expertise and creative finesse. In the world of digital rendering, attention to detail can make all the difference between a decent image and a breathtaking one. This guide is designed to help you bridge that gap and elevate your visual output. In the following paragraphs we will explore a range of strategies, tools, and techniques to fine-tune every aspect of your render, from realistic lighting and advanced material setups to subtle post-processing enhancements. Whether you're a beginner looking to improve or an experienced user aiming to perfect your craft, this article will equip you with the insights needed to achieve high-quality renders in Jitter.
+
+---
 
 # Color bit depth
 
@@ -73,6 +60,8 @@ Things are different when we use {jit.gl.pass}; this object is used to apply pos
 
 > [!IMPORTANT]  
 > If multiple {jit.gl.pass} are chained and they use different @quality settings, the lowest @quality is applied to ALL the chained {jit.gl.pass} FXs. My reccomendation is to set the quality to "hi" whenever possible, and make sure all the {jit.gl.pass} objects in the same FX chain share the same quality settings.
+
+---
 
 # Color spaces and gamma correction
 
@@ -160,6 +149,8 @@ Theoretically, one should convert the bricks texture from sRGB to linear RGB bef
 
 ![](./images/visual-quality_011.png)
 
+---
+
 # Light intensity and tonemapping
 
 Let's say we want to create an outdoor scene illuminated by a bright summer sun. Let's set it up:
@@ -213,6 +204,8 @@ What if we don't want to write the tonemapping and the gamma correction function
 ![](./images/visual-quality_017.png)
 
 It implements both color correction curves, and you can choose between two gamma correction functions (approximate, and accurate) and among four tonemapping curves (Reinhard, Renhard-Jodie, ACES, and Uncharted2). I invite you to experiment with these functions and find the one that looks better for your scene.
+
+---
 
 # Global illumination
 
@@ -419,6 +412,8 @@ The inner mechanics of the ReSTIR algorithm are complex, but the "gi" pass FX is
 
 These are the built-in solutions for computing indirect lighting and global illumination in Max 9. However, there are other noteworthy algorithms and strategies for global illumination, such as voxel cone tracing (VCT), surfels, virtual point lights (VPL), and instant radiosity, each with its own set of pros and cons. So, which method is the best? It depends on the situation—use what works best for your needs; and if the built-in global illumination options in Max 9 don’t meet your requirements, I encourage you to implement your own using custom shaders (All the effects discussed in this article were originally prototyped with Max objects).
 
+---
+
 # Image-based lighting
 
 ![](./images/visual-quality_039.png)
@@ -467,6 +462,8 @@ Max comes with a built-in "default" lighting setup. When you create a 3D object 
 ![](./images/visual-quality_042.png)
 
 This image should be illuminated only by the dark environment, but it doesn't work without the "dummy" black light overriding the default hemisphere light.
+
+---
 
 # Shadows
 
@@ -556,6 +553,8 @@ At the end of the day, shadow maping always requires some tweaking. It's impossi
 
 As everything in computer graphics, many variations of the original algorithm have been created. To name a few: percentage-close filtering (PCF), variance shadow maps (VSM), cascaded shadow maps (CSM). For those of you who are into shader programming, i invite you to experiment with different shadow mapping techniques. If you need to access the shadow map captured by {jit.gl.light} for custom shadow mapping implementations, check out the patch 'lights.shadow.map.texture.maxpat'.
 
+---
+
 # Anti-aliasing
 
 Imagine looking at a digital image where the edges of objects aren’t smooth but appear jagged, like tiny staircases. This is a common problem called aliasing, where visuals don’t look as smooth or realistic as we’d like because the computer struggles to represent fine details at a limited resolution. Let's break down what aliasing means, why it happens, and how to fix it in Jitter.
@@ -613,6 +612,8 @@ These are the Anti-Aliasing methods currently available in Max.
 ![](./images/visual-quality_062.png)
 Left: no Anti-Aliasing and no mipmapping. Center: mipmapping only (trilinear). Right: mipmapping (trilinear) + Anti-Aliasing (TAA).
 
+---
+
 # How to give a sense of scale
 
 Which of the two ducks is bigger?
@@ -628,7 +629,19 @@ Relative Size in a Scene: The objects around something also give clues. For inst
 
 We can use this to our advantage, for example inserting in the scene some familiar objects of well known size.
 
+---
+
 # Lighting setup
+
+---
+
 # Driving viewer's attention
+
+---
+
 # Color harmony
+
+---
+
 # Image composition
+
