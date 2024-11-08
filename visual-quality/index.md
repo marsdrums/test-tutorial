@@ -642,16 +642,16 @@ Atmospheric scattering also impacts our perception of distance and size. Because
 
 According to Beer’s Law, light intensity diminishes exponentially with distance as it travels through a medium (like the atmosphere) filled with particles that scatter or absorb it. Essentially, the farther the light travels, the more it weakens, because particles along the way absorb or scatter part of it.
 
-\[
+$$
 I = I_0 \cdot e^{-\alpha x}
-\]
+$$
 
 where:
 
-- \( I \) is the intensity of light after it has traveled a certain distance \( x \) through the medium.
-- \( I_0 \) is the initial intensity of the light before it enters the medium.
-- \( \alpha \) is the attenuation coefficient, which depends on the properties of the medium (such as concentration and the specific absorption/scattering properties of the particles within it).
-- \( x \) is the path length, or distance the light travels through the medium.
+- $I$ is the intensity of light after it has traveled a certain distance $x$ through the medium.
+- $I_0$ is the initial intensity of the light before it enters the medium.
+- $\alpha$ is the attenuation coefficient, which depends on the properties of the medium (such as concentration and the specific absorption/scattering properties of the particles within it).
+- $x$ is the path length, or distance the light travels through the medium.
 
 
 ## Virtual camera settings
