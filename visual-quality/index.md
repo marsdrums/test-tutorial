@@ -689,6 +689,8 @@ Im Max, you can create a depth of field effect using {jit.gl.pass} @fxname "dof-
 
 ![](./images/visual-quality_068.png)
 
+We are so used to look at the world through cameras, that we can grasp visual clues about distance in scenes seen trough camera lenses.
+
 
 
 ---
