@@ -693,7 +693,7 @@ Im Max, you can create a depth of field effect using {jit.gl.pass} @fxname "dof-
 
 ---
 
-# How to improve objects motion
+# How to improve objects' motion
 
 ---
 
