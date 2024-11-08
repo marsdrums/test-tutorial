@@ -656,12 +656,11 @@ where:
 - $\alpha$ is the attenuation coefficient, which depends on the properties of the medium (such as concentration and the specific absorption/scattering properties of the particles within it).
 - $x$ is the path length, or distance the light travels through the medium.
 
-In Max, atmospheric scattering can me added to the scene using a {jit.gl.pass} FX named "atmospheric":
+In Max, atmospheric scattering can be added to a scene using the {jit.gl.pass} FX named "atmospheric":
 
 ![](./images/visual-quality_066.png)
 
 In the effect we can find as control parameters the factors of the Beer's law: @density multiplies the distance of the objects on srcreen, and @color specifies the rate of light absorption per color channel. @density and @color togheter consitute the $\alpha$ factor. The pass also contains settings to create a ground fog effect.
-
 
 ## Virtual camera settings
 
