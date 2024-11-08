@@ -627,18 +627,21 @@ They are the same size, but some visual clues makes us percieve the duck on the 
 This is an easy one: When we already know the typical size of an object, like a car or a person, we can estimate its size based on that knowledge. If we see something that looks like a car but appears unusually small, we might assume it’s further away.
 In a scene, the objects around something also give clues. For instance, if we see a person standing next to a building, we understand the scale of each object based on the scene as a whole. We can use this to our advantage, for example inserting in the scene some familiar objects of well known size.
 
-## Point of view
-
-Yet another easy one: we are used to experience the world around us looking from a constant height from the ground. Small objects are usually observed from above, big ones from below.
+On the same page: we are used to experience the world around us looking from a constant height from the ground. Small objects are usually observed from above, big ones from below.
 
 ## Atmospheric scattering
-
 
 Atmospheric scattering is a phenomenon that occurs when sunlight or other light waves hit particles in the atmosphere, like dust, water droplets, and gas molecules, causing the light to scatter in different directions. This scattering effect influences how we see distant objects and is one of the main reasons why the sky looks blue during the day and sunsets look reddish.
 
 Here's how it works: when we look at something far away—like a mountain range or a city skyline—the light bouncing off those distant objects travels through more of the atmosphere to reach our eyes. As it does, particles scatter the shorter blue and violet wavelengths, making distant objects appear hazy, less distinct, and sometimes even bluish in color. This haze is what makes distant objects seem "faded" compared to those nearby.
 
 Atmospheric scattering also impacts our perception of distance and size. Because objects that are further away look blurrier and less vibrant, our brains interpret them as being far off, which helps us judge distance. Similarly, this effect can make faraway objects look smaller than they really are because they lose clarity and detail as more of their light scatters. This natural "distance blur" adds depth to what we see and plays a big role in creating a sense of scale in outdoor landscapes.
+
+Take a look at the following image:
+
+![](./images/visual-quality_065.png)
+
+On the left, there's a scene rendered normally; on the right, atmospheric scattering was added. Look at how it's easier to perceive objects distance and how immediately our brain thought: "those donuts must be huge"!
 
 According to Beer’s Law, light intensity diminishes exponentially with distance as it travels through a medium (like the atmosphere) filled with particles that scatter or absorb it. Essentially, the farther the light travels, the more it weakens, because particles along the way absorb or scatter part of it.
 
