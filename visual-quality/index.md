@@ -614,7 +614,7 @@ Left: no Anti-Aliasing and no mipmapping. Center: mipmapping only (trilinear). R
 
 ---
 
-# How to give a sense of scale
+# How to give a sense of scale and distance
 
 Which of the two ducks is bigger?
 
@@ -685,7 +685,9 @@ High camera angles create a "bird's-eye view" effect, making objects appear smal
 Depth of field (DOF) determines how much of the scene is in focus. A shallow depth of field (where only a small part of the scene is sharply in focus) draws attention to a specific area, often creating a strong sense of foreground and background separation.
 A shallow depth of field can make objects outside the focal area look blurrier, enhancing the perception of depth and making the in-focus subject appear isolated or more distant from the rest of the scene. A deep depth of field, where everything is in focus, can flatten the scene slightly, as all objects appear equally sharp regardless of distance.
 
-Im Max, you can create a depth of field effect using {jit.gl.pass} @fxname "dof-hd". This effects implements
+Im Max, you can create a depth of field effect using {jit.gl.pass} @fxname "dof-hq". This effects replicates the behavior of a real camera.
+
+![](./images/visual-quality_068.png)
 
 
 
