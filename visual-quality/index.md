@@ -689,13 +689,13 @@ Im Max, you can create a depth of field effect using {jit.gl.pass} @fxname "dof-
 
 ![](./images/visual-quality_068.png)
 
-Here's a list some of the fundamental parameters:
+These are the two fundamental parameters:
 
 - @lens_focal_length: The focal length of a camera is a fundamental optical property that defines how zoomed-in or zoomed-out an image appears. It’s typically measured in millimeters (mm) and describes the distance between the camera lens and its sensor or film, when the lens is focused on a subject at infinity. In the contexted of DOF, the focal length affects the amount of depth blur; Shorter focal lengths tend to have a larger depth of field, keeping more of the scene in focus from front to back, which is useful for capturing detailed landscapes. Longer focal lengths have a shallower depth of field, especially at wide apertures, which isolates subjects by keeping them sharp while blurring the background—ideal for portrait photography.
 
 ![](./images/visual-quality_069.png)
 
-- @lens_focal_distance: Focal distance is the distance between the camera's lens and the point in the scene where objects appear sharp and in focus. This is different from focal length, which refers to the optical property of the lens itself.
+- @lens_focal_distance: Focal distance is the distance between the camera's lens and the point in the scene where objects appear sharp and in focus. This is different from focal length, which refers to the optical property of the lens itself. Use this attribute to decide which part of the scene must stick out and catch viewer's attention.
 
 ![](./images/visual-quality_070.png)
 
