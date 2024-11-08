@@ -656,6 +656,12 @@ where:
 - $\alpha$ is the attenuation coefficient, which depends on the properties of the medium (such as concentration and the specific absorption/scattering properties of the particles within it).
 - $x$ is the path length, or distance the light travels through the medium.
 
+In Max, atmospheric scattering can me added to the scene using a {jit.gl.pass} FX named "atmospheric":
+
+![](./images/visual-quality_066.png)
+
+In the effect we can find as control parameters the factors , @color and @density.
+
 
 ## Virtual camera settings
 
