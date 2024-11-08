@@ -660,10 +660,34 @@ In Max, atmospheric scattering can me added to the scene using a {jit.gl.pass} F
 
 ![](./images/visual-quality_066.png)
 
-In the effect we can find as control parameters the factors , @color and @density.
+In the effect we can find as control parameters the factors of the Beer's law: @density multiplies the distance of the objects on srcreen, and @color specifies the rate of light absorption per color channel. @density and @color togheter consitute the $\alpha$ factor. The pass also contains settings to create a ground fog effect.
 
 
 ## Virtual camera settings
+
+The virtual camera settings significantly impact how we perceive the distance, size, and depth of objects in a scene. Just like a real camera, virtual camera settings such as field of view (FOV), focal length, and camera position influence how objects appear in terms of size and distance. Here’s a breakdown of the main settings and how they affect perception:
+
+### Field of View (FOV)
+
+Field of view represents the extent of the scene that the camera can "see" and is typically measured in degrees. It’s essentially the camera's angle of view. A wide field of view (e.g., above 60°) creates a more dramatic sense of depth but can distort objects at the edges, making close objects appear larger and distant objects smaller. This can exaggerate the sense of distance and make the scene feel expansive. A narrow field of view (e.g., below 30°) does the opposite, compressing the perceived space and making objects seem closer together, often giving a "zoomed-in" effect. In Max, you can set FOV using the @camera_angle attribute of {jit.gl.camera}.
+
+![](./images/visual-quality_067.png)
+
+### Camera Position and Orientation
+
+This refers to where the virtual camera is placed within the scene and the angle at which it points.
+Camera height, distance from objects, and the viewing angle can greatly influence perceived size and distance. For example:
+Low camera angles make objects appear larger and more imposing, especially when looking up at them.
+High camera angles create a "bird's-eye view" effect, making objects appear smaller and sometimes less significant.
+
+### Depth of Field (DOF)
+
+Depth of field (DOF) determines how much of the scene is in focus. A shallow depth of field (where only a small part of the scene is sharply in focus) draws attention to a specific area, often creating a strong sense of foreground and background separation.
+A shallow depth of field can make objects outside the focal area look blurrier, enhancing the perception of depth and making the in-focus subject appear isolated or more distant from the rest of the scene. A deep depth of field, where everything is in focus, can flatten the scene slightly, as all objects appear equally sharp regardless of distance.
+
+Im Max, you can create a depth of field effect using {jit.gl.pass} @fxname "dof-hd". This effects implements
+
+
 
 ---
 
