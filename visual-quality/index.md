@@ -698,6 +698,10 @@ The "dof-hq" pass is controlled by many parameters, but the main two are:
 
 ![](./images/visual-quality_070.png)
 
+> [!TIP]
+> I suggest activating the attribute @show_in_focus to precisely set "blur-hq" params. The red area shows which part of the scene is in focus. 
+![](./images/visual-quality_071.png)
+
 ---
 
 # How to enhance object movement
