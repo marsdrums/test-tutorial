@@ -713,10 +713,6 @@ The "dof-hq" pass is controlled by many parameters, but the main two are:
 
 ---
 
-# Driving viewer's attention
-
----
-
 # Color harmony
 
 ---
