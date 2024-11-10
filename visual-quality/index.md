@@ -773,31 +773,30 @@ To summarize:
 - update velocity: $\vec{v}(t + \Delta t) = \vec{v}(t) + \vec{a} \cdot \Delta t$
 - update position: $\vec{x}(t + \Delta t) = \vec{x}(t) + \vec{v}(t + \Delta t) \cdot \Delta t$
 
-These steps allow you to iteratively calculate the object's new position and velocity at each time step based on the applied force in the discrete time domain.
+These steps allow you to iteratively compute an object’s position and velocity at each time step, based on the applied force in the discrete time domain.
 
-If you apply forces on one or multiple objects like this, movement is an emergent property, and, since its computation is based on mimicking a physical behavior, the motion will account for acceleration and deceleration.
+When forces are applied to one or more objects in this way, movement becomes an emergent property, naturally incorporating acceleration and deceleration as it simulates physical behavior.
 
-A typical scenario where such an approach to animation is valuable are particle systems. In particle systems, a corpus of $N$ body (with mass) is subjected to one or multiple forces. The video below shows a simple particle system based on physically-plausible attractors.
+This approach to animation is especially useful in particle systems. In these systems, a group of $N$ bodies (each with mass) is influenced by one or more forces. The video below demonstrates a simple particle system driven by physically-plausible attractors.
 
 ![](./images/visual-quality_075.gif)
 
-
-While this way of defining motion delivers organic and plausible results, it's not always feasible or convenient: movement is an emergent property of a "system of rules", and as such, we don't have direct control over the position of the objects at each frame. If we need such a kind of control, we have to figure out other ways to control objects movement.
+Although this approach to defining motion produces organic and realistic results, it’s not always practical or convenient. Movement becomes an emergent property of a "system of rules," which means we don’t have direct control over the objects' positions in each frame. If precise control over position is required, we need to explore other methods for managing object movement.
 
 ### Bend motion in the temporal domain
 
 To have a better understanding of the problem, let's observe again what's wrong with the yellow square's momevent:
 
-The square bounces back and forth without ever changing speed. To create such a movement, there must be an infinite acceleration, which can be caused by a null mass or by and infinitely strong force. This kind of movement is called ***linear motion***, and that's want we're trying to stay away from.
+The square moves back and forth without any change in speed. For this kind of movement to happen, it would require infinite acceleration, which could result from either a zero mass or an infinitely strong force. This type of movement is known as ***linear motion***, and it’s precisely what we’re aiming to avoid.
 
 > [!NOTE]
 > Linear motion can be desiderable if we need to show a "robotic"-like or "digital"-like movement, or if you want to describe the movement of a body with marginal mass (e.g., a mosquito).
 
-Let's say we want to move a body from position $0$ to position $1$ in one second of time. Plotting the linear motion in a graph with time and position on the axis, this is what we get:
+Let's say we want to move a body from position $0$ to position $1$ in one second of time. Plotting its linear motion in a graph with time and position on the axis, this is what we get:
 
 ![](./images/visual-quality_076.png)
 
-The slope of this line segment represents speed. As you can see the body leaves position $0$ at time $0$, continues traveling, and reaches position $1$ at time $1$ without ever changing speed. A natural-like movement requires having an acceleration and a deceleration phase. Starting at speed = 0, the body must accelerate, then decelerate and stop at position $1$ with speed = 0 again. To say that properly: the derivative to the curve must be 0 at position $0$ and at position $1$.
+The slope of this line segment represents speed. Here, the object starts at position 0 at time 0, travels steadily, and reaches position 1 at time 1 without any change in speed. However, for a more natural movement, there should be phases of both acceleration and deceleration. Beginning with speed = 0, the object should accelerate, then decelerate, and finally come to a stop at position 1, with speed = 0 once more. In technical terms, the derivative of the position curve should be 0 at both position 0 and position 1.
 
 ![](./images/visual-quality_077.png)
 
@@ -807,7 +806,7 @@ $$
 y = -2x^3 + 3x^2
 $$
 
-which happens to be the function plotted in the graph above. In the codomain [0; 1], this function exhibits the curves we are after. 
+which happens to be the function plotted in the graph above. In the codomain [0; 1], this function exhibits the curve we are after. 
 
 ### Filter motion in the freqeuncy domain
 
