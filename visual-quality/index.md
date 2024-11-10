@@ -729,11 +729,53 @@ Every object in nature has something we call mass—essentially, the “amount o
 
 When an object with mass moves from a starting to an ending position, it naturally undergoes ***acceleration*** (speeding up) and ***deceleration*** (slowing down) due to the forces needed to start and stop motion.
 
-Imagine pushing a car: it doesn’t reach full speed instantly but accelerates gradually, as its mass resists sudden changes in motion—a property known as inertia. Similarly, when you want to stop, the car doesn’t halt right away; it decelerates gradually, needing a counterforce (like braking or friction) to slow it down. This process reflects how mass resists both starting and stopping motion, requiring force to change its speed.
+Imagine pushing a car: it doesn’t reach full speed instantly but accelerates gradually, as its mass resists sudden changes in motion (because of inertia). Similarly, when you want to stop, the car doesn’t halt right away; it decelerates gradually, needing a counterforce (like braking or friction) to slow it down. This process reflects how mass resists both starting and stopping motion, requiring force to change its speed.
 
 How can we inject an acceleration and a deceleration phase to the movement of objects? We have three ways to do it:
 
 ### Physics-based motion
+
+In specific scenarios, it's possible to describe objects' motion through the physical laws themselves. Imagine you have an object, with its own mass, and there's a force actracting it. Knowing the force strenght and direction, and the object's mass, you can define movement as a biproduct of the physical interaction.
+
+In a discrete time domain, you can describe the movement of an object with mass $m$ subjected to a force $vec{F}$ using Newton’s Second Law of Motion:
+
+$$
+\vec{F} = m \cdot \vec{a}
+$$
+
+where $\vec{a}$ is the object's acceleration. To find the object's position and velocity over time, break this down into discrete time steps $\Delta t$ and use the following equations.
+
+- Calculate Acceleration
+Given the force $\vec{F}$, find the acceleration $\vec{a}$ of the object as:
+
+$$
+\vec{a} = \frac{\vec{F}}{m}
+$$
+
+- Update Velocity
+If you know the object’s velocity at time $t$, denoted $\vec{v}(t)$, update its velocity at the next time step $t + \Delta t$ as:
+
+$$
+\vec{v}(t + \Delta t) = \vec{v}(t) + \vec{a} \cdot \Delta t
+$$
+
+where $\Delta t$ is the time interval between steps.
+
+- Update Position
+To update the object’s position $\vec{x}(t)$, use the updated velocity:
+
+$$
+\vec{x}(t + \Delta t) = \vec{x}(t) + \vec{v}(t + \Delta t) \cdot \Delta t
+$$
+
+To summarize:
+- calculate Acceleration: $\vec{a} = \frac{\vec{F}}{m}$
+- update velocity: $\vec{v}(t + \Delta t) = \vec{v}(t) + \vec{a} \cdot \Delta t$
+- update position: $\vec{x}(t + \Delta t) = \vec{x}(t) + \vec{v}(t + \Delta t) \cdot \Delta t$
+
+These steps allow you to iteratively calculate the object's new position and velocity at each time step based on the applied force in the discrete time domain.
+
+If you apply forces to one or multiple objects like this, movement is an emergent property, and, as such, since its computation is based on a physical behavior, the motion will account for acceleration and deceleration.
 
 ### Bend motion in the temporal domain
 
