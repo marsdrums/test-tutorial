@@ -150,9 +150,9 @@ Theoretically, one should convert the bricks texture from sRGB to linear RGB bef
 ![](./images/visual-quality_011.png)
 
 > [!IMPORTANT]
-> Color space conversions are NOT needed in case of simple playback and spatial resampling. Convert color spaces only if you have to work on image's colors
+> Color space conversion is NOT needed in case of simple playback and spatial resampling. Convert color spaces only if you have to work on image's colors.
 ![](./images/visual-quality_072.png)
-When performing a zoom operation, the process interpolatates pixels' color values, hence requiring a color space conversion, in theory. In practice, the difference is visually neglibigle, and the color conversion can usually be skipped. Here's a zoom in performed with and without color space conversion; the difference is hard to tell.
+When performing a zoom operation, on the other hand, the process interpolatates pixels' color values, hence requiring a color space conversion. In practice, the difference is visually neglibigle, and the color conversion can usually be skipped. Here's a zoom in performed with and without color space conversion; the difference is hard to tell.
 ![](./images/visual-quality_073.png)
 
 
