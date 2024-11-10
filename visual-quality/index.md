@@ -149,6 +149,13 @@ Theoretically, one should convert the bricks texture from sRGB to linear RGB bef
 
 ![](./images/visual-quality_011.png)
 
+> [!IMPORTANT]
+> Color space conversions are NOT needed in case of simple playback and spatial resampling. Convert color spaces only if you have to work on image's colors
+![](./images/visual-quality_072.png)
+When performing a zoom operation, the process interpolatates pixels' color values, hence requiring a color space conversion, in theory. In practice, the difference is visually neglibigle, and the color conversion can usually be skipped. Here's a zoom in performed with and without color space conversion; the difference is hard to tell.
+![](./images/visual-quality_073.png)
+
+
 ---
 
 # Light intensity and tonemapping
@@ -699,7 +706,7 @@ The "dof-hq" pass is controlled by many parameters, but the main two are:
 ![](./images/visual-quality_070.png)
 
 > [!TIP]
-> I suggest activating the attribute @show_in_focus to precisely set "blur-hq" params. The red area shows which part of the scene is in focus. 
+> I suggest activating the attribute @show_in_focus to precisely set "blur-hq" params. The red area shows which part of the scene is currently in focus. 
 ![](./images/visual-quality_071.png)
 
 ---
