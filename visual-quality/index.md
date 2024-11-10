@@ -801,13 +801,13 @@ The slope of this line segment represents speed. As you can see the body leaves 
 
 ![](./images/visual-quality_077.png)
 
-To create such a curve we can use a variety of mathematical functions that exhibit null derivaty at $x=0$ and $x=1$. A notabole example are cubic curves like:
+To create such a curve we can use a variety of mathematical functions that exhibit null derivaty in $x=0$ and $x=1$. Notable examples are cubic curves like:
 
 $$
 y = -2x^3 + 3x^2
 $$
 
-which happens to be the function plotten in the graph above. In the codomain [0; 1], this function exhibits the curves we are after.
+which happens to be the function plotted in the graph above. In the codomain [0; 1], this function exhibits the curves we are after. 
 
 ### Filter motion in the freqeuncy domain
 
