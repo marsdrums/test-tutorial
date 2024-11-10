@@ -782,7 +782,7 @@ A typical scenario where such an approach to animation is valuable are particle 
 ![](./images/visual-quality_075.gif)
 
 
-While this way of defining motion delivers organic and plausible results, it's not always feasible or convenient: movement is an emergent property of a "system of rules", but we don't have direct control over the position of the objects at each frame. If we need such a kind of control, we have to figure out other ways to control objects movement.
+While this way of defining motion delivers organic and plausible results, it's not always feasible or convenient: movement is an emergent property of a "system of rules", and as such, we don't have direct control over the position of the objects at each frame. If we need such a kind of control, we have to figure out other ways to control objects movement.
 
 ### Bend motion in the temporal domain
 
@@ -793,7 +793,7 @@ The square bounces back and forth without ever changing speed. To create such a 
 > [!NOTE]
 > Linear motion can be desiderable if we need to show a "robotic"-like or "digital"-like movement, or if you want to describe the movement of a body with marginal mass (e.g., a mosquito).
 
-Plotting in a graph time and position, this is what we get:
+Plotting linear motion in a graph with time and position on the axis, this is what we get:
 
 
 
