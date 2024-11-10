@@ -720,7 +720,9 @@ Which of the two squares does move "better"?
 
 ![](./images/visual-quality_074.gif)
 
-I like the blu square better.
+I like the blu square better, and i think you do too. But why? 
+
+Every object in nature has something we call mass—essentially, the “amount of stuff” that makes up an object. Whether it’s a tiny pebble or a massive mountain, each one has mass. And with mass comes a natural tendency for objects to either stay put or keep moving in the same way, unless something else (a force) makes them change their behavior. This is a principle known as inertia, part of Newton’s first law of motion.
 
 ## Motion blur
 
