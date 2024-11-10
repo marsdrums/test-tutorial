@@ -793,7 +793,11 @@ The square bounces back and forth without ever changing speed. To create such a 
 > [!NOTE]
 > Linear motion can be desiderable if we need to show a "robotic"-like or "digital"-like movement, or if you want to describe the movement of a body with marginal mass (e.g., a mosquito).
 
-Plotting linear motion in a graph with time and position on the axis, this is what we get:
+Let's say we want to move a body from position $0$ to position $1$ in one second of time. Plotting the linear motion in a graph with time and position on the axis, this is what we get:
+
+![](./images/visual-quality_076.png)
+
+![](./images/visual-quality_077.png)
 
 
 
