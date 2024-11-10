@@ -782,7 +782,11 @@ A typical scenario where such an approach animation is valuable are particle sys
 ![](./images/visual-quality_075.gif)
 
 
+While this way of defining motion delivers organic and plausible results, it's not always feasible or convenient: movement is an emergent property of a "system of rules", but we don't have direct control over the position of the objects at each frame. If we need such a kind of control, we have to figure out other ways to control objects movement.
+
 ### Bend motion in the temporal domain
+
+
 
 ### Filter motion in the freqeuncy domain
 
