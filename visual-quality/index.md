@@ -706,7 +706,7 @@ The "dof-hq" pass is controlled by many parameters, but the main two are:
 ![](./images/visual-quality_070.png)
 
 > [!TIP]
-> I suggest activating the attribute @show_in_focus to precisely set "blur-hq" params. The red area shows which part of the scene is currently in focus. 
+> I suggest activating the attribute @show_in_focus to precisely set "blur-hq" params. The brighter the color, the sharper the image looks, and the red area shows which part of the scene is perfectly in focus. 
 ![](./images/visual-quality_071.png)
 
 ---
@@ -715,6 +715,12 @@ The "dof-hq" pass is controlled by many parameters, but the main two are:
 
 
 ## Inertia
+
+Which of the two squares does move "better"?
+
+![](./images/visual-quality_074.gif)
+
+I like the blu square better.
 
 ## Motion blur
 
