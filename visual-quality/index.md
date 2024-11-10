@@ -713,6 +713,9 @@ The "dof-hq" pass is controlled by many parameters, but the main two are:
 
 # How to enhance object movement
 
+In computer graphics, making objects move according to real-world physical laws is essential for creating believable and immersive scenes. When objects behave as they would in nature—accelerating, slowing down, bouncing, or falling realistically—our brains recognize and connect with that authenticity, making the scene feel much more lifelike. By applying principles like inertia, gravity, and friction, you can achieve motion that not only looks correct but also helps the audience engage with the virtual world as if it were real. This adherence to physical laws bridges the gap between digital environments and our physical understanding, enhancing both visual realism and emotional impact.
+
+Let's see how we can improve the movement of objects in Max.
 
 ## Inertia
 
@@ -723,6 +726,12 @@ Which of the two squares does move "better"?
 I like the blu square better, and i think you do too. But why? 
 
 Every object in nature has something we call mass—essentially, the “amount of stuff” that makes up an object. Whether it’s a tiny pebble or a massive mountain, each one has mass. And with mass comes a natural tendency for objects to either stay put or keep moving in the same way, unless something else (a force) makes them change their behavior. This is a principle known as inertia, part of Newton’s first law of motion.
+
+When any object with mass moves from a starting position to an ending position, it typically goes through phases of acceleration (speeding up) and deceleration (slowing down). This behavior happens naturally due to the forces involved in setting an object in motion and bringing it to rest.
+
+Imagine you’re pushing a car. When you first start pushing, the car doesn’t immediately go full speed; it begins slowly and gradually picks up speed as you keep applying force. This initial phase is called acceleration. It happens because the car’s mass resists sudden changes in motion (because of inertia), so it takes time for the car to reach its full speed.
+
+Once the car is moving and you want to stop it, simply stopping your push won’t bring it to an instant halt. Instead, you’ll need to push in the opposite direction (or rely on brakes or friction) to gradually slow it down. This slowing phase is called deceleration, where the car gradually loses speed until it stops. Just as mass resists starting to move, it also resists stopping; you need a force to counter its motion.
 
 ## Motion blur
 
