@@ -797,9 +797,17 @@ Let's say we want to move a body from position $0$ to position $1$ in one second
 
 ![](./images/visual-quality_076.png)
 
+The slope of this line segment represents speed. As you can see the body leaves position $0$ at time $0$, continues traveling, and reaches position $1$ at time $1$ without ever changing speed. A natural-like movement requires having an acceleration and a deceleration phase. Starting at speed = 0, the body must accelerate, then decelerate and stop at position $1$ with speed = 0 again. To say that properly: the derivative to the curve must be 0 at position $0$ and at position $1$.
+
 ![](./images/visual-quality_077.png)
 
+To create such a curve we can use a variety of mathematical functions that exhibit null derivaty at $x=0$ and $x=1$. A notabole example are cubic curves like:
 
+$$
+y = -2x^3 + 3x^2
+$$
+
+which happens to be the function plotten in the graph above. In the codomain [0; 1], this function exhibits the curves we are after.
 
 ### Filter motion in the freqeuncy domain
 
