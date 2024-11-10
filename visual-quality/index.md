@@ -777,9 +777,10 @@ These steps allow you to iteratively calculate the object's new position and vel
 
 If you apply forces to one or multiple objects like this, movement is an emergent property, and, as such, since its computation is based on a physical behavior, the motion will account for acceleration and deceleration.
 
-A typical scenario where such an approach to computing motion is valuable are particle systems. In particle systems, a corpus of $N$ body (with mass) is subjected to one or multiple forces. This is an example of particle system
+A typical scenario where such an approach animation is valuable are particle systems. In particle systems, a corpus of $N$ body (with mass) is subjected to one or multiple forces. The video below shows a simple particle system based on physically-plausible attractors.
 
 ![](./images/visual-quality_075.gif)
+
 
 ### Bend motion in the temporal domain
 
