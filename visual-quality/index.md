@@ -727,11 +727,17 @@ I like the blu square better, and i think you do too. But why?
 
 Every object in nature has something we call mass—essentially, the “amount of stuff” that makes up an object. Whether it’s a tiny pebble or a massive mountain, each one has mass. And with mass comes a natural tendency for objects to either stay put or keep moving in the same way, unless something else (a force) makes them change their behavior. This is a principle known as inertia, part of Newton’s first law of motion.
 
-When any object with mass moves from a starting position to an ending position, it typically goes through phases of acceleration (speeding up) and deceleration (slowing down). This behavior happens naturally due to the forces involved in setting an object in motion and bringing it to rest.
+When an object with mass moves from a starting to an ending position, it naturally undergoes ***acceleration*** (speeding up) and ***deceleration*** (slowing down) due to the forces needed to start and stop motion.
 
-Imagine you’re pushing a car. When you first start pushing, the car doesn’t immediately go full speed; it begins slowly and gradually picks up speed as you keep applying force. This initial phase is called acceleration. It happens because the car’s mass resists sudden changes in motion (because of inertia), so it takes time for the car to reach its full speed.
+Imagine pushing a car: it doesn’t reach full speed instantly but accelerates gradually, as its mass resists sudden changes in motion—a property known as inertia. Similarly, when you want to stop, the car doesn’t halt right away; it decelerates gradually, needing a counterforce (like braking or friction) to slow it down. This process reflects how mass resists both starting and stopping motion, requiring force to change its speed.
 
-Once the car is moving and you want to stop it, simply stopping your push won’t bring it to an instant halt. Instead, you’ll need to push in the opposite direction (or rely on brakes or friction) to gradually slow it down. This slowing phase is called deceleration, where the car gradually loses speed until it stops. Just as mass resists starting to move, it also resists stopping; you need a force to counter its motion.
+How can we inject an acceleration and a deceleration phase to the movement of objects? We have three ways to do it:
+
+### Physics-based motion
+
+### Bend motion in the temporal domain
+
+### Filter motion in the freqeuncy domain
 
 ## Motion blur
 
