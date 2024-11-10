@@ -775,9 +775,9 @@ To summarize:
 
 These steps allow you to iteratively calculate the object's new position and velocity at each time step based on the applied force in the discrete time domain.
 
-If you apply forces to one or multiple objects like this, movement is an emergent property, and, as such, since its computation is based on a physical behavior, the motion will account for acceleration and deceleration.
+If you apply forces on one or multiple objects like this, movement is an emergent property, and, since its computation is based on mimicking a physical behavior, the motion will account for acceleration and deceleration.
 
-A typical scenario where such an approach animation is valuable are particle systems. In particle systems, a corpus of $N$ body (with mass) is subjected to one or multiple forces. The video below shows a simple particle system based on physically-plausible attractors.
+A typical scenario where such an approach to animation is valuable are particle systems. In particle systems, a corpus of $N$ body (with mass) is subjected to one or multiple forces. The video below shows a simple particle system based on physically-plausible attractors.
 
 ![](./images/visual-quality_075.gif)
 
@@ -785,6 +785,15 @@ A typical scenario where such an approach animation is valuable are particle sys
 While this way of defining motion delivers organic and plausible results, it's not always feasible or convenient: movement is an emergent property of a "system of rules", but we don't have direct control over the position of the objects at each frame. If we need such a kind of control, we have to figure out other ways to control objects movement.
 
 ### Bend motion in the temporal domain
+
+To have a better understanding of the problem, let's observe again what's wrong with the yellow square's momevent:
+
+The square bounces back and forth without ever changing speed. To create such a movement, there must be an infinite acceleration, which can be caused by a null mass or by and infinitely strong force. This kind of movement is called ***linear motion***, and that's want we're trying to stay away from.
+
+> [!NOTE]
+> Linear motion can be desiderable if we need to show a "robotic"-like or "digital"-like movement, or if you want to describe the movement of a body with marginal mass (e.g., a mosquito).
+
+Plotting in a graph time and position, this is what we get:
 
 
 
