@@ -891,9 +891,11 @@ Let's bring back this concept to Jitterland, and let's see how we can use it to 
 
 ![](./images/visual-quality_087.gif)
 
-I've set up a simple scene where a red sphere moves randomly on screen. The motion has been low-pass-filtered using the object {slide}. The two graphs on the right report the non-filtered and the filtered motion. Overall, the movement looks convincing, as the sphere undergoes acceleration and deceleration. For comparison, this is a side-by-side comparison of the non-filtered motion vs. filtered:
+I've set up a simple scene where a red sphere moves randomly on screen. The motion has been low-pass-filtered using the object {slide}. The two graphs on the right report the non-filtered and the filtered motion. Overall, the movement looks convincing, as the sphere undergoes acceleration and deceleration. This is a side-by-side comparison of the non-filtered vs. filtered motion:
 
 ![](./images/visual-quality_088.gif)
+
+
 
 ## Motion blur
 
