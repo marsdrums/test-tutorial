@@ -891,14 +891,14 @@ Let's bring back this concept to Jitterland, and let's see how we can use it to 
 
 ![](./images/visual-quality_087.gif)
 
-I've set up a simple scene where a red sphere moves randomly on screen. The motion has been low-pass-filtered using the object {slide}. The two graphs on the right report the non-filtered and the filtered motion. Overall, the movement looks convincing, as the sphere undergoes acceleration and deceleration. This is a side-by-side comparison of the non-filtered vs. filtered motion:
+I’ve created a simple scene with a red sphere that moves randomly across the screen. The motion is smoothed with a low-pass filter using the {slide} object. The two graphs on the right show the unfiltered and filtered motions. Overall, the filtered movement looks realistic, with the sphere experiencing acceleration and deceleration. Here’s a side-by-side comparison of the unfiltered vs. filtered motion:
 
 ![](./images/visual-quality_088.gif)
 
 {slide} is a possible choice for filtering, but it's not the only one. Max offers a variety of low-pass implementations for audio signals, but there aren't many built-in options for filtering streams of messages, matrices, and textures. Still, we can build our own filters. Let's see a couple of low-pass implementations useful for us Jitterheads.
 
 > [!NOTE]
-> Digital filters are a slippery territory. Filter design is a complex topic that would require a discussion on its own. For the sake of this article (and because i'm not a filter design expert), i'll just show some filter implementations without getting too much into the technical details, but providing qualitative considerations and use case scenarios.
+> Digital filters can be tricky to navigate, and designing them is a complex subject that deserves its own in-depth discussion. For this article, I’ll focus on demonstrating some filter implementations without diving deeply into technical details. Instead, I'll provide qualitative insights and examples of when and how to use these filters, keeping things accessible and practical. (Plus, I’m not a filter design expert!)
 
 ### One-pole filter
 
@@ -908,10 +908,12 @@ This is the simplest possible low-pass filter:
 
 One-pole filters operating on messages, matrices, and textures. 
 
-Although simple, this low-pass filter can be very effective. It's implemented as a running average between the values in the current frame, and the values filtered in the previous frames. Depending on how your position values are represented, you can implement a custom one-pole filter to smooth out messages, matrices, or textures. The filter is controlled by an interpolation value (within the range [0;1]) that decides how much to "take" from the current frame, and how much from the previous frame. One-pole filters are 1st order filter, which mean they can cut 6dB per octave. This mean that the frequency cut they provide is very smooth. If you want to increase the filter order (hence making it more selective), you can cascade multiple one-pole filters; every filter in the cascade increases the filtering order by 1.
+This low-pass filter, though simple, can be very effective. It works by averaging values from the current frame with values filtered from previous frames. Depending on how your position data is represented, you can customize a one-pole filter to smooth data like messages, matrices, or textures. The filter’s strength is controlled by an interpolation value (ranging from 0 to 1), which determines how much influence the current frame has versus the previous frame.
+
+Since one-pole filters are 1st-order filters, they provide a gentle frequency cut of 6 dB per octave, resulting in smooth filtering. To make the filter more selective, you can increase the order by cascading multiple one-pole filters; each additional filter in the chain increases the overall filtering order by 1.
 
 > [!NOTE]
-> One-pole low-pass filters can be implemented in a variety of ways, including some buit-in objects. I decided to implement it in gen codebox to better show the inner mechanics of the algorithm.
+> One-pole low-pass filters can be implemented in various ways, including using some built-in objects. I chose to implement it in a gen codebox to give a clearer view of the algorithm's inner workings.
 
 ### Bi-quadratic filters and Butterworth filters
 
