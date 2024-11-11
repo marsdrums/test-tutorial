@@ -809,7 +809,21 @@ $$
 which happens to be the function plotted in the graph above. In the codomain [0; 1], this function exhibits the curve we are after, starting end ending with slope 0. Let's try to apply this movement path to an object to see the difference.
 
 ![](./images/visual-quality_078.gif)
+
+> [!NOTE]
+> By no means, the function describing the object's motion must be defined in the domain [0; 1]; still, it's very convenient to define such a function in this domain, because it's easier to perform further manipulations of the motion curve. If you need to express the movement in a range different from [0; 1], you can simply scale the output to the needed range.
+
+From this basic cubic function, you can design many different variations. For example:
+
+- You can cascade multiple cubic function to enhance the acceleration and deceleration phases (mimiking a larger mass).
 ![](./images/visual-quality_079.gif)
+
+- Since the function returns a value within the range [0;1], you can take advange of it and perform exponentiations to further bend the curve creating assymetries of the aceleration and deceleration phases, while conserving the condition on null derivative for $x = 0$ and $x = 1$.
+
+
+
+![](./images/visual-quality_080.png)
+
 
 ### Filter motion in the freqeuncy domain
 
