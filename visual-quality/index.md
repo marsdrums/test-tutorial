@@ -830,7 +830,7 @@ Cubic functions are not the only ones having null derivatives in a given codomai
 
 $\color{red} y = x$ (for reference), $\color{aqua} y = -2x^3 + 3x^2$, $\color{magenta} y = \frac{\cos(x \cdot \pi) + 1}{2}$, $\color{gold} y = 6x^5 - 15x^4 + 10x^3$.
 
-This last one is a quintic function, and it's particularly noteworthy because it does not only have null first derivatives in $x=0$ and $x=1$, but it also has null second derivatives in $x=0$ and $x=1$. This is relevant for for us, because the first derivative of the motion function represents speed (the slope of the function), while the second derivarive represents acceleration (the slope of the speed function). Functions like the cubic one we used earlier shows a discontinuity for what concerns the second derivative (acceleration). 
+This last one is a quintic function, and it's particularly noteworthy because it does not only have null first derivatives in $x=0$ and $x=1$, but it also has null second derivatives in $x=0$ and $x=1$. This is relevant for for us, because the first derivative of the motion function represents speed (the slope of the function), while the second derivarive represents acceleration (the slope of the speed function). Functions like the cubic one we used earlier shows a discontinuity for what concerns the second derivative (acceleration). Although visually better than linear functions to describe motion, an infinite force or a null mass are still required to make a body accelerate like that.
 
 ![](./images/visual-quality_082.png)
 Left: $\color{aqua} y = -2x^3 + 3x^2$, $\color{magenta} y'$, $\color{green} y''$; right: $\color{gold} y = 6x^5 - 15x^4 + 10x^3$, $\color{magenta} y'$, $\color{green} y''$;
@@ -841,6 +841,13 @@ If we really want to describe a motion function like "the cool kids", we can opt
 
 ![](./images/visual-quality_083.gif)
 
+When do these functions come in handy? In the previous paragraph, we described motion as the biproduct of forces acting on bodies with mass; we didn't have precise control over where and when a body moves. Motion function, somehow reverse the approach: You can define the exact initial position and ending position, as well as how much time the object takes to complete the movement. For a known object mass, you can eventually derive which forces are implied in the motion to make it accelerate that way. This kind of control over objects movement is very useful when you must express an initial postion, an ending position, and define how much time it takes to complete the movement. A similar scenario are, for example, transition effects.
+
+![](./images/visual-quality_084.gif)
+
+Left {jit.pwindow}: {jit.fx.tr.rotfade} and {jit.fx.tr.zoomfade} controlled via linear motion; right: same effects controlled via quintic motion.
+
+Look at the difference that proper motion functions can make. The transitions on the left look "mechanical", while the two on the right are fluent and more "natural".
 
 ### Filter motion in the freqeuncy domain
 
