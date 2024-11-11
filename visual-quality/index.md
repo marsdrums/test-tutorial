@@ -897,19 +897,31 @@ I've set up a simple scene where a red sphere moves randomly on screen. The moti
 
 {slide} is a possible choice for filtering, but it's not the only one. Max offers a variety of low-pass implementations for audio signals, but there aren't many built-in options for filtering streams of messages, matrices, and textures. Still, we can build our own filters. Let's see a couple of low-pass implementations useful for us Jitterheads.
 
+> [!NOTE]
+> Digital filters are a slippery territory. Filter design is a complex topic that would require a discussion on its own. For the sake of this article, i'll just show some filter implementations without getting too much into the technical details, but providing qualitative considerations and use case scenarios.
+
 ### One-pole filter
 
 This is the simplest possible low-pass filter:
 
 ![](./images/visual-quality_089.png)
 
-One-pole filters disegned to operate on messages, matrices, and textures. 
+One-pole filters operating on messages, matrices, and textures. 
 
-Although simple, this low-pass filter can be very effective. It's implemented as a running average between the values in the current frame, and the values filtered in the previous frames. Depending on how your position values are represented, you can implement a custom one-pole filter to smooth out messages, matrices, or textures. The filter is controlled by an interpolation value (within the range [0;1]) that decides how much to "take" from the current frame, and how much from the previous frame.
+Although simple, this low-pass filter can be very effective. It's implemented as a running average between the values in the current frame, and the values filtered in the previous frames. Depending on how your position values are represented, you can implement a custom one-pole filter to smooth out messages, matrices, or textures. The filter is controlled by an interpolation value (within the range [0;1]) that decides how much to "take" from the current frame, and how much from the previous frame. One-pole filters are 1st order filter, which mean they can cut 6dB per octave. This mean that the frequency cut they provide is very smooth. If you want to increase the filter order (hence making it more selective), you can cascade multiple one-pole filters; every filter in the cascade increases the filtering order by 1.
+
+> [!NOTE]
+> One-pole low-pass filters can be implemented in a variety of ways, including some buit-in objects. I decided to implement it in gen codebox to better show the inner mechanics of the algorithm.
 
 ### Bi-quadratic filters and Butterworth filters
 
-Biquadratic filters, commonly called biquad filters, are a type of digital or analog filter with a transfer function that is a ratio of two second-degree polynomials. Each biquad filter is a second-order filter, meaning it has two poles and typically two zeros, which gives it flexibility in shaping the frequency response. These filters are widely used in digital signal processing because they offer a simple and stable way to implement many common filter types
+Think of a biquad filter as a mini toolkit for customizing a signal. Each biquad filter is a 2nd order filter, meaning it has two key frequency “control points.” These control points help create precise filtering effects and can be adjusted to create a variety of responses.
+
+One of the greatest strengths of biquad filters is their modularity. You can stack multiple biquad filters together to create more complex filters. Each biquad section adds two more control points, so by stacking three sections, for instance, you create a 6th order filter with a lot of detail and control over the frequency response.
+
+![](./images/visual-quality_090.png)
+
+![](./images/visual-quality_091.png)
 
 
 ## Motion blur
