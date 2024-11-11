@@ -800,13 +800,13 @@ The slope of this line segment represents speed. Here, the object starts at posi
 
 ![](./images/visual-quality_077.png)
 
-To create such a curve we can use a variety of mathematical functions that exhibit null derivaty in $x=0$ and $x=1$. Notable examples are cubic curves like:
+To create such a curve we can use a variety of mathematical functions that exhibit null derivaty in $x=0$ and $x=1$. A notable example is the cubic curve:
 
 $$
 y = -2x^3 + 3x^2
 $$
 
-which happens to be the function plotted in the graph above. In the codomain [0; 1], this function exhibits the curve we are after. 
+which happens to be the function plotted in the graph above. In the codomain [0; 1], this function exhibits the curve we are after, starting end ending with slope 0. Let's try to apply this movement path to an object to see the difference.
 
 ### Filter motion in the freqeuncy domain
 
