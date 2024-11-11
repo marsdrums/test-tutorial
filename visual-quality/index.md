@@ -783,7 +783,7 @@ This approach to animation is especially useful in particle systems. In these sy
 
 Although this approach to defining motion produces organic and realistic results, it’s not always practical or convenient. Movement becomes an emergent property of a "system of rules," which means we don’t have direct control over the objects' positions in each frame. If precise control over position is required, we need to explore other methods for managing object movement.
 
-### Bend motion in the temporal domain
+### "Bend" motion in the temporal domain
 
 To have a better understanding of the problem, let's observe again what's wrong with the yellow square's momevent:
 
@@ -852,10 +852,17 @@ Look at the difference that proper motion functions can make. The transitions on
 > [!NOTE]
 > if you need to create motion curves for multidimensional movement (e.g., an object moving in a 3D space), you can apply the same principles to each individual dimension.
 
-The strength point of this approach is precision over time. Things start and stop moving exactly when we want to. Still, this method becomes unpractical if we need to define complex moment over time. We could "glue" togheter pieces of functions to describe a complex motion, but if we do so, we also have to guarantee the contition of continuity for the first (and eventually second) derivative. While this is not impossible (we could solve a system of equations to compute ad-hoc pieces of functions), it may be inconvinient. For such a scenario, it's better to approach the problem from a different perspective.
+The strength point of this approach is precision over time. Things start and stop moving exactly when we want to. Still, this method becomes unpractical if we need to define complex moment over time. We could "glue" togheter pieces of functions to describe a complex motion, but if we do so, we also have to guarantee the contition of continuity for the first (and eventually second) derivative. While this is not impossible (we could solve systems of equations to compute ad-hoc pieces of functions), it may be inconvinient. For such a scenario, it's better to approach the problem from a different perspective.
 
 ### Filter motion in the freqeuncy domain
 
+Any variable phenomenon, like the changing position of an object in space, can actually be broken down into a series of simpler waves—sines and cosines! This idea comes from something called the ***Fourier series***, and it’s a powerful way to represent complex, varying signals.
+
+By adding up these waves in just the right way, we can reconstruct any complex movement or signal. Each sine or cosine wave in the series has a specific frequency, amplitude (height), and phase (shift), which together help us "build" the final pattern. This method is like having a toolkit of building blocks that, when put together, mimic the movement or variation we want to describe.
+
+The beauty of this approach is that it applies to virtually anything that changes over time or space, whether it’s the flicker of light, the beat of a drum, or an object’s motion. Fourier series essentially gives us a “recipe” for recreating any variable pattern with an infinite sum of these simple wave-like functions.
+
+Let's look at our square moving from a different perspective:
 
 
 ## Motion blur
