@@ -828,7 +828,7 @@ From this basic cubic function, you can design many different variations. For ex
 Cubic functions are not the ones that have null derivatives in a given codomain. These are some possible other functions plotted on a graph:
 ![](./images/visual-quality_080.png)
 
-$\color{red} y = x$
+$\color{red} y = x$ (for reference), $\color{aqua} y = -2x^3 + 3x^2$, $\color{magenta} y = \frac{\cos(x \cdot \pi) + 1}{2}$, $\color{gold} y = 6x^5 - 15x^4 + 10x^3$.
 
 
 ### Filter motion in the freqeuncy domain
