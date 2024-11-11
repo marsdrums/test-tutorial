@@ -810,6 +810,8 @@ which happens to be the function plotted in the graph above. In the codomain [0;
 
 ![](./images/visual-quality_078.gif)
 
+To apply this curve as motions, we simply provide a linear input to the function, and it returns a "bent" version.
+
 > [!NOTE]
 > By no means, the function describing the object's motion must be defined in the domain [0; 1]; still, it's very convenient to define such a function in this domain, because it's easier to perform further manipulations of the motion curve. If you need to express the movement in a range different from [0; 1], you can simply scale the output to the needed range.
 
@@ -818,11 +820,13 @@ From this basic cubic function, you can design many different variations. For ex
 - You can cascade multiple cubic function to enhance the acceleration and deceleration phases (mimiking a larger mass).
 ![](./images/visual-quality_079.gif)
 
-- Since the function returns a value within the range [0;1], you can take advange of it and perform exponentiations to further bend the curve creating assymetries of the aceleration and deceleration phases, while conserving the condition on null derivative for $x = 0$ and $x = 1$.
+- Since the function returns a value within the range [0;1], you can take advange of this and perform exponentiations to further bend the curve creating assymetries of the aceleration and deceleration phases, while conserving the condition on null derivative for $x=0$ and $x=1$.
+![](./images/visual-quality_081.gif)
 
-
-
+Cubic functions are not the ones that have null derivatives in a given codomain. These are some possible other functions plotted on a graph:
 ![](./images/visual-quality_080.png)
+
+#f03c15 text
 
 
 ### Filter motion in the freqeuncy domain
