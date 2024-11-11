@@ -830,6 +830,15 @@ Cubic functions are not the ones that have null derivatives in a given codomain.
 
 $\color{red} y = x$ (for reference), $\color{aqua} y = -2x^3 + 3x^2$, $\color{magenta} y = \frac{\cos(x \cdot \pi) + 1}{2}$, $\color{gold} y = 6x^5 - 15x^4 + 10x^3$.
 
+This last one is a quintic function, and it's particularly noteworthy because it does not only have null first derivatives in $x=0$ and $x=1$, but it also has null second derivatives in $x=0$ and $x=1$. This is relevant for for us, because the first derivative of the motion function represents speed (the slope of the function), while the second derivarive represents acceleration (the slope of the speed function). Functions like the cubic one we used earlier shows a discontinuity for what concerns the second derivative (acceleration). 
+
+![](./images/visual-quality_082.png)
+Left: $\color{aqua} y = -2x^3 + 3x^2$, $\color{magenta} y'$, $\color{green} y''$; right: $\color{gold} y = 6x^5 - 15x^4 + 10x^3$, $\color{magenta} y'$, $\color{green} y''$;
+
+You can notice how the second derivative of the cubic function is a straight line, and it's not zero in $x=0$ and $x=1$.
+
+If we really want to describe a motion function like "the cool kids", we can opt for such a quintic function.
+
 
 ### Filter motion in the freqeuncy domain
 
