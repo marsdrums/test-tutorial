@@ -854,7 +854,7 @@ Look at the difference that proper motion functions can make. The transitions on
 
 The strength point of this approach is precision over time. Things start and stop moving exactly when we want to. Still, this method becomes unpractical if we need to define complex moment over time. We could "glue" togheter pieces of functions to describe a complex motion, but if we do so, we also have to guarantee the contition of continuity for the first (and eventually second) derivative. While this is not impossible (we could solve systems of equations to compute ad-hoc pieces of functions), it may be inconvinient. For such a scenario, it's better to approach the problem from a different perspective.
 
-### Filter motion in the freqeuncy domain
+### Filter motion in the frequency domain
 
 Any variable phenomenon, like the changing position of an object in space, can actually be broken down into a series of simpler waves—sines and cosines! This idea comes from something called the ***Fourier series***, and it’s a powerful way to represent complex, varying signals.
 
