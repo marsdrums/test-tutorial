@@ -828,7 +828,7 @@ From this basic cubic function, you can design many different variations. For ex
 Cubic functions are not the ones that have null derivatives in a given codomain. These are some possible other functions plotted on a graph:
 ![](./images/visual-quality_080.png)
 
-<code style="color : red">TEST</code>
+$\color{red} y = x$
 
 
 ### Filter motion in the freqeuncy domain
