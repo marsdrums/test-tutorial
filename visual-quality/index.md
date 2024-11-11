@@ -898,7 +898,7 @@ I've set up a simple scene where a red sphere moves randomly on screen. The moti
 {slide} is a possible choice for filtering, but it's not the only one. Max offers a variety of low-pass implementations for audio signals, but there aren't many built-in options for filtering streams of messages, matrices, and textures. Still, we can build our own filters. Let's see a couple of low-pass implementations useful for us Jitterheads.
 
 > [!NOTE]
-> Digital filters are a slippery territory. Filter design is a complex topic that would require a discussion on its own. For the sake of this article, i'll just show some filter implementations without getting too much into the technical details, but providing qualitative considerations and use case scenarios.
+> Digital filters are a slippery territory. Filter design is a complex topic that would require a discussion on its own. For the sake of this article (and because i'm not a filter design expert), i'll just show some filter implementations without getting too much into the technical details, but providing qualitative considerations and use case scenarios.
 
 ### One-pole filter
 
