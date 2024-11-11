@@ -808,6 +808,9 @@ $$
 
 which happens to be the function plotted in the graph above. In the codomain [0; 1], this function exhibits the curve we are after, starting end ending with slope 0. Let's try to apply this movement path to an object to see the difference.
 
+![](./images/visual-quality_078.gif)
+![](./images/visual-quality_079.gif)
+
 ### Filter motion in the freqeuncy domain
 
 ## Motion blur
