@@ -825,7 +825,7 @@ From this basic cubic function, you can design many different variations. For ex
 
 ![](./images/visual-quality_081.gif)
 
-Cubic functions are not the ones that have null derivatives in a given codomain. These are some possible other functions plotted on a graph:
+Cubic functions are not the only ones having null derivatives in a given codomain. These are some possible other functions plotted on a graph:
 ![](./images/visual-quality_080.png)
 
 $\color{red} y = x$ (for reference), $\color{aqua} y = -2x^3 + 3x^2$, $\color{magenta} y = \frac{\cos(x \cdot \pi) + 1}{2}$, $\color{gold} y = 6x^5 - 15x^4 + 10x^3$.
@@ -835,7 +835,7 @@ This last one is a quintic function, and it's particularly noteworthy because it
 ![](./images/visual-quality_082.png)
 Left: $\color{aqua} y = -2x^3 + 3x^2$, $\color{magenta} y'$, $\color{green} y''$; right: $\color{gold} y = 6x^5 - 15x^4 + 10x^3$, $\color{magenta} y'$, $\color{green} y''$;
 
-You can notice how the second derivative of the cubic function is a straight line, and it's non-zero in $x=0$ and $x=1$.
+You can notice how the second derivative of the cubic function is a straight line, and it's non-zero in $x=0$ and $x=1$, while in the quintic function case, it touches the abscissa in both $x=0$ and $x=1$.
 
 If we really want to describe a motion function like "the cool kids", we can opt for such a quintic function.
 
