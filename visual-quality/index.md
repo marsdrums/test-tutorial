@@ -923,6 +923,9 @@ One of the greatest strengths of biquad filters is their modularity. You can sta
 
 ![](./images/visual-quality_091.png)
 
+> [!NOTE]
+> The object {jit.fx.ti.filter} implements a biquad temporal filter like the one displayed above.
+
 
 ## Motion blur
 
