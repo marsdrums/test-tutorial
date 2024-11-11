@@ -895,6 +895,8 @@ I've set up a simple scene where a red sphere moves randomly on screen. The moti
 
 ![](./images/visual-quality_088.gif)
 
+{slide} is a possible choice for filtering, but it's not the only one. Max offers a variety of low-pass implementations for audio signals, but there aren't many built-in options for filtering streams of messages, matrices, and textures. Still, we can build our own filters. Let's see a couple low-pass implementations useful for us Jitterheads.
+
 
 
 ## Motion blur
