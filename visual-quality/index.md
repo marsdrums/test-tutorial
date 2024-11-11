@@ -723,7 +723,7 @@ Which of the two squares does move "better"?
 
 ![](./images/visual-quality_074.gif)
 
-I like the blu square better, and i think you do too. But why? 
+I like the blu square better, and i bet you do too. But why? 
 
 Every object in nature has something we call mass—essentially, the “amount of stuff” that makes up an object. Whether it’s a tiny pebble or a massive mountain, each one has mass. And with mass comes a natural tendency for objects to either stay put or keep moving in the same way, unless something else (a force) makes them change their behavior. This is a principle known as inertia, part of Newton’s first law of motion.
 
@@ -841,15 +841,22 @@ If we really want to describe a motion function like "the cool kids", we can opt
 
 ![](./images/visual-quality_083.gif)
 
-When do these functions come in handy? In the previous paragraph, we described motion as the biproduct of forces acting on bodies with mass; we didn't have precise control over where and when a body moves. Motion function, somehow reverse the approach: You can define the exact initial position and ending position, as well as how much time the object takes to complete the movement. For a known object mass, you can eventually derive which forces are implied in the motion to make it accelerate that way. This kind of control over objects movement is very useful when you must express an initial postion, an ending position, and define how much time it takes to complete the movement. A similar scenario are, for example, transition effects.
+When do these functions come in handy? In the previous paragraph, we described motion as the biproduct of forces acting on bodies with mass; we didn't have precise control over where and when a body moves. Motion functions, somehow reverse the approach: You can define the exact initial and ending positions, as well as how much time the object takes to complete the movement. For a known object mass, you can eventually derive which forces are implied in the motion to make it accelerate that way. This kind of control over objects movement is very useful when you must express an initial postion, an ending position, and define how much time it takes to complete the movement. A similar scenario are, for example, transition effects.
 
 ![](./images/visual-quality_084.gif)
 
-Left {jit.pwindow}: {jit.fx.tr.rotfade} and {jit.fx.tr.zoomfade} controlled via linear motion; right: same effects controlled via quintic motion.
+Left: {jit.fx.tr.rotfade} and {jit.fx.tr.zoomfade} controlled via linear motion; right: same effects controlled via quintic motion.
 
-Look at the difference that proper motion functions can make. The transitions on the left look "mechanical", while the two on the right are fluent and more "natural".
+Look at the difference that proper motion functions can make. The transitions on the left look "mechanical", while the two on the right appear fluent and more "natural". 
+
+> [!NOTE]
+> if you need to create motion curves for multidimensional movement (e.g., an object moving in a 3D space), you can apply the same principles to each individual dimension.
+
+The strength point of this approach is precision over time. Things start and stop moving exactly when we want to. Still, this method becomes unpractical if we need to define complex moment over time. We could "glue" togheter pieces of functions to describe a complex motion, but if we do so, we also have to guarantee the contition of continuity for the first (and eventually second) derivative. While this is not impossible (we could solve a system of equations to compute ad-hoc pieces of functions), it may be inconvinient. For such a scenario, it's better to approach the problem from a different perspective.
 
 ### Filter motion in the freqeuncy domain
+
+
 
 ## Motion blur
 
