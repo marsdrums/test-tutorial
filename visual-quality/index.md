@@ -905,7 +905,7 @@ This is the simplest possible low-pass filter:
 
 One-pole filters disegned to operate on messages, matrices, and textures. 
 
-Although simple, this low-pass filter can be very effective. It's implemented as a running average between the values in the current frame, and the values filtered in the previous frames. Depending on whether your position values are represented, you can implement a custom one-pole filter to smooth out messages, matrices, or textures. The filter is controlled by an interpolation value (within the range [0; 1]) that decides how much to "take" from the current frame, and how much from the previous frame.
+Although simple, this low-pass filter can be very effective. It's implemented as a running average between the values in the current frame, and the values filtered in the previous frames. Depending on how your position values are represented, you can implement a custom one-pole filter to smooth out messages, matrices, or textures. The filter is controlled by an interpolation value (within the range [0;1]) that decides how much to "take" from the current frame, and how much from the previous frame.
 
 ### Bi-quadratic filters and Butterworth filters
 
