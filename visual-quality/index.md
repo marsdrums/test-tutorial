@@ -899,17 +899,17 @@ I've set up a simple scene where a red sphere moves randomly on screen. The moti
 
 ### One-pole filter
 
-This is the simplest possible low pass filter. It's implemented as a running average between values in the current frame, and the values filtered in the previous frames. 
+This is the simplest possible low-pass filter:
 
 ![](./images/visual-quality_089.png)
 
 One-pole filters disegned to operate on messages, matrices, and textures. 
 
-Although simple, this low-pass filter can be very effective.
+Although simple, this low-pass filter can be very effective. It's implemented as a running average between the values in the current frame, and the values filtered in the previous frames. Depending on whether your position values are represented, you can implement a custom one-pole filter to smooth out messages, matrices, or textures. The filter is controlled by an interpolation value (within the range [0; 1]) that decides how much to "take" from the current frame, and how much from the previous frame.
 
 ### Bi-quadratic filters and Butterworth filters
 
-
+Biquadratic filters, commonly called biquad filters, are a type of digital or analog filter with a transfer function that is a ratio of two second-degree polynomials. Each biquad filter is a second-order filter, meaning it has two poles and typically two zeros, which gives it flexibility in shaping the frequency response. These filters are widely used in digital signal processing because they offer a simple and stable way to implement many common filter types
 
 
 ## Motion blur
