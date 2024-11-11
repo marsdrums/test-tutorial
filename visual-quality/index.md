@@ -885,7 +885,7 @@ What i'm intrested in is what happens to our motion function if we filter out so
 The low pass filter attenuates high frequencies, and look at our motion function on the left: it "rounded", showing juicy acceleration and deceleration phases! Controlling the lowpass filter cutoff, we can control the motion path roundness, hence mimiking a variation of the object's mass. This brings us to another way we can use to define non-linear motion:
 
 > [!IMPORTANT]
-> You can provide a linear motion path (which is easy to define and control), interpret it in the frequency domain, and remove high frequencies from it. This will create a smoother motion which naturally accounts for acceleration, deceleration, and inertia.
+> You can create a straightforward linear motion path (simple to define and control), interpret it in the frequency domain, and filter out the high frequencies. This process results in a smoother motion that naturally incorporates acceleration, deceleration, and inertia.
 
 Let's bring back this concept to Jitterland, and let's see how we can use it to improve the motion of objects.
 
@@ -915,11 +915,24 @@ Since one-pole filters are 1st-order filters, they provide a gentle frequency cu
 > [!NOTE]
 > One-pole low-pass filters can be implemented in various ways, including using some built-in objects. I chose to implement it in a gen codebox to give a clearer view of the algorithm's inner workings.
 
-### Bi-quadratic filters and Butterworth filters
+### Biquadratic filters and Butterworth filters
 
-Think of a biquad filter as a mini toolkit for customizing a signal. Each biquad filter is a 2nd order filter, meaning it has two key frequency “control points.” These control points help create precise filtering effects and can be adjusted to create a variety of responses.
+A biquadratic filter (or biquad filter for short) is a type of digital filter used to shape or modify signals in various ways. It’s called “biquad” because it’s based on a second-order equation, meaning it can control two key frequency elements at once.
 
-One of the greatest strengths of biquad filters is their modularity. You can stack multiple biquad filters together to create more complex filters. Each biquad section adds two more control points, so by stacking three sections, for instance, you create a 6th order filter with a lot of detail and control over the frequency response.
+Biquad filters rely on specific coefficients to control their operation. These coefficients allow you to decide which frequencies are boosted or reduced and determine the filter’s type—whether it’s low-pass, high-pass, band-pass, etc. In the filter equation, these coefficients define precisely how much to enhance or reduce particular parts of the signal.
+
+A biquad filter operates using a formula with five main coefficients: a0, a1, a2, b1, b2. These coefficients go into a difference equation that applies the filter to each new sample in the signal. In practical terms, the filter equation looks like this:
+
+$$
+y[n] = \frac{b_0 \cdot x[n] + b_1 \cdot x[n-1] + b_2 \cdot x[n-2] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]}{a_0}
+$$
+
+Where:
+
+- $y[n]$ is the output signal at the current sample.
+- $x[n]$, $x[n-1]$, and $x[n-2]$ are the current and past input samples.
+- $y[n-1]$ and $y[n-2]$ are the past two output samples.
+
 
 ![](./images/visual-quality_090.png)
 
