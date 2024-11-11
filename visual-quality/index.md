@@ -882,13 +882,18 @@ What i'm intrested in is what happens to our motion function if we filter out so
 
 ![](./images/visual-quality_086.png)
 
-The low pass filter attenuates high frequencies, and look at our motion function on the left: it "rounded", showing juicy acceleration and deceleration phases! Controlling the lowpass filter cutoff, we can control the motion path roundness, hence mimiking a variation of the object's mass. This brings us to another way we can define non-linear motion:
+The low pass filter attenuates high frequencies, and look at our motion function on the left: it "rounded", showing juicy acceleration and deceleration phases! Controlling the lowpass filter cutoff, we can control the motion path roundness, hence mimiking a variation of the object's mass. This brings us to another way we can use to define non-linear motion:
 
 > [!IMPORTANT]
 > You can provide a linear motion path (which is easy to define and control), interpret it in the frequency domain, and remove high frequencies from it. This will create a smoother motion which naturally accounts for acceleration, deceleration, and inertia.
 
+Let's bring back this concept to Jitterland, and let's see how we can use it to improve the motion of objects.
 
+![](./images/visual-quality_087.gif)
 
+I've set up a simple scene where a red sphere moves randomly on screen. The motion has been low-pass-filtered using the object {slide}. The two graphs on the right report the non-filtered and the filtered motion. Overall, the movement looks convincing, as the sphere undergoes acceleration and deceleration. For comparison, this is a side-by-side comparison of the non-filtered motion vs. filtered:
+
+![](./images/visual-quality_088.gif)
 
 ## Motion blur
 
