@@ -895,7 +895,20 @@ I've set up a simple scene where a red sphere moves randomly on screen. The moti
 
 ![](./images/visual-quality_088.gif)
 
-{slide} is a possible choice for filtering, but it's not the only one. Max offers a variety of low-pass implementations for audio signals, but there aren't many built-in options for filtering streams of messages, matrices, and textures. Still, we can build our own filters. Let's see a couple low-pass implementations useful for us Jitterheads.
+{slide} is a possible choice for filtering, but it's not the only one. Max offers a variety of low-pass implementations for audio signals, but there aren't many built-in options for filtering streams of messages, matrices, and textures. Still, we can build our own filters. Let's see a couple of low-pass implementations useful for us Jitterheads.
+
+### One-pole filter
+
+This is the simplest possible low pass filter. It's implemented as a running average between values in the current frame, and the values filtered in the previous frames. 
+
+![](./images/visual-quality_089.png)
+
+One-pole filters disegned to operate on messages, matrices, and textures. 
+
+Although simple, this low-pass filter can be very effective.
+
+### Bi-quadratic filters and Butterworth filters
+
 
 
 
