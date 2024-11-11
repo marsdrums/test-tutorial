@@ -862,7 +862,32 @@ By adding up these waves in just the right way, we can reconstruct any complex m
 
 The beauty of this approach is that it applies to virtually anything that changes over time or space, whether it’s the flicker of light, the beat of a drum, or an object’s motion. Fourier series essentially gives us a “recipe” for recreating any variable pattern with an infinite sum of these simple wave-like functions.
 
-Let's look at our square moving from a different perspective:
+Let's look at our square moving from a different perspective borrowing some tools from MSP-land:
+
+![](./images/visual-quality_085.png)
+
+> [!NOTE]
+> I intentionally removed all numerical references from the objects; in order to operate, these analysis tools ({scope~}, and {spectrumdraw~}) require an audio signal in a frequency range that is meaningful for audio applications. Therefore, showing "the numbers" wouldn't have made any sense. Still, i wanted to abuse them to illustrate the concept.
+
+The two graphs above show the square's motion function from two different perspectives: 
+- Left: the position moving linearly from the beginning to the end of the motion path.
+- Right: the spectral decomposition of the motion function on the left.
+
+By "breaking" the motion function into a combination of sine waves, we can see that multiple elementary waves of encreasing frequency and decreasing amplitude are required to give rise to the "triangular" motion that our square is going through.
+
+> [!NOTE]
+> Actually, to combine into a perfect triangular path, an infinite amount of sine waves is needed.
+
+What i'm intrested in is what happens to our motion function if we filter out some of the highest sine waves. To perform filtering, since we are the "~ realm", i'll use a simple audio low pass filter.
+
+![](./images/visual-quality_086.png)
+
+The low pass filter attenuates high frequencies, and look at our motion function on the left: it "rounded", showing juicy acceleration and deceleration phases! Controlling the lowpass filter cutoff, we can control the motion path roundness, hence mimiking a variation of the object's mass. This brings us to another way we can define non-linear motion:
+
+> [!IMPORTANT]
+> You can provide a linear motion path (which is easy to define and control), interpret it in the frequency domain, and remove high frequencies from it. This will create a smoother motion which naturally accounts for acceleration, deceleration, and inertia.
+
+
 
 
 ## Motion blur
