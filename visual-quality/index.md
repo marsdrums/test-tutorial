@@ -811,7 +811,7 @@ $$
 y = -2x^3 + 3x^2
 $$
 
-which happens to be the function plotted in the graph above. In the codomain [0; 1], this function exhibits the curve we are after, starting end ending with slope 0. Let's try to apply this movement path to an object to see the difference.
+which happens to be the function plotted in the graph above. In the subdomain [0; 1], this function exhibits the curve we are after, starting end ending with slope 0. Let's try to apply this movement path to an object to see the difference.
 
 ![](./images/visual-quality_078.gif)
 
@@ -830,7 +830,8 @@ From this basic cubic function, you can design many different variations. For ex
 
 ![](./images/visual-quality_081.gif)
 
-Cubic functions are not the only ones having null derivatives in a given codomain. These are some possible other functions plotted on a graph:
+Cubic functions are not the only ones having null derivatives at the beginning and at the end of a given subdomain. These are some possible other functions plotted on a graph:
+
 ![](./images/visual-quality_080.png)
 
 $\color{red} y = x$ (for reference), $\color{aqua} y = -2x^3 + 3x^2$, $\color{magenta} y = \frac{\cos(x \cdot \pi) + 1}{2}$, $\color{gold} y = 6x^5 - 15x^4 + 10x^3$.
