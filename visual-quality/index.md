@@ -1032,9 +1032,11 @@ And in the biquad computation coefficients are no longer provided as params, but
 
 ![](./images/visual-quality_099.png)
 
-With control over individual cut off values, you can differenciate the objects behavior. In the patch below, i had fun generating random cutoff values (in the range [2;4]), and then i tried to assign progressively increasing cutoff values (from left to right). Having this degree of control, you can create very intresting animations.
+With control over individual cutoff values, you can differenciate the objects behavior. In the patch below, i had fun generating random cutoff values (in the range [2;4]), and then i tried to assign progressively increasing cutoff values (from left to right). With this degree of control, you can create very intresting animations.
 
 https://github.com/user-attachments/assets/20d97fc4-999a-4f2f-a23d-76a5b91b9b0c
+
+Filters are an excellent tool for enhancing the appearance of complex object motion, with Butterworth filters being especially well-suited for this purpose. Much like motion functions, filters allow you to smooth a motion path by providing a linear motion as input, producing results that naturally reflect physically plausible behavior. However, this approach to motion smoothing has a limitation: filters tend to introduce a slight delay in timing, reducing temporal precision. In the end, there’s no single best approach—each situation calls for the right tool to achieve the desired effect.
 
 ## Motion blur
 
