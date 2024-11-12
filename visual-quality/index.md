@@ -131,6 +131,9 @@ The difference is dramatic; the gamma-corrected image on the left seems more nat
 
 ![](./images/visual-quality_008.png)
 
+> [!TIP]
+> As you’ve seen, gamma correction can significantly alter colors. I recommend applying gamma correction at the very start of your patching process and choosing colors based on their gamma-corrected appearance. If you apply gamma correction later and have already balanced colors without it, you may end up needing to redo the color adjustments from scratch.
+
 ## Gamma corrections in a chain of effects
 
 We said that gamma correction must be applied last, but we should also convert any input image or video from sRGB to linear RGB before processing them. 
