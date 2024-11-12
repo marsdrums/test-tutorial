@@ -1004,7 +1004,7 @@ The rendering looks "ok", but let's try to filter out the particle movement.
 
 https://github.com/user-attachments/assets/9b6d91e5-f33a-4896-9544-fdf12144d7af
 
-
+Particles look way more lively! Let's now try to use higher-order butterworth filters. Here i cascaded 4 filters to get 8th-order filtering; i also backed up a little the cutoff value because we don't need to roll it down so much to considerably attenuate high frequency with such a high-order filter.
 
 
 ## Motion blur
