@@ -630,7 +630,7 @@ Which of the two ducks is bigger?
 
 ![](./images/visual-quality_063.png)
 
-They are the same size, but some visual clues makes us percieve the duck on the right to be way bigger than the duck on the left. We, as humans, are used to estimate the size of objects and the distance between them. Humans estimate the size of objects through a combination of visual cues, learned experience, and context. Our brains use information from our eyes, as well as from our knowledge of the world, to interpret and understand the relative size and distance of objects. I'd like to list some of visual clues that contribute to the size perception and explore how we can recreate them in Jitter to give a better sense of objects' scale.
+They are the same size, but some visual clues makes us percieve the duck on the right to be way bigger than the duck on the left. We, as humans, are used to estimate the size of objects and the distance between them. Humans estimate the size of objects through a combination of visual cues, learned experience, and context. Our brains use information from our eyes, as well as from our knowledge of the world, to interpret and understand the relative size and distance of objects. I'd like to list some visual clues that contribute to the size perception and explore how we can recreate them in Jitter to give a better sense of objects' scale.
 
 ## Familiarity and Context
 
