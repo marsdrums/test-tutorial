@@ -411,7 +411,7 @@ Let’s explore what makes ReSTIR unique without delving too deeply into technic
 > [!NOTE]
 > Numerous variations of the ReSTIR algorithm have been developed to adapt to different rendering methods. In Jitter, the ReSTIR algorithm is used to compute global illumination by tracing rays in screen-space.
 
-ReSTIR has been implemented in Max 9 as {jit.gl.pass} FX named "gi" (global illumination). This pass FX can interact with {jit.gl.pbr} (to get the materials' BRDFs) and with {jit.gl.environment} (to gather light from an environment map). This means that whichever settings you use for jit.gl.pbr, the ReSTIR pass will respond with the correct lighting behavior. For example, any change of a mesh' roughness and/or metalness, will affect how the "gi" pass computes global illumination.
+ReSTIR has been implemented in Max 9 as {jit.gl.pass} FX named "gi" (global illumination). This pass FX can interact with {jit.gl.pbr} (to get the materials' BRDFs) and with {jit.gl.environment} (to gather light from an environment map). This means that whichever settings you use for jit.gl.pbr, the ReSTIR algorithm will respond with the correct lighting behavior. For example, any change of a mesh' roughness and/or metalness, will affect how the "gi" pass computes global illumination.
 
 ![](./images/visual-quality_036.png)
 
