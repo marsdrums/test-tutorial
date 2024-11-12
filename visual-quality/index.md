@@ -1014,7 +1014,13 @@ https://github.com/user-attachments/assets/a7db5010-202c-446e-992e-39d732dcecb9
 
 As you can see, decreasing the cutoff value resembles a mass increase. Since we have our butterworth coefficients calculator exposed, we cen go a step further and assign different cutoff values to each particle. I reworked slightly to coefficients calculator and the biquad filter to read from matrices the coefficient values.
 
+![](./images/visual-quality_098.png)
 
+The coefficient calculator has been turned into a {jit.gen.codebox} to operate on matrices, but the code stays the same.
+
+![](./images/visual-quality_099.png)
+
+And in the biquad computation coefficients are no longer provided as params, but as matrices.
 
 
 ## Motion blur
