@@ -898,7 +898,7 @@ Let's bring back this concept to Jitterland, and let's see how we can use it to 
 
 ![](./images/visual-quality_087.gif)
 
-I’ve created a simple scene with a red sphere that moves randomly across the screen. The motion is smoothed with a low-pass filter using the {slide} object. The two graphs on the right show the unfiltered and filtered motions. Overall, the filtered movement looks realistic, with the sphere experiencing acceleration and deceleration. Here’s a side-by-side comparison of the unfiltered vs. filtered motion:
+I've created a simple scene with a red sphere that moves randomly across the screen. The motion is smoothed with a low-pass filter using the {slide} object. The two graphs on the right show the unfiltered and filtered motions. Overall, the filtered movement looks realistic, with the sphere experiencing acceleration and deceleration. Here’s a side-by-side comparison of the unfiltered vs. filtered motion:
 
 ![](./images/visual-quality_088.gif)
 
