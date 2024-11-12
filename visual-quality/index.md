@@ -1056,7 +1056,7 @@ In computer graphics, we replicate this effect to give the impression of speed a
 
 # Eye candies
 
-We set up a wonderful scene, with realistic motion and breath-taking lighting, but we need that extra 2% of spicyness. These is a list of post processing effects that can give you that extra flavor.
+We set up a wonderful scene, with realistic motion and breath-taking lighting, but we need that extra 2% of spicyness. These is a list of post processing effects that can give you that extra push.
 
 ## Grain
 
