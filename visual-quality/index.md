@@ -996,9 +996,15 @@ And this is the coefficient computation implemented in Max:
 
 ![](./images/visual-quality_093.png)
 
-Enough math, let's see how this filter looks like! I designed a very simple test patch where the colors of an input video are interpeted as 3D positions for a particle system. In particular, particles are distributed evenly across the horizontal dimension, and i computed the color luminance to affect vertical positioning.
+Enough math, let's see how this filter looks like! I designed a straightforward test patch where the colors of an input video are interpeted as 3D positions for a particle system. In particular, particles are distributed evenly across the horizontal dimension, and i computed the color luminance to affect vertical positioning.
 
-https://github.com/user-attachments/assets/b4cd2c1c-b6a7-4c1f-ae70-b57422f9b090
+https://github.com/user-attachments/assets/ab967640-0ed2-42f0-a89c-1cbc212b7d3c
+
+The rendering looks "ok", but let's try to filter out the particle movement. 
+
+https://github.com/user-attachments/assets/9b6d91e5-f33a-4896-9544-fdf12144d7af
+
+
 
 
 ## Motion blur
