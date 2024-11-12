@@ -1054,4 +1054,31 @@ Motion blur is a visual effect that simulates the natural blurring of moving obj
 
 In computer graphics, we replicate this effect to give the impression of speed and smoothness. Motion blur can enhance the realism of fast-paced scenes by softening the edges of objects in motion, making them look less "stiff" or "choppy." Without it, animations, especially at high speeds, can feel unnatural or overly crisp.
 
+# Eye candies
+
+We set up a wonderful scene, with realistic motion and breath-taking lighting, but we need that extra 2% of spicyness. These is a list of post processing effects that can give you that extra flavor.
+
+## Grain
+
+A "grain" effect, often referred to as film grain, is a visual effect that simulates the appearance of tiny particles or irregularities that are typically found in analog film stock. This effect mimics the texture of classic film, replicating the random, slightly gritty pattern that comes from the natural silver halide crystals used in old film emulsions. Adding film grain to your rendering may serve different purposes:
+
+- Digital footage is often very clean and sharp, sometimes to the point of feeling too clinical or lifeless. Grain can add a subtle layer of texture that makes the image appear more organic. This depth can help avoid the "flat" look that some digital video has and make scenes appear more immersive and visually interesting.
+
+- If your render contains composited elements (such as 3D elements, images, and videos), adding a grain FX can help make these disparate parts feel more cohesive. Grain effectively "glues" the visual layers together because the consistent texture over the entire frame helps everything blend in more naturally.
+
+- Grain can also be used to mask minor flaws in footage, such as noise, slight color banding, or imperfections from upscaling lower-resolution video. By adding a layer of grain, you create a visual distraction that makes these issues less noticeable.
+
+To add film grain to your renders in Max, you can use the {jit.gl.pass}' effect called "grain".
+
+## Vignette
+
+A vignette effect is a visual effect that gradually darkens or lightens the edges of the video frame, leaving the central part of the frame more prominent. The primary purpose of a vignette is to draw the viewer’s attention towards the center of the frame or a key subject. By slightly darkening the edges, the eye is naturally guided to the brighter, central part of the scene. This is particularly useful when you want to make sure that viewers are focusing on the main character or critical action in the shot. 
+
+Vignetting is often associated with traditional cinematic visuals, as it was originally a natural characteristic of old lenses and film stock. Adding a vignette gives your video a subtle, filmic quality that can feel sophisticated, adding a professional aesthetic that makes your footage feel more like something seen in the movies!
+
+## Bloom
+
+The bloom effect is a visual effect that simulates an intense, glowing halo of light that appears to “bloom” or spread out beyond the bright areas of an image, giving the impression of light spilling over into surrounding parts of the frame. Bloom is often used to emulate HDR, making it feel like the bright parts of the image are more intense than what a standard screen can naturally produce. It helps accentuate highlights without losing too much detail, creating a sense of depth between the shadows and light areas. The bloom effect helps to ensure that those bright regions feel vivid and realistic, enhancing the sense of dynamic range.
+
+In older lenses, bright highlights tended to bloom as the light scattered inside the lens elements. Adding a bloom effect helps replicate this imperfection, which is often perceived as aesthetically pleasing because it adds a bit of warmth and life to a shot. Many filmmakers appreciate this look for the same reason they add grain—it gives the footage a more human and imperfect quality, moving away from the stark, clinical sharpness of modern digital cameras.
 
