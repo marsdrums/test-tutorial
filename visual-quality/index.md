@@ -1038,6 +1038,8 @@ https://github.com/user-attachments/assets/20d97fc4-999a-4f2f-a23d-76a5b91b9b0c
 
 Filters are an excellent tool for enhancing the appearance of complex object motion, with Butterworth filters being especially well-suited for this purpose. Much like motion functions, filters allow you to smooth a motion path by providing a linear motion as input, producing results that naturally reflect physically plausible behavior. However, this approach to motion smoothing has a limitation: filters tend to introduce a slight delay in timing, reducing temporal precision. In the end, there’s no single best approach—each situation calls for the right tool to achieve the desired effect.
 
+It’s worth highlighting that Max provides a set of objects specifically crafted to simplify object motion management: {jit.anim.drive}, {jit.anim.path}, and {jit.anim.node}. These objects are ideal for high-level motion control, as they can be adjusted through intuitive, meaningful parameters. Additionally, there’s a set of external objects called “ease” that provides tools for defining motion functions without needing to dive deeply into the underlying math. Max, as always, is a highly modular, multi-level development environment, allowing you to find solutions that best suit your needs.
+
 ## Motion blur
 
 ---
