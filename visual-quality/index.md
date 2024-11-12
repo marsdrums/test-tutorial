@@ -917,11 +917,13 @@ Since one-pole filters are 1st-order filters, they provide a gentle frequency cu
 
 ### Biquadratic filters and Butterworth filters
 
-A biquadratic filter (or biquad filter for short) is a type of digital filter used to shape or modify signals in various ways. It’s called “biquad” because it’s based on a second-order equation, meaning it can control two key frequency elements at once.
+A filter can be constructed (in the case of an analog filter) or implemented (if digital) in a variety of ways. A filter ***topology*** refers to the structural arrangement or configuration used to implement a filter in electronics or digital signal processing. The topology defines how components (such as capacitors, resistors, and inductors in analog filters, or coefficients and delays in digital filters) are organized and interconnected to achieve the desired filtering effect.
 
-Biquad filters rely on specific coefficients to control their operation. These coefficients allow you to decide which frequencies are boosted or reduced and determine the filter’s type—whether it’s low-pass, high-pass, band-pass, etc. In the filter equation, these coefficients define precisely how much to enhance or reduce particular parts of the signal.
+In the world of digital filters, a widely used filter topology are biquadratic filters (or biquad filter for short). This kind of filters are very appreciated for their flexibility, as they can be used to implement different filter responses (low-pass, high-pass, band-pass, etc.).
 
-A biquad filter operates using a formula with five main coefficients: a0, a1, a2, b1, b2. These coefficients go into a difference equation that applies the filter to each new sample in the signal. In practical terms, the filter equation looks like this:
+Biquad filters rely on specific coefficients to control their operation. These coefficients allow you to decide which frequencies are boosted or reduced and determine the filter’s type. A biquad filter operates using a formula with five main coefficients: a0, a1, a2, b1, b2. 
+
+In practical terms, the filter equation looks like this:
 
 $$
 y[n] = \frac{b_0 \cdot x[n] + b_1 \cdot x[n-1] + b_2 \cdot x[n-2] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]}{a_0}
@@ -933,13 +935,66 @@ Where:
 - $x[n]$, $x[n-1]$, and $x[n-2]$ are the current and past input samples.
 - $y[n-1]$ and $y[n-2]$ are the past two output samples.
 
-
-![](./images/visual-quality_090.png)
+And a Maxy implementation of such a filter topology looks like this:
 
 ![](./images/visual-quality_091.png)
 
 > [!NOTE]
-> The object {jit.fx.ti.filter} implements a biquad temporal filter like the one displayed above.
+> The objects {biquad~} and {jit.fx.ti.filter} implement biquad temporal filters like the ones displayed above.
+
+How can we compute the correct filter coefficients to get the desired filter response? Each kind of filter has its onw coefficient calculation.
+
+> [!TIP]
+> I invite you to check out the patch "gen~.biquad.maxpat" for looking at various biquad coefficient computations:
+![](./images/visual-quality_092.png)
+
+For our goal, there's a specific filter response i'm particularly intrested in: low-pass ***Butterworth filters***. Butterworth filters are a type of signal filter known for their maximally flat frequency response in the passband, meaning they allow frequencies up to a specified cutoff to pass through without significant attenuation or ripples. This makes Butterworth filters ideal when smooth, distortion-free filtering is needed. The transition from passband to stopband (attenuation region) is gradual compared to other filters, like Chebyshev or elliptic filters, which prioritize sharper cutoffs at the expense of flatness. Moreover, Butterworth filters generally offer a near-linear phase response, especially at lower frequencies, which minimizes phase distortion for signals passing through the filter. In other words, butterworth filters are design to be as transparent as possible in regard to the signal being filtered.
+
+We can implement a digital butterworth filter response using a biquad filter. Let's see how to compute proper coefficients for this kind of filter:
+
+To compute the coefficients $a0$,$a1$,$a2$,$b1$,$b2$ for implementing a Butterworth filter, we need to follow a systematic process. 
+
+Define Parameters:
+- Cutoff frequency $fc$ (in Hz) – the frequency at which the filter starts attenuating the signal.
+- Sampling rate $fs$ (in Hz) – the rate at which the signal is sampled. In our case, the frame rate of our video.
+
+The cutoff frequency in the digital domain needs to be pre-warped using the following formula:
+
+$$
+ωc = 2π * (fc / fs)
+$$
+
+where $ωc$ is the angular frequency. The warped frequency is then:
+
+$$
+ωd = 2 * tan(ωc / 2)
+$$
+
+The coefficients for the second-order Butterworth filter in the z-domain are calculated as follows:
+
+$$
+a0 = (ωd^2) / (1 + √2 * ωd + ωd^2)
+$$
+
+$$
+a1 = 2 * a0
+$$
+
+$$
+a2 = a0
+$$
+
+$$
+b1 = (2 * (ωd^2 - 1)) / (1 + √2 * ωd + ωd^2)
+$$
+
+$$
+b2 = (1 - √2 * ωd + ωd^2) / (1 + √2 * ωd + ωd^2)
+$$
+
+And this is the coefficient computation implemented in Max:
+
+![](./images/visual-quality_093.png)
 
 
 ## Motion blur
