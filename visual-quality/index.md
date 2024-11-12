@@ -1051,15 +1051,4 @@ Motion blur is a visual effect that simulates the natural blurring of moving obj
 
 In computer graphics, we replicate this effect to give the impression of speed and smoothness. Motion blur can enhance the realism of fast-paced scenes by softening the edges of objects in motion, making them look less "stiff" or "choppy." Without it, animations, especially at high speeds, can feel unnatural or overly crisp.
 
----
-
-# Lighting setup
-
----
-
-# Color harmony
-
----
-
-# Image composition
 
