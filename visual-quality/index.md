@@ -1004,12 +1004,13 @@ The rendering looks "ok", but let's try to filter out the particle movement.
 
 https://github.com/user-attachments/assets/9b6d91e5-f33a-4896-9544-fdf12144d7af
 
-The particles look way more lively! Let's now try using higher-order Butterworth filters. Here, I cascaded 4 filters to get 8th-order filtering; I also backed up the cutoff value a little because we don't need to roll it down so much to considerably attenuate high frequency with such a high-order filter.
+The particles look way more lively! Let's now try using higher-order Butterworth filters. Here, I cascaded four filters to get 8th-order filtering; I also backed up the cutoff value a little because we don't need to roll it down so much to considerably attenuate high frequency with such a high-order filter.
 
 https://github.com/user-attachments/assets/2c8569f9-3630-456f-a708-6d877726614f
 
-The particle movement became "bouncier"! Before reaching the input position, each particle oscillates slightly. Cascading even more 2nd-order filters, the bouncing effect becomes more pronounced. We can evan try to "trigger" a new particle arrangment and look at how the filter smoothens out motion:
+The particle movement became "bouncier"! Before reaching the input position, each particle oscillates slightly. Cascading even more 2nd-order filters, the bouncing effect becomes more pronounced. We can even try to "trigger" a new particle arrangement and look at how the filter smoothens out motion:
 
+https://github.com/user-attachments/assets/a7db5010-202c-446e-992e-39d732dcecb9
 
 
 ## Motion blur
