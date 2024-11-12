@@ -787,6 +787,8 @@ Although this approach to defining motion produces organic and realistic results
 
 To have a better understanding of the problem, let's observe again what's wrong with the yellow square's momevent:
 
+![](./images/visual-quality_101.gif)
+
 The square moves back and forth without any change in speed. For this kind of movement to happen, it would require infinite acceleration, which could result from either a zero mass or an infinitely strong force. This type of movement is known as ***linear motion***, and it’s precisely what we’re aiming to avoid.
 
 > [!NOTE]
