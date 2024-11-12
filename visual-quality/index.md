@@ -594,7 +594,7 @@ TAA applies a sub-pixel jitter or shift to the camera's position between frames.
 In Max, TAA can be applied using the object {jit.gl.pass} @fxname TAA.
 
 > [!IMPORTANT]
-> TAA must placed after tonemapping and before gamma correction.
+> TAA must be placed after tonemapping and before gamma correction.
 
 ![](./images/visual-quality_059.png)
 ![](./images/visual-quality_058.png)
