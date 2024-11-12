@@ -891,6 +891,9 @@ The low pass filter attenuates high frequencies, and look at our motion function
 > [!IMPORTANT]
 > You can create a straightforward linear motion path (simple to define and control), interpret it in the frequency domain, and filter out the high frequencies. This process results in a smoother motion that naturally incorporates acceleration, deceleration, and inertia.
 
+> [!NOTE]
+> The filters described in the following section are infinite impulse response (IIR) filters that work in the time domain. When I mention "operate in the frequency domain," I’m not implying any spectral processing; rather, I’m referring to the filters' effect, which is to reduce the amplitude of certain frequency ranges.
+
 Let's bring back this concept to Jitterland, and let's see how we can use it to improve the motion of objects.
 
 ![](./images/visual-quality_087.gif)
