@@ -1014,7 +1014,7 @@ The rendering looks "ok", but let's try to filter out the particle movement.
 
 https://github.com/user-attachments/assets/9b6d91e5-f33a-4896-9544-fdf12144d7af
 
-The particles look way more lively! Let's now try using higher-order Butterworth filters. Here, I cascaded four filters to get 8th-order filtering; I also backed up the cutoff value a little because we don't need to roll it down so much to considerably attenuate high frequency with such a high-order filter.
+The particles look way more lively! Let's now try using higher-order Butterworth filters. Here, I cascaded four filters to get 8th-order filtering; I also backed up the cutoff value a little because we don't need to roll it down so much to attenuate high frequencies with such a high-order filter.
 
 https://github.com/user-attachments/assets/2c8569f9-3630-456f-a708-6d877726614f
 
