@@ -900,7 +900,7 @@ I’ve created a simple scene with a red sphere that moves randomly across the s
 > [!NOTE]
 > Digital filters can be tricky to navigate, and designing them is a complex subject that deserves its own in-depth discussion. For this article, I’ll focus on demonstrating some filter implementations without diving deeply into technical details. Instead, I'll provide qualitative insights and examples of when and how to use these filters, keeping things accessible and practical. (Plus, I’m not a filter design expert!)
 
-### One-pole filter
+#### One-pole filter
 
 This is the simplest possible low-pass filter:
 
@@ -915,7 +915,7 @@ Since one-pole filters are 1st-order filters, they provide a gentle frequency cu
 > [!NOTE]
 > One-pole low-pass filters can be implemented in various ways, including using some built-in objects. I chose to implement it in a gen codebox to give a clearer view of the algorithm's inner workings.
 
-### Biquadratic filters and Butterworth filters
+#### Biquadratic filters and Butterworth filters
 
 A filter can be constructed (in the case of an analog filter) or implemented (if digital) in a variety of ways. A filter ***topology*** refers to the structural arrangement or configuration used to implement a filter in electronics or digital signal processing. The topology defines how components (such as capacitors, resistors, and inductors in analog filters, or coefficients and delays in digital filters) are organized and interconnected to achieve the desired filtering effect.
 
