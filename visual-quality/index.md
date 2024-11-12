@@ -54,7 +54,7 @@ The same principles apply when capturing a render to texture: The attribute @typ
 
 ![](./images/visual-quality_037.png)
 
-Things are different when we use {jit.gl.pass}; this object is used to apply post-processing effects on a 3D scene rendered to texture, and to control the bit depth of the internal processing there's a @quality attribute: @quality "lo" = char, @quality "med" = float16" (the default), @quality = "hi" = float32.
+Things are different when we use {jit.gl.pass}; this object is used to apply post-processing effects on a 3D scene rendered to texture, and to control the bit depth of the internal processing there's a @quality attribute: @quality "lo" = char, @quality "med" = float16" (the default), @quality "hi" = float32.
 
 ![](./images/visual-quality_038.png)
 
@@ -1014,15 +1014,15 @@ https://github.com/user-attachments/assets/a7db5010-202c-446e-992e-39d732dcecb9
 
 As you can see, decreasing the cutoff value resembles a mass increase. Since we have our butterworth coefficients calculator exposed, we cen go a step further and assign different cutoff values to each particle. I reworked slightly to coefficients calculator and the biquad filter to read from matrices the coefficient values.
 
-![](./images/visual-quality_098.png)
-
 The coefficient calculator has been turned into a {jit.gen.codebox} to operate on matrices, but the code stays the same.
 
-![](./images/visual-quality_099.png)
+![](./images/visual-quality_098.png)
 
 And in the biquad computation coefficients are no longer provided as params, but as matrices.
 
-With control over indivisual cut off values, you can differenciate the objects behavior. In the patch below, i had fun generating random cutoff values (in the range [2;4]), and then i tried to assign progressively increasing cutoff values (from left to right). Having this degree of control, you can create very intresting animations.
+![](./images/visual-quality_099.png)
+
+With control over individual cut off values, you can differenciate the objects behavior. In the patch below, i had fun generating random cutoff values (in the range [2;4]), and then i tried to assign progressively increasing cutoff values (from left to right). Having this degree of control, you can create very intresting animations.
 
 https://github.com/user-attachments/assets/20d97fc4-999a-4f2f-a23d-76a5b91b9b0c
 
