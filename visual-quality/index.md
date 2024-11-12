@@ -32,7 +32,7 @@ In the digital domain, colors are represented using numerical values, typically 
 - 24-bit: Can represent 16777216 values.
 - 32-bit: Can represent 4294967296 values.
 
-In Jitter we can decide the color bit depth for a generated image, or we can convert the bit depth of an existing one.
+In Jitter, we can decide the color bit depth for a generated image or convert the bit depth of an existing one.
 
 For example, the object {jit.noise} with @planecount 3, @type char, and @dim 100, for each cell of the Jitter matrix, produces 3 color values using 8 bits of memory, making a 24-bit color information. Each component of the RGB encoded color can assume 256 distinct values for 16777216 possible color combinations. This is often called ***True Color***, as it’s sufficient for most applications to represent realistic images with smooth color transitions.
 
@@ -44,37 +44,37 @@ The image we get after this process should be mathematically identical to the in
 
 To make an even more extreme example, let's assume a 1-bit color value. If such a value is $1$, and we multiply it by $0.5$ the result of this operation can't be $0.5$, but only $0$ or $1$ (depending on how the value gets rounded);
 
-For this reason, it makes sense to have bit depths higher than 8-bit.
+For this reason, having bit depths higher than 8-bit makes sense.
 
 > [!IMPORTANT]  
 > You should always use ***float32***, or at least ***float16*** matrices/textures for image processing.
 
-Once your process has finished, you can safely reduce the bit depth of your image if you need, for example, to use smaller storage space, and the result won't change noticeably.
+Once your process has finished, you can safely reduce the bit depth of your image if you need to use smaller storage space, for example, and the result won't change noticeably.
 
 ![](./images/visual-quality_005.png)
 
-The same principles apply when capturing a render to texture: The attribute @type of {jit.gl.node} must be set to "float16" of "float32" if we want to further process the images.
+The same principles apply when capturing a render to texture: The attribute @type of {jit.gl.node} must be set to "float16" of "float32" if we want to process the images further.
 
 ![](./images/visual-quality_037.png)
 
-Things are different when we use {jit.gl.pass}; this object is used to apply post-processing effects on a 3D scene rendered to texture, and to control the bit depth of the internal processing there's a @quality attribute: @quality "lo" = char, @quality "med" = float16" (the default), @quality "hi" = float32.
+Things are different when we use {jit.gl.pass}; this object is used to apply post-processing effects on a 3D scene rendered to a texture and to control the bit depth of the internal processing there's a @quality attribute: @quality "lo" = char, @quality "med" = float16" (the default), @quality "hi" = float32.
 
 ![](./images/visual-quality_038.png)
 
 > [!IMPORTANT]  
-> If multiple {jit.gl.pass} are chained and they use different @quality settings, the lowest @quality is applied to ALL the chained {jit.gl.pass} FXs. My reccomendation is to set the quality to "hi" whenever possible, and make sure all the {jit.gl.pass} objects in the same FX chain share the same quality settings.
+> If multiple {jit.gl.pass} are chained and they use different @quality settings, the lowest @quality is applied to ALL the chained {jit.gl.pass} FXs. My recommendation is to set the quality to "hi" whenever possible and make sure all the {jit.gl.pass} objects in the same FX chain share the same quality settings.
 
 ---
 
 # Color spaces and gamma correction
 
-As we sain in the previous paragraph, in the digital world, colors are expressed through numerical values, often spanning three or more dimensions. Devices such as screens, printers, and cameras interpret these values to display visible colors. The RGB color model is the most commonly used representation. As you likely know, RGB stands for Red, Green, and Blue, the three primary color components combined to reproduce a wide range of colors from the visible spectrum. When all three components are combined at full intensity, they produce white light.
+As we said in the previous paragraph, colors are expressed through numerical values in the digital world, often spanning three or more dimensions. Devices such as screens, printers, and cameras interpret these values to display visible colors. The RGB color model is the most commonly used representation. As you likely know, RGB stands for Red, Green, and Blue, the three primary color components combined to reproduce a wide range of colors from the visible spectrum. When all three components are combined at full intensity, they produce white light.
 
-The problem is that the RGB color encoding is somehow abstract. Each device may have a different way of interpreting the numerical values, resulting in unconsistent results across different devices. For this reason, when we talk about colors, we usually refer to a so-called ***color space***. 
+The problem is that the RGB color encoding is somehow abstract. Each device may interpret the numerical values differently, resulting in inconsistent results across different devices. For this reason, when we talk about colors, we usually refer to a so-called ***color space***. 
 
 Color spaces are systems used to represent and organize colors consistently and measurably. They define how colors can be described in various contexts, whether on a screen, in print, or during digital processing. Color spaces ensure that colors appear as intended, regardless of the device.
 
-Nowadays, most devices (TVs, phones, computer monitors, projectors) use the ***sRGB*** color space (Standard Red, Green, Blue). Understanding how sRGB works is important to assign colors to pixels properly.
+Nowadays, most devices (TVs, phones, computer monitors, projectors) use the ***sRGB*** color space (Standard Red, Green, Blue). Understanding how sRGB works is essential to assign colors to pixels correctly.
 
 ## Why sRGB?
 
@@ -82,7 +82,7 @@ Human vision is more sensitive to changes in darker tones than in brighter tones
 
 Given the limited number of shades that a color may assume in the digital domain (e.g., 256 × 256 × 256 = 16.000.000 possible colors with 8-bit color data), it makes sense to "spend" more precision on darker tones than on brighter ones to match the human color perception better. If brightness were linearly represented, most of the color data would be concentrated in the bright parts of the image, and the darker parts would lack detail.
 
-How does sRGB "distribute" precision where it's needed most? It does it by applying a so-called ***gamma correction*** curve, which re-maps the RGB values to better match human eye perception. The gamma curve in sRGB compensates for the ***non-linear*** way human eyes perceive brightness, making images appear more natural on screens; it optimizes digital data by spreading information more evenly across the range of brightness levels we perceive.
+How does sRGB "distribute" precision where it's needed most? It applies a so-called ***gamma correction*** curve, which re-maps the RGB values to match human eye perception better. The gamma curve in sRGB compensates for the ***non-linear*** way human eyes perceive brightness, making images appear more natural on screens; it optimizes digital data by spreading information more evenly across the range of brightness levels we perceive.
 
 A piece-wise function defines the ***gamma correction*** curve:
 
@@ -92,9 +92,9 @@ The function above transforms the linear RGB colors into sRGB colors. It's also 
 
 ![](./images/visual-quality_002.png)
 
-If you want to check out an implementation of such functions, see the shader 'hdr.gamma.jxs'.
+If you'd like to check out an implementation of these functions, you can see the shader 'hdr.gamma.jxs'.
 
-Most of the time, for efficiency and simplicity, an approximte gamma correction function is preferred over the ones above:
+Most of the time, for efficiency and simplicity, an approximate gamma correction function is preferred over the ones above:
 
 $$
 sRGB = linRGB^{1/2.2}
@@ -104,11 +104,11 @@ $$
 linRGB = sRGB^{2.2}
 $$
 
-These gamma correction curves are very popular and widely used in computer graphics applications because they're simpler than the original piece-wise function, and the difference is visually negligible.
+These gamma correction curves are very popular and widely used in computer graphics applications because they're more straightforward than the original piece-wise function, and the difference is visually negligible.
 
 ## How and where should i apply gamma correction?
 
-Let's put it this way: computers must operate on RGB colors. They don't care at all about our funky color perception; they just need to process color values as they are. Screens, on the other hand, are expecting to receive color values encoded in sRGB color space. So, gamma correction must always be used as the last step of any graphic pipeline. Before sending a Jitter matrix or a texture to the display, we should convert the linear RGB into sRGB.
+Let's put it this way: computers must operate on RGB colors. They don't care at all about our funky color perception; they need to process color values as they are. Screens, on the other hand, are expecting to receive color values encoded in sRGB color space. So, gamma correction must always be used as the last step of any graphic pipeline. Before sending a Jitter matrix or a texture to the display, we should convert the linear RGB into sRGB.
 
 In Jitter, this can be done in a variety of ways:
 
@@ -127,7 +127,7 @@ Let's now talk about the difference that it makes. Let's see the last image with
 
 ![](./images/visual-quality_007.png)
 
-The difference is pretty dramatic; the gamma-corrected image on the left seems more natural and "believable" than the non-gamma-corrected one on the right. Dark details are more distinguishable, and it doesn't look too dark and oversaturated like the image on the right. It's not just a matter of brightness; even if increasing the color values of the image on the right to match the left image brightness, colors still look weird and unnatural:
+The difference is dramatic; the gamma-corrected image on the left seems more natural and "believable" than the non-gamma-corrected image on the right. Dark details are more distinguishable, and it doesn't look too dark and oversaturated like the image on the right. It's not just a matter of brightness; even if increasing the color values of the image on the right to match the left image brightness, colors still look weird and unnatural:
 
 ![](./images/visual-quality_008.png)
 
@@ -136,7 +136,7 @@ The difference is pretty dramatic; the gamma-corrected image on the left seems m
 We said that gamma correction must be applied last, but we should also convert any input image or video from sRGB to linear RGB before processing them. 
 
 > [!IMPORTANT]
-> When images or videos are stored on your computer, their colors are in sRGB color space, therefore, to make a correct image processing chain, we must follow these steps:
+> When images or videos are stored on your computer, their colors are in sRGB color space; therefore, to make a correct image processing chain, we must follow these steps:
 input image -> sRGB to linear RGB -> image processing -> linear RGB to sRGB -> display
 
 ![](./images/visual-quality_009.png)
@@ -153,9 +153,9 @@ Theoretically, one should convert the bricks texture from sRGB to linear RGB bef
 ![](./images/visual-quality_011.png)
 
 > [!IMPORTANT]
-> Color space conversion is NOT needed in case of simple playback and spatial resampling. Convert color spaces only if you have to work on image's colors.
+> Color space conversion is NOT needed in the case of simple playback and spatial resampling. Convert color spaces only if you have to work on the image's colors.
 ![](./images/visual-quality_072.png)
-When performing a zoom operation, on the other hand, the process interpolatates pixels' color values, hence requiring a color space conversion. In practice, the difference is visually neglibigle, and the color conversion can usually be skipped. Here's a zoom in performed with and without color space conversion; the difference is hard to tell.
+When performing a zoom operation, on the other hand, the process interpolatates pixels' color values, hence requiring a color space conversion. In practice, the difference is visually neglibigle, and the color conversion can usually be skipped. Here's a zoom-in performed with and without color space conversion; the difference is hard to tell.
 ![](./images/visual-quality_073.png)
 
 
@@ -167,14 +167,14 @@ Let's say we want to create an outdoor scene illuminated by a bright summer sun.
 
 ![](./images/visual-quality_012.png)
 
-It's a very simple patch, but there are a couple of things i want you to focus on. First of all, I disabled @gamma_correction on both {jit.gl.pbr} objects, and I'm computing the color space conversion manually using {jit.gl.pix.codebox}. Don't mind about the other settings of {jit.gl.pbr}, we'll talk about those in another chapter. 
+It's a straightforward patch, but there are a couple of things i want you to focus on. First of all, I disabled @gamma_correction on both {jit.gl.pbr} objects, and I'm computing the color space conversion manually using {jit.gl.pix.codebox}. Don't mind about the other settings of {jit.gl.pbr}, we'll talk about those in another chapter. 
 
 We said we wanted a bright, sunny day, but honestly, the result looks kind of dull and dark. I set the @diffuse attribute of {jit.gl.light} to a color that resembles the sunlight color, but it doesn't seem enough to get the effect we were after. It doesn't look like an outdoor scene because the light isn't intense enough. This brings us to a key concept: 
 
 > [!IMPORTANT]  
-> light color is NOT light intensity. 
+> Light color is NOT light intensity. 
 
-When we set the @diffuse attribute of {jit.gl.light} what we are actually setting is the light's "tint"; if we want to have a light of arbitrary instesity, we should take those values and multiply them by an intensity value. Let's see what it looks like now:
+When we set the @diffuse attribute of {jit.gl.light}, what we are setting is the light's "tint"; if we want to have a light of arbitrary intensity, we should take those values and multiply them by an intensity value. Let's see what it looks like now:
 
 ![](./images/visual-quality_013.png)
 
@@ -183,19 +183,19 @@ I'm using the {swatch} object to decide the light tint, and I multiply each comp
 > [!IMPORTANT]  
 > You should think in terms of light energy, not in terms of light color. 
 
-When we set the @diffuse attribute of {jit.gl.light} we are expressing how much energy comes from the light source -> how much red, how much green, and how much blue. If you look at the values in the message box below the object {vexpr}, you can notice how values go way past 1. So, don't be afraid to crank up these numbers!
+When we set the @diffuse attribute of {jit.gl.light} we are expressing how much energy comes from the light source -> how much red, how much green, and how much blue. If you look at the values in the message box below the object {vexpr}, you can notice how values go past 1. So, don't be afraid to crank these numbers up!
 
 The light intensity looks correct, but we lost all the details on the shape: the image looks burnt! Let's take a look at the values that are being sent to {jit.pworld}:
 
 ![](./images/visual-quality_014.png)
 
-I put togheter a simple utility to better understand the values that {jit.pworld} receives. This {jit.gl.pix.codebox} converts the rendered image's RGB values to luminance and then compares that luminance to 1: if it exceeds 1, the utility displays a white pixel; if not, it shows a black pixel. With this straightforward test, we can observe that {jit.pworld} is indeed receiving values greater than 1, which results in displaying only white. Essentially, this means colors are clipped, as no color can appear brighter than pure white. Once again, we're in a spot where our rendering looks unnatural: The light intensity seems convincing, but we lost all the shape details because of color clipping. What can we do then?
+I put together a simple utility to better understand the values that {jit.pworld} receives. This {jit.gl.pix.codebox} converts the rendered image's RGB values to luminance and then compares that luminance to 1: if it exceeds 1, the utility displays a white pixel; if not, it shows a black pixel. With this straightforward test, we can observe that {jit.pworld} is indeed receiving values greater than 1, which results in displaying only white. Essentially, this means colors are clipped, as no color can appear brighter than pure white. Once again, we're in a spot where our rendering looks unnatural: The light intensity seems convincing, but we lost all the shape details because of color clipping. What can we do then?
 
 Here comes into play another essential color correction tool: ***tonemapping***.
 
-Tonemapping is a technique used to convert high dynamic range (HDR) images with a wide range of luminance values into a format that can be displayed on low dynamic range (LDR) devices like standard monitors, televisions, or printed media. The goal of tonemapping is to compress the wide range of brightness levels in an HDR image into a range that can be properly displayed on these devices, while still conveying the perceived brightness and contrast of the original scene.
+Tonemapping is a technique used to convert high-dynamic-range (HDR) images with a wide range of luminance values into a format that can be displayed on low-dynamic-range (LDR) devices like standard monitors, televisions, or printed media. The goal of tonemapping is to compress the wide range of brightness levels in an HDR image into a range that can be adequately displayed on these devices while still conveying the perceived brightness and contrast of the original scene.
 
-Tonemapping involves using mathematical functions or algorithms that compress the HDR luminance (brightness) range into a more limited one. This process can be done in several ways, depending on the desired artistic or visual effect. A ubiquitous tonemapping curve is the ***Reinhard Tonemapping***. This curve threatens R, G, and B channels equally and works as a sort of "intensity limiter." The Reinhard tonemapping curve corresponds to the function $RGB_{out} = \frac{RGB_{in}}{RGB_{in}+1}$, and this is its plotted graph:
+Tonemapping involves using mathematical functions or algorithms that compress the HDR luminance (brightness) range into a more limited one. This process can be done in several ways, depending on the desired artistic or visual effect. A ubiquitous tonemapping curve is the ***Reinhard Tonemapping***. This curve equally threatens R, G, and B channels and works as an "intensity limiter." The Reinhard tonemapping curve corresponds to the function $RGB_{out} = \frac{RGB_{in}}{RGB_{in}+1}$, and this is its plotted graph:
 
 ![](./images/visual-quality_015.png)
 
@@ -204,22 +204,22 @@ The red line represents colors without tonemapping, and the green curve shows th
 
 ![](./images/visual-quality_016.png)
 
-With the tonemapping function in place, the color details on the cube are back, and we can still perceive the intense brightness of the light source. Take a look at where I placed the tonemapping function in relation to the gamma correction function. The order for these two "finisher" effects matters and must always be the same:
+With the tonemapping function in place, the color details on the cube are back, and we can still perceive the intense brightness of the light source. Look at where i placed the tonemapping function and the gamma correction function. The order for these two "finisher" effects matters and must always be the same:
 
 > [!IMPORTANT]  
 > Tonemapping first, then gamma correction.
 
-What if we don't want to write the tonemapping and the gamma correction functions every time? We can again use the {jit.gl.pass} effect named ***gamma***. 
+What if we want to avoid writing the tonemapping and the gamma correction functions every time? We can again use the {jit.gl.pass} effect named ***gamma***. 
 
 ![](./images/visual-quality_017.png)
 
-It implements both color correction curves, and you can choose between two gamma correction functions (approximate, and accurate) and among four tonemapping curves (Reinhard, Renhard-Jodie, ACES, and Uncharted2). I invite you to experiment with these functions and find the one that looks better for your scene.
+It implements both color correction curves, and you can choose between two gamma correction functions (approximate and accurate) and among four tonemapping curves (Reinhard, Renhard-Jodie, ACES, and Uncharted2). I invite you to experiment with these functions and find the one that looks better for your scene.
 
 ---
 
 # Global illumination
 
-Let's keep working on our outdoor scene, and let's see what is still missing. Now we have a bright light illuminating the scene, but if you turn the camera around, this is what the back of the cube looks like:
+Let's keep working on our outdoor scene and see what still needs to be added. Now we have a bright light illuminating the scene, but if you turn the camera around, this is what the back of the cube looks like:
 
 ![](./images/visual-quality_018.png)
 
@@ -271,7 +271,7 @@ $$
 > [!NOTE]  
 > Many possible formulations exist for the rendering equation, but for the sake of this article, I'll just focus on the version for non-translucent materials.
 
-If we go beyond the initial aversion to Greek letters one may have, we can break this function into pieces and discover that it's actually pretty simple and elegant.
+If we go beyond the initial aversion to Greek letters, we can break this function into pieces and discover that it's pretty simple and elegant.
 
 ![](./images/visual-quality_022.png)
 
@@ -370,7 +370,7 @@ Now that we have a good idea of what ambient occlusion is, let's see which Max o
 
 ![](./images/visual-quality_029.png)
 
-{jit.gl.pass}' FX ***ssao*** is the simplest ambient occlusion implementation available in max. It is controlled by three parameters: amnt, intensity, and radius. I like to leave "intensity" at 1, and play around with the other two parameters, but i invite you to explore the settings further. "Amnt" controls the amount of obscurance, and radius sets the distance to search for occluders. Although simple, ssao is my first choice because it's not demanding in terms of computing resources, and with a bit of tweaking, it can make miracles. 
+{jit.gl.pass}' FX ***ssao*** is the most straightforward ambient occlusion implementation available in max. It is controlled by three parameters: amnt, intensity, and radius. I like to leave "intensity" at 1, and play around with the other two parameters, but i invite you to explore the settings further. "Amnt" controls the amount of obscurance, and radius sets the distance to search for occluders. Although simple, ssao is my first choice because it's not demanding in terms of computing resources, and with a bit of tweaking, it can make miracles. 
 
 > [!TIP]  
 > Try to cascade three ssao FXs with decreasing radius. I find this configuration to be the best, as it delivers near-surface details but also reacts to distant occluders.
@@ -411,7 +411,7 @@ Let’s explore what makes ReSTIR unique without delving too deeply into technic
 > [!NOTE]
 > Numerous variations of the ReSTIR algorithm have been developed to adapt to different rendering methods. In Jitter, the ReSTIR algorithm is used to compute global illumination by tracing rays in screen-space.
 
-ReSTIR has been implemented in Max 9 as {jit.gl.pass} FX named "gi" (global illumination). This pass FX can interact with {jit.gl.pbr} (to get the materials' BRDFs) and with {jit.gl.environment} (to gather light from an environment map). This means that whichever settings you use for jit.gl.pbr, the ReSTIR algorithm will respond with the correct lighting behavior. For example, any change of a mesh' roughness and/or metalness, will affect how the "gi" pass computes global illumination.
+ReSTIR has been implemented in Max 9 as {jit.gl.pass} FX named "gi" (global illumination). This pass FX can interact with {jit.gl.pbr} (to get the materials' BRDFs) and with {jit.gl.environment} (to gather light from an environment map). This means that whichever settings you use for jit.gl.pbr, the ReSTIR algorithm will respond with the correct lighting behavior. For example, any change of a mesh' roughness and/or metalness will affect how the "gi" pass computes global illumination.
 
 ![](./images/visual-quality_036.png)
 
@@ -430,32 +430,32 @@ These are the built-in solutions for computing indirect lighting and global illu
 
 Images rendered with various environment maps and "gi" pass FX.
 
-One of the secrets to achieving realism is Image-Based Lighting, or IBL for short. Think of IBL as a way to light up your 3D world using real photos of an environment. Instead of manually placing lights around your scene, you can use an image, often a special panoramic photo called environment map (an High Dynamic Range image), that captures the light and colors of a real place. This image wraps around your 3D scene like an invisible sphere, casting light and reflections as if your virtual object were truly sitting in that environment.
+One of the secrets to achieving realism is Image-Based Lighting, or IBL for short. Think of IBL as a way to light up your 3D world using real photos of an environment. Instead of manually placing lights around your scene, you can use an image, often a special panoramic photo called an environment map (a High Dynamic Range image), that captures the light and colors of a real place. This image wraps around your 3D scene like an invisible sphere, casting light and reflections as if your virtual object were truly sitting in that environment.
 
 In Max you can upload an environment map into {jit.gl.material} or {jit.gl.pbr} directly, or use {jit.gl.environment}. The latter is designed to communicate with all {jit.gl.pbr}, {jit.gl.material}, and {jit.gl.skybox} objects in the patch. {jit.gl.environment} also interacts with the "gi" pass FX. By loading an environment map, the "gi" pass can ray trace this environment, casting light from it.
 
 > [!TIP]
-> Usually, all objects in a 3D scene are supposed to live in the same environment. For this reason, i suggest using {jit.gl.environment} for uploading an environment map, because it simplifies a lot the IBL settings control.
+> Usually, all objects in a 3D scene are supposed to live in the same environment. For this reason, i suggest using {jit.gl.environment} for uploading an environment map, because it greatly simplifies the IBL settings control.
 
 ![](./images/visual-quality_040.png)
 
-By loading different environment maps, you can quickly change the illumination of your entire scene. You can download plenty of them from the internet, or create your own with 360° cameras. Environment maps usually come in the .EXR format.
+By loading different environment maps, you can quickly change the illumination of your entire scene. You can download plenty of them online or create your own with 360° cameras. Environment maps usually come in the .EXR format.
 
 > [!NOTE]
 > EXR images, or OpenEXR files, are a type of image format designed specifically for high-quality, high-dynamic-range (HDR) imaging. These images are commonly used in computer graphics and visual effects, including environment mapping, due to their ability to store a vast range of luminance and color data that traditional image formats like JPEG or PNG cannot capture.
 
 Environment maps usually come in two formats: equirectangular and cube maps.
-- An equirectangular environment map is a type of panoramic image that represents a full 360-degree view of an environment, mapped onto a 2D rectangular image. The format resembles a world map where the top and bottom portions correspond to the poles, and the center represents the equator.
-- A cube map is a set of six square images that represent the environment around a point in space, with each image covering one side of a cube (front, back, left, right, top, and bottom). When mapped together, these six images form a seamless 3D environment around a viewer or object.
+- An equirectangular environment map is a panoramic image representing a full 360-degree view of an environment mapped onto a 2D rectangular image. The format resembles a world map where the top and bottom portions correspond to the poles, and the center represents the equator.
+A cube map is a set of six square images that represent the environment around a point in space. Each image covers one side of a cube (front, back, left, right, top, and bottom). When mapped together, these six images form a seamless 3D environment around a viewer or object.
 
 ![](./images/visual-quality_043.png)
 
 Image from "Extending 2D Saliency Models for Head Movement Prediction in 360-degree Images using CNN-based Fusion" by Ibrahim Djemai et al.
 
-The object {jit.gl.environment} can load equirectangular environment maps, but if you have a cube map, you can transform it into an equirectangualar map using the object {jit.gl.cubemap}.
+The object {jit.gl.environment} can load equirectangular environment maps. Still, if you have a cube map, you can transform it into an equirectangular map using the object {jit.gl.cubemap}.
 
 > [!NOTE]
-> Take a look the the {jit.gl.environment} help file to see how to import cube maps into it. If you need to transform an quirectangular environment map into a cube map, check out the "ibl.rect2cube.mrt.jxs" shader.
+> Take a look at the {jit.gl.environment} help file to see how to import cube maps into it. If you need to transform an equirectangular environment map into a cube map, check out the "ibl.rect2cube.mrt.jxs" shader.
 
 The object {jit.gl.environment} has a @gamma_correction attribute; like with {jit.gl.pbr}, if you want to manage gamma correction manually, you should disable this attribute. The {jit.gl.environment} object includes an attribute called @reflect_edge, which determines the resolution of the environment map used for reflections. This value should be set as a power of 2.
 
@@ -467,7 +467,7 @@ The object {jit.gl.environment} has a @gamma_correction attribute; like with {ji
 Max comes with a built-in "default" lighting setup. When you create a 3D object in an empty patch, it appears illuminated even if no {jit.gl.light} object is present. This is because Max automatically applies a white hemisphere light from above, providing a convenient way to sketch out a scene without worrying about lighting configuration. However, as soon as a {jit.gl.light} object is added, this default light is automatically turned off and replaced by the custom lighting you set up. Unlike with {jit.gl.light} objects, the default light isn’t automatically disabled when using a {jit.gl.environment}.
 
 > [!IMPORTANT]
-> If you want to use image-based lighting ONLY (without any {jit.gl.light}), you must intanciate a "dummy" light with @diffuse 0 0 0 to override the default hemisphere light.
+> If you want to use image-based lighting ONLY (without any {jit.gl.light}), you must instantiate a "dummy" light with @diffuse 0 0 0 to override the default hemisphere light.
 
 ![](./images/visual-quality_042.png)
 
@@ -479,13 +479,13 @@ This image should be illuminated only by the dark environment, but it doesn't wo
 
 ![](./images/visual-quality_044.png)
 
-In computer graphics, shadows are visual indicators that mimic the effect of objects blocking light. They are crucial for creating realistic 3D environments as they convey the spatial relationships between objects, their positions, and their interactions with light sources. Shadows result from light being obstructed and unable to reach certain surfaces due to intervening objects. In essence, shadows are defined negatively: they represent the absence of light. The rendering equation inherently accounts for shadowing, but, as mentioned, solving it directly is impractical in real-time rendering. Therefore, specific techniques have been developed to identify which surfaces should not be illuminated. Jitter employs a technique known as ***shadow mapping*** for rendering shadows.
+In computer graphics, shadows are visual indicators that mimic the effect of objects blocking light. They are crucial for creating realistic 3D environments as they convey the spatial relationships between objects, their positions, and their interactions with light sources. Shadows result from light being obstructed and unable to reach certain surfaces due to intervening objects. In essence, shadows are defined negatively: they represent the absence of light. The rendering equation inherently accounts for shadowing, but, as mentioned, solving it directly is impractical in real-time rendering. Therefore, specific techniques have been developed to identify which surfaces should not be illuminated. Jitter employs a method known as ***shadow mapping*** for rendering shadows.
 
-Shadow mapping works by identifying which parts of the scene are occluded from the light source's viewpoint, thus indicating where shadows should fall. This method is highly effective and widely used in real-time rendering for applications like video games and simulations due to its versatility. Picture positioning a light source (e.g., {jit.gl.light}) and observing the scene from its vantage point. Surfaces visible from the light’s position receive illumination, while those not directly seen remain in shadow. 
+Shadow mapping works by identifying which parts of the scene are occluded from the light source's viewpoint, thus indicating where shadows should fall. Due to its versatility, this method is highly effective and widely used in real-time rendering for applications like video games and simulations. Picture positioning a light source (e.g., {jit.gl.light}) and observing the scene from its vantage point. Surfaces visible from the light’s position receive illumination, while those not directly seen remain in shadow. 
 
 ![](./images/visual-quality_045.png)
 
-Shadow maps are created by rendering the scene from the light's point of view and recording the distance to the visible surfaces. To determine if a point visible from the camera should be in shadow, the distance from that point to the light source is calculated. If this distance is greater than the value stored in the shadow map, the point is considered to be in shadow.
+Shadow maps are created by rendering the scene from the light's point of view and recording the distance to the visible surfaces. To determine if a point visible from the camera should be in shadow, the distance from that point to the light source is calculated. If this distance is greater than the value stored in the shadow map, the point is considered in shadow.
 
 ![](./images/visual-quality_046.png)
 
@@ -498,23 +498,23 @@ Shadows are activated from the {jit.gl.light} object by enabling the @shadows at
 > [!NOTE]
 > Only directional lights and spot lights can cast shadows.
 
-Shadows are there, but they don't look very good on this scene, and would probably need some tweaking. {jit.gl.light} has some attributes we can modify related to shadows: @shadowblur, @shadowquality, @shadowrange. Let's see what are these attributes referring to:
+Shadows are there, but they don't look very good on this scene and would probably need some tweaking. {jit.gl.light} has some attributes we can modify related to shadows: @shadowblur, @shadowquality, @shadowrange. Let's see what are these attributes referring to:
 
-***@shadowblur*** controls the amount of blurring applied on the rendered shadows. When the light source is very small of very far from the illuminated object, shadows appear sharp, with well-defined edges where the transition between light and shadow is abrupt. This kind of shadows are usually called ***hard shadows***. On the contrary, if the light has a big emitting surface, shadows have blurred, gradual edges, creating a transition zone between light and dark. This transition is called the penumbra, where light is partially blocked but not completely absent. The center of the shadow, where light is fully blocked, is called the umbra. Such blurry shadows are called ***soft shadows***. The @shadowblur attributes controls the transitions from hard to soft shadows, and it helps giving the impression of a large emitting light. It also helps with masking aliasing problems (more on that later).
+***@shadowblur*** controls the amount of blurring applied on the rendered shadows. When the light source is very small or very far from the illuminated object, shadows appear sharp, with well-defined edges where the transition between light and shadow is abrupt. This kind of shadows are usually called ***hard shadows***. On the contrary, if the light has a big emitting surface, shadows have blurred, gradual edges, creating a transition zone between light and dark. This transition is called the penumbra, where light is partially blocked but not wholly absent. The center of the shadow, where light is entirely blocked, is called the umbra. Such blurry shadows are called ***soft shadows***. The @shadowblur attribute controls the transitions from hard to soft shadows, and it helps give the impression of a large emitting light. It also helps with masking aliasing problems (more on that later).
 
 ![](./images/visual-quality_051.png)
 
-***@shadowquality*** is a param that controls the resolution of the shadow map. As said before, with shadow mapping, the scene is captured from the camera point of view into a texture. @shadowquality sets the overall quality of the shadow map by changing its resolution.
+***@shadowquality*** is a parameter that controls the resolution of the shadow map. As said before, shadow mapping captures the scene from the camera's point of view into a texture. @shadowquality sets the overall quality of the shadow map by changing its resolution.
 
 ![](./images/visual-quality_050.png)
 
 > [!TIP]
-> When setting @shadowquality, start from "hi", and progressively reduce the quality until you start seeing jagged shadow margins. Then, increase the quality by one step. If perfomance isn't an issue, go with "hi" directly.
+> When setting @shadowquality, start from "hi", and progressively reduce the quality until you see jagged shadow margins. Then, increase the quality by one step. If performance isn't an issue, go with "hi" directly.
 
 > [!NOTE]
-> instead of using the @shadowquality attribute, you can send the message "sendoutput dim" followed by the desired shadow map size to {jit.gl.light}. Take a look at the patch 'lights.shadow.map.texture.maxpat' for an example.
+> Instead of using the @shadowquality attribute, you can send the message "sendoutput dim" followed by the desired shadow map size to {jit.gl.light}. Take a look at the patch 'lights.shadow.map.texture.maxpat' for an example.
 
-The ***@shadowrange*** attribute determines how much of the scene is visible from the light's perspective. When rendering the scene from a light source, the light is represented by a virtual camera, which has the same controls as any camera created with {jit.gl.camera}. This includes a far clip parameter to set the extent of the view frustum. The @shadowrange attribute specifies the length of the light-camera frustum. Adjusting this attribute properly is essential to ensure that all objects in the scene are capable of casting shadows.
+The ***@shadowrange*** attribute determines how much of the scene is visible from the light's perspective. When rendering the scene from a light source, the light is represented by a virtual camera, which has the same controls as any camera created with {jit.gl.camera}. This includes a far clip parameter to set the extent of the view frustum. The @shadowrange attribute specifies the length of the light-camera frustum. Adjusting this attribute properly is essential to ensure that all objects in the scene can cast shadows.
 
 ![](./images/visual-quality_049.png)
 
@@ -528,29 +528,29 @@ These are the settings i ended up with:
 
 ![](./images/visual-quality_052.png)
 
-I usually like to have shadows with no or little blur when using directional lights, because they simulate light coming from a very distant emitter, which doesn't create regions of penumbra. @shadowrange has been set to tighly comprise all the objects in the shadowmap, and @shadowquality has been set to "hi" because performance wasn't problematic with such a simple scene.
+I usually like to have shadows with no or little blur when using directional lights because they simulate light coming from a distant emitter, which doesn't create penumbra regions. @shadowrange has been set to comprise all the objects in the shadowmap tightly, and @shadowquality has been set to "hi" because performance wasn't problematic with such a simple scene.
 
 These were the shadow settings of {jit.gl.light}, but there are other shadow-related attributes we can modify: {jit.gl.pbr} and {jit.gl.material} can in fact be used to tweak the shadow apparence further. Let's take a closer look at our scene:
 
 ![](./images/visual-quality_053.png)
 
-You can notice that where the cube contacts the floor, the shadow isn't precise. {jit.gl.pbr}'s shadow attributes control the behaviour of the shadow-receiving objects, and we can try to tweak them to improbe the shadows look. @shadow_hard, @shadow_soft, and @shadow_radius are parameters used to trim the shadow's apparence when {jit.gl.light}'s @shadowblur is greater than 0, defining the transition between umbra and penumbra. Since our light is directional, i'll set these parameters to their "neutral" values:
+You can notice that the shadow isn't precise where the cube contacts the floor. {jit.gl.pbr}'s shadow-related attributes control the behavior of the shadow-receiving objects, and we can try to tweak them to improve the shadow's look. @shadow_hard, @shadow_soft, and @shadow_radius are parameters used to trim the shadow's appearance when {jit.gl.light}'s @shadowblur is greater than 0, defining the transition between umbra and penumbra. Since our light is directional, i'll set these parameters to their "neutral" values:
 
 ![](./images/visual-quality_054.png)
 
-You can notice that the contact shadow looks sharper now. About the last attribute, @shadow_eps, this is used to compensate for two kinds of visual artifacts that shadow mapping may produce: shadow acne, and shadow leakage.
+You can notice that the contact shadow looks sharper now. The last attribute, @shadow_eps, is used to compensate for two kinds of visual artifacts that shadow mapping may produce: shadow acne and shadow leakage.
 
-Shadow acne is a common artifact that occurs in shadow mapping, creating an unwanted pattern of dark spots or lines on the surfaces of 3D objects. 
+Shadow acne is a common artifact in shadow mapping. It creates an unwanted pattern of dark spots or lines on the surfaces of 3D objects. 
 
 ![](./images/visual-quality_055.png)
 
-This issue happens when the shadow map incorrectly calculates whether a point is in shadow, leading to a speckled or "striped" appearance. Shadow acne arises due to precision errors and self-shadowing issues. When rendering from the light's point of view, each surface's distance from the light is stored in the shadow map. During the scene's final rendering, the distance from the camera's perspective is compared to the shadow map's stored values. If the depth values are too close or nearly identical, slight precision errors can cause the surface to be falsely considered in shadow, even when it shouldn't be. This leads to shadow acne. To solve this issue, a small offset is added to the distance comparison, removing self-shading issues. @shadow_eps controls this arbitrary offset (the small offset is usually referred to as "epsilon").
+This issue happens when the shadow map incorrectly calculates whether a point is in shadow, leading to a speckled or "striped" appearance. Shadow acne arises due to precision errors and self-shadowing issues. When rendering from the light's point of view, each surface's distance from the light is stored in the shadow map. The distance from the camera's perspective is compared to the shadow map's stored values during the scene's final rendering. If the depth values are too close or nearly identical, slight precision errors can cause the surface to be falsely considered in shadow, even when it shouldn't be. This leads to shadow acne. A slight offset is added to the distance comparison to solve this issue, removing self-shading issues. @shadow_eps controls this arbitrary offset (the slight offset is usually called "epsilon").
 
-Shadow leakage is another common artifact in shadow mapping, where light or shadow unintentionally "leaks" through objects, causing parts of the scene to appear illuminated when they should be in shadow, or vice versa. 
+Shadow leakage is another common artifact in shadow mapping. In this phenomenon, light or shadow unintentionally "leaks" through objects, causing parts of the scene to appear illuminated when they should be in shadow or vice versa. 
 
 ![](./images/visual-quality_056.png)
 
-shadow leaking below the cube.
+Shadow leaking below the cube.
 
 Shadow leakage typically happens due to improper depth comparisons or insufficient precision in the shadow map, leading to errors in identifying whether a surface should be in shadow. This issue is especially common when large or complex scenes are rendered, where distant objects or parts of the scene may not be accurately represented in the shadow map. Once again, a small @shadow_eps can solve or alleviate the issue.
 
@@ -559,9 +559,9 @@ Shadow leakage typically happens due to improper depth comparisons or insufficie
 ![](./images/visual-quality_064.png)
 Left: @shadow_eps = 0, leads to shadow acne; Center: @shadow_eps 0.004, correct settings for this scene; Right: @shadow_eps = 0.2 (the default), leads to light leaking through the wall on the left, and the shadows below the poles on the balcony look detached from the poles.
 
-At the end of the day, shadow maping always requires some tweaking. It's impossible to find settings that always work, because shadow mapping is very sensible to the scene's scale. The only way is to get the desired effect is to empirically tweak the parameters until shadows look good. Still, it's important to be aware of the parameters' role to modify them with conciousness.
+At the end of the day, shadow mapping always requires some tweaking. It's impossible to find settings that always work because shadow mapping is very sensible to the scene's scale. The only way to get the desired effect is to empirically tweak the parameters until the shadows look good. Still, it's important to be aware of the parameters' role to modify them with consciousness.
 
-As everything in computer graphics, many variations of the original algorithm have been created. To name a few: percentage-close filtering (PCF), variance shadow maps (VSM), cascaded shadow maps (CSM). For those of you who are into shader programming, i invite you to experiment with different shadow mapping techniques. If you need to access the shadow map captured by {jit.gl.light} for custom shadow mapping implementations, check out the patch 'lights.shadow.map.texture.maxpat'.
+As with everything in computer graphics, many variations of the original algorithm have been created. To name a few: percentage-close filtering (PCF), variance shadow maps (VSM), and cascaded shadow maps (CSM). For those of you who are into shader programming, i invite you to experiment with different shadow mapping techniques. If you need to access the shadow map captured by {jit.gl.light} for custom shadow mapping implementations, check out the patch 'lights.shadow.map.texture.maxpat'.
 
 ---
 
@@ -571,15 +571,15 @@ Imagine looking at a digital image where the edges of objects aren’t smooth bu
 
 Aliasing happens when complex images or detailed patterns are represented at a lower resolution than needed. Picture trying to draw a smooth curve using only square blocks—no matter how carefully you place them, you’ll end up with a blocky, stepped edge instead of a perfect curve. Aliasing arises when a continuous signal (e.g., an image or sound wave) is sampled at an insufficient rate, violating the Nyquist-Shannon sampling theorem. In computer graphics, this means that when an image or 3D model is rendered at a resolution that cannot fully capture its detail, the representation suffers from noticeable artifacts.
 
-To minimize aliasing, a variety of different techniques have been developed. Such techniques go under the umbrella term of ***anti-aliasing***.
+A variety of techniques have been developed to minimize aliasing. Such techniques are grouped under the umbrella term ***anti-aliasing***.
 
 ![](./images/visual-quality_057.png)
 
-In Jitter there are 3 methods we can use to reduce aliasing issues.
+In Jitter, there are 3 methods we can use to reduce aliasing issues.
 
 ## Full Scene Anti-Aliasing (FSAA)
 
-Full Scene Anti-Aliasing is the simplest, but the most effective form of Anti-Aliasing. FSAA solves aliasing issues by rendering the entire scene at a higher resolution than the display resolution. For example, if the target display resolution is 1080p (1920x1080 pixels), FSAA might render the scene at 2x, 4x, or even higher multiples of that resolution (e.g., 3840x2160 or 7680x4320). Once the high-resolution scene is rendered, FSAA averages the colors of the sub-pixels to compute the final color of each displayed pixel. This averaging process smooths out color transitions between adjacent pixels, reducing the stair-step effect seen along diagonal and curved edges. The rendered high-resolution image is then downsampled (reduced) to the original display resolution. The result is a smoother final image that preserves the details while minimizing aliasing effects.
+Full Scene Anti-Aliasing is the simplest but the most effective form of Anti-Aliasing. FSAA solves aliasing issues by rendering the entire scene at a higher resolution than the display resolution. For example, if the target display resolution is 1080p (1920x1080 pixels), FSAA might render the scene at 2x, 4x, or even higher multiples of that resolution (e.g., 3840x2160 or 7680x4320). Once the high-resolution scene is rendered, FSAA averages the colors of the sub-pixels to compute the final color of each displayed pixel. This averaging smooths out color transitions between adjacent pixels, reducing the stair-step effect seen along diagonal and curved edges. The rendered high-resolution image is then downsampled (reduced) to the original display resolution. The result is a smoother final image that preserves the details while minimizing aliasing effects.
 
 In Max, FSAA can be enabled by the attribute @fsaa of {jit.world}, {jit.pworld}, and {jit.gl.node}. @fsaa enables a 2x supersampling.
 
@@ -608,17 +608,17 @@ So, if the original texture is 1024x1024 pixels, mipmaps would be created at 512
 Mipmapping in Max is enabled at texture level: set {jit.gl.texture}'s @mipmap to "bilinear" or "trilinear" and disable @rectangle.
 
 > [!IMPORTANT]
-> {jit.gl.texture}'s @rectangle must be disabled (0) to enable mipmappnig as non-rectangular textures are required for creating the mip levels.
+> {jit.gl.texture}'s @rectangle must be disabled (0) to enable mipmapping, as non-rectangular textures are required for creating the MIP levels.
 
 ![](./images/visual-quality_061.png)
 ![](./images/visual-quality_060.png)
 
 Left: Mipmapping enabled; right: Mipmapping disabled.
 
-These are the Anti-Aliasing methods currently available in Max. 
+These are the anti-aliasing methods currently available in Max. 
 
 > [!TIP]
-> Anti-Aliasing and mipmapping can cohexist. I suggest always using both an Anti-Aliasing method and mipmapping combined.
+> Anti-Aliasing and mipmapping can coexist. I suggest always using both an Anti-Aliasing method and mipmapping combined.
 ![](./images/visual-quality_062.png)
 Left: no Anti-Aliasing and no mipmapping. Center: mipmapping only (trilinear). Right: mipmapping (trilinear) + Anti-Aliasing (TAA).
 
@@ -630,41 +630,41 @@ Which of the two ducks is bigger?
 
 ![](./images/visual-quality_063.png)
 
-They are the same size, but some visual clues makes us percieve the duck on the right to be way bigger than the duck on the left. We, as humans, are used to estimate the size of objects and the distance between them. Humans estimate the size of objects through a combination of visual cues, learned experience, and context. Our brains use information from our eyes, as well as from our knowledge of the world, to interpret and understand the relative size and distance of objects. I'd like to list some visual clues that contribute to the size perception and explore how we can recreate them in Jitter to give a better sense of objects' scale.
+They are the same size, but some visual clues make us perceive the duck on the right to be way bigger than the duck on the left. We, as humans, are used to estimate the size of objects and the distance between them. Humans estimate the size of objects through a combination of visual cues, learned experience, and context. Our brains use information from our eyes, as well as from our knowledge of the world, to interpret and understand the relative size and distance of objects. I'd like to list some visual clues that contribute to the size perception and explore how we can recreate them in Jitter to give a better sense of objects' scale.
 
 ## Familiarity and Context
 
 This is an easy one: When we already know the typical size of an object, like a car or a person, we can estimate its size based on that knowledge. If we see something that looks like a car but appears unusually small, we might assume it’s further away.
-In a scene, the objects around something also give clues. For instance, if we see a person standing next to a building, we understand the scale of each object based on the scene as a whole. We can use this to our advantage, for example inserting in the scene some familiar objects of well known size.
+The objects around something in a scene also give clues. For instance, if we see a person standing next to a building, we understand the scale of each object based on the scene as a whole. We can use this to our advantage, for example, inserting some familiar objects of well-known size in the scene.
 
-On the same page: we are used to experience the world around us looking from a constant height from the ground. Small objects are usually observed from above, big ones from below.
+On the same page, we are used to experiencing the world around us by looking from a constant height above the ground. Small objects are usually observed from above, and big ones from below.
 
 ## Atmospheric scattering
 
-Atmospheric scattering is a phenomenon that occurs when sunlight or other light waves hit particles in the atmosphere, like dust, water droplets, and gas molecules, causing the light to scatter in different directions. This scattering effect influences how we see distant objects and is one of the main reasons why the sky looks blue during the day and sunsets look reddish.
+Atmospheric scattering occurs when sunlight or other light waves hit particles in the atmosphere, like dust, water droplets, and gas molecules, causing the light to scatter in different directions. This scattering effect influences how we see distant objects and is one of the main reasons why the sky looks blue during the day and sunsets look reddish.
 
-Here's how it works: when we look at something far away—like a mountain range or a city skyline—the light bouncing off those distant objects travels through more of the atmosphere to reach our eyes. As it does, particles scatter the shorter blue and violet wavelengths, making distant objects appear hazy, less distinct, and sometimes even bluish in color. This haze is what makes distant objects seem "faded" compared to those nearby.
+Here's how it works: when we look at something far away—like a mountain range or a city skyline—the light bouncing off those distant objects travels through more of the atmosphere to reach our eyes. As it does, particles scatter the shorter blue and violet wavelengths, making distant objects appear hazy, less distinct, and sometimes even bluish. This haze makes distant objects seem "faded" compared to those nearby.
 
-Atmospheric scattering also impacts our perception of distance and size. Because objects that are further away look blurrier and less vibrant, our brains interpret them as being far off, which helps us judge distance. Similarly, this effect can make faraway objects look smaller than they really are because they lose clarity and detail as more of their light scatters. This natural "distance blur" adds depth to what we see and plays a big role in creating a sense of scale in outdoor landscapes.
+Atmospheric scattering also impacts our perception of distance and size. Because objects that are further away look blurrier and less vibrant, our brains interpret them as being far off, which helps us judge distance. Similarly, this effect can make faraway objects look smaller than they are because they lose clarity and detail as more of their light scatters. This natural "distance blur" adds depth to what we see and plays a significant role in creating a sense of scale in outdoor landscapes.
 
 Take a look at the following image:
 
 ![](./images/visual-quality_065.png)
 
-On the left, there's a scene rendered normally; on the right, atmospheric scattering was added. Look at how it's easier to perceive objects distance and how immediately our brain thought: "those donuts must be huge"!
+On the left, there's a scene rendered typically; on the right, atmospheric scattering was added. Look at how it's easier to perceive objects' distance and how immediately our brain thinks: "Those donuts must be huge!"
 
-According to Beer’s Law, light intensity diminishes exponentially with distance as it travels through a medium (like the atmosphere) filled with particles that scatter or absorb it. Essentially, the farther the light travels, the more it weakens, because particles along the way absorb or scatter part of it.
+According to Beer’s Law, light intensity diminishes exponentially with distance as it travels through a medium (like the atmosphere) filled with particles that scatter or absorb it. Essentially, the farther the light travels, the weaker it is because particles absorb or scatter part of it along the way.
 
 $$
 I = I_0 \cdot e^{-\alpha x}
 $$
 
-where:
+Where:
 
-- $I$ is the intensity of light after it has traveled a certain distance $x$ through the medium.
+- $I$ is the light intensity after it has traveled a certain distance $x$ through the medium.
 - $I_0$ is the initial intensity of the light before it enters the medium.
 - $\alpha$ is the attenuation coefficient, which depends on the properties of the medium (such as concentration and the specific absorption/scattering properties of the particles within it).
-- $x$ is the path length, or distance the light travels through the medium.
+- $x$ is the path length or distance the light travels through the medium.
 
 In Max, atmospheric scattering can be added to a scene using the {jit.gl.pass} FX named "atmospheric":
 
@@ -691,32 +691,32 @@ High camera angles create a "bird's-eye view" effect, making objects appear smal
 
 ### Depth of Field (DOF)
 
-Depth of field (DOF) determines how much of the scene is in focus. A shallow depth of field (where only a small part of the scene is sharply in focus) draws attention to a specific area, often creating a strong sense of foreground and background separation.
+Depth of field (DOF) determines how much of the scene is in focus. A shallow DOF (where only a small part of the scene is sharply in focus) draws attention to a specific area, often creating a strong sense of foreground and background separation.
 A shallow depth of field can make objects outside the focal area look blurrier, enhancing the perception of depth and making the in-focus subject appear isolated or more distant from the rest of the scene. A deep depth of field, where everything is in focus, can flatten the scene slightly, as all objects appear equally sharp regardless of distance.
 
-Im Max, you can create a depth of field effect using {jit.gl.pass} @fxname "dof-hq". This effects replicates the behavior of a real camera.
+Im Max, you can create a depth of field effect using {jit.gl.pass} @fxname "dof-hq". This effect replicates the behavior of a real camera.
 
 ![](./images/visual-quality_068.png)
 
 The "dof-hq" pass is controlled by many parameters, but the main two are:
 
-- @lens_focal_length: The focal length of a camera is a fundamental optical property that defines how zoomed-in or zoomed-out an image appears. It’s typically measured in millimeters (mm) and describes the distance between the camera lens and its sensor or film, when the lens is focused on a subject at infinity. In the contexted of DOF, the focal length affects the amount of depth blur; Shorter focal lengths tend to have a larger depth of field, keeping more of the scene in focus from front to back, which is useful for capturing detailed landscapes. Longer focal lengths have a shallower depth of field, especially at wide apertures, which isolates subjects by keeping them sharp while blurring the background—ideal for portrait photography.
+- @lens_focal_length: The focal length of a camera is a fundamental optical property that defines how zoomed-in or zoomed-out an image appears. It’s typically measured in millimeters (mm) and describes the distance between the camera lens and its sensor or film when the lens is focused on a subject at infinity. In the context of DOF, the focal length affects the amount of depth blur; Shorter focal lengths tend to have a larger depth of field, keeping more of the scene in focus from front to back, which is helpful in capturing detailed landscapes. Longer focal lengths have a shallower depth of field, especially at wide apertures, which isolates subjects by keeping them sharp while blurring the background—ideal for portrait photography.
 
 ![](./images/visual-quality_069.png)
 
-- @lens_focal_distance: Focal distance is the distance between the camera's lens and the point in the scene where objects appear sharp and in focus. This is different from focal length, which refers to the optical property of the lens itself. Use this attribute to decide which part of the scene must stick out and catch viewer's attention.
+@lens_focal_distance: Focal distance is the distance between the camera's lens and the point in the scene where objects appear sharp and in focus. This is different from focal length, which refers to the optical property of the lens itself. Use this attribute to decide which part of the scene must stand out and catch the viewer's attention.
 
 ![](./images/visual-quality_070.png)
 
 > [!TIP]
-> I suggest activating the attribute @show_in_focus to precisely set "blur-hq" params. The brighter the color, the sharper the image looks, and the red area shows which part of the scene is perfectly in focus. 
+> I suggest activating the attribute @show_in_focus to set "blur-hq" params precisely. The brighter the color, the sharper the image looks, and the red area shows which part of the scene is perfectly in focus. 
 ![](./images/visual-quality_071.png)
 
 ---
 
 # How to enhance object movement
 
-In computer graphics, making objects move according to real-world physical laws is essential for creating believable and immersive scenes. When objects behave as they would in nature—accelerating, slowing down, bouncing, or falling realistically—our brains recognize and connect with that authenticity, making the scene feel much more lifelike. By applying principles like inertia, gravity, and friction, you can achieve motion that not only looks correct but also helps the audience engage with the virtual world as if it were real. This adherence to physical laws bridges the gap between digital environments and our physical understanding, enhancing both visual realism and emotional impact.
+In computer graphics, making objects move according to real-world physical laws is essential for creating believable and immersive scenes. When objects behave as they would in nature—accelerating, slowing down, bouncing, or falling realistically—our brains recognize and connect with that authenticity, making the scene feel much more lifelike. By applying principles like inertia, gravity, and friction, you can achieve motion that looks correct and helps the audience engage with the virtual world as if it were real. This adherence to physical laws bridges the gap between digital environments and our physical understanding, enhancing both visual realism and emotional impact.
 
 Let's see how we can improve the movement of objects in Max.
 
@@ -738,7 +738,7 @@ How can we inject an acceleration and a deceleration phase to the movement of ob
 
 ### Physics-based motion
 
-In specific scenarios, it's possible to describe objects' motion through the physical laws themselves. Imagine you have an object, with its own mass, and there's a force actracting it. Knowing the force strenght and direction, and the object's mass, you can define movement as a biproduct of the physical interaction.
+In specific scenarios, it's possible to describe objects' motion through the physical laws. Imagine you have an object with its own mass, and a force attracts it. Knowing the force strength and direction and the object's mass, you can define the movement as a byproduct of the physical interaction.
 
 In a discrete time domain, you can describe the movement of an object with mass $m$ subjected to a force $vec{F}$ using Newton’s Second Law of Motion:
 
@@ -762,7 +762,7 @@ $$
 \vec{v}(t + \Delta t) = \vec{v}(t) + \vec{a} \cdot \Delta t
 $$
 
-where $\Delta t$ is the time interval between steps.
+Where $\Delta t$ is the time interval between steps.
 
 - Update Position
 To update the object’s position $\vec{x}(t)$, use the updated velocity:
@@ -776,11 +776,11 @@ To summarize:
 - update velocity: $\vec{v}(t + \Delta t) = \vec{v}(t) + \vec{a} \cdot \Delta t$
 - update position: $\vec{x}(t + \Delta t) = \vec{x}(t) + \vec{v}(t + \Delta t) \cdot \Delta t$
 
-These steps allow you to iteratively compute an object’s position and velocity at each time step, based on the applied force in the discrete time domain.
+These steps allow you to iteratively compute an object’s position and velocity at each time step based on the applied force in the discrete time domain.
 
 When forces are applied to one or more objects in this way, movement becomes an emergent property, naturally incorporating acceleration and deceleration as it simulates physical behavior.
 
-This approach to animation is especially useful in particle systems. In these systems, a group of $N$ bodies (each with mass) is influenced by one or more forces. The video below demonstrates a simple particle system driven by physically-plausible attractors.
+This approach to animation is especially useful in particle systems. In these systems, a group of $N$ bodies (each with mass) is influenced by one or more forces. The video below demonstrates a simple particle system driven by physically plausible attractors.
 
 ![](./images/visual-quality_075.gif)
 
@@ -792,62 +792,62 @@ To have a better understanding of the problem, let's observe again what's wrong 
 
 ![](./images/visual-quality_101.gif)
 
-The square moves back and forth without any change in speed. For this kind of movement to happen, it would require infinite acceleration, which could result from either a zero mass or an infinitely strong force. This type of movement is known as ***linear motion***, and it’s precisely what we’re aiming to avoid.
+The square moves back and forth without any change in speed. For this kind of movement to happen, it would require infinite acceleration, which could result from either a zero mass or an infinitely strong force. This type of movement is known as ***linear motion***, which is precisely what we aim to avoid.
 
 > [!NOTE]
-> Linear motion can be desiderable if we need to show a "robotic"-like or "digital"-like movement, or if you want to describe the movement of a body with marginal mass (e.g., a mosquito).
+> Linear motion can be desirable if we need to show a "robotic"-like or "digital"---like movement or if you want to describe the movement of a body with marginal mass (e.g., a mosquito).
 
-Let's say we want to move a body from position $0$ to position $1$ in one second of time. Plotting its linear motion in a graph with time and position on the axis, this is what we get:
+Let's say we want to move a body from position $0$ to $1$ in one second. Plotting its linear motion in a graph with time and position on the axis, this is what we get:
 
 ![](./images/visual-quality_076.png)
 
-The slope of this line segment represents speed. Here, the object starts at position 0 at time 0, travels steadily, and reaches position 1 at time 1 without any change in speed. However, for a more natural movement, there should be phases of both acceleration and deceleration. Beginning with speed = 0, the object should accelerate, then decelerate, and finally come to a stop at position 1, with speed = 0 once more. In technical terms, the derivative of the position curve should be 0 at both position 0 and position 1.
+The slope of this line segment represents speed. Here, the object starts at position 0 at time 0, travels steadily, and reaches position 1 at time 1 without any change in speed. However, there should be phases of both acceleration and deceleration for a more natural movement. Beginning with speed = 0, the object should accelerate, then decelerate, and finally stop at position 1, with speed = 0 once more. In technical terms, the derivative of the position curve should be 0 at both position 0 and position 1.
 
 ![](./images/visual-quality_077.png)
 
-To create such a curve we can use a variety of mathematical functions that exhibit null derivaty in $x=0$ and $x=1$. A notable example is the cubic curve:
+To create such a curve, we can use various mathematical functions that exhibit null derivaty in $x=0$ and $x=1$. A notable example is the cubic curve:
 
 $$
 y = -2x^3 + 3x^2
 $$
 
-which happens to be the function plotted in the graph above. In the subdomain [0; 1], this function exhibits the curve we are after, starting end ending with slope 0. Let's try to apply this movement path to an object to see the difference.
+Which happens to be the function plotted in the graph above. This function exhibits the curve we are after in the subdomain [0; 1], starting and ending with slope 0. Let's apply this movement path to an object to see the difference.
 
 ![](./images/visual-quality_078.gif)
 
-To apply this curve as motions, we simply provide a linear input to the function, and it returns a "bent" version.
+To apply this curve as motion, we simply provide a linear input to the function, which returns a "bent" version.
 
 > [!NOTE]
-> By no means, the function describing the object's motion must be defined in the domain [0; 1]; still, it's very convenient to define such a function in this domain, because it's easier to perform further manipulations of the motion curve. If you need to express the movement in a range different from [0; 1], you can simply scale the output to the needed range.
+> By no means should the function describing the object's motion be defined in the domain [0; 1]; still, it's very convenient to define such a function in this domain because it's easier to perform further manipulations of the motion curve. If you need to express the movement in a range different from [0; 1], you can scale the output to the needed range.
 
 From this basic cubic function, you can design many different variations. For example:
 
-- You can cascade multiple cubic function to enhance the acceleration and deceleration phases (mimiking a larger mass).
+- You can cascade multiple cubic functions to enhance the acceleration and deceleration phases (mimicking a larger mass).
 
 ![](./images/visual-quality_079.gif)
 
-- Since the function returns a value within the range [0;1], you can take advange of this and perform exponentiations to further bend the curve creating assymetries of the aceleration and deceleration phases, while conserving the condition on null derivative at $x=0$ and $x=1$.
+Since the function returns a value within the range [0;1], you can take advantage of this and perform exponentiations to further bend the curve, creating assymetries of the acceleration and deceleration phases while conserving the condition on the null derivative at $x=0$ and $x=1$.
 
 ![](./images/visual-quality_081.gif)
 
-Cubic functions are not the only ones having null derivatives at the beginning and at the end of a given subdomain. These are some possible other functions plotted on a graph:
+Cubic functions are not the only ones with null derivatives at a given subdomain's beginning and end. These are some possible other functions plotted on a graph:
 
 ![](./images/visual-quality_080.png)
 
 $\color{red} y = x$ (for reference), $\color{aqua} y = -2x^3 + 3x^2$, $\color{magenta} y = \frac{\cos(x \cdot \pi) + 1}{2}$, $\color{gold} y = 6x^5 - 15x^4 + 10x^3$.
 
-This last one is a quintic function, and it's particularly noteworthy because it does not only have null first derivatives in $x=0$ and $x=1$, but it also has null second derivatives in $x=0$ and $x=1$. This is relevant for for us, because the first derivative of the motion function represents speed (the slope of the function), while the second derivarive represents acceleration (the slope of the speed function). Functions like the cubic one we used earlier shows a discontinuity for what concerns the second derivative (acceleration). Although visually better than linear functions to describe motion, an infinite force or a null mass are still required to make a body accelerate like that.
+This last one is a quintic function, and it's particularly noteworthy because it not only has null first derivatives in $x=0$ and $x=1$ but also null second derivatives in $x=0$ and $x=1$. This is relevant for us because the first derivative of the motion function represents speed (the function's slope), while the second derivative represents acceleration (the slope of the speed function). Functions like the cubic one we used earlier show a discontinuity of the second derivative (acceleration). Although visually better than linear functions to describe motion, an infinite force or a null mass is still required to make a body accelerate like that.
 
 ![](./images/visual-quality_082.png)
 Left: $\color{aqua} y = -2x^3 + 3x^2$, $\color{magenta} y'$, $\color{green} y''$; right: $\color{gold} y = 6x^5 - 15x^4 + 10x^3$, $\color{magenta} y'$, $\color{green} y''$;
 
-You can notice how the second derivative (in green) of the cubic function is a straight line, and it's non-zero in $x=0$ and $x=1$, while in the quintic function case, it touches the abscissa in both $x=0$ and $x=1$.
+You can notice how the second derivative (in green) of the cubic function is a straight line, and it's non-zero in $x=0$ and $x=1$. In the quintic function case, it touches the abscissa in both $x=0$ and $x=1$.
 
-If we really want to describe a motion function like "the cool kids", we can opt for such a quintic function.
+If we want to describe a motion function like "the cool kids", we can opt for such a quintic function.
 
 ![](./images/visual-quality_083.gif)
 
-When do these functions come in handy? In the previous paragraph, we described motion as the biproduct of forces acting on bodies with mass; we didn't have precise control over where and when a body moves. Motion functions, somehow reverse the approach: You can define the exact initial and ending positions, as well as how much time the object takes to complete the movement. For a known object mass, you can eventually derive which forces are implied in the motion to make it accelerate that way. This kind of control over objects movement is very useful when you must express an initial postion, an ending position, and define how much time it takes to complete the movement. A similar scenario are, for example, transition effects.
+When do these functions come in handy? In the previous paragraph, we described motion as the byproduct of forces acting on bodies with mass; we didn't have precise control over where and when a body moves. Motion functions somehow reverse the approach: You can define the exact initial and ending positions and how long the object takes to complete the movement. You can eventually derive which forces are implied in the motion for a known object mass to make it accelerate that way. This kind of control over object movement is very useful when you must express an initial or ending position and define how long it takes to complete the movement. A similar scenario is, for example, transition effects.
 
 ![](./images/visual-quality_084.gif)
 
@@ -856,32 +856,32 @@ Left: {jit.fx.tr.rotfade} and {jit.fx.tr.zoomfade} controlled via linear motion;
 Look at the difference that proper motion functions can make. The transitions on the left look "mechanical", while the two on the right appear fluent and more "natural". 
 
 > [!NOTE]
-> if you need to create motion curves for multidimensional movement (e.g., an object moving in a 3D space), you can apply the same principles to each individual dimension.
+> If you need to create motion curves for multidimensional movement (e.g., an object moving in a 3D space), you can apply the same principles to each dimension.
 
-The strength point of this approach is precision over time. Things start and stop moving exactly when we want to. Still, this method becomes unpractical if we need to define complex moment over time. We could "glue" togheter pieces of functions to describe a complex motion, but if we do so, we also have to guarantee the contition of continuity for the first (and eventually second) derivative. While this is not impossible (we could solve systems of equations to compute ad-hoc pieces of functions), it may be inconvinient. For such a scenario, it's better to approach the problem from a different perspective.
+The strength point of this approach is precision over time. Things start and stop moving exactly when we want to. Still, this method becomes unpractical if we need to define complex movement over time. We could "glue" together pieces of functions to describe a complex motion, but if we do so, we also have to guarantee the condition of continuity for the first (and eventually second) derivative. While this is not impossible (we could solve systems of equations to compute ad-hoc pieces of functions), it may be inconvenient. It's better to approach the problem from a different perspective for such a scenario.
 
 ### Filter motion in the frequency domain
 
-Any variable phenomenon, like the changing position of an object in space, can actually be broken down into a series of simpler waves—sines and cosines! This idea comes from something called the ***Fourier series***, and it’s a powerful way to represent complex, varying signals.
+Any variable phenomenon, like the changing position of an object in space, can be broken down into a series of simpler waves—sines and cosines! This idea comes from something called the ***Fourier series***, and it’s a powerful way to represent complex, varying signals.
 
-By adding up these waves in just the right way, we can reconstruct any complex movement or signal. Each sine or cosine wave in the series has a specific frequency, amplitude (height), and phase (shift), which together help us "build" the final pattern. This method is like having a toolkit of building blocks that, when put together, mimic the movement or variation we want to describe.
+By adding up these waves correctly, we can reconstruct any complex movement or signal. Each sine or cosine wave in the series has a specific frequency, amplitude (height), and phase (shift), which together help us "build" the final pattern. This method is like having a toolkit of building blocks that, when put together, mimic the movement or variation we want to describe.
 
 The beauty of this approach is that it applies to virtually anything that changes over time or space, whether it’s the flicker of light, the beat of a drum, or an object’s motion. Fourier series essentially gives us a “recipe” for recreating any variable pattern with an infinite sum of these simple wave-like functions.
 
-Let's look at our yellow square motion from a different perspective borrowing some tools from MSP-land:
+Let's look at our yellow square motion from a different perspective, borrowing some tools from MSP-land:
 
 ![](./images/visual-quality_101.gif)
 
 ![](./images/visual-quality_085.png)
 
 > [!NOTE]
-> I intentionally removed all numerical references from the objects; in order to operate, these analysis tools ({scope~}, and {spectrumdraw~}) require an audio signal in a frequency range that is meaningful for audio applications. Therefore, showing "the numbers" wouldn't have made any sense. Still, i wanted to abuse them to illustrate the concept.
+> I intentionally removed all numerical references from the objects; to operate, these analysis tools ({scope~}, and {spectrumdraw~}) require an audio signal in a frequency range that is meaningful for audio applications. Therefore, showing "the numbers" wouldn't have made any sense. Still, i wanted to abuse them to illustrate the concept.
 
 The two graphs above show the square's motion function from two different perspectives: 
 - Left: the position moving linearly from the beginning to the end of the motion path.
 - Right: the spectral decomposition of the motion function on the left.
 
-By "breaking" the motion function into a combination of sine waves, we can see that multiple elementary waves of encreasing frequency and decreasing amplitude are required to give rise to the "triangular" motion that our square is going through.
+By "breaking" the motion function into a combination of sine waves, we can see that multiple elementary waves of encreasing frequency and decreasing amplitude are required to give rise to the "triangular" motion our square is going through.
 
 > [!NOTE]
 > Actually, to combine into a perfect triangular path, an infinite amount of sine waves is needed.
@@ -890,15 +890,15 @@ What i'm intrested in is what happens to our motion function if we filter out so
 
 ![](./images/visual-quality_086.png)
 
-The low pass filter attenuates high frequencies, and look at our motion function on the left: it "rounded", showing juicy acceleration and deceleration phases! Controlling the lowpass filter cutoff, we can control the motion path roundness, hence mimiking a variation of the object's mass. This brings us to another way we can use to define non-linear motion:
+The low-pass filter attenuates high frequencies, and look at our motion function on the left: it is "rounded", showing juicy acceleration and deceleration phases! Controlling the low-pass filter cutoff, we can control the motion path roundness, mimicking a variation of the object's mass. This brings us to another way we can use to define non-linear motion:
 
 > [!IMPORTANT]
 > You can create a straightforward linear motion path (simple to define and control), interpret it in the frequency domain, and filter out the high frequencies. This process results in a smoother motion that naturally incorporates acceleration, deceleration, and inertia.
 
 > [!NOTE]
-> The filters described in the following section are infinite impulse response (IIR) filters that work in the time domain. When I mention "operate in the frequency domain," I’m not implying any spectral processing; rather, I’m referring to the filters' effect, which is to reduce the amplitude of certain frequency ranges.
+> The filters described in the following section are infinite impulse response (IIR) filters that work in the time domain. When I mention "operate in the frequency domain," I’m not implying any spectral processing; rather, I’m referring to the filters' effect to reduce the amplitude of certain frequency ranges.
 
-Let's bring back this concept to Jitterland, and let's see how we can use it to improve the motion of objects.
+Let's bring this concept back to Jitterland and see how we can use it to improve object motion.
 
 ![](./images/visual-quality_087.gif)
 
@@ -906,7 +906,7 @@ I've created a simple scene with a red sphere that moves randomly across the scr
 
 ![](./images/visual-quality_088.gif)
 
-{slide} is a possible choice for filtering, but it's not the only one. Max offers a variety of low-pass implementations for audio signals, but there aren't many built-in options for filtering streams of messages, matrices, and textures. Still, we can build our own filters. Let's see a couple of low-pass implementations useful for us Jitterheads.
+{slide} is a possible choice for filtering, but it's not the only one. Max offers a variety of low-pass implementations for audio signals, but there are few built-in options for filtering streams of messages, matrices, and textures. Still, we can build our filters from scratch. Let's see a couple of practical low-pass implementations for us, Jitterheads.
 
 > [!NOTE]
 > Digital filters can be tricky to navigate, and designing them is a complex subject that deserves its own in-depth discussion. For this article, I’ll focus on demonstrating some filter implementations without diving deeply into technical details. Instead, I'll provide qualitative insights and examples of when and how to use these filters, keeping things accessible and practical. (Plus, I’m not a filter design expert!)
@@ -924,15 +924,15 @@ This low-pass filter, though simple, can be very effective. It works by averagin
 Since one-pole filters are 1st-order filters, they provide a gentle frequency cut of 6 dB per octave, resulting in smooth filtering. To make the filter more selective, you can increase the order by cascading multiple one-pole filters; each additional filter in the chain increases the overall filtering order by 1.
 
 > [!NOTE]
-> One-pole low-pass filters can be implemented in various ways, including using some built-in objects. I chose to implement it in a gen codebox to give a clearer view of the algorithm's inner workings.
+> One-pole low-pass filters can be implemented in various ways, including using some built-in objects. I implemented it in a gen codebox to give a clearer view of the algorithm's inner workings.
 
 #### Biquadratic filters and Butterworth filters
 
-A filter can be constructed (in the case of an analog filter) or implemented (if digital) in a variety of ways. A filter ***topology*** refers to the structural arrangement or configuration used to implement a filter in electronics or digital signal processing. The topology defines how components (such as capacitors, resistors, and inductors in analog filters, or coefficients and delays in digital filters) are organized and interconnected to achieve the desired filtering effect.
+A filter can be constructed (in the case of an analog filter) or implemented (if digital) in various ways. A filter ***topology*** refers to the structural arrangement or configuration used to implement a filter in electronics or digital signal processing. The topology defines how components (such as capacitors, resistors, and inductors in analog filters, or coefficients and delays in digital filters) are organized and interconnected to achieve the desired filtering effect.
 
-In the world of digital filters, a widely used filter topology are biquadratic filters (or biquad filter for short). This kind of filters are very appreciated for their flexibility, as they can be used to implement different filter responses (low-pass, high-pass, band-pass, etc.).
+In the world of digital filters, a widely used filter topology is biquadratic filters (or biquad filter for short). These kinds of filters are very appreciated for their flexibility, as they can be used to implement different filter responses (low-pass, high-pass, band-pass, etc.).
 
-Biquad filters rely on specific coefficients to control their operation. These coefficients allow you to decide which frequencies are boosted or reduced and determine the filter’s type. A biquad filter operates using a formula with five main coefficients: $a0$, $a1$, $a2$, $b1$, $b2$. 
+Biquad filters rely on specific coefficients to control their operation. These coefficients allow you to decide which frequencies are boosted or reduced and determine the filter’s type. A biquad filter operates using a formula with five principal coefficients: $a0$, $a1$, $a2$, $b1$, $b2$. 
 
 In practical terms, the filter equation looks like this:
 
@@ -959,9 +959,9 @@ How can we compute the correct filter coefficients to get the desired filter res
 > I invite you to check out the patch "gen~.biquad.maxpat" for looking at various biquad coefficient computations:
 ![](./images/visual-quality_092.png)
 
-For our goal, there's a specific filter response i'm particularly intrested in: low-pass ***Butterworth filters***. Butterworth filters are a type of signal filter known for their maximally flat frequency response in the passband, meaning they allow frequencies up to a specified cutoff to pass through without significant attenuation or ripples. This makes Butterworth filters ideal when smooth, distortion-free filtering is needed. The transition from passband to stopband (attenuation region) is gradual compared to other filters, like Chebyshev or elliptic filters, which prioritize sharper cutoffs at the expense of flatness. Moreover, Butterworth filters generally offer a near-linear phase response, especially at lower frequencies, which minimizes phase distortion for signals passing through the filter. In other words, butterworth filters are design to be as transparent as possible in regard to the signal being filtered.
+For our goal, there's a specific filter response i'm particularly interested in: low-pass ***Butterworth filters***. Butterworth filters are a type of signal filter known for their maximally flat frequency response in the passband, meaning they allow frequencies up to a specified cutoff to pass through without significant attenuation or ripples. This makes Butterworth filters ideal when smooth, distortion-free filtering is needed. The transition from passband to stopband (attenuation region) is gradual compared to other filters, like Chebyshev or elliptic filters, which prioritize sharper cutoffs at the expense of flatness. Moreover, Butterworth filters generally offer a near-linear phase response, especially at lower frequencies, which minimizes phase distortion for signals passing through the filter. In other words, butterworth filters are designed to be as transparent as possible regarding the filtered signal.
 
-We can implement a digital butterworth filter response using a biquad filter. Let's see how to compute proper coefficients for this kind of filter:
+We can implement a digital Butterworth filter response using a biquad filter. Let's see how to compute proper coefficients for this kind of filter:
 
 To compute the coefficients $a0$, $a1$, $a2$, $b1$, $b2$ for implementing a Butterworth filter, we need to follow a systematic process. 
 
@@ -975,7 +975,7 @@ $$
 ωc = 2π * (fc / fs)
 $$
 
-where $ωc$ is the angular frequency. The warped frequency is then:
+Where $ωc$ is the angular frequency. The warped frequency is then:
 
 $$
 ωd = 2 * tan(ωc / 2)
@@ -1007,11 +1007,11 @@ This is the coefficient computation implemented in Max:
 
 ![](./images/visual-quality_093.png)
 
-Enough math; let's see how this filter looks! I designed a straightforward test patch where the colors of an input video are interpeted as 3D positions for a particle system. In particular, particles are distributed evenly across the horizontal dimension, and I computed the color luminance to affect vertical positioning.
+Enough math; let's see how this filter looks! I designed a straightforward test patch where the colors of an input video are interpreted as 3D positions for a particle system. In particular, particles are distributed evenly across the horizontal dimension, and I computed the color luminance to affect vertical positioning.
 
 https://github.com/user-attachments/assets/ab967640-0ed2-42f0-a89c-1cbc212b7d3c
 
-The rendering looks "ok", but let's try to filter out the particle movement. 
+The rendering looks "ok," but let's try to filter out the particle movement. 
 
 https://github.com/user-attachments/assets/9b6d91e5-f33a-4896-9544-fdf12144d7af
 
@@ -1023,23 +1023,23 @@ The particle movement became "bouncier"! Before reaching the input position, eac
 
 https://github.com/user-attachments/assets/a7db5010-202c-446e-992e-39d732dcecb9
 
-As you can see, decreasing the cutoff value resembles a mass increase. Since we have our butterworth coefficients calculator exposed, we cen go a step further and assign different cutoff values to each particle. I reworked slightly to coefficients calculator and the biquad filter to read from matrices the coefficient values.
+As you can see, decreasing the cutoff value resembles a mass increase. Since we have our Butterworth coefficients calculator exposed, we can go a step further and assign different cutoff values to each particle. I slightly reworked the coefficients calculator and the biquad filter to read from matrices the coefficient values.
 
 The coefficient calculator has been turned into a {jit.gen.codebox} to operate on matrices, but the code stays the same.
 
 ![](./images/visual-quality_098.png)
 
-And in the biquad computation coefficients are no longer provided as params, but as matrices.
+And in the biquad computation, coefficients are no longer provided as params but as matrices.
 
 ![](./images/visual-quality_099.png)
 
-With control over individual cutoff values, you can differenciate the objects behavior. In the patch below, i had fun generating random cutoff values (in the range [2;4]), and then i tried to assign progressively increasing cutoff values (from left to right). With this degree of control, you can create very intresting animations.
+With control over individual cutoff values, you can differentiate the object's behavior. In the patch below, I had fun generating random cutoff values (in the range [2;4]), and then I tried to assign progressively increasing cutoff values (from left to right). With this degree of control, you can create very interesting animations.
 
 https://github.com/user-attachments/assets/20d97fc4-999a-4f2f-a23d-76a5b91b9b0c
 
 Filters are an excellent tool for enhancing the appearance of complex object motion, with Butterworth filters being especially well-suited for this purpose. Much like motion functions, filters allow you to smooth a motion path by providing a linear motion as input, producing results that naturally reflect physically plausible behavior. However, this approach to motion smoothing has a limitation: filters tend to introduce a slight delay in timing, reducing temporal precision. In the end, there’s no single best approach—each situation calls for the right tool to achieve the desired effect.
 
-It’s worth highlighting that Max provides a set of objects specifically crafted to simplify object motion management: {jit.anim.drive}, {jit.anim.path}, and {jit.anim.node}. These objects are ideal for high-level motion control, as they can be adjusted through intuitive, meaningful parameters. Additionally, there’s a set of external objects called “ease” that provides tools for defining motion functions without needing to dive deeply into the underlying math. Max, as always, is a highly modular, multi-level programming environment, allowing you to find solutions that best suit your needs.
+It’s worth highlighting that Max provides a set of objects specifically crafted to simplify object motion management: {jit.anim.drive}, {jit.anim.path}, and {jit.anim.node}. These objects are ideal for high-level motion control, as they can be adjusted through intuitive, meaningful parameters. Additionally, a set of external objects called “ease” provides tools for defining motion functions without needing to dive deeply into the underlying math. Max, as always, is a highly modular, multi-level programming environment, allowing you to find solutions that best suit your needs.
 
 ## Motion blur
 
@@ -1047,7 +1047,7 @@ Oh, no! Moving squares, again?!
 
 
 
-Motion blur is a visual effect that simulates the natural blurring of moving objects, helping to make animations and videos look more realistic. Imagine when you take a photo of a fast-moving car, and it appears slightly blurred along its path; that's motion blur at work! This happens in real life because, during the time it takes to capture the image, the car is moving, creating a streak or blur along its direction of motion.
+Motion blur is a visual effect that simulates the natural blurring of moving objects, helping to make animations and videos look more realistic. Imagine when you take a photo of a fast-moving car, and it appears slightly blurred along its path; that's motion blur at work! This happens in real life because, during the time it takes to capture the image, the car moves, creating a streak or blur along its direction of motion.
 
 In computer graphics, we replicate this effect to give the impression of speed and smoothness. Motion blur can enhance the realism of fast-paced scenes by softening the edges of objects in motion, making them look less "stiff" or "choppy." Without it, animations, especially at high speeds, can feel unnatural or overly crisp.
 
