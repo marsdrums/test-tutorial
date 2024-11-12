@@ -921,7 +921,7 @@ A filter can be constructed (in the case of an analog filter) or implemented (if
 
 In the world of digital filters, a widely used filter topology are biquadratic filters (or biquad filter for short). This kind of filters are very appreciated for their flexibility, as they can be used to implement different filter responses (low-pass, high-pass, band-pass, etc.).
 
-Biquad filters rely on specific coefficients to control their operation. These coefficients allow you to decide which frequencies are boosted or reduced and determine the filter’s type. A biquad filter operates using a formula with five main coefficients: a0, a1, a2, b1, b2. 
+Biquad filters rely on specific coefficients to control their operation. These coefficients allow you to decide which frequencies are boosted or reduced and determine the filter’s type. A biquad filter operates using a formula with five main coefficients: $a0$, $a1$, $a2$, $b1$, $b2$. 
 
 In practical terms, the filter equation looks like this:
 
@@ -952,13 +952,13 @@ For our goal, there's a specific filter response i'm particularly intrested in: 
 
 We can implement a digital butterworth filter response using a biquad filter. Let's see how to compute proper coefficients for this kind of filter:
 
-To compute the coefficients $a0$,$a1$,$a2$,$b1$,$b2$ for implementing a Butterworth filter, we need to follow a systematic process. 
+To compute the coefficients $a0$, $a1$, $a2$, $b1$, $b2$ for implementing a Butterworth filter, we need to follow a systematic process. 
 
 Define Parameters:
 - Cutoff frequency $fc$ (in Hz) – the frequency at which the filter starts attenuating the signal.
-- Sampling rate $fs$ (in Hz) – the rate at which the signal is sampled. In our case, the frame rate of our video.
+- Sampling rate $fs$ (in Hz) – the rate at which the signal is sampled. In our case, the video frame rate.
 
-The cutoff frequency in the digital domain needs to be pre-warped using the following formula:
+The cutoff frequency (in the digital domain) needs to be pre-warped using the following formula:
 
 $$
 ωc = 2π * (fc / fs)
@@ -970,7 +970,7 @@ $$
 ωd = 2 * tan(ωc / 2)
 $$
 
-The coefficients for the second-order Butterworth filter in the z-domain are calculated as follows:
+The coefficients for a 2nd-order low-pass Butterworth filter are calculated as follows:
 
 $$
 a0 = (ωd^2) / (1 + √2 * ωd + ωd^2)
@@ -995,6 +995,10 @@ $$
 And this is the coefficient computation implemented in Max:
 
 ![](./images/visual-quality_093.png)
+
+Enough math, let's see you this filter looks like! I designed a very simple test patch where the colors of an input video are interpeted as 3D positions for a particle system. In particular, particles are distributed evenly across the horizontal dimension, and i the color luminance to affect vertical positioning.
+
+![](./images/visual-quality_094.mov)
 
 
 ## Motion blur
