@@ -992,11 +992,11 @@ $$
 b2 = (1 - √2 * ωd + ωd^2) / (1 + √2 * ωd + ωd^2)
 $$
 
-And this is the coefficient computation implemented in Max:
+This is the coefficient computation implemented in Max:
 
 ![](./images/visual-quality_093.png)
 
-Enough math, let's see how this filter looks like! I designed a straightforward test patch where the colors of an input video are interpeted as 3D positions for a particle system. In particular, particles are distributed evenly across the horizontal dimension, and i computed the color luminance to affect vertical positioning.
+Enough math; let's see how this filter looks! I designed a straightforward test patch where the colors of an input video are interpeted as 3D positions for a particle system. In particular, particles are distributed evenly across the horizontal dimension, and I computed the color luminance to affect vertical positioning.
 
 https://github.com/user-attachments/assets/ab967640-0ed2-42f0-a89c-1cbc212b7d3c
 
@@ -1004,7 +1004,12 @@ The rendering looks "ok", but let's try to filter out the particle movement.
 
 https://github.com/user-attachments/assets/9b6d91e5-f33a-4896-9544-fdf12144d7af
 
-Particles look way more lively! Let's now try to use higher-order butterworth filters. Here i cascaded 4 filters to get 8th-order filtering; i also backed up a little the cutoff value because we don't need to roll it down so much to considerably attenuate high frequency with such a high-order filter.
+The particles look way more lively! Let's now try using higher-order Butterworth filters. Here, I cascaded 4 filters to get 8th-order filtering; I also backed up the cutoff value a little because we don't need to roll it down so much to considerably attenuate high frequency with such a high-order filter.
+
+https://github.com/user-attachments/assets/2c8569f9-3630-456f-a708-6d877726614f
+
+The particle movement became "bouncier"! Before reaching the input position, each particle oscillates slightly. Cascading even more 2nd-order filters, the bouncing effect becomes more pronounced. We can evan try to "trigger" a new particle arrangment and look at how the filter smoothens out motion:
+
 
 
 ## Motion blur
