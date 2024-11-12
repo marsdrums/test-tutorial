@@ -1012,6 +1012,10 @@ The particle movement became "bouncier"! Before reaching the input position, eac
 
 https://github.com/user-attachments/assets/a7db5010-202c-446e-992e-39d732dcecb9
 
+As you can see, decreasing the cutoff value resembles a mass increase. Since we have our butterworth coefficients calculator exposed, we cen go a step further and assign different cutoff values to each particle. I reworked slightly to coefficients calculator and the biquad filter to read from matrices the coefficient values.
+
+
+
 
 ## Motion blur
 
