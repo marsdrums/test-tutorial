@@ -1022,6 +1022,9 @@ The coefficient calculator has been turned into a {jit.gen.codebox} to operate o
 
 And in the biquad computation coefficients are no longer provided as params, but as matrices.
 
+With control over indivisual cut off values, you can differenciate the objects behavior. In the patch below, i had fun generating random cutoff values (in the range [2;4]), and then i tried to assign progressively increasing cutoff values (from left to right). Having this degree of control, you can create very intresting animations.
+
+https://github.com/user-attachments/assets/20d97fc4-999a-4f2f-a23d-76a5b91b9b0c
 
 ## Motion blur
 
