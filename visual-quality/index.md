@@ -864,7 +864,9 @@ By adding up these waves in just the right way, we can reconstruct any complex m
 
 The beauty of this approach is that it applies to virtually anything that changes over time or space, whether it’s the flicker of light, the beat of a drum, or an object’s motion. Fourier series essentially gives us a “recipe” for recreating any variable pattern with an infinite sum of these simple wave-like functions.
 
-Let's look at our square moving from a different perspective borrowing some tools from MSP-land:
+Let's look at our yellow square motion from a different perspective borrowing some tools from MSP-land:
+
+![](./images/visual-quality_101.gif)
 
 ![](./images/visual-quality_085.png)
 
