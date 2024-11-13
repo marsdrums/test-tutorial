@@ -1048,7 +1048,7 @@ It’s worth highlighting that Max provides a set of objects specifically crafte
 
 Oh, no! Moving squares, again?! That's the last time, i swear... Which one moves "better" ?
 
-![](./images/visual-quality_102.png)
+![](./images/visual-quality_102.gif)
 
 You know it... the blu one wins.
 
