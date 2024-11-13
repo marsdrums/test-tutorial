@@ -1052,6 +1052,8 @@ Oh, no! Moving squares, again?! That's the last time, i swear... Which one moves
 
 You know it... the blu one always wins.
 
+Both squares are going under the same (quintic) motion, but the rendering of the blu square incorporates ***motion blur***.
+
 Motion blur is a visual effect that simulates the natural blurring of moving objects, helping to make animations and videos look more realistic. Imagine when you take a photo of a fast-moving car, and it appears slightly blurred along its path; that's motion blur at work! This happens in real life because, during the time it takes to capture the image, the car moves, creating a streak or blur along its direction of motion.
 
 In computer graphics, we replicate this effect to give the impression of speed and smoothness. Motion blur can enhance the realism of fast-paced scenes by softening the edges of objects in motion, making them look less "stiff" or "choppy." Without it, animations, especially at high speeds, can feel unnatural or overly crisp.
