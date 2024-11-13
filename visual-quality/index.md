@@ -1046,9 +1046,11 @@ It’s worth highlighting that Max provides a set of objects specifically crafte
 
 ## Motion blur
 
-Oh, no! Moving squares, again?!
+Oh, no! Moving squares, again?! That's the last time, i swear... Which one moves "better" ?
 
+![](./images/visual-quality_102.png)
 
+You know it... the blu one wins.
 
 Motion blur is a visual effect that simulates the natural blurring of moving objects, helping to make animations and videos look more realistic. Imagine when you take a photo of a fast-moving car, and it appears slightly blurred along its path; that's motion blur at work! This happens in real life because, during the time it takes to capture the image, the car moves, creating a streak or blur along its direction of motion.
 
