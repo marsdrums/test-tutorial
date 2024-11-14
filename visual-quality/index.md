@@ -1106,6 +1106,11 @@ I created a short sequence for position, scaling, and rotation using linear piec
 
 Rotation and scaling go through the same treatment as position values.
 
+> [!NOTE]
+> In the patch, i explicitely stored postion, rotation and scaling for later manual interpolation. One could act smart, and store the current and previous states of {jit.gl.gridshape} as presets, and interpolate between them using Max built-in tools.
+
+
+
 
 
 # Eye candies
