@@ -1084,7 +1084,7 @@ In the left-top corner of the patch, i'm generating a motion path, and at each f
 > [!NOTE]
 > {uzi} is set to count from 1 to 80, and in the interpolation process i divided the iteration index by 80. This means that the interpolation factor for the function "mix" goes from 0,0125 up to 1. I'm intentionally avoiding an interpolation factor of 0 to not re-draw a square at the exact previous position. The difference is visually unnoticeable, but i felt like it was more conceptually consitent.
 
-The patch succesfully draws 80 progressively shifting copies of the square, but the result doesn't look like a proper blur; it's more like an expanding rectangular block. That is because we're violating the laws of energy conservation. We won't end up in jail for that, but we must account for it surely. 
+The patch succesfully draws 80 progressively shifting copies of the square, but the result doesn't look like a proper blur; it's more like an expanding rectangular block. That is because we're violating the laws of energy conservation. We won't end up in jail for that, but we surely must account for it. 
 
 Think again at the real world example where a camera takes a picture of a moving object. The light reaching the camera sensor is the same light that bounced off the subject of our picture towards the camera. If the subject is moving or still, the amount of energy (light) hitting the camera sensor must be the same. In our example, we're drawing 80 copies of the square without changing the amount of light they reflect towards the digital camera, meaning that we're increasing the emitted light intensity by a factor of 80. To fix it, we have to divide the amount of emitted radiance of each copy by $N$, where $N$ is the number of copies, so that the total amount of emitted light sums up to 1. In other words, we have to compute an average. 
 
@@ -1094,7 +1094,18 @@ With that in mind, this is how our patch looks like now:
 
 ![](./images/visual-quality_104.gif)
 
-I enabled {jit.gl.gridshape}'s color blending via @blend_enable 1 and i disabled depth testing with @depth_enable 0. The blending mode has been set to @blend "add", because if we need to perform an average computation, we must sum the colors of each square. The square's color intensity has been divided by the number of copies.
+I enabled {jit.gl.gridshape}'s color blending via @blend_enable 1 and i disabled depth testing with @depth_enable 0. The blending mode has been set to @blend "add", because if we need to perform an average computation, we must sum the colors of each square. Prior to rendering, the squares' color intensity has been divided by the number of copies.
+
+This "time interpolation" process must be applied to any parameter that influences positioning, such as scaling and rotation.
+
+![](./images/visual-quality_105.gif)
+
+Here i created a short sequence of position, scaling, and rotation using linear piece-wise functions. The patch stores both the values at the current frame and at the previous frame for later interpolation. To let scaling and rotation create a motion blur, the right half of the patch now looks like this:
+
+![](./images/visual-quality_106.png)
+
+Rotation and scaling go throug the same treatment as position values.
+
 
 
 # Eye candies
