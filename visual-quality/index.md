@@ -1084,13 +1084,17 @@ In the left-top corner of the patch, i'm generating a motion path, and at each f
 > [!NOTE]
 > {uzi} is set to count from 1 to 80, and in the interpolation process i divided the iteration index by 80. This means that the interpolation factor for the function "mix" goes from 0,0125 up to 1. I'm intentionally avoiding an interpolation factor of 0 to not re-draw a square at the exact previous position. The difference is visually unnoticeable, but i felt like it was more conceptually consitent.
 
-The patch succesfully draws 80 progressively shifting copies of the square, but the result doesn't look like a proper blur. That is because we're violating the law of energy conservation. We won't end up in jail for that, but we must account for it. 
+The patch succesfully draws 80 progressively shifting copies of the square, but the result doesn't look like a proper blur. That is because we're violating the laws of energy conservation. We won't end up in jail for that, but we must account for it. 
 
 Think again at the real world example where a camera takes a picture of a moving object. The light reaching the camera sensor is the same light that bounced off the subject of our picture towards the camera. If the subject is moving or still, the amount of energy (light) hitting the camera sensor must be the same. In our example, we're drawing 80 copies of the square without changing the amount of light they reflect towards the digital camera, meaning that we're increasing the emitted light intensity by a factor of 80. To fix it, we have to divide the amount of emitted radiance of each copy by $N$, where $N$ is the number of copies, so that the total amount of emitted light sums up to 1. In other words, we have to compute an average. 
 
-Now, we're not rendering each square to a separate texture; it that was the case, we could have performed a running average of the rendered textures. What we're doing is rendering the copies of the square into the same render target. Therefore, if we want to compute an average (sum and divide by $N$), we must do it at the rendering stage. 
+Now, we're not rendering each square to a separate texture; if that was the case, we could have performed a running average over the rendered textures. What we're doing is rendering the copies of the square to the same render target. Therefore, if we want to compute an average (sum and divide by $N$), we must do it at the rendering stage. 
 
-This is how our patch looks like now:
+With that in mind, this is how our patch looks like now:
+
+![](./images/visual-quality_104.gif)
+
+I enabled {jit.gl.gridshape}'s color blending via @blend_enable 1 and i disabled depth testing with @depth_enable 0. The blending mode has been set to @blend "add", because if we need to perform an average computation, we must sum the colors of each square. The square's color intensity has been divided by the number of copies.
 
 
 # Eye candies
