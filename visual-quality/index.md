@@ -1079,11 +1079,18 @@ Let's set it up in Max:
 
 ![](./images/visual-quality_103.gif)
 
-In the left-top corner of the patch, i'm generating a motion path, and at each frame i store the current and the previous (horizontal)postions into the {pv} objects labeled "curr" and "prev". On the right side is where the accumulation takes place. There's a square drawn with the object {jit.gl.gridshape}, which is set to @automatic 0, meaning it doesn't render automatically to screen, but only when it receives a bang message (or a "draw" message). {jit.gl.gridshape} has been bound to a {jit.gl.node} object which is rendering to a texture through the attribute @capture 1. A nice thing about {jit.gl.node} is that it reports from the right-most outlet when the capturing phase begins via "begin_capture" messages. When the capturing phase begins, it triggers the drawing of multiple copies of the square. In the patch an {uzi} object shots 80 iterations of the drawing process; at each iteration, the previous and the current positions are linearly interpolated and a sqaure is drawn at the resulting position.
+In the left-top corner of the patch, i'm generating a motion path, and at each frame i store the current and the previous (horizontal) postions into the {pv} objects labeled "curr" and "prev". The right side is where the accumulation takes place. There's a square drawn with the object {jit.gl.gridshape}, which is set to @automatic 0, meaning it doesn't render automatically to screen at each frame, but only when it receives a bang message (or a "draw" message). {jit.gl.gridshape} has been bound to a {jit.gl.node} object which is rendering to a texture through the attribute @capture 1. A nice thing about {jit.gl.node} is that it reports from the right-most outlet when the capturing phase begins via "begin_capture" messages. When the capturing phase begins, it triggers the drawing of multiple copies of the square. In the patch an {uzi} object shots 80 iterations of the drawing process; at each iteration, the previous and the current positions are linearly interpolated and a square is drawn at the resulting position.
 
 > [!NOTE]
 > {uzi} is set to count from 1 to 80, and in the interpolation process i divided the iteration index by 80. This means that the interpolation factor for the function "mix" goes from 0,0125 up to 1. I'm intentionally avoiding an interpolation factor of 0 to not re-draw a square at the exact previous position. The difference is visually unnoticeable, but i felt like it was more conceptually consitent.
 
+The patch succesfully draws 80 progressively shifting copies of the square, but the result doesn't look like a proper blur. That is because we're violating the law of energy conservation. We won't end up in jail for that, but we must account for it. 
+
+Think again at the real world example where a camera takes a picture of a moving object. The light reaching the camera sensor is the same light that bounced off the subject of our picture towards the camera. If the subject is moving or still, the amount of energy (light) hitting the camera sensor must be the same. In our example, we're drawing 80 copies of the square without changing the amount of light they reflect towards the digital camera, meaning that we're increasing the emitted light intensity by a factor of 80. To fix it, we have to divide the amount of emitted radiance of each copy by $N$, where $N$ is the number of copies, so that the total amount of emitted light sums up to 1. In other words, we have to compute an average. 
+
+Now, we're not rendering each square to a separate texture; it that was the case, we could have performed a running average of the rendered textures. What we're doing is rendering the copies of the square into the same render target. Therefore, if we want to compute an average (sum and divide by $N$), we must do it at the rendering stage. 
+
+This is how our patch looks like now:
 
 
 # Eye candies
