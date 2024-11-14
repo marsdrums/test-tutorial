@@ -1073,10 +1073,11 @@ This sounds fancy, but in reality is the simplest way to create blurry motions a
 
 We said that in digital rendering images "appear" istantaneously at each frame. Consider an object at frame $f$ to be in position $p_{f}$ which was in position $p_{f-1}$ at the previous frame $f_{-1}$. When rendering frames $f_{-1}$ and $f$ in succesion, the object appears as jumping from $p_{f-1}$ to $p_{f}$. If all we can do is to render an object in a single specific position at each frame, we could recreate the effect of a motion trail by rendering multiple objects covering a set of positions between $p_{f-1}$ and $p_{f}$.
 
-Motion blur through accumulation consists of rendering the same object multiple times filling the space between $p_{f-1}$ and $p_{f}$ through a "gradient" of positions.
+Motion blur through accumulation consists of rendering the same object multiple times filling the space between $p_{f-1}$ and $p_{f}$ through a "gradient" of intermediary positions.
 
 Let's set it up in Max:
 
+![](./images/visual-quality_103.gif)
 
 
 # Eye candies
