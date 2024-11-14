@@ -1109,6 +1109,14 @@ Rotation and scaling go through the same treatment as position values.
 > [!NOTE]
 > In the patch, i explicitely stored postion, rotation and scaling for later manual interpolation. One could act smart, and store the current and previous states of {jit.gl.gridshape} as presets, and interpolate between them using Max built-in tools.
 
+To make a fair comparison, this is the same scene rendered without and with motion blur:
+
+![](./images/visual-quality_107.gif)
+
+The animation looks smoother overall, and we have a better perception of motion speed and direction, in particual when the shape goes under a fast movement.
+
+Now we have the besic setup for applying motion blur, let's have fun with a larger-scale scene.
+
 
 
 
