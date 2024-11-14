@@ -1113,7 +1113,7 @@ To make a fair comparison, this is the same scene rendered without and with moti
 
 ![](./images/visual-quality_107.gif)
 
-The animation looks smoother overall, and we have a better perception of motion speed and direction, in particual when the shape goes under a fast movement.
+The animation looks smoother overall, and we have a better perception of motion's speed and direction, in particual when the shape goes under a fast movement.
 
 Now we have the besic setup for applying motion blur, let's have fun with a larger-scale scene.
 
