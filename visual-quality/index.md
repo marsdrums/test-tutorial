@@ -1079,6 +1079,12 @@ Let's set it up in Max:
 
 ![](./images/visual-quality_103.gif)
 
+In the left-top corner of the patch, i'm generating a motion path, and at each frame i store the current and the previous (horizontal)postions into the {pv} objects labeled "curr" and "prev". On the right side is where the accumulation takes place. There's a square drawn with the object {jit.gl.gridshape}, which is set to @automatic 0, meaning it doesn't render automatically to screen, but only when it receives a bang message (or a "draw" message). {jit.gl.gridshape} has been bound to a {jit.gl.node} object which is rendering to a texture through the attribute @capture 1. A nice thing about {jit.gl.node} is that it reports from the right-most outlet when the capturing phase begins via "begin_capture" messages. When the capturing phase begins, it triggers the drawing of multiple copies of the square. In the patch an {uzi} object shots 80 iterations of the drawing process; at each iteration, the previous and the current positions are linearly interpolated and a sqaure is drawn at the resulting position.
+
+> [!NOTE]
+> {uzi} is set to count from 1 to 80, and in the interpolation process i divided the iteration index by 80. This means that the interpolation factor for the function "mix" goes from 0,0125 up to 1. I'm intentionally avoiding an interpolation factor of 0 to not re-draw a square at the exact previous position. The difference is visually unnoticeable, but i felt like it was more consitent conceptually.
+
+
 
 # Eye candies
 
