@@ -940,7 +940,7 @@ Biquad filters rely on specific coefficients to control their operation. These c
 In practical terms, the filter equation looks like this:
 
 $$
-y[n] = \frac{b_0 \cdot x[n] + b_1 \cdot x[n-1] + b_2 \cdot x[n-2] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]}{a_0}
+y[n] = \frac{a_0 \cdot x[n] + a_1 \cdot x[n-1] + a_2 \cdot x[n-2] - b_1 \cdot y[n-1] - b_2 \cdot y[n-2]}{a_0}
 $$
 
 Where:
