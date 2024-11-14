@@ -1056,7 +1056,22 @@ Both squares are going under the same (quintic) motion, but the rendering of the
 
 Motion blur is a visual effect that simulates the natural blurring of moving objects, helping to make animations and videos look more realistic. Imagine when you take a photo of a fast-moving car, and it appears slightly blurred along its path; that's motion blur at work! This happens in real life because, during the time it takes to capture the image, the car moves, creating a streak or blur along its direction of motion.
 
-We can replicate this effect to give the impression of speed and smoothness. Motion blur can enhance the realism of fast-paced scenes by softening the edges of objects in motion, making them look less "stiff" or "choppy." Without it, animations, especially at high speeds, can feel unnatural or overly crisp.
+We can replicate this effect to give the impression of speed and smoothness. Motion blur can enhance the realism of fast-paced scenes by blurring objects in the direction of motion, making them look less "stiff" or "choppy." Let's break down the real-world phenomena that lead to motion blur:
+
+Motion blur arises in photography when there is relative motion between the camera sensor and the subject during the exposure time. Exposure time, also known as shutter speed, is the duration for which a camera’s sensor (or film) is exposed to light. During this time, the camera’s shutter is open, allowing light to reach the sensor and create an image. In the digital world, we can think of exposure time as the intra-frame time (the time elapsed between one frame and the next). In 3D rendering, time is discretized into frames, which are "undivisible" time units; objects appear istantaneously on screen at each frame, and there's not an intermediate phase in which the virtual camera is exposed to light, hence no motion blur is rendered. If we want to add this effect to our renders, we have to make it ourself.
+
+There are several methods to create a motion blur effect, and the choiche of which to use depends on the rendering method we're using, the time budget we have for rendering a frame, and the kind of rendered scene. Here's a list of some approaches to motion blur rendering:
+
+### Ray-traced motion blur
+
+This sounds fancy, but in reality is the simplest way to create blurry motions as it replicates the phenomena that produce the blur in the real world. If you're rendering your scene using a ray-based method (e.g., ray marching or path tracing) you assing meaningful colors to the pixels by "shooting" rays from the camera point of view into the scene, finding the intersections of each ray with the surrounding geometry, and computing light transport to shade the pixels. This process is repeated multiple times per frame, gathering numerous samples from the scene and averaging their color contributions; If you move the objects in the scene or the camera itself while collecting color samples, is like having a motion happening during the exposure time. As result, the rendered images will naturally account for motion blur. 
+
+> [!NOTE]
+> This guide is not about implementing ray-tracing rendering solutions, but since that's feasible with standard Max + custom shaders, i thought to include this method to give the reader a broader perspective on the topic.
+
+### Motion blur through accumulation
+
+
 
 # Eye candies
 
