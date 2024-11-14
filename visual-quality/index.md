@@ -1100,7 +1100,7 @@ This "time interpolation" process must be applied to any parameter that influenc
 
 ![](./images/visual-quality_105.gif)
 
-I created a short sequence for position, scaling, and rotation using linear piece-wise functions passed through out "quintic bender". The patch stores both the values at the current frame and at the previous frame for later interpolation. To let scaling and rotation create motion blur, the right half of the patch now looks like this:
+I created a short sequence for position, scaling, and rotation using linear piece-wise functions passed through our "quintic bender". The patch stores both the values at the current frame and at the previous frame for later interpolation. To let scaling and rotation create motion blur, the right half of the patch now looks like this:
 
 ![](./images/visual-quality_106.png)
 
