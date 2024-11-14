@@ -412,7 +412,7 @@ ReSTIR (Reservoir-based Spatiotemporal Importance Resampling) is a cutting-edge 
 Let’s explore what makes ReSTIR unique without delving too deeply into technical details. When we discussed path tracing, we noted that this rendering method is slow because it requires evaluating a large number of incoming light directions to approximate the solution to the rendering equation, which makes it unsuitable for real-time applications. So, how many directions can we feasibly evaluate within the time span of a single frame on modern hardware? The answer is surprisingly limited: just one or two. Given that a typical path tracer samples around 10,000 directions, which single direction should we prioritize? Ideally, it would be the direction that carries the most energy (light), contributing the most to the pixel’s shading. But how can we identify this optimal direction? This is where ReSTIR comes into play. Think of it as a sophisticated 'direction sorter' that can quickly identify the most significant light direction—the one that maximizes energy contribution.
 
 > [!NOTE]
-> Numerous variations of the ReSTIR algorithm have been developed to adapt to different rendering methods. In Jitter, the ReSTIR algorithm is used to compute global illumination by tracing rays in screen-space.
+> Numerous variations of the ReSTIR algorithm have been developed to adapt to different rendering pipelines. In Jitter, the ReSTIR algorithm is used to compute global illumination by tracing rays in screen-space.
 
 ReSTIR has been implemented in Max 9 as {jit.gl.pass} FX named "gi" (global illumination). This pass FX can interact with {jit.gl.pbr} (to get the materials' BRDFs) and with {jit.gl.environment} (to gather light from an environment map). This means that whichever settings you use for jit.gl.pbr, the ReSTIR algorithm will respond with the correct lighting behavior. For example, any change of a mesh' roughness and/or metalness will affect how the "gi" pass computes global illumination.
 
@@ -1118,7 +1118,7 @@ The animation looks smoother overall, and we have a better perception of motion'
 You may have noticed that i'm rendering the scene at 30 fps ({jit.world}'s @fps 30.). Motion blur is about capturing the intra-frame movement, and the longer the exposure time, the more evident the blur. To increase the exposure time you should use low @fps values, as $exposuretime = 1s / fps$. 
 
 > [!IMPORTANT]
-> The amount of frames per seconds influences the overall look of animations - Very low frame rates (from 10 to 20 fps) make you video look like a hand-draw cartoon (especially when motion blur is disabled); low frame rates (from 24 to 30 fps) produce a cinematic look. Higer frame rates (40 - 60 fps) result in videogame-like animations. 
+> The amount of frames per seconds influences the animations' overall look - Very low frame rates (from 10 to 20 fps) make you video look like a hand-draw cartoon (especially when motion blur is disabled); low frame rates (from 24 to 30 fps) produce a cinematic look; higer frame rates (40 - 60 fps) result in videogame-like animations. 
 
 Now we have the besic setup for applying motion blur, let's have fun with a larger-scale scene.
 
