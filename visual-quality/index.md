@@ -1071,7 +1071,7 @@ This sounds fancy, but in reality is the simplest way to create blurry motions a
 
 ### Motion blur through accumulation
 
-We said that in digital rendering images "appear" istantaneously at each frame. Consider an object in position $p$ at frame $f$ which was in position $p^{-1}$ at the previous frame $f^{-1}$.
+We said that in digital rendering images "appear" istantaneously at each frame. Consider an object at frame $f$ to be in position $p^{f}$ which was in position $p^{f-1}$ at the previous frame $f^{-1}$. When rendering frames $f^{-1}$ and $f$, the objects appears as jumping from $p^{f-1}$ to $p^{f}$.
 
 # Eye candies
 
