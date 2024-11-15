@@ -1144,7 +1144,9 @@ And this is how i'm managing the accumulation process:
 
 ![](./images/visual-quality_113.png)
 
-The linear interpolation between the set of current postitions and the set of previous positions is computed with the object {jit.xfade}. To set the desidered transparency for the lines, the alpha component of the lines' color is divided by the total number of copies.
+The linear interpolation between the set of current postitions and the set of previous positions is computed with the object {jit.xfade}. To set the desidered transparency for the lines, the alpha component of the lines' color is divided by the total number of copies. Setting the number of copies to 1 you can disable motion blur (only the current set of positions gets rendered).
+
+I like the result, but there's still something we're not considering; let's try to stop the video player, and let's move the camera around.
 
 
 
