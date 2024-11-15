@@ -1162,7 +1162,7 @@ About interpolating the camera positions, things are a bit tricky; if we want to
 
 Finally, also the camera movement leads to motion blur:
 
-
+https://github.com/user-attachments/assets/20484751-968c-407f-945b-98738f63ca68
 
 # Eye candies
 
