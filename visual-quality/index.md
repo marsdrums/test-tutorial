@@ -1144,10 +1144,13 @@ And this is how i'm managing the accumulation process:
 
 ![](./images/visual-quality_113.png)
 
-The linear interpolation between the set of current postitions and the set of previous positions is computed with the object {jit.xfade}. To set the desidered transparency for the lines, the alpha component of the lines' color is divided by the total number of copies. Setting the number of copies to 1 you can disable motion blur (only the current set of positions gets rendered).
+The linear interpolation between the set of current postitions and the set of previous positions is computed with the object {jit.xfade}. To set the desired transparency for the lines, the alpha component of the lines' color is divided by the total number of copies. You can disable motion blur by setting the number of copies to 1 (only the current set of positions gets rendered).
 
-I like the result, but there's still something we're not considering; let's try to stop the video player, and let's move the camera around.
+I like the result, but there's still something we're not considering; let's try to stop the video player and let's move the camera around.
 
+https://github.com/user-attachments/assets/ca1cf709-d9cd-40c3-8fa1-097fd1370141
+
+The camera movement doesn't produce any blur. As we said at the beginning, motion blur arises when there's a relative motion between the camera and the objects in the scene. Hence, we have to consider the camera motion as well. To make it happen, we almost have all we need already. The geometry is rendered multiple times in each frame (50 times in the above patch), so we need to temporally interpolate the intra-frame camera movement and render each copy of the geometry as seen from different camera positions.
 
 
 # Eye candies
