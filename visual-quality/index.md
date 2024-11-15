@@ -1132,6 +1132,10 @@ And with motion blur enabled:
 
 https://github.com/user-attachments/assets/d851aa1c-83ef-4553-a17c-1ae174384511
 
+Video compression is not helping in showing the difference, but it can be better grasped with a side-by-side still image:
+
+![](./images/visual-quality_112.png)
+
 Let's see how to add motion blur in this context. The lines' position is no longer determined by a single @position parameter; instead, we store the position of the vertices in matrices. To store the current and previous positions, we use {jit.matrix} instead of {pv}.
 
 ![](./images/visual-quality_111.png)
