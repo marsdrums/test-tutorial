@@ -1152,11 +1152,11 @@ https://github.com/user-attachments/assets/ca1cf709-d9cd-40c3-8fa1-097fd1370141
 
 The camera movement doesn't produce any blur. As we said at the beginning, motion blur arises when there's a relative motion between the camera and the objects in the scene. Hence, we have to consider the camera motion as well. To make it happen, we almost have all we need already. The geometry is rendered multiple times in each frame (50 times in the above patch), so we need to temporally interpolate the intra-frame camera movement and render each copy of the geometry as seen from different camera positions.
 
-For a clearer implementation, i re-designed the acculumation process with some wireless connections:
+For a clearer implementation, i re-designed the acculumation process using wireless connections:
 
 ![](./images/visual-quality_115.png)
 
-About interpolating the camera positions, things are a bit tricky; if we want to move the camera using {jit.anim.drive}, we'll need two {jit.gl.camera} objects: One camera object receives the position from {jit.anim.drive}, and at each frame it gets enabled and disabled. From this first camera we also query the current position, and store it, togheter with the previous position, into two {pv} ojbecs. The second camera is used for rendering, interpolating linearly the current and previous positions.
+Interpolating camera positions can be somewhat complex. To move the camera using {jit.anim.drive}, two {jit.gl.camera} objects are required. The first camera, referred to as the "dummy" camera in the patch, is controlled by {jit.anim.drive} and provides its current position as well as its previous position. These positions are queried from the dummy camera and stored in two {pv} objects. The second camera is used for rendering, interpolating linearly the current and previous positions.
 
 ![](./images/visual-quality_116.png)
 
