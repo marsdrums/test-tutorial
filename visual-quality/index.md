@@ -1120,7 +1120,11 @@ You may have noticed that i'm rendering the scene at 30 fps ({jit.world}'s @fps 
 > [!IMPORTANT]
 > The amount of frames per seconds influences the animations' overall look - Very low frame rates (from 10 to 20 fps) make you video look like a hand-draw cartoon (especially when motion blur is disabled); low frame rates (from 24 to 30 fps) produce a cinematic look; higer frame rates (40 - 60 fps) result in videogame-like animations. 
 
-Now we have the besic setup for applying motion blur, let's have fun with a larger-scale scene.
+Now we have the basic setup for applying motion blur, let's have fun with a larger-scale scene. I recreated one of the most famous effects ever: the Rutt-Etra video synthesyzer. I'm distributing some lines of a plane and determine the height of the lines using the luminance from a video.
+
+![](./images/visual-quality_108.png)
+
+The render looks like this:
 
 
 
