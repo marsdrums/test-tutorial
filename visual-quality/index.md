@@ -1136,13 +1136,15 @@ Video compression is not helping in showing the difference, but it can be better
 
 ![](./images/visual-quality_112.png)
 
-Let's see how to add motion blur in this context. The lines' position is no longer determined by a single @position parameter; instead, we store the position of the vertices in matrices. To store the current and previous positions, we use {jit.matrix} instead of {pv}.
+Let's see how to add motion blur in this context. The lines' position is no longer determined by a single @position parameter; instead, we store the position of the vertices using matrices. Therefore, to store the current and previous positions, we can use use {jit.matrix} instead of {pv}.
 
 ![](./images/visual-quality_111.png)
 
+And this is how i'm managing the accumulation process:
 
+![](./images/visual-quality_113.png)
 
-
+The linear interpolation between the set of current postitions and the set of previous positions is computed with the object {jit.xfade}. To set the desidered transparency for the lines, the alpha component of the lines' color is divided by the total number of copies.
 
 
 
