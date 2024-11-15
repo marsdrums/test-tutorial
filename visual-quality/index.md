@@ -1160,7 +1160,7 @@ Interpolating camera positions can be somewhat complex. To move the camera using
 
 ![](./images/visual-quality_116.png)
 
-Finally, also the camera movement leads to motion blur:
+Finally, also the camera movement incorporates motion blur:
 
 https://github.com/user-attachments/assets/20484751-968c-407f-945b-98738f63ca68
 
