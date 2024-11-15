@@ -1107,24 +1107,36 @@ I created a short sequence for position, scaling, and rotation using linear piec
 Rotation and scaling go through the same treatment as position values.
 
 > [!NOTE]
-> In the patch, i explicitely stored postion, rotation and scaling for later manual interpolation. One could act smart, and store the current and previous states of {jit.gl.gridshape} as presets, and interpolate between them using Max built-in tools.
+> In the patch, I explicitly stored position, rotation, and scaling for later manual interpolation. One could act smart and store the current and previous states of {jit.gl.gridshape} as presets and interpolate between them using Max built-in tools.
 
 To make a fair comparison, this is the same scene rendered without and with motion blur:
 
 ![](./images/visual-quality_107.gif)
 
-The animation looks smoother overall, and we have a better perception of motion's speed and direction, in particual when the shape moves fast.
+The animation looks smoother overall, and we perceive the motion's speed and direction better, particularly when the shape moves fast.
 
 You may have noticed that i'm rendering the scene at 30 fps ({jit.world}'s @fps 30.). Motion blur is about capturing the intra-frame movement, and the longer the exposure time, the more evident the blur. To increase the exposure time you should use low @fps values, as $exposuretime = 1s / fps$. 
 
 > [!IMPORTANT]
 > The amount of frames per seconds influences the animations' overall look - Very low frame rates (from 10 to 20 fps) make you video look like a hand-draw cartoon (especially when motion blur is disabled); low frame rates (from 24 to 30 fps) produce a cinematic look; higer frame rates (40 - 60 fps) result in videogame-like animations. 
 
-Now we have the basic setup for applying motion blur, let's have fun with a larger-scale scene. I recreated one of the most famous effects ever: the Rutt-Etra video synthesyzer. I'm distributing some lines of a plane and determine the height of the lines using the luminance from a video.
+Now that we have the basic setup for applying motion blur let's have fun with a larger-scale scene. I recreated one of the most iconic effects ever: the Rutt-Etra video synthesizer. I'm distributing some lines of a plane and determining the height of the lines using the luminance from a video.
 
 ![](./images/visual-quality_108.png)
 
 The render looks like this:
+
+https://github.com/user-attachments/assets/063b540b-4a1e-4bb6-8b86-2e26082e10f8
+
+And with motion blur enabled:
+
+https://github.com/user-attachments/assets/d851aa1c-83ef-4553-a17c-1ae174384511
+
+Let's see how to add motion blur in this context. The lines' position is no longer determined by a single @position parameter; instead, we store the position of the vertices in matrices. To store the current and previous positions, we use {jit.matrix} instead of {pv}.
+
+![](./images/visual-quality_111.png)
+
+
 
 
 
@@ -1132,7 +1144,7 @@ The render looks like this:
 
 # Eye candies
 
-We set up a wonderful scene, with realistic motion and breath-taking lighting, but we need that extra 2% of spicyness. This is a list of post processing effects that can give you that extra push.
+You set up an incredible scene with realistic motion and breathtaking lighting, but you need that extra 2% spiciness. This is a list of post-processing effects that can give you that extra push.
 
 ## Grain
 
