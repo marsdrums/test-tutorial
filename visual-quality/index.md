@@ -1164,6 +1164,13 @@ Finally, also the camera movement incorporates motion blur:
 
 https://github.com/user-attachments/assets/20484751-968c-407f-945b-98738f63ca68
 
+> [!NOTE]
+> In the examples above the intra-frame motion is computed interpolating linearly between the current position ($P_{f}$) and the previous position ($P_{f-1}$). This means that the intra-frame motion is slways a straight line. For fast movements with frequent changes in direction, it may be worth using different forms of interpolation capable of producing curves (e.g., cubic spline interpolation).
+
+I had fun putting together a short montage of some scenes rendered using all we discussed so far in this chapter:
+
+
+
 # Eye candies
 
 You set up an incredible scene with realistic motion and breathtaking lighting, but you need that extra 2% spiciness. This is a list of post-processing effects that can give you that extra push.
