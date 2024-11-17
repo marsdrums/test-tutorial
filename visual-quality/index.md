@@ -1118,9 +1118,9 @@ The animation looks smoother overall, and we perceive the motion's speed and dir
 You may have noticed that i'm rendering the scene at 30 fps ({jit.world}'s @fps 30.). Motion blur is about capturing the intra-frame movement, and the longer the exposure time, the more evident the blur. To increase the exposure time you should use low @fps values, as $exposuretime = 1s / fps$. 
 
 > [!IMPORTANT]
-> The amount of frames per seconds influences the animations' overall look - Very low frame rates (from 10 to 20 fps) make you video look like a hand-draw cartoon (especially when motion blur is disabled); low frame rates (from 24 to 30 fps) produce a cinematic look; higer frame rates (40 - 60 fps) result in videogame-like animations. 
+> The number of frames per seconds influences the animations' overall look - Very low frame rates (from 10 to 20 fps) make you video look like a hand-draw cartoon (especially when motion blur is disabled); low frame rates (from 24 to 30 fps) produce a cinematic look; higer frame rates (40 - 60 fps) result in videogame-like animations. 
 
-Now that we have the basic setup for applying motion blur let's have fun with a larger-scale scene. I recreated one of the most iconic effects ever: the Rutt-Etra video synthesizer. I'm distributing some lines of a plane and determining the height of the lines using the luminance from a video.
+Now that we have the basic setup for applying motion blur let's have fun with a larger-scale scene. I recreated one of the most iconic effects ever: the Rutt-Etra video synthesizer. I'm distributing some lines on a plane and determining the height of the lines using the luminance from a video.
 
 ![](./images/visual-quality_108.png)
 
