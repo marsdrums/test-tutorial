@@ -604,6 +604,9 @@ TAA applies a sub-pixel jitter or shift to the camera's position between frames.
 
 In Max, TAA can be applied using the object {jit.gl.pass} @fxname TAA.
 
+Careful consideration must be given to the placement of Temporal Anti-Aliasing (TAA) in an effects chain. TAA relies on color information across multiple frames, and to prevent ghosting artifacts, it restricts the color of each pixel to fall within the minimum and maximum color values of its eight neighboring pixels. This process, known as color clipping, is a critical aspect of TAA.
+To enhance the accuracy of color clipping, colors are first converted from RGB to the YCoCg color space. Without delving too deeply into technical details, this color space represents color using values strictly within the [0, 1] range. Consequently, it is important to ensure that TAA does not receive RGB values exceeding 1. Applying tone mapping before TAA guarantees that no values surpass this range.
+
 > [!IMPORTANT]
 > TAA must be placed after tonemapping and before gamma correction.
 
