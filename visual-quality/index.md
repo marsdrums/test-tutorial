@@ -1167,14 +1167,27 @@ https://github.com/user-attachments/assets/20484751-968c-407f-945b-98738f63ca68
 > [!NOTE]
 > In the examples above the intra-frame motion is computed interpolating linearly between the current position ($P_{f}$) and the previous position ($P_{f-1}$). This means that the intra-frame motion is slways a straight line. For fast movements with frequent changes in direction, it may be worth using different forms of interpolation capable of producing curved paths (e.g., cubic spline interpolation).
 
-Motion blur by accumulation is an effective way to blur out objects in the direction of motion. Still, it has some limitations.
-It can be very demanding on computational resources; drawing multiple copies of the geometry may not always be feasible, at lest, not in real-time. You can indeed reduce the number of copies, but if you do so, the blur is likely to look discontinued, and the single copies of the geometry become visible, forming regular patterns. If a lower copies count is needed, there are a couple of things you can try:
-- try to trade regularity for noise, using, for example, quasi-random sequences for the temporal interpolation values, like the Halton sequences, or blue noise. This can effectively reduce the number of copies needed to show a continuos motion. Our brain is trained to find patterns, and it's really good at it; trading ragularity for randomness, can help to mask the low number of copies (Monte Carlo method, remember?).
-- Set the number of copies as a function of displacement; if a geometry didn't move from one frame to the next, 1 copy of the geometry is enough, as no motion blur is required. If an object goes under a significant displacement intra-frame, you need to use multiple copies of the geometry to visually cover the displacement path. Hence, you can make the number of copies variable: for each point $P_{f-1}$, you can compute how much it travelled to reach $P_{f}$, and use this value to set the number of copies accordingly. Just take care to also change the object's color according to the number of copies (energy conservation).
+Motion Blur by Accumulation is a powerful method to create a blur effect along the direction of an object’s motion. However, it comes with some challenges:
 
-Another limitation of this approach to motion blur, is that it works on transparent objects only; since the blending happens at rendering stage, this technique is feasible only if the rendered objects are semi-transparent. This may arise some complications concerning the rendering order and depth sorting.
+#### High Computational Cost:
 
-For the reasons above, motion blur by accumulation is usually used on simple geometry only, such as points and lines. If you need to apply motion blur to a more complex geometry, you can try the following approach.
+This technique requires rendering multiple copies of the geometry, which can be resource-intensive, especially for real-time applications.
+Reducing the number of copies is an option, but it often results in visible artifacts. The blur may appear discontinuous, and individual geometry copies may become discernible, forming regular, unwanted patterns.
+If you need to reduce the number of copies, consider these strategies:
+
+- Add Randomness: Instead of regular sampling, use quasi-random sequences, such as Halton sequences or blue noise, for temporal interpolation. This introduces randomness that helps mask the low number of copies. Our brains are excellent at detecting patterns, so replacing regularity with randomness can effectively smooth the motion blur (a Monte Carlo-inspired approach).
+Adaptive Copy Count: Adjust the number of copies based on the displacement between frames. For example:
+If a geometry remains stationary between frames, a single copy suffices since no motion blur is needed.
+- For geometries with significant displacement between frames, increase the number of copies to adequately cover the motion path.
+This approach requires computing the displacement for each point (e.g., from position $P_{f-1}$ to $P_{f}$) and setting the copy count accordingly. Additionally, adjust the object's color to maintain energy conservation, ensuring the blur effect remains visually consistent.
+
+#### Transparency Requirement:
+
+This method relies on blending during the rendering stage, making it suitable only for semi-transparent objects.
+This introduces complications with rendering order and depth sorting, as transparent objects often require careful handling to avoid visual artifacts.
+
+#### Practical Usage
+Due to these constraints, motion blur by accumulation is typically applied to simple geometries like points and lines. For more complex geometries, alternative techniques may be more suitable. If you need to blur complex objects, consider other methods that circumvent these limitations.
 
 ### Motion blur as post-processing effect
 
