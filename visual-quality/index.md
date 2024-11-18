@@ -360,8 +360,6 @@ In practice, this means for every point $\mathbf{x}$ to explore $n$ directions w
 
 ![](./images/visual-quality_026.png)
 
-Image from "Scalable Ambient Occlusion for Molecular Visualisation" by Gary Mcgowan et al.
-
 Since the occlusion term is divided by $n$, we compute the average occlusion for point $\mathbf{x}$, which is nothing more than a value in the range [0; 1] that represents how much "stuff" is blocking the light reaching point $\mathbf{x}$.
 
 This is what the occlusion term looks like:
