@@ -1225,6 +1225,8 @@ This results in uncorrect blurring of the object's edges.
 > [!NOTE]
 > Various techniques have been developed to address this limitation, such as deforming the geometry in the direction of motion or "inflating motion vectors." The latter involves extending the motion vectors beyond the object's original boundaries, allowing the blur to extend past the shape's silhouette. While these methods help mitigate the issue, they can introduce new challenges. For instance, a stationary background object might appear blurred even if it isn’t moving. Currently, these methods are not implemented in Max due to their highly context-specific nature. However, I encourage you to explore and experiment with these approaches by creating custom shaders.
 
+This concludes our in-depth look at some of tools we can use to improve the motion of objects on screen. In conclusion, there is no universally correct or incorrect way to utilize the tools and techniques discussed. Each method serves as a creative option in your toolbox, and the decision on which to use should be guided by your artistic intent, the performance limitations of your hardware, and the specific message or mood you wish to convey through your rendering. Whether prioritizing realism, stylization, or efficiency, the power lies in your ability to adapt these tools to meet the unique needs of your project and bring your vision to life.
+
 # Eye candies
 
 You set up an incredible scene with realistic motion and breathtaking lighting, but you need that extra 2% spiciness. This is a list of post-processing effects that can give you that extra push.
