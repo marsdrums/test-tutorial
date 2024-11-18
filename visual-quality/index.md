@@ -1269,14 +1269,16 @@ To add a vignette effect in Max you can use the {jit.gl.pass}' effect called "vi
 ![](./images/visual-quality_123.png)
 
 This pass effect is controlled by the following attributes:
-- @center
-- @expand
-- @falloff
-- @exposure
-- anamorphic
-- @bars
+- @center sets the normalized coordinates of the vignette's center.
+- @expand controls the steepness of the transition from the uneffected vignette center to the darker areas
+- @falloff controls at which distance from the vignette's center the darkening effect begins
+- @exposure controls post-vignette exposure. Use this attribute if you need to gain back some brightness after applying the vignette
+- @anamorphic is a boolean control that let you decide between non-anamorphic (0) and anamorphic (1) vignetting. 
+- @bars creates two black bars at the top and the bottom of the image. Use this functionality to give a cinematic wide-screen look to your render. 
 
 ## Bloom
+
+![](./images/visual-quality_124.png)
 
 The bloom effect is a visual effect that simulates an intense, glowing halo of light that appears to “bloom” or spread out beyond the bright areas of an image, giving the impression of light spilling over into surrounding parts of the frame. Bloom is often used to emulate HDR, making it feel like the bright parts of the image are more intense than what a standard screen can naturally produce. It helps accentuate highlights without losing too much detail, creating a sense of depth between the shadows and light areas. The bloom effect helps to ensure that those bright regions feel vivid and realistic, enhancing the sense of dynamic range.
 
