@@ -1268,7 +1268,7 @@ The pass FX "grain" is controlled by few simple parameters:
 - @color_tint controls the grain color tint (only working with @colored 1); you can use this control to give a tint to the film grain, simulating different film models.
 
 > [!IMPORTANT]
-> Film grain must be applied after tonemapping, and before gamma correction. The grain is added to the color values, hence, if colors are clipped, no grain will be visible in the image.
+> Film grain must be applied after tonemapping, and before gamma correction. The grain is added to the color values, hence, if colors are clipped, no grain will be visible in the image. Also, it must come right before gamma correction, with no intermediary effect; since the grain effect simulates the behavior of the support (film) capturing the animated sequence, it should be placed last and shouldn't be affected by any other effect (other than gamma correction).
 
 ## Vignette
 
