@@ -1233,6 +1233,8 @@ You set up an incredible scene with realistic motion and breathtaking lighting, 
 
 ## Grain
 
+![](./images/visual-quality_120.png)
+
 A "grain" effect, often referred to as film grain, is a visual effect that simulates the appearance of tiny particles or irregularities that are typically found in analog film stock. This effect mimics the texture of classic film, replicating the random, slightly gritty pattern that comes from the natural silver halide crystals used in old film emulsions. Adding film grain to your rendering may serve different purposes:
 
 - Digital footage is often very clean and sharp, sometimes to the point of feeling too clinical or lifeless. Grain can add a subtle layer of texture that makes the image appear more organic. This depth can help avoid the "flat" look that some digital video has and make scenes appear more immersive and visually interesting.
@@ -1243,11 +1245,36 @@ A "grain" effect, often referred to as film grain, is a visual effect that simul
 
 To add film grain to your renders in Max, you can use the {jit.gl.pass}' effect called "grain".
 
+![](./images/visual-quality_121.png)
+
+The pass FX "grain" is controlled by few simple parameters:
+- @grain_amount determines the amount of grain to apply
+- @grain_size controls the dimension on the silver halide crystals
+- @colored is a boolean control decide between monochromatic and colored grain
+- @color_tint controls the grain color tint (only working with @colored 1); you can use this control to give a tint to the film grain, simulating different film models.
+
+> [!IMPORTANT]
+> Film grain must be applied after tonemapping, and before gamma correction. The grain is added to the color values, hence, if colors are clipped, no grain will be visible in the image.
+
 ## Vignette
+
+![](./images/visual-quality_122.png)
 
 A vignette effect is a visual effect that gradually darkens or lightens the edges of the video frame, leaving the central part of the frame more prominent. The primary purpose of a vignette is to draw the viewer’s attention towards the center of the frame or a key subject. By slightly darkening the edges, the eye is naturally guided to the brighter, central part of the scene. This is particularly useful when you want to make sure that viewers are focusing on the main character or critical action in the shot. 
 
 Vignetting is often associated with traditional cinematic visuals, as it was originally a natural characteristic of old lenses and film stock. Adding a vignette gives your video a subtle, filmic quality that can feel sophisticated, adding a professional aesthetic that makes your footage feel more like something seen in the movies!
+
+To add a vignette effect in Max you can use the {jit.gl.pass}' effect called "vignette".
+
+![](./images/visual-quality_123.png)
+
+This pass effect is controlled by the following attributes:
+- @center
+- @expand
+- @falloff
+- @exposure
+- anamorphic
+- @bars
 
 ## Bloom
 
