@@ -86,11 +86,23 @@ How does sRGB "distribute" precision where it's needed most? It applies a so-cal
 
 A piece-wise function defines the ***gamma correction*** curve:
 
-![](./images/visual-quality_001.png)
+$$
+C_{\text{encoded}} =
+\begin{cases}
+12.92 \cdot C_{\text{linear}}, & C_{\text{linear}} \leq 0.0031308 \\
+1.055 \cdot C_{\text{linear}}^{\frac{1}{2.4}} - 0.055, & C_{\text{linear}} > 0.0031308
+\end{cases}
+$$
 
 The function above transforms the linear RGB colors into sRGB colors. It's also possible to convert colors back from sRGB to linear RGB:
 
-![](./images/visual-quality_002.png)
+$$
+C_{\text{linear}} =
+\begin{cases}
+\frac{C_{\text{encoded}}}{12.92}, & C_{\text{encoded}} \leq 0.04045 \\
+\left(\frac{C_{\text{encoded}} + 0.055}{1.055}\right)^{2.4}, & C_{\text{encoded}} > 0.04045
+\end{cases}
+$$
 
 If you'd like to check out an implementation of these functions, you can see the shader 'hdr.gamma.jxs'.
 
