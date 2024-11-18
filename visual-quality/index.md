@@ -1284,3 +1284,7 @@ The bloom effect is a visual effect that simulates an intense, glowing halo of l
 
 In older lenses, bright highlights tended to bloom as the light scattered inside the lens elements. Adding a bloom effect helps replicate this imperfection, which is often perceived as aesthetically pleasing because it adds a bit of warmth and life to a shot. Many filmmakers appreciate this look for the same reason they add grain—it gives the footage a more human and imperfect quality, moving away from the stark, clinical sharpness of modern digital cameras.
 
+In Max you can create a bloom effect using {jit.gl.pass} @fxname bloom-hq
+
+![](./images/visual-quality_125.png)
+
