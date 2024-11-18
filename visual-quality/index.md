@@ -1069,7 +1069,7 @@ This sounds fancy, but in reality is the simplest way to create blurry motions a
 > [!NOTE]
 > This guide is not about implementing ray-tracing rendering solutions, but since that's feasible with standard Max + custom shaders, i thought to include this method to give the reader a broader perspective on the topic.
 
-### Motion blur through accumulation
+### Motion blur by accumulation
 
 We said that in digital rendering images "appear" istantaneously at each frame. Consider an object at frame $f$ to be in position $p_{f}$ which was in position $p_{f-1}$ at the previous frame $f_{-1}$. When rendering frames $f_{-1}$ and $f$ in succesion, the object appears as jumping from $p_{f-1}$ to $p_{f}$. If all we can do is to render an object in a single specific position at each frame, we could recreate the effect of a motion trail by rendering multiple objects covering a set of positions between $p_{f-1}$ and $p_{f}$.
 
@@ -1165,9 +1165,18 @@ Finally, also the camera movement incorporates motion blur:
 https://github.com/user-attachments/assets/20484751-968c-407f-945b-98738f63ca68
 
 > [!NOTE]
-> In the examples above the intra-frame motion is computed interpolating linearly between the current position ($P_{f}$) and the previous position ($P_{f-1}$). This means that the intra-frame motion is slways a straight line. For fast movements with frequent changes in direction, it may be worth using different forms of interpolation capable of producing curves (e.g., cubic spline interpolation).
+> In the examples above the intra-frame motion is computed interpolating linearly between the current position ($P_{f}$) and the previous position ($P_{f-1}$). This means that the intra-frame motion is slways a straight line. For fast movements with frequent changes in direction, it may be worth using different forms of interpolation capable of producing curved paths (e.g., cubic spline interpolation).
 
-I had fun putting together a short montage of some scenes rendered using all we discussed so far in this chapter:
+Motion blur by accumulation is an effective way to blur out objects in the direction of motion. Still, it has some limitations.
+It can be very demanding on computational resources; drawing multiple copies of the geometry may not always be feasible, at lest, not in real-time. You can indeed reduce the number of copies, but if you do so, the blur is likely to look discontinued, and the single copies of the geometry become visible, forming regular patterns. If a lower copies count is needed, there are a couple of things you can try:
+- try to trade regularity for noise, using, for example, quasi-random sequences for the temporal interpolation values, like the Halton sequences, or blue noise. This can effectively reduce the number of copies needed to show a continuos motion. Our brain is trained to find patterns, and it's really good at it; trading ragularity for randomness, can help to mask the low number of copies (Monte Carlo method, remember?).
+- Set the number of copies as a function of displacement; if a geometry didn't move from one frame to the next, 1 copy of the geometry is enough, as no motion blur is required. If an object goes under a significant displacement intra-frame, you need to use multiple copies of the geometry to visually cover the displacement path. Hence, you can make the number of copies variable: for each point $P_{f-1}$, you can compute how much it travelled to reach $P_{f}$, and use this value to set the number of copies accordingly. Just take care to also change the object's color according to the number of copies (energy conservation).
+
+Another limitation of this approach to motion blur, is that it works on transparent objects only; since the blending happens at rendering stage, this technique is feasible only if the rendered objects are semi-transparent. This may arise some complications concerning the rendering order and depth sorting.
+
+For the reasons above, motion blur by accumulation is usually used on simple geometry only, such as points and lines. If you need to apply motion blur to a more complex geometry, you can try the following approach.
+
+### Motion blur as post-processing effect
 
 
 
