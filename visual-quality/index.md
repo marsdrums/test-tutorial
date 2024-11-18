@@ -177,7 +177,7 @@ We said we wanted a bright, sunny day, but honestly, the result looks kind of du
 > [!IMPORTANT]  
 > Light color is NOT light intensity. 
 
-When we set the @diffuse attribute of {jit.gl.light}, what we are setting is the light's "tint"; if we want to have a light of arbitrary intensity, we should take those values and multiply them by an intensity value. Let's see what it looks like now:
+When we set the @diffuse attribute of {jit.gl.light}, what we are setting is the light's emitted energy; if we want to have a light of arbitrary intensity, we should take some color values and multiply them by an intensity value. Let's see what it looks like now:
 
 ![](./images/visual-quality_013.png)
 
