@@ -313,7 +313,7 @@ These are couple of images rendered using a path tracer implemented in Max.
 > [!NOTE]  
 > There isn't a ready-to-go implementation of such a rendering technique in Max, but you can make your own path tracer by writing custom shaders. Implementing a path tracer from scratch isn't a trivial task, and it's outside the scope of this article. Still, it shows you that everything is possible in Max, even if no object directly supports a desired functionality (Turing completeness, baby!).
 
-There's still one major problem: finding a good approximation of the solution to the rendering equation requires a lot of time. These images were rendered in about five minutes each. While it may not seem like a lot, it is if we want to render these complex lighting phenomena in real-time, where we just have a few milliseconds of "time budget" to spend on a video frame. Techniques like path tracing are (partially) out of the way if we want to program a real-time application, but we can use many variations of the rendering equation to perform complex shading in the real-time domain.
+There's still one major problem: finding a good approximation of the solution to the rendering equation requires a lot of time. These images were rendered in about two minutes each. While it may not seem like a lot, it is if we want to render these complex lighting phenomena in real-time, where we just have a few milliseconds of "time budget" to spend on a video frame. Techniques like path tracing are (partially) out of the way if we want to program a real-time application, but we can use many variations of the rendering equation to perform complex shading in the real-time domain.
 
 Let's see some of these techniques and explore which objects implement them.
 
