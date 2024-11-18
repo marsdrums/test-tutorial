@@ -751,14 +751,14 @@ $$
 
 where $\vec{a}$ is the object's acceleration. To find the object's position and velocity over time, break this down into discrete time steps $\Delta t$ and use the following equations.
 
-- Calculate Acceleration
+- Calculate Acceleration:
 Given the force $\vec{F}$, find the acceleration $\vec{a}$ of the object as:
 
 $$
 \vec{a} = \frac{\vec{F}}{m}
 $$
 
-- Update Velocity
+- Update Velocity:
 If you know the object’s velocity at time $t$, denoted $\vec{v}(t)$, update its velocity at the next time step $t + \Delta t$ as:
 
 $$
@@ -767,7 +767,7 @@ $$
 
 Where $\Delta t$ is the time interval between steps.
 
-- Update Position
+- Update Position:
 To update the object’s position $\vec{x}(t)$, use the updated velocity:
 
 $$
