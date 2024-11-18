@@ -87,7 +87,7 @@ How does sRGB "distribute" precision where it's needed most? It applies a so-cal
 A piece-wise function defines the ***gamma correction*** curve:
 
 $$
-C_{\text{encoded}} =
+C_{\text{sRGB}} =
 \begin{cases}
 12.92 \cdot C_{\text{linear}}, & C_{\text{linear}} \leq 0.0031308 \\
 1.055 \cdot C_{\text{linear}}^{\frac{1}{2.4}} - 0.055, & C_{\text{linear}} > 0.0031308
@@ -99,8 +99,8 @@ The function above transforms the linear RGB colors into sRGB colors. It's also 
 $$
 C_{\text{linear}} =
 \begin{cases}
-\frac{C_{\text{encoded}}}{12.92}, & C_{\text{encoded}} \leq 0.04045 \\
-\left(\frac{C_{\text{encoded}} + 0.055}{1.055}\right)^{2.4}, & C_{\text{encoded}} > 0.04045
+\frac{C_{\text{sRGB}}}{12.92}, & C_{\text{sRGB}} \leq 0.04045 \\
+\left(\frac{C_{\text{sRGB}} + 0.055}{1.055}\right)^{2.4}, & C_{\text{sRGB}} > 0.04045
 \end{cases}
 $$
 
