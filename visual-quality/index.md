@@ -1206,7 +1206,7 @@ In max you can implement this process yourself, using custom shaders, or you can
 
 This is a scene rendered using motion blur pass effect:
 
-![](./images/visual-quality_118.png)
+![](./images/visual-quality_118.gif)
 
 Left: motion blur enabled; Right: motion blur disabled.
 
