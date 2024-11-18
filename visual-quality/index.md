@@ -423,6 +423,17 @@ The inner mechanics of the ReSTIR algorithm are complex, but the "gi" pass FX is
 > [!IMPORTANT]
 > The "gi" pass FX requires rendering multiple render targets (direct illumination, albedo, normals, roughness, metalness, four layers of depth). To make the effect work correctly, {jit.gl.pass}' @quality attribute must be set to "hi".
 
+Some of the effects discussed in this chapter, particularly "tssao-gi" and "gi," compute indirect illumination by simulating the way light bounces off surfaces in the scene. The amount of light reflected back into the environment after each bounce is influenced by several factors, one of which is the albedo color—often referred to as the surface color (corresponding to the attribute @mat_diffuse in {jit.gl.pbr} and {jit.gl.material}).
+
+The term "albedo color" can be somewhat misleading, as it might suggest it is simply a color. In reality, the albedo color determines the proportion of light that is absorbed versus reflected by a surface. For example, an albedo color of (0.9,0.1,0.1) (RGB) indicates that the object reflects nearly all energy in the red wavelength while almost completely absorbing the green and blue wavelengths.
+
+With this in mind, it’s crucial to be careful when setting the albedo color:
+
+> [!IMPORTANT]
+> - The albedo color should not exceed a value of 1. In accordance with the principle of energy conservation, no object can reflect more light than it receives.
+- The albedo color should also avoid being exactly 0 or 1. In the physical world, no object perfectly absorbs or reflects a specific wavelength. To avoid this, steer clear of absolute values when setting albedo. For example, instead of defining a bright green surface as (0.0, 1.0, 0.0), use a value like (0.05,0.9,0.05). This ensures no wavelength is completely "eliminated," which is particularly important if the indirect illumination algorithm in use calculates multiple light bounces.
+- Albedo values generally do not need to be very high. Typically, albedo colors are defined with values below 0.5. If you need a brighter appearance, consider increasing the light intensity instead of pushing albedo values higher.
+
 These are the built-in solutions for computing indirect lighting and global illumination in Max 9. However, there are other noteworthy algorithms and strategies for global illumination, such as voxel cone tracing (VCT), surfels, virtual point lights (VPL), and instant radiosity, each with its own set of pros and cons. So, which method is the best? It depends on the situation—use what works best for your needs; and if the built-in global illumination options in Max 9 don’t meet your requirements, I encourage you to implement your own using custom shaders (All the effects discussed in this article were originally prototyped with Max objects).
 
 ---
@@ -1294,5 +1305,5 @@ The two main control paramters for this pass effect are:
 - @threshold sets the lowest luminance that can produce a bloom effect
 
 > [!IMPORTANT]
-> The bloom-hq pass effect has been designed to be a "finisher" effect, and it contains tonemapping and gamma correction functionalities enabled by default. If you want to manage tonemapping and gamma correction manually (which i reccomend), disable the attributes @tonemapping and @gamma_correction. Moreover, the bloom effect must always come before tonemapping in the processing chain.
+> The bloom-hq pass effect has been designed to be a "finisher" effect, and it implements tonemapping and gamma correction functionalities enabled by default. If you want to manage tonemapping and gamma correction manually (which i reccomend), disable the attributes @tonemapping and @gamma_correction. Moreover, the bloom effect must always come before tonemapping in the processing chain.
 
