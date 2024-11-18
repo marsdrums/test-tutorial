@@ -1292,7 +1292,7 @@ This pass effect is controlled by the following attributes:
 
 > [!TIP]
 > Consider applying an off-center vignette to highlight and emphasize the light originating from a specific direction:
-![](./images/visual-quality_127.png)
+![](./images/visual-quality_126.png)
 
 ## Bloom
 
