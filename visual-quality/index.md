@@ -1264,7 +1264,7 @@ To add film grain to your renders in Max, you can use the {jit.gl.pass}' effect 
 The pass FX "grain" is controlled by few simple parameters:
 - @grain_amount determines the amount of grain to apply
 - @grain_size controls the dimension on the silver halide crystals
-- @colored is a boolean control decide between monochromatic and colored grain
+- @colored is a boolean control to decide between monochromatic and colored grain
 - @color_tint controls the grain color tint (only working with @colored 1); you can use this control to give a tint to the film grain, simulating different film models.
 
 > [!IMPORTANT]
