@@ -1207,12 +1207,18 @@ Using the motion vectors, neighboring pixels are sampled along the direction of 
 
 In max you can implement this process yourself, using custom shaders, or you can use {jit.gl.pass} @fxname motionblur. This effect implements a motion blur filter using the steps described above. As long as all objects in the scene are shaded by either {jit.gl.material} or {jit.gl.pbr}, this pass FX will produce a blur when the objects or the camera move.
 
-This is a scene rendered using motion blur pass effect:
+This is a scene rendered using the motion blur pass effect:
 
 ![](./images/visual-quality_118.gif)
 
 Left: motion blur enabled; Right: motion blur disabled.
+This effect has a single control, @velocity_scale, which determines the amount of blur to apply in the direction of motion. 
 
+Post-processing motion blur effects are widely used, because they're not as demanding as the accumulation approach in terms of computational resources. Still, they have some disadvantages:
+
+- The motion blur effect is limited to the confines of the object itself. When an object moves, the motion blur appears accurate only within the boundaries of its original shape. This limitation arises because motion vectors, which guide the direction and intensity of the blur, are inherently tied to the object’s silhouette. As a result, the blur cannot extend beyond the object's outline.
+
+![](./images/visual-quality_119.png)
 
 
 # Eye candies
