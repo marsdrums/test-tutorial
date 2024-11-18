@@ -743,7 +743,7 @@ How can we inject an acceleration and a deceleration phase to the movement of ob
 
 In specific scenarios, it's possible to describe objects' motion through the physical laws. Imagine you have an object with its own mass, and a force attracts it. Knowing the force strength and direction and the object's mass, you can define the movement as a byproduct of the physical interaction.
 
-In a discrete time domain, you can describe the movement of an object with mass $m$ subjected to a force $vec{F}$ using Newton’s Second Law of Motion:
+In a discrete time domain, you can describe the movement of an object with mass $m$ subjected to a force $\vec{F}$ using Newton’s Second Law of Motion:
 
 $$
 \vec{F} = m \cdot \vec{a}
