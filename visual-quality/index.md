@@ -1214,12 +1214,16 @@ This is a scene rendered using the motion blur pass effect:
 Left: motion blur enabled; Right: motion blur disabled.
 This effect has a single control, @velocity_scale, which determines the amount of blur to apply in the direction of motion. 
 
-Post-processing motion blur effects are widely used, because they're not as demanding as the accumulation approach in terms of computational resources. Still, they have some disadvantages:
+Post-processing motion blur effects are widely used, because they're not as demanding as the accumulation approach in terms of computational resources. Still, they have one major disadvantage: the motion blur effect is limited to the confines of the object itself.
 
-- The motion blur effect is limited to the confines of the object itself. When an object moves, the motion blur appears accurate only within the boundaries of its original shape. This limitation arises because motion vectors, which guide the direction and intensity of the blur, are inherently tied to the object’s silhouette. As a result, the blur cannot extend beyond the object's outline.
+When an object moves, the motion blur appears accurate only within the boundaries of its original shape. This limitation arises because motion vectors, which guide the direction and intensity of the blur, are inherently tied to the object’s silhouette. As a result, the blur cannot extend beyond the object's outline.
 
 ![](./images/visual-quality_119.png)
 
+This results in uncorrect blurring of the object's edges. 
+
+> [!NOTE]
+> Various techniques have been developed to address this limitation, such as deforming the geometry in the direction of motion or "inflating motion vectors." The latter involves extending the motion vectors beyond the object's original boundaries, allowing the blur to extend past the shape's silhouette. While these methods help mitigate the issue, they can introduce new challenges. For instance, a stationary background object might appear blurred even if it isn’t moving. Currently, these methods are not implemented in Max due to their highly context-specific nature. However, I encourage you to explore and experiment with these approaches by creating custom shaders.
 
 # Eye candies
 
