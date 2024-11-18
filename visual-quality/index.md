@@ -1294,5 +1294,5 @@ The two main control paramters for this pass effect are:
 - @threshold sets the lowest luminance that can produce a bloom effect
 
 > [!IMPORTANT]
-> The bloom-hq has been designed to be a "finisher" effect, and it contains tonemapping and gamma correction functionalities enabled by default. If you want to manage tonemapping and gamma correction manually (which i reccomend), disable the attributes @tonemapping and @gamma_correction. Moreover, the bloom effect must always come before tonemapping in the processing chain.
+> The bloom-hq pass effect has been designed to be a "finisher" effect, and it contains tonemapping and gamma correction functionalities enabled by default. If you want to manage tonemapping and gamma correction manually (which i reccomend), disable the attributes @tonemapping and @gamma_correction. Moreover, the bloom effect must always come before tonemapping in the processing chain.
 
