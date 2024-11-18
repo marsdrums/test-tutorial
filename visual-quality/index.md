@@ -1288,3 +1288,11 @@ In Max you can create a bloom effect using {jit.gl.pass} @fxname bloom-hq
 
 ![](./images/visual-quality_125.png)
 
+The two main control paramters for this pass effect are:
+
+- @bloom_amt controls the intensity of the bloom effect
+- @threshold sets the lowest luminance that can produce a bloom effect
+
+> [!IMPORTANT]
+> The bloom-hq has been designed to be a "finisher" effect; it contains tonemapping and gamma correction enabled by default. If you want to manage tonemapping and gamma correction manually (which i reccomend), disable the attributes @tonemapping and @gamma_correction. Moreover, the bloom effect is designed to operate on large color values, therefore, it must come before tonemapping in the processing chain.
+
