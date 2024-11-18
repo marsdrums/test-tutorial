@@ -1175,10 +1175,10 @@ This technique requires rendering multiple copies of the geometry, which can be 
 Reducing the number of copies is an option, but it often results in visible artifacts. The blur may appear discontinuous, and individual geometry copies may become discernible, forming regular, unwanted patterns.
 If you need to reduce the number of copies, consider these strategies:
 
-- Add Randomness: Instead of regular sampling, use quasi-random sequences, such as Halton sequences or blue noise, for temporal interpolation. This introduces randomness that helps mask the low number of copies. Our brains are excellent at detecting patterns, so replacing regularity with randomness can effectively smooth the motion blur (a Monte Carlo-inspired approach).
-Adaptive Copy Count: Adjust the number of copies based on the displacement between frames. For example:
+- Add Randomness: Instead of regular sampling (linear interpolation), use quasi-random sequences, such as Halton sequences or blue noise, for temporal interpolation. This introduces randomness that helps mask the low number of copies. Our brains are excellent at detecting patterns, so replacing regularity with randomness can effectively smooth the motion blur (a Monte Carlo-inspired approach).
+- Adaptive Copy Count: Adjust the number of copies based on the displacement between frames. For example:
 If a geometry remains stationary between frames, a single copy suffices since no motion blur is needed.
-- For geometries with significant displacement between frames, increase the number of copies to adequately cover the motion path.
+For geometries with significant displacement between frames, increase the number of copies to adequately cover the motion path.
 This approach requires computing the displacement for each point (e.g., from position $P_{f-1}$ to $P_{f}$) and setting the copy count accordingly. Additionally, adjust the object's color to maintain energy conservation, ensuring the blur effect remains visually consistent.
 
 #### Transparency Requirement:
@@ -1190,6 +1190,25 @@ This introduces complications with rendering order and depth sorting, as transpa
 Due to these constraints, motion blur by accumulation is typically applied to simple geometries like points and lines. For more complex geometries, alternative techniques may be more suitable. If you need to blur complex objects, consider other methods that circumvent these limitations.
 
 ### Motion blur as post-processing effect
+
+Motion Blur as a Post-Processing Effect is a technique used in computer graphics to simulate the visual blur that occurs when objects or the camera move quickly during a scene. Unlike geometry-based motion blur, which involves modifying or duplicating the geometry during rendering, post-processing motion blur is applied as an image-based effect after the main rendering process is complete. A motion blur effect can be implemented following these steps:
+
+1) Render the scene as usual.
+2) Render motion vectors for each pixels. Motion vectors are mathematical representations of the movement of pixels or objects between consecutive frames in a video or rendered scene. They describe the direction and magnitude of movement in screen space. In Max you can render motion vectors by setting the @capture attribute of {jit.gl.node} to the value 3; this will make {jit.gl.node} render to 3 distinct render targets (textures), and the third one will contain motion vectors, encoded as red = horizontal movement, and green = vertical movement.
+3) Make the blur: the motion vectors are used to determine the direction and intensity of the blur for each pixel.
+Using the motion vectors, neighboring pixels are sampled along the direction of motion to create a streaking or smearing effect.
+4) Composite: the blurred pixels are combined with the original image to produce the final frame, giving the illusion of motion blur.
+
+> [!NOTE]
+> Some advanced motion blur effects may need additional steps, like rendering the distance of each pixel from the camera (depth).
+
+In max you can implement this process yourself, using custom shaders, or you can use {jit.gl.pass} @fxname motionblur. This effect implements a motion blur filter using the steps described above. As long as all objects in the scene are shaded by either {jit.gl.material} or {jit.gl.pbr}, this pass FX will produce a blur when the objects or the camera move.
+
+This is a scene rendered using motion blur pass effect:
+
+![](./images/visual-quality_118.png)
+
+Left: motion blur enabled; Right: motion blur disabled.
 
 
 
