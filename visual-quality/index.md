@@ -1290,6 +1290,10 @@ This pass effect is controlled by the following attributes:
 - @anamorphic is a boolean control that let you decide between non-anamorphic (0) and anamorphic (1) vignetting. 
 - @bars creates two black bars at the top and the bottom of the image. Use this functionality to give a cinematic wide-screen look to your render. 
 
+> [!TIP]
+> Consider applying an off-center vignette to highlight and emphasize the light originating from a specific direction:
+![](./images/visual-quality_127.png)
+
 ## Bloom
 
 ![](./images/visual-quality_124.png)
