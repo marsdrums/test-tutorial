@@ -1165,7 +1165,7 @@ Finally, also the camera movement incorporates motion blur:
 https://github.com/user-attachments/assets/20484751-968c-407f-945b-98738f63ca68
 
 > [!NOTE]
-> In the examples above the intra-frame motion is computed interpolating linearly between the current position ($P_{f}$) and the previous position ($P_{f-1}$). This means that the intra-frame motion is slways a straight line. For fast movements with frequent changes in direction, it may be worth using different forms of interpolation capable of producing curved paths (e.g., cubic spline interpolation).
+> In the examples above the intra-frame motion is computed interpolating linearly between the current position ($P_{f}$) and the previous position ($P_{f-1}$). This means that the intra-frame motion is slways a straight line. For fast movements with frequent changes in direction, it may be worth using different forms of interpolation capable of producing curved paths (e.g., cubic spline interpolation), at the cost of longer history of position values required.
 
 Motion Blur by Accumulation is a powerful method to create a blur effect along the direction of an object’s motion. However, it comes with some challenges:
 
@@ -1180,6 +1180,9 @@ If you need to reduce the number of copies, consider these strategies:
 If a geometry remains stationary between frames, a single copy suffices since no motion blur is needed.
 For geometries with significant displacement between frames, increase the number of copies to adequately cover the motion path.
 This approach requires computing the displacement for each point (e.g., from position $P_{f-1}$ to $P_{f}$) and setting the copy count accordingly. Additionally, adjust the object's color to maintain energy conservation, ensuring the blur effect remains visually consistent.
+
+> [!IMPORTANT]
+> All the patches shown in this paragraph operate on positional data stored and processed by the CPU. For faster execution times, it's possible to replicate the accumulation process on the GPU, using {jit.gl.buffer} or {jit.gl.texture} instead of matrices, and using custom geometry shaders or GPU instancing for drawing the geometry. 
 
 #### Transparency Requirement:
 
