@@ -602,6 +602,8 @@ Full Scene Anti-Aliasing is the simplest but the most effective form of Anti-Ali
 
 In Max, FSAA can be enabled by the attribute @fsaa of {jit.world}, {jit.pworld}, and {jit.gl.node}. @fsaa enables 2x supersampling.
 
+![](./images/visual-quality_130.png)
+
 Beyond 3D rendering, this anti-aliasing method is highly effective in video processing. Operations such as rotations and distortions can introduce aliasing artifacts in the processed image. Aliasing can be mitigated by super-sampling the image prior to applying these transformations. Once the process is complete, the image is filtered and then downscaled to its original resolution.
 
 ![](./images/visual-quality_127.png)
