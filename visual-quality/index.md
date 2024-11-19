@@ -80,7 +80,7 @@ Nowadays, most devices (TVs, phones, computer monitors, projectors) use the ***s
 
 Human vision is more sensitive to changes in darker tones than in brighter tones. In other words, we can detect more subtle differences in shadowed areas than in highlights. 
 
-Given the limited number of shades that a color may assume in the digital domain (e.g., 256 × 256 × 256 = 16.000.000 possible colors with 8-bit color data), it makes sense to "spend" more precision on darker tones than on brighter ones to match the human color perception better. If brightness were linearly represented, most of the color data would be concentrated in the bright parts of the image, and the darker parts would lack detail.
+Given the limited number of shades that a color may assume in the digital domain (e.g., 256 × 256 × 256 = 16777216 possible colors with 8-bit color data), it makes sense to "spend" more precision on darker tones than on brighter ones to match the human color perception better. If brightness were linearly represented, most of the color data would be concentrated in the bright parts of the image, and the darker parts would lack detail.
 
 How does sRGB "distribute" precision where it's needed most? It applies a so-called ***gamma correction*** curve, which re-maps the RGB values to match human eye perception better. The gamma curve in sRGB compensates for the ***non-linear*** way human eyes perceive brightness, making images appear more natural on screens; it optimizes digital data by spreading information more evenly across the range of brightness levels we perceive.
 
