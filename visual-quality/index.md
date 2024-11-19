@@ -297,8 +297,6 @@ The first thing contributing to the result of the rendering equation is the amou
 The rest of the equation describes how much light comes from point $\mathbf{x}$ (outgoing radiance) as a function of the light that points $\mathbf{x}$ is receiving (incoming radiance). We said before that when some light illuminates a surface, various physical interactions may occur. As a direct result of such interactions, a certain amount of light that point $\mathbf{x}$ is receiving can be reflected in the $\omega_o$ direction and, therefore, reach the viewer or another surface, contributing to its illumination. This last bit of the function is an integral because to know how much light is reflected in the $\omega_o$ direction, we should consider all the possible directions from which the point $\mathbf{x}$ can be illuminated. Such a set of directions is infinite, and it includes all the directions within a hemisphere oriented according to the surface's normal vector. 
 
 ![](./images/visual-quality_025.png)
-Image from "Voxel Based Indirect Illumination using Spherical Harmonics" by Randall Rauwendaal
-
 
 The integral returns the sum of the infinite light contributions from all directions within the normal-oriented hemisphere. Each light contribution depends on three things:
 
