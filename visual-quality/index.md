@@ -602,6 +602,18 @@ Full Scene Anti-Aliasing is the simplest but the most effective form of Anti-Ali
 
 In Max, FSAA can be enabled by the attribute @fsaa of {jit.world}, {jit.pworld}, and {jit.gl.node}. @fsaa enables a 2x supersampling.
 
+Beyond 3D rendering, this anti-aliasing method is highly effective in video processing. Operations such as rotations and distortions can introduce aliasing artifacts in the processed image. Aliasing can be mitigated by super-sampling the image prior to applying these transformations. Once the process is complete, the image is filtered and then downscaled to its original resolution.
+
+![](./images/visual-quality_127.png)
+
+There isn't a built-in option for super-sampling an image process, but you can create one yourself. On the CPU, you can upscale a jitter matrix using {jit.matrix} and then filter and downscale it with {cv.jit.resize}, an object available in the "cv.jit" package:
+
+![](./images/visual-quality_128.png)
+
+On the GPU, you can upscale textures using {jit.gl.texture} and perform averaging and downscaling with {jit.gl.pix} or custom shaders:
+
+![](./images/visual-quality_129.png)
+
 ## Temporal Anti-Aliasing (TAA)
 
 Temporal Anti-Aliasing (TAA) is an advanced anti-aliasing technique that reduces aliasing artifacts by using information from previous frames in addition to the current frame to produce aliasing-free images. TAA takes samples from multiple frames over time (hence "temporal") and combines them. Unlike techniques that only use information from a single frame, TAA leverages data from past and current frames to determine the color of each pixel in the current frame.
