@@ -998,9 +998,7 @@ How can we compute the correct filter coefficients to get the desired filter res
 
 For our goal, there's a specific filter response i'm particularly interested in: low-pass ***Butterworth filters***. Butterworth filters are a type of signal filter known for their maximally flat frequency response in the passband, meaning they allow frequencies up to a specified cutoff to pass through without significant attenuation or ripples. This makes Butterworth filters ideal when smooth, distortion-free filtering is needed. The transition from passband to stopband (attenuation region) is gradual compared to other filters, like Chebyshev or elliptic filters, which prioritize sharper cutoffs at the expense of flatness. Moreover, Butterworth filters generally offer a near-linear phase response, especially at lower frequencies, which minimizes phase distortion for signals passing through the filter. In other words, butterworth filters are designed to be as transparent as possible regarding the filtered signal.
 
-We can implement a digital Butterworth filter response using a biquad filter. Let's see how to compute proper coefficients for this kind of filter:
-
-To compute the coefficients $a0$, $a1$, $a2$, $b1$, $b2$ for implementing a Butterworth filter, we need to follow a systematic process. 
+We can implement a digital Butterworth filter response using a biquad filter. Let's see how to compute proper coefficients for this kind of filter.
 
 Define Parameters:
 - Cutoff frequency $fc$ (in Hz) – the frequency at which the filter starts attenuating the signal.
