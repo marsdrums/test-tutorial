@@ -200,11 +200,11 @@ I'm using the {swatch} object to decide the light tint, and I multiply each comp
 
 When we set the @diffuse attribute of {jit.gl.light} we are expressing how much energy comes from the light source -> how much red, how much green, and how much blue. If you look at the values in the message box below the object {vexpr}, you can notice how values go past 1. So, don't be afraid to crank these numbers up!
 
-The light intensity looks correct, but we lost all the details on the shape: the image looks burnt! Let's take a look at the values that are being sent to {jit.pworld}:
+The light intensity looks correct, but we lost all the details on the shape: the image looks burnt! Let's take a look at the values that are being sent to {jit.pworld}. I put together a simple utility to better understand the values that {jit.pworld} receives:
 
 ![](./images/visual-quality_014.png)
 
-I put together a simple utility to better understand the values that {jit.pworld} receives. This {jit.gl.pix.codebox} converts the rendered image's RGB values to luminance and then compares that luminance to 1: if it exceeds 1, the utility displays a white pixel; if not, it shows a black pixel. With this straightforward test, we can observe that {jit.pworld} is indeed receiving values greater than 1, which results in displaying only white. Essentially, this means colors are clipped, as no color can appear brighter than pure white. Once again, we're in a spot where our rendering looks unnatural: The light intensity seems convincing, but we lost all the shape details because of color clipping. What can we do then?
+This {jit.gl.pix.codebox} converts the rendered image's RGB values to luminance and then compares that luminance to 1: if it exceeds 1, the utility displays a white pixel; if not, it shows a black pixel. With this straightforward test, we can observe that {jit.pworld} is indeed receiving values greater than 1, which results in displaying only white. Essentially, this means colors are clipped, as no color can appear brighter than pure white. Once again, we're in a spot where our rendering looks unnatural: The light intensity seems convincing, but we lost all the shape details because of color clipping. What can we do then?
 
 Here comes into play another essential color correction tool: ***tonemapping***.
 
