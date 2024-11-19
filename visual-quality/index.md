@@ -600,7 +600,7 @@ In Jitter, there are 3 methods we can use to reduce aliasing issues.
 
 Full Scene Anti-Aliasing is the simplest but the most effective form of Anti-Aliasing. FSAA solves aliasing issues by rendering the entire scene at a higher resolution than the display resolution. For example, if the target display resolution is 1080p (1920x1080 pixels), FSAA might render the scene at 2x, 4x, or even higher multiples of that resolution (e.g., 3840x2160 or 7680x4320). Once the high-resolution scene is rendered, FSAA averages the colors of the sub-pixels to compute the final color of each displayed pixel. This averaging smooths out color transitions between adjacent pixels, reducing the stair-step effect seen along diagonal and curved edges. The rendered high-resolution image is then downsampled (reduced) to the original display resolution. The result is a smoother final image that preserves the details while minimizing aliasing effects.
 
-In Max, FSAA can be enabled by the attribute @fsaa of {jit.world}, {jit.pworld}, and {jit.gl.node}. @fsaa enables a 2x supersampling.
+In Max, FSAA can be enabled by the attribute @fsaa of {jit.world}, {jit.pworld}, and {jit.gl.node}. @fsaa enables 2x supersampling.
 
 Beyond 3D rendering, this anti-aliasing method is highly effective in video processing. Operations such as rotations and distortions can introduce aliasing artifacts in the processed image. Aliasing can be mitigated by super-sampling the image prior to applying these transformations. Once the process is complete, the image is filtered and then downscaled to its original resolution.
 
