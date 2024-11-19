@@ -508,7 +508,7 @@ Shadow maps are created by rendering the scene from the light's point of view an
 
 ![](./images/visual-quality_046.png)
 
-Let's now see hot to activate shadows in Jitter.
+Let's see how to activate shadows in Jitter:
 
 ![](./images/visual-quality_047.png)
 
