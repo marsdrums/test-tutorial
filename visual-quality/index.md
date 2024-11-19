@@ -1201,7 +1201,7 @@ https://github.com/user-attachments/assets/20484751-968c-407f-945b-98738f63ca68
 
 Motion Blur by Accumulation is a powerful method to create a blur effect along the direction of an object’s motion. However, it comes with some challenges:
 
-#### High Computational Cost:
+High Computational Cost:
 
 This technique requires rendering multiple copies of the geometry, which can be resource-intensive, especially for real-time applications.
 Reducing the number of copies is an option, but it often results in visible artifacts. The blur may appear discontinuous, and individual geometry copies may become discernible, forming regular, unwanted patterns.
@@ -1216,12 +1216,13 @@ This approach requires computing the displacement for each point (e.g., from pos
 > [!IMPORTANT]
 > All the patches shown in this paragraph operate on positional data stored and processed by the CPU. For faster execution times, it's possible to replicate the accumulation process on the GPU, using {jit.gl.buffer} or {jit.gl.texture} instead of matrices, and using custom geometry shaders or GPU instancing for drawing the geometry. 
 
-#### Transparency Requirement:
+Transparency Requirement:
 
 This method relies on blending during the rendering stage, making it suitable only for semi-transparent objects.
 This introduces complications with rendering order and depth sorting, as transparent objects often require careful handling to avoid visual artifacts.
 
-#### Practical Usage
+Practical Usage:
+
 Due to these constraints, motion blur by accumulation is typically applied to simple geometries like points and lines. For more complex geometries, alternative techniques may be more suitable. If you need to blur complex objects, consider other methods that circumvent these limitations.
 
 ### Motion blur as post-processing effect
