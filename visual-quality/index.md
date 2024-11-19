@@ -472,8 +472,6 @@ A cube map is a set of six square images that represent the environment around a
 
 ![](./images/visual-quality_043.png)
 
-Image from "Extending 2D Saliency Models for Head Movement Prediction in 360-degree Images using CNN-based Fusion" by Ibrahim Djemai et al.
-
 The object {jit.gl.environment} can load equirectangular environment maps. Still, if you have a cube map, you can transform it into an equirectangular map using the object {jit.gl.cubemap}.
 
 > [!NOTE]
