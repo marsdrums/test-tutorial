@@ -481,8 +481,7 @@ The object {jit.gl.environment} has a @gamma_correction attribute; like with {ji
 
 > [!TIP]
 > If your scene contains very smooth materials (with @roughness close to 0), a low @reflect_edge value may result in blurry reflections. If that's the case, increase @reflect_edge to a larger power of two.
-
-![](./images/visual-quality_041.png)
+> ![](./images/visual-quality_041.png)
 
 Max comes with a built-in "default" lighting setup. When you create a 3D object in an empty patch, it appears illuminated even if no {jit.gl.light} object is present. This is because Max automatically applies a white hemisphere light from above, providing a convenient way to sketch out a scene without worrying about lighting configuration. However, as soon as a {jit.gl.light} object is added, this default light is automatically turned off and replaced by the custom lighting you set up. Unlike with {jit.gl.light} objects, the default light isn’t automatically disabled when using a {jit.gl.environment}.
 
