@@ -1128,7 +1128,7 @@ I created a short sequence for position, scaling, and rotation using linear piec
 
 Rotation and scaling go through the same treatment as position values.
 
-> [!NOTE]
+> [!TIP]
 > In the patch, I explicitly stored position, rotation, and scaling for later manual interpolation. One could act smart and store the current and previous states of {jit.gl.gridshape} as presets and interpolate between them using Max built-in tools.
 
 To make a fair comparison, this is the same scene rendered without and with motion blur:
