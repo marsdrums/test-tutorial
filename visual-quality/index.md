@@ -875,7 +875,7 @@ When do these functions come in handy? In the previous paragraph, we described m
 
 Left: {jit.fx.tr.rotfade} and {jit.fx.tr.zoomfade} controlled via linear motion; right: same effects controlled via quintic motion.
 
-Look at the difference that proper motion functions can make. The transitions on the left look "mechanical", while the two on the right appear fluent and more "natural". 
+The transitions on the left look "mechanical", while the two on the right appear fluent and more "natural". 
 
 > [!NOTE]
 > If you need to create motion curves for multidimensional movement (e.g., an object moving in a 3D space), you can apply the same principles to each dimension.
