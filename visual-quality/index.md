@@ -608,6 +608,9 @@ Beyond 3D rendering, this anti-aliasing method is highly effective in video proc
 
 ![](./images/visual-quality_127.png)
 
+> [!NOTE]
+> This is the same approach used in signal processing for reducing aliasing: upsample -> process -> low-pass filter -> downsample.
+
 There isn't a built-in option for super-sampling an image process, but you can create one yourself. On the CPU, you can upscale a jitter matrix using {jit.matrix} and then filter and downscale it with {cv.jit.resize}, an object available in the "cv.jit" package:
 
 ![](./images/visual-quality_128.png)
@@ -615,6 +618,10 @@ There isn't a built-in option for super-sampling an image process, but you can c
 On the GPU, you can upscale textures using {jit.gl.texture} and perform averaging and downscaling with {jit.gl.pix} or custom shaders:
 
 ![](./images/visual-quality_129.png)
+
+> [!NOTE]
+> In the example above, I’m performing a 6x upscale and downscale. In the GPU implementation, the filtering process is optimized by splitting it into two separate steps. Averaging is performed using a 6x6 square box kernel, which would require a total of 36 texture lookups if done in a single pass. However, square kernels are separable, meaning the filtering and downscaling can be applied separately along each dimension. This approach achieves the same mathematical result while reducing the number of texture lookups to 
+$N*2$ instead of $N^2$, where $N$ represents the scaling factor.
 
 ## Temporal Anti-Aliasing (TAA)
 
