@@ -343,7 +343,7 @@ $$
 L_o(\mathbf{x}) = L_{ambient} \cdot \frac{1}{n} \cdot \sum_{i=1}^{n} \cos(\theta_i)
 $$
 
-The integral has been substituted with a computable discrete summation (Monte Carlo method), and the ambient term $L_{ambient}$ has been moved outside it since it's always the same for any incoming light direction. We assumed that the ambient light is uniform and coming from every direction within the normal-oriented hemisphere. We don't care any more about the angle formed by the surface normal and the incoming light directionwe; all we care about is if the light coming from $\omega_i$ direction can actually reach the point $\mathbf{x}$ we're shading, or if it's blocked by something. We can, therefore, get rid of the geometric term $\cos(\theta_i)$ and substitute it with a simpler ***occlusion term***: 
+The integral has been substituted with a computable discrete summation (Monte Carlo method), and the ambient term $L_{ambient}$ has been moved outside it since it's always the same for any incoming light direction. We assumed that the ambient light is uniform and coming from every direction within the normal-oriented hemisphere. We don't care any more about the angle formed by the surface normal and the incoming light direction; all we care about is if the light coming from $\omega_i$ direction can actually reach the point $\mathbf{x}$ we're shading, or if it's blocked by something. We can, therefore, get rid of the geometric term $\cos(\theta_i)$ and substitute it with a simpler ***occlusion term***: 
 
 $$
 L_o(\mathbf{x}) = L_{ambient} \cdot \frac{1}{n} \cdot \sum_{i=1}^{n} O(\mathbf{x}, \omega_i)
@@ -1212,7 +1212,7 @@ This technique requires rendering multiple copies of the geometry, which can be 
 Reducing the number of copies is an option, but it often results in visible artifacts. The blur may appear discontinuous, and individual geometry copies may become discernible, forming regular, unwanted patterns.
 If you need to reduce the number of copies, consider these strategies:
 
-- Add Randomness: Instead of regular sampling (linear interpolation), use quasi-random sequences, such as Halton sequences or blue noise, for temporal interpolation. This introduces randomness that helps mask the low number of copies. Our brains are excellent at detecting patterns, so replacing regularity with randomness can effectively smooth the motion blur (a Monte Carlo-inspired approach).
+- Add Randomness: Instead of regular sampling, try quasi-random sequences, such as Halton sequences or blue noise, for temporal interpolation. This introduces randomness that helps mask the low number of copies. Our brains are excellent at detecting patterns, so replacing regularity with randomness can effectively smooth the motion blur (a Monte Carlo-inspired approach).
 - Adaptive Copy Count: Adjust the number of copies based on the displacement between frames. For example:
 If a geometry remains stationary between frames, a single copy suffices since no motion blur is needed.
 For geometries with significant displacement between frames, increase the number of copies to adequately cover the motion path.
