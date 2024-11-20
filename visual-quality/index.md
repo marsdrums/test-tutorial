@@ -621,7 +621,7 @@ On the GPU, you can upscale textures using {jit.gl.texture} and perform averagin
 
 > [!NOTE]
 > In the example above, I’m performing a 6x upscale and downscale. In the GPU implementation, the filtering process is optimized by splitting it into two separate steps. Averaging is performed using a 6x6 square box kernel, which would require a total of 36 texture lookups if done in a single pass. However, square kernels are separable, meaning the filtering and downscaling can be applied separately along each dimension. This approach achieves the same mathematical result while reducing the number of texture lookups to 
-$N*2$ instead of $N^2$, where $N$ represents the scaling factor.
+$2N$ instead of $N^2$, where $N$ represents the scaling factor.
 
 This method of anti-aliasing is highly effective but can be computationally intensive, as it involves increasing the resolution of the images being processed.
 
