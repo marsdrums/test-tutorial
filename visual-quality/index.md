@@ -401,6 +401,7 @@ You can notice how the red sphere reflects some light onto the white sphere and 
 
 ![](./images/visual-quality_034.png)
 
+"tssao" stands for Temporal Screen-Space Amient Occlusion, "gi" for Global Illumination, and "ssr" for Screen-Space Reflections.
 These two pass FXs can get closer to the original rendering equation formulation, but many aspects remain unconsidered (e.g., albedo modulation and per-surface BRDFs).
 
 Before moving on, i'd like to spend a couple of words on how to set up the ambient light values for {jit.gl.light}. Light loses some energy at each bounce because part of it gets absorbed (the amount of absorption depends on the albedo values of the surface it bounced off). After a few reflections (like 7 or 8), radiance typically becomes very weak, negligible in terms of lighting contribution. Since the ambient light should represent the average indirect light amount, its values are usually relatively low (in the above examples, R: 0.05, G: 0.05, B: 0.05). That is to say, not to be afraid of using just a touch of ambient light. 
@@ -415,7 +416,7 @@ Before moving on, i'd like to spend a couple of words on how to set up the ambie
 
 Image rendered using {jit.gl.pass} @fxname gi. Left: direct illumination only ({jit.gl.pbr} + {jit.gl.light}); right: direct illumination + indirect illumination
 
-ReSTIR (Reservoir-based Spatiotemporal Importance Resampling) is a cutting-edge technique in real-time computer graphics for improving lighting quality. It's especially valuable for ray-traced graphics, where simulating light behavior accurately is traditionally very demanding on computational resources. 
+ReSTIR (Reservoir-based Spatio-Temporal Importance Resampling) is a cutting-edge technique in real-time computer graphics for improving lighting quality. It's especially valuable for ray-traced graphics, where simulating light behavior accurately is traditionally very demanding on computational resources. 
 
 Let’s explore what makes ReSTIR unique without delving too deeply into technical details. When we discussed path tracing, we noted that this rendering method is slow because it requires evaluating a large number of incoming light directions to approximate the solution to the rendering equation, which makes it unsuitable for real-time applications. So, how many directions can we feasibly evaluate within the time span of a single frame on modern hardware? The answer is surprisingly limited: just one or two. Given that a typical path tracer samples around 10,000 directions, which single direction should we prioritize? Ideally, it would be the direction that carries the most energy (light), contributing the most to the pixel’s shading. But how can we identify this optimal direction? This is where ReSTIR comes into play. Think of it as a sophisticated 'direction sorter' that can quickly identify the most significant light direction—the one that maximizes energy contribution.
 
