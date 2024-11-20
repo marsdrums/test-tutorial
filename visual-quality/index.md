@@ -623,6 +623,8 @@ On the GPU, you can upscale textures using {jit.gl.texture} and perform averagin
 > In the example above, I’m performing a 6x upscale and downscale. In the GPU implementation, the filtering process is optimized by splitting it into two separate steps. Averaging is performed using a 6x6 square box kernel, which would require a total of 36 texture lookups if done in a single pass. However, square kernels are separable, meaning the filtering and downscaling can be applied separately along each dimension. This approach achieves the same mathematical result while reducing the number of texture lookups to 
 $N*2$ instead of $N^2$, where $N$ represents the scaling factor.
 
+This method of anti-aliasing is highly effective but can be computationally intensive, as it involves increasing the resolution of the images being processed.
+
 ## Temporal Anti-Aliasing (TAA)
 
 Temporal Anti-Aliasing (TAA) is an advanced anti-aliasing technique that reduces aliasing artifacts by using information from previous frames in addition to the current frame to produce aliasing-free images. TAA takes samples from multiple frames over time (hence "temporal") and combines them. Unlike techniques that only use information from a single frame, TAA leverages data from past and current frames to determine the color of each pixel in the current frame.
