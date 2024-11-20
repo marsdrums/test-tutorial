@@ -565,13 +565,9 @@ Shadow acne is a common artifact in shadow mapping. It creates an unwanted patte
 
 This issue happens when the shadow map incorrectly calculates whether a point is in shadow, leading to a speckled or "striped" appearance. Shadow acne arises due to precision errors and self-shadowing issues. When rendering from the light's point of view, each surface's distance from the light is stored in the shadow map. The distance from the camera's perspective is compared to the shadow map's stored values during the scene's final rendering. If the depth values are too close or nearly identical, slight precision errors can cause the surface to be falsely considered in shadow, even when it shouldn't be. This leads to shadow acne. A slight offset is added to the distance comparison to solve this issue, removing self-shading issues. @shadow_eps controls this arbitrary offset (the slight offset is usually called "epsilon").
 
-Shadow leakage is another common artifact in shadow mapping. In this phenomenon, light or shadow unintentionally "leaks" through objects, causing parts of the scene to appear illuminated when they should be in shadow or vice versa. 
+Light leakage is another common artifact in shadow mapping. In this phenomenon, light unintentionally "leaks" through objects, causing parts of the scene to appear illuminated when they should be in shadow. 
 
-![](./images/visual-quality_056.png)
-
-Shadow leaking below the cube.
-
-Shadow leakage typically happens due to improper depth comparisons or insufficient precision in the shadow map, leading to errors in identifying whether a surface should be in shadow. This issue is especially common when large or complex scenes are rendered, where distant objects or parts of the scene may not be accurately represented in the shadow map. Once again, a small @shadow_eps can solve or alleviate the issue.
+Light leakage typically happens due to improper depth comparisons or insufficient precision in the shadow map, leading to errors in identifying whether a surface should be in shadow. This issue is especially common when large or complex scenes are rendered, where distant objects or parts of the scene may not be accurately represented in the shadow map. Light leakage arises when @shadow_eps is too high.
 
 > [!TIP]
 > When setting @shadow_eps, start at 0 and increase it slowly. Stop right when the artifacts disappear.
