@@ -343,7 +343,7 @@ $$
 L_o(\mathbf{x}) = L_{ambient} \cdot \frac{1}{n} \cdot \sum_{i=1}^{n} \cos(\theta_i)
 $$
 
-The integral has been substituted with a computable discrete summation, and the ambient term $L_{ambient}$ has been moved outside it since it's always the same for any incoming light direction. We assumed that the ambient light is uniform and coming from everywhere within the normal-oriented hemisphere; we can, therefore, get rid of the geometric term $\cos(\theta_i)$ and substitute it with a simpler ***occlusion term***: 
+The integral has been substituted with a computable discrete summation (Monte Carlo method), and the ambient term $L_{ambient}$ has been moved outside it since it's always the same for any incoming light direction. We assumed that the ambient light is uniform and coming from every direction within the normal-oriented hemisphere. We don't care any more about the angle formed by the surface normal and the incoming light directionwe; all we care about is if the light coming from $\omega_i$ direction can actually reach the point $\mathbf{x}$ we're shading, or if it's blocked by something. We can, therefore, get rid of the geometric term $\cos(\theta_i)$ and substitute it with a simpler ***occlusion term***: 
 
 $$
 L_o(\mathbf{x}) = L_{ambient} \cdot \frac{1}{n} \cdot \sum_{i=1}^{n} O(\mathbf{x}, \omega_i)
